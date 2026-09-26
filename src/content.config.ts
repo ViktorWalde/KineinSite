@@ -16,4 +16,18 @@ const aprender = defineCollection({
   }),
 });
 
-export const collections = { aprender };
+const estudos = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/estudos" }),
+  schema: z.object({
+    title: z.string().min(1),
+    summary: z.string().min(1),
+    language: z.string().min(1),
+    standard: z.string().min(1),
+    platform: z.string().min(1),
+    toolchain: z.string().min(1),
+    lastTested: z.coerce.date(),
+    status: z.enum(["draft", "verified"]),
+  }),
+});
+
+export const collections = { aprender, estudos };

@@ -1,0 +1,71 @@
+---
+import { getCollection, render, type CollectionEntry } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { sitePath } from "../../site";
+import "../../styles/study.css";
+
+export async function getStaticPaths() {
+  const entries = await getCollection(
+    "estudos",
+    ({ data }) => data.status === "verified",
+  );
+  return entries.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+interface Props {
+  entry: CollectionEntry<"estudos">;
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const tested = new Intl.DateTimeFormat("pt-BR", { timeZone: "UTC" }).format(
+  entry.data.lastTested,
+);
+---
+
+<BaseLayout
+  current="docs"
+  title={entry.data.title}
+  description={entry.data.summary}
+>
+  <div class="study-shell shell">
+    <nav class="study-breadcrumb" aria-label="Caminho">
+      <a href={sitePath("/documentacao/")}>Documentação</a>
+      <span aria-hidden="true">/</span>
+      <span>Estudos de {entry.data.language}</span>
+    </nav>
+
+    <header class="study-header">
+      <p class="kicker">ESTUDO PRÁTICO · {entry.data.language}</p>
+      <h1>{entry.data.title}</h1>
+      <p class="study-summary">{entry.data.summary}</p>
+      <dl class="study-meta">
+        <div>
+          <dt>Padrão</dt>
+          <dd>{entry.data.standard}</dd>
+        </div>
+        <div>
+          <dt>Ambiente testado</dt>
+          <dd>
+            {entry.data.platform} · {entry.data.toolchain}
+          </dd>
+        </div>
+        <div>
+          <dt>Último teste</dt>
+          <dd>{tested}</dd>
+        </div>
+      </dl>
+    </header>
+
+    <article class="study-article">
+      <Content />
+    </article>
+
+    <nav class="study-end-nav" aria-label="Voltar à documentação">
+      <a href={sitePath("/documentacao/")}>← Ver as outras trilhas de estudo</a>
+    </nav>
+  </div>
+</BaseLayout>

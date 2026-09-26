@@ -1,30 +1,38 @@
 ---
-import { manualUrl, repositoryUrl } from "../site";
+import { manualUrl, repositoryUrl, sitePath } from "../site";
 
 const tracks = [
   {
     language: "C",
+    status: "EM PREPARAÇÃO",
     path: "Programa local de amostras: compilar, executar e verificar resultados. Firmware vem depois.",
     destination: "Ver C na IDE",
     href: `${repositoryUrl}#c-e-c`,
+    external: true,
   },
   {
     language: "C++",
-    path: "Projeto de linha de comando com CMake, CTest e depuração. Um alvo embarcado vem depois.",
-    destination: "Build e testes no manual",
-    href: `${manualUrl}#4-build-testes-e-análise`,
+    status: "ESTUDO DISPONÍVEL",
+    path: "Comece no software de IoT: processe telemetria simulada em C++20. O projeto guiado na IDE virá após a validação do fluxo.",
+    destination: "Estudar telemetria local",
+    href: sitePath("/estudos/cpp/telemetria-local/"),
+    external: false,
   },
   {
     language: "Rust",
+    status: "EM PREPARAÇÃO",
     path: "Projeto local com Cargo, tratamento de erros e testes. Targets específicos vêm depois.",
     destination: "Ver Rust na IDE",
     href: `${repositoryUrl}#rust`,
+    external: true,
   },
   {
     language: "Python",
+    status: "EM PREPARAÇÃO",
     path: "Ambiente virtual, relatório CSV e testes locais com unittest. API e banco vêm depois.",
     destination: "Python no manual",
     href: `${manualUrl}#10-python`,
+    external: true,
   },
 ] as const;
 ---
@@ -36,21 +44,26 @@ const tracks = [
 >
   <div class="docs-heading">
     <span>04 / LINGUAGENS</span>
-    <h2 id="linguagens-title">Quatro percursos para aprender na Vectis.</h2>
+    <h2 id="linguagens-title">Quatro percursos de linguagem.</h2>
   </div>
   <p>
-    Vamos escrever conteúdo próprio em português, baseado nas fontes de cada
-    ecossistema e em projetos executados na IDE. Os percursos serão publicados
-    gradualmente, após testar cada passo na versão indicada.
+    Conteúdo próprio em português, baseado nas fontes de cada ecossistema. Os
+    estudos de linguagem mostram conceitos executados e verificados; os projetos
+    na IDE virão após o teste na versão indicada.
   </p>
   <div class="path-grid">
     {tracks.map((track) => (
       <article class="path-card">
-        <span>EM PREPARAÇÃO</span>
+        <span>{track.status}</span>
         <h3>{track.language}</h3>
         <p>{track.path}</p>
-        <a href={track.href} target="_blank" rel="noopener noreferrer">
-          {track.destination} <span aria-hidden="true">↗</span>
+        <a
+          href={track.href}
+          target={track.external ? "_blank" : undefined}
+          rel={track.external ? "noopener noreferrer" : undefined}
+        >
+          {track.destination}{" "}
+          <span aria-hidden="true">{track.external ? "↗" : "→"}</span>
         </a>
       </article>
     ))}
