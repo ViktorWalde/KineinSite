@@ -1,0 +1,67 @@
+---
+import { sitePath } from "../site";
+
+const areas = [
+  {
+    id: "embarcados",
+    number: "01",
+    status: "Recursos no beta",
+    title: "Bare metal e Linux embarcado",
+    description:
+      "Kits, toolchains, targets, dispositivos e depuração dentro do contexto do projeto, conforme o ecossistema e as ferramentas disponíveis.",
+    linkText: "Ver o caminho para embarcados",
+  },
+  {
+    id: "iot",
+    number: "02",
+    status: "Foco do produto",
+    title: "IoT e IIoT",
+    description:
+      "Projetos que atravessam firmware, gateway, serviços e dados. A Vectis busca manter visíveis as escolhas feitas em cada camada.",
+    linkText: "Ver o roteiro para IoT e IIoT",
+  },
+  {
+    id: "backend",
+    number: "03",
+    status: "Recursos no beta",
+    title: "Backend e dados",
+    description:
+      "Python para APIs, automação e testes, com ferramentas de containers e acesso a PostgreSQL, TimescaleDB, SQLite e MongoDB.",
+    linkText: "Ver Python, backend e dados",
+  },
+  {
+    id: "ros2",
+    number: "04",
+    status: "Direção futura",
+    title: "ROS 2 e robótica",
+    description:
+      "Workspaces, execução e simulação estão no roteiro de estudo. A integração ROS 2 ainda precisa ser implementada e verificada.",
+    linkText: "Ver o estado de ROS 2",
+  },
+] as const;
+---
+
+<section id="foco" class="section shell" aria-labelledby="foco-title">
+  <div class="section-intro">
+    <p class="kicker">PARA ONDE A VECTIS CAMINHA</p>
+    <h2 id="foco-title">Da placa ao backend, com o ambiente à vista.</h2>
+    <p class="section-intro-copy">
+      O foco reúne sistemas embarcados, IoT/IIoT, backend de dispositivos e,
+      futuramente, ROS 2. Cada área abaixo indica seu estágio atual.
+    </p>
+  </div>
+  <div class="area-grid">
+    {areas.map((area) => (
+      <article class="area-card">
+        <span>
+          {area.number} / {area.status}
+        </span>
+        <h3>{area.title}</h3>
+        <p>{area.description}</p>
+        <a class="inline-link" href={sitePath(`/documentacao/#${area.id}`)}>
+          {area.linkText}
+        </a>
+      </article>
+    ))}
+  </div>
+</section>

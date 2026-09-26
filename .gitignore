@@ -1,0 +1,8 @@
+node_modules/
+.astro/
+dist/
+.npm/
+*.log
+firefox-profile/
+screenshot-*.png
+/DocPrivate/

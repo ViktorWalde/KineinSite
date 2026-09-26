@@ -1,0 +1,247 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import LanguageTracks from "../../components/LanguageTracks.astro";
+import LearningPaths from "../../components/LearningPaths.astro";
+import { developmentSnapshot } from "../../data/development";
+import {
+  discordUrl,
+  manualUrl,
+  releaseUrl,
+  repositoryUrl,
+  sitePath,
+} from "../../site";
+
+const references = [
+  {
+    title: "C",
+    label: "Comitê de padronização WG14",
+    href: "https://www.open-std.org/jtc1/sc22/wg14/",
+    detail: "Padrão e documentos do comitê; não é um tutorial de início.",
+  },
+  {
+    title: "C++",
+    label: "Portal ISO C++",
+    href: "https://isocpp.org/std/the-standard",
+    detail: "Informações sobre o padrão e seus documentos.",
+  },
+  {
+    title: "Rust",
+    label: "Livro oficial",
+    href: "https://doc.rust-lang.org/book/",
+    detail: "Fundamentos da linguagem e do ecossistema.",
+  },
+  {
+    title: "Python",
+    label: "Tutorial oficial",
+    href: "https://docs.python.org/3/tutorial/",
+    detail: "Introdução à linguagem e à biblioteca padrão.",
+  },
+  {
+    title: "CMake",
+    label: "Documentação oficial",
+    href: "https://cmake.org/cmake/help/latest/",
+    detail: "Build e configuração de projetos C/C++.",
+  },
+  {
+    title: "cppreference",
+    label: "Referência comunitária",
+    href: "https://en.cppreference.com/w/cpp",
+    detail: "Consulta prática de C++; não é documentação do comitê.",
+  },
+] as const;
+---
+
+<BaseLayout
+  current="docs"
+  title="Documentação"
+  description="Manual, release oficial e roteiro de guias da Kinein Vectis para embarcados, IoT/IIoT, backend e a futura integração ROS 2."
+>
+  <div class="docs-shell shell">
+    <aside class="docs-sidebar" aria-label="Navegação desta página">
+      <p>DOCUMENTAÇÃO</p>
+      <nav aria-label="Seções da documentação">
+        <a href="#comece">Comece por aqui</a>
+        <a href="#guias">Aprender na Vectis</a>
+        <a href="#trilhas">Áreas e trilhas</a>
+        <a href="#linguagens">Por linguagem</a>
+        <a href="#referencias">Referências externas</a>
+        <a href="#ajuda">Comunidade e ajuda</a>
+      </nav>
+      <div class="docs-sidebar-note">
+        Conteúdo público, sem conta para leitura.
+      </div>
+    </aside>
+
+    <div class="docs-main">
+      <header class="docs-intro">
+        <p class="kicker">LEIA NO SEU RITMO</p>
+        <h1>Documentação da Kinein Vectis</h1>
+        <p class="docs-intro-copy">
+          Comece pela versão pública e pelo manual. O Guia da IDE virá antes dos
+          projetos guiados, com cada tarefa testada na versão indicada.
+        </p>
+        <div class="docs-status">
+          <span aria-hidden="true">●</span> Versão pública indicada: 0.2.0 beta
+          para Linux x86_64. Confira a release antes de instalar.
+        </div>
+        <p class="docs-release-note">
+          A {developmentSnapshot.version} está em desenvolvimento. Veja o{" "}
+          <a class="inline-link" href={sitePath("/#desenvolvimento")}>
+            andamento das etapas
+          </a>
+          ; os recursos dessa versão ainda não fazem parte do download público.
+        </p>
+      </header>
+
+      <section id="comece" class="docs-section" aria-labelledby="comece-title">
+        <div class="docs-heading">
+          <span>01 / COMEÇAR</span>
+          <h2 id="comece-title">Do download ao primeiro contato.</h2>
+        </div>
+        <div class="docs-card-grid">
+          <a
+            class="docs-card"
+            href={releaseUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span>
+              ORIGEM OFICIAL <span aria-hidden="true">↗</span>
+            </span>
+            <h3>Release e pacote</h3>
+            <p>
+              Veja plataforma, arquivos, notas e SHA-256 na página da versão.
+            </p>
+          </a>
+          <a
+            class="docs-card"
+            href={manualUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span>
+              MANUAL DA IDE <span aria-hidden="true">↗</span>
+            </span>
+            <h3>Entenda a Vectis</h3>
+            <p>Consulte a documentação mantida junto ao código do projeto.</p>
+          </a>
+        </div>
+        <p class="docs-note">
+          O tutorial público de instalação ainda precisa ser alinhado à versão
+          do pacote atual. Até essa revisão, use a release e o README como
+          fontes para instalação.
+        </p>
+      </section>
+
+      <section id="guias" class="docs-section" aria-labelledby="guias-title">
+        <div class="docs-heading">
+          <span>02 / APRENDER</span>
+          <h2 id="guias-title">Primeiro a IDE, depois os projetos.</h2>
+        </div>
+        <p>
+          O manual técnico já está disponível no repositório da IDE. Ainda não
+          há capítulos próprios verificados neste site. A área Aprender terá
+          duas partes, nesta ordem:
+        </p>
+        <ol class="learning-sequence">
+          <li>
+            <strong>Guia da IDE</strong>
+            <p>
+              Instalação, interface, primeiro projeto, build, execução, testes,
+              depuração e solução de problemas na versão citada.
+            </p>
+          </li>
+          <li>
+            <strong>Projetos guiados</strong>
+            <p>
+              Exemplos locais e pequenos que introduzem C++, C, Python e Rust
+              junto com as tarefas feitas na Vectis.
+            </p>
+          </li>
+        </ol>
+        <p>
+          Cada capítulo terá pré-requisitos, passos, resultado esperado e
+          solução de problemas. Referências externas servirão para aprofundar,
+          sem substituir os passos. Novas páginas aparecerão somente após a
+          reprodução do fluxo descrito.
+        </p>
+      </section>
+
+      <LearningPaths />
+
+      <LanguageTracks />
+
+      <section
+        id="referencias"
+        class="docs-section"
+        aria-labelledby="referencias-title"
+      >
+        <div class="docs-heading">
+          <span>05 / APROFUNDAR</span>
+          <h2 id="referencias-title">Referências dos ecossistemas.</h2>
+        </div>
+        <p>
+          Estas referências externas servem para aprofundamento. Os tutoriais de
+          configuração da Vectis serão publicados neste site; o rótulo abaixo
+          indica quem mantém cada referência.
+        </p>
+        <ul class="reference-list">
+          {references.map((reference) => (
+            <li>
+              <a
+                class="reference-link"
+                href={reference.href}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span>
+                  <strong>{reference.title}</strong>
+                  <small>{reference.label}</small>
+                </span>
+                <span>{reference.detail}</span>
+                <span aria-hidden="true">↗</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section id="ajuda" class="docs-section" aria-labelledby="ajuda-title">
+        <div class="docs-heading">
+          <span>06 / PARTICIPAR</span>
+          <h2 id="ajuda-title">Dúvida, problema ou sugestão?</h2>
+        </div>
+        <p>
+          Comece pelo manual e pela release da sua versão. O Discord oficial
+          recebe dúvidas, relatos de defeito e sugestões sobre os próximos
+          fluxos da IDE.
+        </p>
+        <div class="help-panel">
+          <div>
+            <strong>Um relato útil inclui</strong>
+            <p>
+              Versão da IDE, sistema, passos para reproduzir, resultado esperado
+              e resultado observado. Remova tokens, caminhos privados e dados
+              pessoais de logs ou capturas.
+            </p>
+          </div>
+          <a
+            class="button button-secondary"
+            href={discordUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Entrar no Discord <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+        <p class="docs-note">
+          Confira também o{" "}
+          <a href={repositoryUrl} target="_blank" rel="noopener noreferrer">
+            código do projeto
+          </a>
+          e as notas da versão antes de relatar um problema.
+        </p>
+      </section>
+    </div>
+  </div>
+</BaseLayout>

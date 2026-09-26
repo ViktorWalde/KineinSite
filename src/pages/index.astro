@@ -1,0 +1,229 @@
+---
+import { getImage } from "astro:assets";
+import wallpaperSource from "../../assets/backgrounds/wallpaper-site.png";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import CurrentStatus from "../components/CurrentStatus.astro";
+import DevelopmentStatus from "../components/DevelopmentStatus.astro";
+import FocusAreas from "../components/FocusAreas.astro";
+import { discordUrl, releaseUrl, repositoryUrl, sitePath } from "../site";
+
+const wallpaper = await getImage({
+  src: wallpaperSource,
+  format: "webp",
+  quality: 76,
+});
+---
+
+<BaseLayout
+  current="home"
+  title="O ambiente do seu projeto à vista"
+  description="Conheça o beta público 0.2.0 da Kinein Vectis para Linux x86_64, acompanhe a 0.3.0 em desenvolvimento e veja a direção futura para embarcados, IoT/IIoT, backend e ROS 2."
+>
+  <section class="hero" aria-labelledby="hero-title">
+    <img
+      class="hero-bg"
+      src={wallpaper.src}
+      width={wallpaperSource.width}
+      height={wallpaperSource.height}
+      alt=""
+      decoding="async"
+    />
+    <div class="shell hero-layout">
+      <div class="hero-art" aria-hidden="true"></div>
+      <div class="hero-copy">
+        <p class="hero-overline">
+          <span aria-hidden="true">∭</span> BETA PÚBLICO 0.2.0 · LINUX X86_64
+        </p>
+        <h1 id="hero-title">
+          O ambiente do seu projeto, <em>à vista.</em>
+        </h1>
+        <p class="hero-lead">
+          A Kinein Vectis é uma IDE open source para C, C++, Rust e Python,
+          voltada a sistemas, embarcados e software de apoio ao dispositivo. Ela
+          reúne o projeto, as ferramentas encontradas e as escolhas usadas em
+          build, testes e depuração.
+        </p>
+        <div class="hero-actions">
+          <a
+            class="button button-primary"
+            href={releaseUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Ver beta para Linux <span aria-hidden="true">↗</span>
+          </a>
+          <a class="button button-quiet" href={sitePath("/documentacao/")}>
+            Começar pela documentação
+          </a>
+        </div>
+        <p class="hero-meta">
+          Disponível agora: beta 0.2.0 <span aria-hidden="true">·</span> Linux
+          x86_64 <span aria-hidden="true">·</span> A 0.3.0 está em
+          desenvolvimento
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <nav class="journey shell" aria-label="Caminhos rápidos">
+    <a href="#estado">
+      <span class="journey-label">01 / PRESENTE</span>
+      <strong>Veja o estado do beta</strong>
+      <span class="journey-arrow" aria-hidden="true">
+        ↗
+      </span>
+    </a>
+    <a href="#desenvolvimento">
+      <span class="journey-label">02 / EM DESENVOLVIMENTO</span>
+      <strong>Acompanhe a 0.3.0</strong>
+      <span class="journey-arrow" aria-hidden="true">
+        ↗
+      </span>
+    </a>
+    <a href="#foco">
+      <span class="journey-label">03 / DIREÇÃO</span>
+      <strong>Conheça os próximos focos</strong>
+      <span class="journey-arrow" aria-hidden="true">
+        ↗
+      </span>
+    </a>
+  </nav>
+
+  <CurrentStatus />
+
+  <DevelopmentStatus />
+
+  <FocusAreas />
+
+  <section
+    id="experiencia"
+    class="section shell"
+    aria-labelledby="experiencia-title"
+  >
+    <div class="section-intro">
+      <p class="kicker">EXPERIÊNCIA EM DESENVOLVIMENTO</p>
+      <h2 id="experiencia-title">
+        Menos configuração manual. Mais tempo para projetar e testar.
+      </h2>
+      <p class="section-intro-copy">
+        A meta é abrir um projeto compatível, reconhecer o ambiente e oferecer
+        escolhas claras pela interface. Arquivos de configuração podem continuar
+        existindo para as ferramentas; o fluxo comum não deveria exigir que você
+        edite JSON da IDE ou peça a uma IA para fazê-lo.
+      </p>
+    </div>
+    <div class="principle-grid">
+      <article class="principle-card">
+        <span class="card-glyph" aria-hidden="true">
+          ◇
+        </span>
+        <h3>Reconhecer</h3>
+        <p>
+          Mostrar ferramentas, SDKs, ambientes e destinos encontrados para o
+          projeto.
+        </p>
+      </article>
+      <article class="principle-card">
+        <span class="card-glyph" aria-hidden="true">
+          ⌁
+        </span>
+        <h3>Escolher pela interface</h3>
+        <p>
+          Explicar alternativas e pedir sua decisão quando houver mais de um
+          caminho.
+        </p>
+      </article>
+      <article class="principle-card">
+        <span class="card-glyph" aria-hidden="true">
+          ▣
+        </span>
+        <h3>Trabalhar com contexto</h3>
+        <p>
+          Deixar visível o ambiente efetivo de build, teste, execução e
+          depuração.
+        </p>
+      </article>
+    </div>
+    <p class="direction-note">
+      Esta é a direção do produto. O beta 0.2.0 ainda não oferece esse fluxo
+      completo para todos os projetos e ecossistemas.
+    </p>
+  </section>
+
+  <section class="flow-section" aria-labelledby="flow-title">
+    <div class="shell flow-layout">
+      <div class="section-intro">
+        <p class="kicker">O QUE MUDA NA LEITURA DO PROJETO</p>
+        <h2 id="flow-title">Do encontrado ao efetivo.</h2>
+        <p class="section-intro-copy">
+          O fluxo abaixo representa a proposta da IDE. Ele é conceitual e não
+          uma captura da interface.
+        </p>
+        <a
+          class="inline-link"
+          href={`${repositoryUrl}#readme`}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Leia a visão no README oficial <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+      <ol class="state-flow">
+        <li>
+          <span class="step-number">01</span>
+          <div>
+            <strong>Detectado</strong>
+            <p>Ferramentas, SDKs e destinos disponíveis.</p>
+          </div>
+        </li>
+        <li>
+          <span class="step-number">02</span>
+          <div>
+            <strong>Escolhido</strong>
+            <p>Configuração que você seleciona para trabalhar.</p>
+          </div>
+        </li>
+        <li>
+          <span class="step-number">03</span>
+          <div>
+            <strong>Efetivo</strong>
+            <p>Ambiente que a tarefa realmente utiliza.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="closing-section" aria-labelledby="closing-title">
+    <div class="shell closing-layout">
+      <div>
+        <p class="kicker">COMECE COM INFORMAÇÃO CLARA</p>
+        <h2 id="closing-title">
+          Explore o beta. Ajude a definir os próximos fluxos.
+        </h2>
+        <p>
+          Confira requisitos, notas da versão e integridade do pacote na release
+          oficial.
+        </p>
+      </div>
+      <div class="closing-actions">
+        <a
+          class="button button-primary"
+          href={releaseUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Abrir release oficial <span aria-hidden="true">↗</span>
+        </a>
+        <a
+          class="inline-link"
+          href={discordUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Entrar no Discord da Vectis <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

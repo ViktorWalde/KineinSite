@@ -1,0 +1,43 @@
+---
+import SiteFooter from "../components/SiteFooter.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import "../styles/tokens.css";
+import "../styles/base.css";
+import "../styles/layout.css";
+import "../styles/components.css";
+import "../styles/home.css";
+import "../styles/home-sections.css";
+import "../styles/development.css";
+import "../styles/docs.css";
+
+interface Props {
+  title: string;
+  description: string;
+  current: "home" | "docs";
+}
+
+const { title, description, current } = Astro.props;
+---
+
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="referrer" content="no-referrer" />
+    <meta name="description" content={description} />
+    <title>{title} | Kinein Vectis</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#conteudo">
+      Pular para o conteúdo
+    </a>
+    <SiteHeader current={current} />
+    <main id="conteudo">
+      <slot />
+    </main>
+    <SiteFooter />
+    <script src="../scripts/theme.ts"></script>
+  </body>
+</html>

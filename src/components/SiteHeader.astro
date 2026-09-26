@@ -1,0 +1,64 @@
+---
+import { getImage } from "astro:assets";
+import icon from "../../assets/icon-amber.png";
+import { discordUrl, releaseUrl, sitePath } from "../site";
+import ThemeControls from "./ThemeControls.astro";
+
+interface Props {
+  current: "home" | "docs";
+}
+
+const { current } = Astro.props;
+const optimizedIcon = await getImage({ src: icon, width: 84, format: "webp" });
+---
+
+<header class="site-header">
+  <div class="shell header-inner">
+    <a
+      class="brand"
+      href={sitePath("/")}
+      aria-label="Kinein Vectis, página inicial"
+    >
+      <img
+        src={optimizedIcon.src}
+        width="42"
+        height="42"
+        alt=""
+        decoding="async"
+      />
+      <span>
+        Kinein <strong>Vectis</strong>
+      </span>
+    </a>
+
+    <nav class="primary-nav" aria-label="Navegação principal">
+      <a
+        href={sitePath("/#estado")}
+        aria-current={current === "home" ? "page" : undefined}
+      >
+        Estado atual
+      </a>
+      <a
+        href={sitePath("/documentacao/")}
+        aria-current={current === "docs" ? "page" : undefined}
+      >
+        Documentação
+      </a>
+      <a href={discordUrl} target="_blank" rel="noopener noreferrer">
+        Discord <span aria-hidden="true">↗</span>
+      </a>
+    </nav>
+
+    <div class="header-tools">
+      <ThemeControls />
+      <a
+        class="header-repo"
+        href={releaseUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Baixar 0.2.0 <span aria-hidden="true">↗</span>
+      </a>
+    </div>
+  </div>
+</header>

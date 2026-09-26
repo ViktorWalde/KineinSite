@@ -1,0 +1,75 @@
+---
+import { changelogUrl, manualUrl, releaseUrl } from "../site";
+---
+
+<section id="estado" class="section shell" aria-labelledby="estado-title">
+  <div class="section-intro">
+    <p class="kicker">O QUE VOCÊ PODE EXPLORAR HOJE</p>
+    <h2 id="estado-title">O que você pode baixar hoje.</h2>
+    <p class="section-intro-copy">
+      A versão pública é a <strong>0.2.0 beta para Linux x86_64</strong>. Ela
+      reúne edição e navegação de projeto com tarefas de desenvolvimento e
+      painéis de ambiente. O que funciona em cada projeto depende das
+      ferramentas e do alvo disponíveis.
+    </p>
+  </div>
+  <div class="status-panel">
+    <div>
+      <h3>Beta público</h3>
+      <p>
+        A série 0.x é beta: interfaces, configurações e fluxos podem mudar.
+        Verifique requisitos, pacote e limitações na release antes de instalar.
+      </p>
+    </div>
+    <div class="status-actions">
+      <a
+        class="button button-secondary"
+        href={releaseUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Conferir a release <span aria-hidden="true">↗</span>
+      </a>
+      <a
+        class="inline-link"
+        href={manualUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Ler o manual da IDE <span aria-hidden="true">↗</span>
+      </a>
+    </div>
+  </div>
+  <div class="current-capabilities">
+    <div>
+      <h3>Projeto e editor</h3>
+      <p>Explorer, editor, navegação por símbolos e estado do projeto.</p>
+    </div>
+    <div>
+      <h3>Executar e investigar</h3>
+      <p>
+        Build, testes, depuração e execução em uma aba do terminal integrado.
+      </p>
+    </div>
+    <div>
+      <h3>Ferramentas de apoio</h3>
+      <p>
+        Git, embarcados, containers e bancos em fluxos com pré-requisitos
+        próprios.
+      </p>
+    </div>
+  </div>
+  <p class="status-source">
+    O{" "}
+    <a
+      class="inline-link"
+      href={changelogUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      changelog da IDE <span aria-hidden="true">↗</span>
+    </a>
+    descreve esses recursos. A release informa arquivos, requisitos e limites do
+    pacote distribuído.
+  </p>
+</section>

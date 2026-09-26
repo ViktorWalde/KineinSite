@@ -1,0 +1,79 @@
+.development-section {
+  padding-block-start: 0;
+}
+
+.development-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin-block-start: 2rem;
+}
+
+.development-card {
+  min-width: 0;
+  padding: clamp(1.2rem, 2vw, 1.6rem);
+  border: 1px solid var(--border);
+  border-radius: 0.7rem;
+  background: var(--surface);
+}
+
+.development-card h3 {
+  margin-block-end: 1.25rem;
+  font-size: 1.05rem;
+}
+
+.development-card ul {
+  display: grid;
+  gap: 0.9rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.development-card li {
+  display: grid;
+  grid-template-columns: 3.8rem minmax(0, 1fr);
+  align-items: start;
+  gap: 0.6rem;
+}
+
+.development-code {
+  padding-block: 0.12rem;
+  border: 1px solid var(--border);
+  border-radius: 0.3rem;
+  color: var(--accent);
+  font-size: 0.72rem;
+  font-weight: 800;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.development-card strong,
+.development-card small {
+  display: block;
+}
+
+.development-card strong {
+  font-size: 0.94rem;
+  line-height: 1.4;
+}
+
+.development-card small {
+  margin-block-start: 0.25rem;
+  color: var(--muted);
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+.development-note {
+  max-width: 70ch;
+  margin-block: 1.2rem 0;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+@media (width <= 980px) {
+  .development-grid {
+    grid-template-columns: 1fr;
+  }
+}

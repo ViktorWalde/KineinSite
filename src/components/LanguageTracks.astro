@@ -1,0 +1,58 @@
+---
+import { manualUrl, repositoryUrl } from "../site";
+
+const tracks = [
+  {
+    language: "C",
+    path: "Programa local de amostras: compilar, executar e verificar resultados. Firmware vem depois.",
+    destination: "Ver C na IDE",
+    href: `${repositoryUrl}#c-e-c`,
+  },
+  {
+    language: "C++",
+    path: "Projeto de linha de comando com CMake, CTest e depuração. Um alvo embarcado vem depois.",
+    destination: "Build e testes no manual",
+    href: `${manualUrl}#4-build-testes-e-análise`,
+  },
+  {
+    language: "Rust",
+    path: "Projeto local com Cargo, tratamento de erros e testes. Targets específicos vêm depois.",
+    destination: "Ver Rust na IDE",
+    href: `${repositoryUrl}#rust`,
+  },
+  {
+    language: "Python",
+    path: "Ambiente virtual, relatório CSV e testes locais com unittest. API e banco vêm depois.",
+    destination: "Python no manual",
+    href: `${manualUrl}#10-python`,
+  },
+] as const;
+---
+
+<section
+  id="linguagens"
+  class="docs-section"
+  aria-labelledby="linguagens-title"
+>
+  <div class="docs-heading">
+    <span>04 / LINGUAGENS</span>
+    <h2 id="linguagens-title">Quatro percursos para aprender na Vectis.</h2>
+  </div>
+  <p>
+    Vamos escrever conteúdo próprio em português, baseado nas fontes de cada
+    ecossistema e em projetos executados na IDE. Os percursos serão publicados
+    gradualmente, após testar cada passo na versão indicada.
+  </p>
+  <div class="path-grid">
+    {tracks.map((track) => (
+      <article class="path-card">
+        <span>EM PREPARAÇÃO</span>
+        <h3>{track.language}</h3>
+        <p>{track.path}</p>
+        <a href={track.href} target="_blank" rel="noopener noreferrer">
+          {track.destination} <span aria-hidden="true">↗</span>
+        </a>
+      </article>
+    ))}
+  </div>
+</section>

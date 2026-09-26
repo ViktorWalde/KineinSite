@@ -1,0 +1,31 @@
+---
+import { discordUrl, releaseUrl, repositoryUrl, sitePath } from "../site";
+---
+
+<footer class="site-footer">
+  <div class="shell footer-top">
+    <div class="footer-intro">
+      <strong>Kinein Vectis</strong>
+      <p>Beta público 0.2.0 para C, C++, Rust e Python no Linux x86_64.</p>
+    </div>
+    <a
+      class="footer-discord"
+      href={discordUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Discord <span aria-hidden="true">↗</span>
+    </a>
+  </div>
+  <div class="shell footer-bottom">
+    <nav aria-label="Links do projeto">
+      <a href={sitePath("/documentacao/")}>Documentação</a>
+      <a href={releaseUrl} target="_blank" rel="noopener noreferrer">
+        Download 0.2.0
+      </a>
+      <a href={repositoryUrl} target="_blank" rel="noopener noreferrer">
+        Repositório
+      </a>
+    </nav>
+  </div>
+</footer>

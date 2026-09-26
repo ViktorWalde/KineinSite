@@ -1,0 +1,352 @@
+.docs-shell {
+  display: grid;
+  grid-template-columns: 13rem minmax(0, 1fr);
+  align-items: start;
+  gap: clamp(2rem, 5vw, 5rem);
+  padding-block: 3.5rem 7rem;
+}
+
+.path-card a {
+  color: var(--accent);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.path-card-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 1.2rem;
+  margin-block-start: 1.2rem;
+}
+
+.docs-sidebar {
+  position: sticky;
+  top: 2rem;
+  padding-top: 0.6rem;
+}
+
+.docs-sidebar > p {
+  margin-block-end: 1.4rem;
+  color: var(--accent);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+.docs-sidebar nav {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.docs-sidebar a {
+  padding: 0.4rem 0.65rem;
+  border-left: 2px solid var(--border);
+  color: var(--muted);
+  font-size: 0.98rem;
+  text-decoration: none;
+}
+
+.docs-sidebar a:hover,
+.docs-sidebar a:focus-visible {
+  border-color: var(--accent);
+  color: var(--text);
+}
+
+.docs-sidebar-note {
+  margin-block-start: 2rem;
+  padding: 0.8rem;
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.docs-main {
+  min-width: 0;
+  max-width: 55rem;
+  font-size: 1.1rem;
+  line-height: 1.75;
+}
+
+.docs-main > * {
+  scroll-margin-top: 2rem;
+}
+
+.docs-intro {
+  padding-block: 0.25rem 3.2rem;
+}
+
+.docs-intro h1 {
+  max-width: 15ch;
+  margin-block-end: 1.2rem;
+  font-size: clamp(2.6rem, 4vw, 4rem);
+}
+
+.docs-intro-copy {
+  max-width: 65ch;
+  color: var(--muted);
+  font-size: 1.15rem;
+}
+
+.docs-status,
+.docs-note {
+  padding: 1rem 1.15rem;
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  background: var(--surface);
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.docs-status span {
+  margin-inline-end: 0.5rem;
+  color: var(--accent);
+}
+
+.docs-release-note {
+  max-width: 65ch;
+  margin-block: 0.9rem 0;
+  color: var(--muted);
+  font-size: 0.94rem;
+}
+
+.docs-section {
+  padding-block: 3rem;
+  border-top: 1px solid var(--border);
+}
+
+.docs-section > p {
+  max-width: 70ch;
+  color: var(--muted);
+}
+
+.docs-heading > span {
+  color: var(--accent);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.11em;
+}
+
+.docs-heading h2 {
+  margin-block: 0.75rem 1.5rem;
+  font-size: clamp(1.8rem, 3vw, 2.7rem);
+}
+
+.docs-card-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-block-end: 1rem;
+}
+
+.docs-card {
+  display: block;
+  padding: 1.3rem;
+  border: 1px solid var(--border);
+  border-radius: 0.6rem;
+  background: color-mix(in srgb, var(--surface) 96%, var(--accent));
+  text-decoration: none;
+  transition:
+    border-color 180ms ease,
+    background-color 180ms ease;
+}
+
+.docs-card:hover,
+.docs-card:focus-visible {
+  border-color: var(--accent);
+  background-color: color-mix(in srgb, var(--surface) 91%, var(--accent));
+}
+
+.docs-card > span {
+  color: var(--accent);
+  font-size: 0.71rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.docs-card h3 {
+  margin-block: 1.2rem 0.5rem;
+}
+
+.docs-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.98rem;
+}
+
+.path-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.path-card {
+  scroll-margin-top: 2rem;
+  padding: 1.35rem;
+  border: 1px solid var(--border);
+  border-radius: 0.6rem;
+  background: color-mix(in srgb, var(--surface) 96%, var(--accent));
+}
+
+.path-card:target {
+  border-color: var(--accent);
+}
+
+.path-card > span {
+  color: var(--accent);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+.path-card h3 {
+  margin-block: 0.8rem;
+}
+
+.path-card p {
+  color: var(--muted);
+  font-size: 0.98rem;
+}
+
+.learning-sequence {
+  display: grid;
+  gap: 0.8rem;
+  margin-block: 1.5rem;
+  padding: 0;
+  list-style: none;
+  counter-reset: learning-step;
+}
+
+.learning-sequence li {
+  display: grid;
+  grid-template-columns: 2.5rem minmax(0, 1fr);
+  column-gap: 1rem;
+  padding: 1.1rem;
+  border: 1px solid var(--border);
+  border-radius: 0.6rem;
+  background: var(--surface);
+  counter-increment: learning-step;
+}
+
+.learning-sequence li::before {
+  grid-row: span 2;
+  color: var(--accent);
+  font-size: 0.8rem;
+  font-weight: 800;
+  content: counter(learning-step, decimal-leading-zero);
+}
+
+.learning-sequence p {
+  margin: 0.3rem 0 0;
+  color: var(--muted);
+  font-size: 0.98rem;
+}
+
+.reference-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.reference-list li {
+  border-bottom: 1px solid var(--border);
+}
+
+.reference-list li:first-child {
+  border-top: 1px solid var(--border);
+}
+
+.reference-link {
+  display: grid;
+  grid-template-columns: 10rem 1fr auto;
+  align-items: center;
+  gap: 1rem;
+  padding-block: 1rem;
+  text-decoration: none;
+}
+
+.reference-link > span:nth-child(2) {
+  color: var(--muted);
+  font-size: 0.98rem;
+}
+
+.reference-link > span:last-child {
+  color: var(--accent);
+}
+
+.reference-list strong,
+.reference-list small {
+  display: block;
+}
+
+.reference-list small {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.help-panel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 1.4rem;
+  border: 1px solid var(--border);
+  border-radius: 0.65rem;
+  background: var(--surface);
+}
+
+.help-panel p {
+  max-width: 48ch;
+  margin: 0.4rem 0 0;
+  color: var(--muted);
+  font-size: 0.98rem;
+}
+
+.help-panel .button {
+  flex: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .docs-card {
+    transition: none;
+  }
+}
+
+@media (width <= 850px) {
+  .docs-shell {
+    grid-template-columns: 1fr;
+    padding-block-start: 2rem;
+  }
+
+  .docs-sidebar {
+    position: static;
+    padding: 0 0 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .docs-sidebar nav {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .docs-sidebar-note {
+    display: none;
+  }
+}
+
+@media (width <= 600px) {
+  .docs-card-grid,
+  .path-grid,
+  .reference-link {
+    grid-template-columns: 1fr;
+  }
+
+  .reference-link {
+    gap: 0.35rem;
+  }
+
+  .help-panel {
+    align-items: start;
+    flex-direction: column;
+  }
+}
