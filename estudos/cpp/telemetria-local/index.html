@@ -1,0 +1,92 @@
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="light dark"><meta name="referrer" content="no-referrer"><meta name="description" content="Comece com dados simulados de sensores e calcule uma média sem depender de hardware, rede ou bibliotecas externas."><title>C++20: processe telemetria local | Kinein Vectis</title><style>.study-shell{max-width:54rem;padding-block:clamp(2rem,5vw,4rem) 6rem}.study-breadcrumb{color:var(--muted);flex-wrap:wrap;gap:.55rem;font-size:.9rem;display:flex}.study-breadcrumb a,.study-end-nav a,.study-article a{color:var(--accent)}.study-header{border-bottom:1px solid var(--border);padding-block:2rem 2.5rem}.study-header h1{max-width:18ch;margin-block:.5rem 1rem;font-size:clamp(2.4rem,5vw,4rem)}.study-summary{max-width:66ch;color:var(--muted);font-size:1.15rem}.study-meta{flex-wrap:wrap;gap:1rem 2rem;margin:1.75rem 0 0;display:flex}.study-meta div{min-width:9rem}.study-meta dt{color:var(--muted);font-size:.8rem}.study-meta dd{margin:.15rem 0 0;font-weight:650}.study-article{max-width:72ch;padding-block:2.5rem;font-size:1.08rem;line-height:1.8}.study-article h2,.study-article h3{scroll-margin-top:6rem}.study-article h2{margin-block:3rem 1rem;font-size:clamp(1.65rem,3vw,2.2rem)}.study-article h3{margin-block:2rem .75rem}.study-article p,.study-article ul,.study-article ol{margin-block:0 1.3rem}.study-article li+li{margin-block-start:.55rem}.study-article :not(pre)>code{overflow-wrap:anywhere}.study-article pre{border:1px solid var(--border);background:var(--surface);max-width:100%;color:var(--text);tab-size:2;border-radius:.6rem;margin-block:1.5rem;padding:1.2rem;font-size:.9rem;line-height:1.6;overflow-x:auto}.study-article pre code{color:inherit;font-size:inherit;background:0 0;padding:0}.study-article blockquote{border-left:3px solid var(--accent);background:var(--surface);color:var(--muted);margin:1.5rem 0;padding:.8rem 1.2rem}.study-article blockquote p:last-child{margin-block-end:0}.study-end-nav{border-top:1px solid var(--border);padding-block-start:1.5rem;font-weight:700}
+</style><link rel="stylesheet" href="/KineinSite/_astro/BaseLayout.CSnkvvUD.css"></head><body><a class="skip-link" href="#conteudo">Pular para o conteúdo</a><header class="site-header"><div class="shell header-inner"><a class="brand" href="/KineinSite/" aria-label="Kinein Vectis, página inicial"><img src="/KineinSite/_astro/icon-amber.DfSfEzUf_Z5y0ai.webp" width="42" height="42" alt="" decoding="async"><span>Kinein <strong>Vectis</strong></span></a><nav class="primary-nav" aria-label="Navegação principal"><a href="/KineinSite/#estado">Estado atual</a><a href="/KineinSite/documentacao/" aria-current="page">Documentação</a><a href="https://discord.gg/cWRkUGUmQU" target="_blank" rel="noopener noreferrer">Discord <span aria-hidden="true">↗</span></a></nav><div class="header-tools"><details class="appearance"><summary>Tema <span aria-hidden="true">⌄</span></summary><div class="appearance-panel"><label for="theme-choice">Tema</label><select id="theme-choice" name="theme"><option value="system">Seguir o sistema</option><option value="light">Claro</option><option value="dark">Escuro</option><option value="warm">Quente</option></select><label for="accent-choice">Cor de destaque</label><select id="accent-choice" name="accent"><option value="amber">Âmbar</option><option value="blue">Azul</option><option value="teal">Verde-azulado</option></select><p>A preferência fica somente neste navegador.</p></div></details><a class="header-repo" href="https://github.com/ViktorWalde/KineinVectis/releases/tag/v0.2.0" target="_blank" rel="noopener noreferrer">Baixar 0.2.0 <span aria-hidden="true">↗</span></a></div></div></header><main id="conteudo"><div class="study-shell shell"><nav class="study-breadcrumb" aria-label="Caminho"><a href="/KineinSite/documentacao/">Documentação</a><span aria-hidden="true">/</span><span>Estudos de C++</span></nav><header class="study-header"><p class="kicker">ESTUDO PRÁTICO · C++</p><h1>C++20: processe telemetria local</h1><p class="study-summary">Comece com dados simulados de sensores e calcule uma média sem depender de hardware, rede ou bibliotecas externas.</p><dl class="study-meta"><div><dt>Padrão</dt><dd>C++20</dd></div><div><dt>Ambiente testado</dt><dd>Linux x86_64 · GCC 15.2.0</dd></div><div><dt>Último teste</dt><dd>26/09/2026</dd></div></dl></header><article class="study-article"><h2 id="o-que-você-vai-construir">O que você vai construir</h2>
+<p>Um programa de linha de comando que recebe leituras simuladas de temperatura de dois sensores e mostra a média de um deles. Esse é um primeiro exercício da <strong>camada de software de um sistema IoT</strong>: organizar amostras, selecionar um dispositivo e lidar com a ausência de dados.</p>
+<p>O exemplo roda no Linux com um compilador C++20. Ele não lê sensores físicos, não se conecta a um broker e não depende de recursos da Kinein Vectis. Os guias de projeto na IDE serão escritos após testar o fluxo na versão pública correspondente.</p>
+<p>Você precisa de um terminal e do <code>g++</code> com suporte a C++20. Confira com <code>g++ --version</code>.</p>
+<h2 id="passo-1-escreva-o-programa">Passo 1: escreva o programa</h2>
+<p>Crie um arquivo chamado <code>main.cpp</code> com o código abaixo:</p>
+<pre><code class="language-cpp">#include &lt;array&gt;
+#include &lt;cstddef&gt;
+#include &lt;iomanip&gt;
+#include &lt;iostream&gt;
+#include &lt;optional&gt;
+#include &lt;span&gt;
+#include &lt;string&gt;
+#include &lt;string_view&gt;
+
+struct Leitura {
+  std::string sensor;
+  int milicelsius;
+};
+
+std::optional&lt;double&gt; media_celsius(
+    std::span&lt;const Leitura&gt; leituras,
+    std::string_view sensor) {
+  double soma = 0.0;
+  std::size_t quantidade = 0;
+
+  for (const Leitura&amp; leitura : leituras) {
+    if (leitura.sensor == sensor) {
+      soma += static_cast&lt;double&gt;(leitura.milicelsius) / 1000.0;
+      ++quantidade;
+    }
+  }
+
+  if (quantidade == 0) {
+    return std::nullopt;
+  }
+
+  return soma / static_cast&lt;double&gt;(quantidade);
+}
+
+int main() {
+  const std::array&lt;Leitura, 4&gt; leituras{{
+      {"sala", 21500},
+      {"externo", 19100},
+      {"sala", 22000},
+      {"sala", 21750},
+  }};
+
+  std::cout &lt;&lt; std::fixed &lt;&lt; std::setprecision(2);
+
+  for (std::string_view sensor : {"sala", "patio"}) {
+    const auto media = media_celsius(leituras, sensor);
+    if (media) {
+      std::cout &lt;&lt; sensor &lt;&lt; ": " &lt;&lt; *media &lt;&lt; " C\n";
+    } else {
+      std::cout &lt;&lt; sensor &lt;&lt; ": sem leituras\n";
+    }
+  }
+}
+</code></pre>
+<p>Cada temperatura é armazenada como um inteiro em milésimos de grau Celsius: <code>21500</code> representa <code>21,5 °C</code>. A conversão para <code>double</code> acontece quando calculamos a média.</p>
+<h2 id="passo-2-compile-e-confira-o-resultado">Passo 2: compile e confira o resultado</h2>
+<p>No diretório onde salvou <code>main.cpp</code>, execute:</p>
+<pre><code class="language-sh">g++ -std=c++20 -Wall -Wextra -Wpedantic -Werror main.cpp -o telemetria
+./telemetria
+</code></pre>
+<p>Resultado esperado:</p>
+<pre><code class="language-text">sala: 21.75 C
+patio: sem leituras
+</code></pre>
+<p>As três leituras da sala somam <code>65,25 °C</code>; divididas por três, produzem <code>21,75 °C</code>. O pátio não aparece nas amostras, então o programa informa que não há leituras em vez de dividir por zero.</p>
+<p>Se o compilador disser que não conhece <code>std::span</code>, confirme se aceita <code>-std=c++20</code>. No GCC, essa opção seleciona o padrão C++20.</p>
+<h2 id="passo-3-entenda-as-escolhas-de-c-moderno">Passo 3: entenda as escolhas de C++ moderno</h2>
+<ul>
+<li><code>std::array</code> mantém um conjunto pequeno e fixo de amostras neste exercício. Em uma aplicação que acumula amostras dinamicamente, <code>std::vector</code> é uma escolha mais adequada.</li>
+<li><code>std::string</code> guarda o nome de cada sensor junto com a leitura. Já <code>std::string_view</code> recebe o nome usado na busca sem precisar criar outra string.</li>
+<li><code>std::span&lt;const Leitura&gt;</code> permite percorrer as amostras sem copiá-las. É uma <strong>visão</strong>: o programa que chama a função continua responsável por manter as amostras vivas durante a chamada.</li>
+<li><code>std::optional&lt;double&gt;</code> representa uma média que pode não existir. O código só acessa <code>*media</code> depois de verificar se há valor.</li>
+</ul>
+<p>Os conceitos de interfaces explícitas, objetos que possuem seus dados e visões sem posse são desenvolvidos nas <a href="https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines">C++ Core Guidelines</a>. O uso de <code>std::span</code> passou a fazer parte da biblioteca em C++20, conforme os <a href="https://open-std.org/JTC1/SC22/WG21/docs/papers/2020/p2131r0.html">documentos do comitê WG21</a>. Este texto e o exemplo foram escritos para este guia; não reproduzem a documentação dessas fontes.</p>
+<h2 id="passo-4-faça-três-pequenas-mudanças">Passo 4: faça três pequenas mudanças</h2>
+<ol>
+<li>Troque <code>"patio"</code> por <code>"externo"</code> no laço final. A segunda linha deve passar a mostrar <code>externo: 19.10 C</code>.</li>
+<li>Adicione <code>{"sala", 22500}</code> ao fim das amostras e altere o tamanho de <code>std::array&lt;Leitura, 4&gt;</code> para <code>std::array&lt;Leitura, 5&gt;</code>. A média da sala deve passar a <code>21.94 C</code> após o arredondamento para duas casas.</li>
+<li>Remova ou renomeie todas as leituras de <code>"sala"</code>. O programa deve mostrar <code>sala: sem leituras</code>.</li>
+</ol>
+<p>Recompile e execute após cada mudança. Se o resultado for diferente, confira o nome do sensor, a quantidade de elementos do <code>std::array</code> e a unidade de cada valor.</p>
+<h2 id="próximos-estudos">Próximos estudos</h2>
+<p>O próximo passo é validar entradas que chegam de fora do programa e separar o cálculo em uma função testada com CTest. Só depois faz sentido acrescentar rede, MQTT e integração com a IDE. Este exemplo ainda não trata leituras inválidas, tempo das amostras, perda de mensagens ou armazenamento contínuo.</p>
+<p>Para aprofundar, consulte também a <a href="https://gcc.gnu.org/onlinedocs/gcc/Standards.html">documentação do GCC sobre padrões de linguagem</a> e o <a href="https://cmake.org/cmake/help/latest/guide/tutorial/Testing%20and%20CTest.html">tutorial oficial de testes com CMake e CTest</a>.</p>
+</article><nav class="study-end-nav" aria-label="Voltar à documentação"><a href="/KineinSite/documentacao/">← Ver as outras trilhas de estudo</a></nav></div></main><footer class="site-footer"><div class="shell footer-top"><div class="footer-intro"><strong>Kinein Vectis</strong><p>Beta público 0.2.0 para C, C++, Rust e Python no Linux x86_64.</p></div><a class="footer-discord" href="https://discord.gg/cWRkUGUmQU" target="_blank" rel="noopener noreferrer">Discord <span aria-hidden="true">↗</span></a></div><div class="shell footer-bottom"><nav aria-label="Links do projeto"><a href="/KineinSite/documentacao/">Documentação</a><a href="https://github.com/ViktorWalde/KineinVectis/releases/tag/v0.2.0" target="_blank" rel="noopener noreferrer">Download 0.2.0</a><a href="https://github.com/ViktorWalde/KineinVectis" target="_blank" rel="noopener noreferrer">Repositório</a></nav></div></footer><script type="module">var e=[`system`,`light`,`dark`,`warm`],t=[`amber`,`blue`,`teal`],n=document.documentElement,r=document.querySelector(`#theme-choice`),i=document.querySelector(`#accent-choice`);function a(e){try{return localStorage.getItem(e)}catch{return null}}function o(e,t){try{localStorage.setItem(e,t)}catch{}}function s(t){return t!==null&&e.includes(t)}function c(e){return e!==null&&t.includes(e)}function l(e){e===`system`?n.removeAttribute(`data-theme`):n.dataset.theme=e}function u(e){e===`amber`?n.removeAttribute(`data-accent`):n.dataset.accent=e}var d=a(`kinein-theme`),f=a(`kinein-accent`),p=s(d)?d:`system`,m=c(f)?f:`amber`;l(p),u(m),r&&i&&(r.value=p,i.value=m,n.dataset.enhanced=`true`,r.addEventListener(`change`,()=>{s(r.value)&&(l(r.value),o(`kinein-theme`,r.value))}),i.addEventListener(`change`,()=>{c(i.value)&&(u(i.value),o(`kinein-accent`,i.value))}));</script></body></html>
