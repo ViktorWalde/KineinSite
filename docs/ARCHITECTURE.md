@@ -24,7 +24,7 @@ O HTML gerado não usa realce de sintaxe com cores fixas. Blocos de código herd
 
 ## Verificações
 
-`npm run build:pages` executa `astro check`, ESLint, Stylelint, verificação de arquitetura, Prettier, build, `html-validate` e `scripts/check-links.mjs`. O último confere arquivos e âncoras de links **internos** no HTML gerado; links externos exigem revisão editorial. O workflow `validate.yml` roda o mesmo comando em push para `main` e pull requests. Nenhum desses checks substitui a revisão visual e de teclado no navegador.
+`npm run build:pages` executa `astro check`, ESLint, Stylelint, verificação de arquitetura, Prettier, build, `html-validate` e `scripts/check-links.mjs`. O último confere arquivos e âncoras de links **internos** no HTML gerado; links externos exigem revisão editorial. A validação automática de push e pull request está pausada porque os jobs do GitHub Actions não estão iniciando nesta conta. `validate.yml` guarda a configuração para execução manual após a liberação dos jobs. Até lá, o mantenedor executa o build local antes de publicar. Nenhum desses checks substitui a revisão visual e de teclado no navegador.
 
 ## Publicação
 

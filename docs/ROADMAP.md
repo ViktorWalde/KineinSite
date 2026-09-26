@@ -8,7 +8,7 @@ Este documento descreve **o site**, não o cronograma de recursos da Kinein Vect
 - Distinção visual entre beta público 0.2.0, desenvolvimento da 0.3.0 e direção futura da IDE.
 - Temas claro, escuro e quente com três cores de destaque, sem exigir conta.
 - Validação de tipos, estilos, formatação, HTML e links internos no build; publicação por `gh-pages`.
-- Documentação técnica para colaboração e validação automática de pull requests.
+- Documentação técnica para colaboração e build local obrigatório antes da publicação.
 
 ## Próximas entregas do site
 
@@ -19,6 +19,7 @@ Este documento descreve **o site**, não o cronograma de recursos da Kinein Vect
 | 3 | Publicar o Guia básico da IDE. | Implementar a rota da coleção `aprender` e reproduzir instalação, interface e primeiro projeto na versão pública indicada, com comandos e resultados. |
 | 4 | Continuar os estudos de C++ para software de IoT: entrada validada, módulos e CMake/CTest. | Compilar e executar os exemplos, testar casos de erro e registrar ferramenta, plataforma e data no guia. |
 | 5 | Reduzir os avisos de coesão de CSS e revisar links externos. | Separar responsabilidades sem mudar o comportamento visual; build sem erros e links externos essenciais conferidos. |
+| 6 | Reativar a validação automática de pull requests. | Confirmar que a conta pode iniciar jobs do GitHub Actions e que o workflow passa em um push e em um pull request. Até lá, usar `npm run build:pages` localmente. |
 
 Um estudo de MQTT local só será colocado como guia publicado depois de escolher e testar cliente, broker e versões. Guias de ROS 2, emulação ou fluxos novos da Vectis dependem de recursos reais da IDE; não entram no roadmap de entrega do site antes dessa validação.
 

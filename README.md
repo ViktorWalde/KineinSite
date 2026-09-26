@@ -53,6 +53,6 @@ git push origin main
 bash scripts/publicar-pages.sh
 ```
 
-O script exige `user.name` e um endereço `@users.noreply.github.com` na configuração local do Git, roda `npm run build:pages` e envia apenas `dist/` para `gh-pages`. Contribuidores externos devem abrir um pull request; a publicação fica com os mantenedores. O workflow `deploy.yml` é uma alternativa manual existente, mas não é o fluxo usado para a publicação por branch. O workflow de validação de pull requests não publica o site.
+O script exige `user.name` e um endereço `@users.noreply.github.com` na configuração local do Git, roda `npm run build:pages` e envia apenas `dist/` para `gh-pages`. Contribuidores externos devem abrir um pull request; a publicação fica com os mantenedores. O workflow `deploy.yml` é uma alternativa manual existente, mas não é o fluxo usado para a publicação por branch. A validação automática de pull requests está pausada; o workflow `validate.yml` pode ser executado manualmente quando o GitHub voltar a iniciar seus jobs.
 
 `DocPrivate/` é uma pasta local ignorada pelo Git. Não inclua dados pessoais, credenciais, caminhos privados ou documentos de trabalho nessa contribuição.

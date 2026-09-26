@@ -1,10 +1,8 @@
 name: Validar KineinSite
 
+# A execução automática será reativada quando a conta puder iniciar jobs do Actions.
 on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
+  workflow_dispatch:
 
 permissions:
   contents: read

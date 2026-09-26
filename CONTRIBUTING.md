@@ -4,7 +4,7 @@ Obrigado por ajudar a tornar o site mais claro e útil. Mudanças pequenas e ver
 
 ## Preparar o ambiente
 
-Use Node.js 24 e npm. Execute `npm ci` e `npm run dev`; a página local abre em <http://127.0.0.1:4321/>. Antes de abrir um pull request, execute `npm run build:pages`. O mesmo build é executado pelo workflow de validação. Consulte [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) para localizar rotas, componentes e estilos.
+Use Node.js 24 e npm. Execute `npm ci` e `npm run dev`; a página local abre em <http://127.0.0.1:4321/>. Antes de abrir um pull request, execute `npm run build:pages` e informe o resultado. A validação automática de pull requests está pausada; o mantenedor também executa esse build antes da publicação. Consulte [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) para localizar rotas, componentes e estilos.
 
 ## Escopo de uma mudança
 
