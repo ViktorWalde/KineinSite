@@ -6,6 +6,8 @@
     "node": ">=24 <25"
   },
   "scripts": {
+    "dev": "ASTRO_TELEMETRY_DISABLED=1 astro dev --host 127.0.0.1",
+    "preview": "KINEIN_PAGES_BUILD=1 ASTRO_TELEMETRY_DISABLED=1 astro preview --host 127.0.0.1",
     "check:types": "ASTRO_TELEMETRY_DISABLED=1 astro check",
     "check:lint": "eslint 'src/**/*.{astro,ts,js,mjs}' 'scripts/**/*.mjs' '*config.mjs' --no-error-on-unmatched-pattern --max-warnings 0",
     "check:css": "stylelint 'src/**/*.css' --allow-empty-input --max-warnings 0",

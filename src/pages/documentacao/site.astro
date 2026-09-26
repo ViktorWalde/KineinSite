@@ -1,0 +1,202 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { sitePath, siteRepositoryUrl } from "../../site";
+
+const projectDocs = [
+  {
+    title: "Código e README",
+    label: "REPOSITÓRIO",
+    href: siteRepositoryUrl,
+    detail: "Comece pelo estado atual, pelos comandos e pelo código fonte.",
+  },
+  {
+    title: "Arquitetura",
+    label: "ROTAS E PUBLICAÇÃO",
+    href: `${siteRepositoryUrl}/blob/main/docs/ARCHITECTURE.md`,
+    detail: "Entenda coleções, temas, validações e o fluxo do Pages.",
+  },
+  {
+    title: "Como contribuir",
+    label: "PULL REQUESTS",
+    href: `${siteRepositoryUrl}/blob/main/CONTRIBUTING.md`,
+    detail: "Critérios para interface, conteúdo e verificação de guias.",
+  },
+  {
+    title: "Roadmap técnico",
+    label: "PRÓXIMAS ENTREGAS",
+    href: `${siteRepositoryUrl}/blob/main/docs/ROADMAP.md`,
+    detail: "Prioridades e condições de conclusão, sem promessas de data.",
+  },
+] as const;
+---
+
+<BaseLayout
+  current="docs"
+  title="Sobre este site"
+  description="Arquitetura, processo de contribuição e roadmap verificável do site público da Kinein Vectis."
+>
+  <div class="docs-shell shell">
+    <aside class="docs-sidebar" aria-label="Navegação desta página">
+      <p>PROJETO DO SITE</p>
+      <nav aria-label="Seções sobre o site">
+        <a href="#estado-site">Estado atual</a>
+        <a href="#arquitetura-site">Arquitetura</a>
+        <a href="#roteiro-site">Próximas entregas</a>
+        <a href="#colaborar-site">Como colaborar</a>
+        <a href={sitePath("/documentacao/")}>Voltar à documentação</a>
+      </nav>
+    </aside>
+
+    <div class="docs-main">
+      <header class="docs-intro">
+        <p class="kicker">PROJETO ABERTO À COLABORAÇÃO</p>
+        <h1>O site também é um projeto.</h1>
+        <p class="docs-intro-copy">
+          Aqui estão as peças que existem hoje e os próximos trabalhos que
+          podemos verificar. Este roteiro trata do site; o estado da IDE está
+          descrito na{" "}
+          <a class="inline-link" href={sitePath("/#estado")}>
+            página inicial
+          </a>
+          .
+        </p>
+      </header>
+
+      <section
+        id="estado-site"
+        class="docs-section"
+        aria-labelledby="estado-site-title"
+      >
+        <div class="docs-heading">
+          <span>01 / PUBLICADO</span>
+          <h2 id="estado-site-title">O que existe hoje.</h2>
+        </div>
+        <p>
+          Página inicial, índice de documentação e primeiro estudo de C++20. O
+          site tem três temas de leitura, três cores de destaque e passa por
+          verificações de código, HTML e links internos antes da publicação.
+        </p>
+        <p>
+          O{" "}
+          <a
+            class="inline-link"
+            href={sitePath("/estudos/cpp/telemetria-local/")}
+          >
+            estudo de telemetria
+          </a>{" "}
+          é independente da IDE. Os guias de tarefas na Vectis ainda dependem de
+          reprodução dos passos na versão pública indicada.
+        </p>
+      </section>
+
+      <section
+        id="arquitetura-site"
+        class="docs-section"
+        aria-labelledby="arquitetura-site-title"
+      >
+        <div class="docs-heading">
+          <span>02 / COMO FUNCIONA</span>
+          <h2 id="arquitetura-site-title">
+            Páginas estáticas e conteúdo verificado.
+          </h2>
+        </div>
+        <p>
+          Astro gera o site, e o GitHub Pages entrega os arquivos. O código não
+          usa servidor ou banco de dados. As preferências de tema ficam no
+          navegador. Estudos de linguagem são escritos em Markdown e só geram
+          página pública quando estão marcados como verificados.
+        </p>
+        <p>
+          Para trabalhar no repositório, use Node.js 24, <code>npm ci</code> e
+          <code>npm run dev</code>. Antes de propor uma mudança, execute
+          <code>npm run build:pages</code>. A documentação de arquitetura no
+          repositório descreve coleções, rotas e publicação em detalhes.
+        </p>
+      </section>
+
+      <section
+        id="roteiro-site"
+        class="docs-section"
+        aria-labelledby="roteiro-site-title"
+      >
+        <div class="docs-heading">
+          <span>03 / ROADMAP DO SITE</span>
+          <h2 id="roteiro-site-title">
+            Próximos trabalhos, com critério de conclusão.
+          </h2>
+        </div>
+        <ol class="learning-sequence">
+          <li>
+            <strong>Revisar leitura e navegação</strong>
+            <p>
+              Conferir telas estreitas, contraste dos temas, foco por teclado e
+              movimento reduzido. Corrigir cada defeito reproduzido.
+            </p>
+          </li>
+          <li>
+            <strong>Ampliar os estudos verificados</strong>
+            <p>
+              Validar entradas e testes em C++ com exemplos executados. Melhorar
+              a navegação entre estudos quando houver mais páginas.
+            </p>
+          </li>
+          <li>
+            <strong>Publicar o Guia básico da IDE</strong>
+            <p>
+              Criar a rota própria e testar instalação, interface e primeiro
+              projeto na versão pública citada antes de publicar.
+            </p>
+          </li>
+          <li>
+            <strong>Manter a base técnica</strong>
+            <p>
+              Reduzir avisos de coesão de CSS e conferir os links externos
+              essenciais durante revisões de conteúdo.
+            </p>
+          </li>
+        </ol>
+        <p>
+          Recursos ainda não validados da IDE não têm data de publicação como
+          guia. O{" "}
+          <a
+            class="inline-link"
+            href={`${siteRepositoryUrl}/blob/main/docs/ROADMAP.md`}
+          >
+            roadmap detalhado
+          </a>{" "}
+          registra as condições de cada entrega.
+        </p>
+      </section>
+
+      <section
+        id="colaborar-site"
+        class="docs-section"
+        aria-labelledby="colaborar-site-title"
+      >
+        <div class="docs-heading">
+          <span>04 / CONTRIBUIR</span>
+          <h2 id="colaborar-site-title">Correções e estudos são bem-vindos.</h2>
+        </div>
+        <p>
+          Explique o problema, mostre o resultado esperado e indique como
+          verificou a mudança. Para um estudo, registre fontes, ferramentas e
+          resultado da execução. A publicação fica com os mantenedores.
+        </p>
+        <div class="docs-card-grid">
+          {projectDocs.map((doc) => (
+            <a
+              class="docs-card"
+              href={doc.href}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span>{doc.label} ↗</span>
+              <h3>{doc.title}</h3>
+              <p>{doc.detail}</p>
+            </a>
+          ))}
+        </div>
+      </section>
+    </div>
+  </div>
+</BaseLayout>

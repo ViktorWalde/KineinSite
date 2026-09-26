@@ -148,13 +148,20 @@
   text-decoration: none;
   transition:
     border-color 180ms ease,
-    background-color 180ms ease;
+    background-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
 }
 
 .docs-card:hover,
 .docs-card:focus-visible {
   border-color: var(--accent);
   background-color: color-mix(in srgb, var(--surface) 91%, var(--accent));
+}
+
+.docs-card:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgb(0 0 0 / 10%);
 }
 
 .docs-card > span {
@@ -314,6 +321,10 @@
 @media (prefers-reduced-motion: reduce) {
   .docs-card {
     transition: none;
+  }
+
+  .docs-card:hover {
+    transform: none;
   }
 }
 

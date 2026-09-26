@@ -10,7 +10,6 @@ html {
 }
 
 body {
-  min-width: 320px;
   margin: 0;
   background: var(--page);
   color: var(--text);
@@ -98,15 +97,15 @@ code {
   .help-panel,
   .appearance-panel {
     transition:
-      background-color 260ms ease,
-      border-color 260ms ease,
-      color 260ms ease;
+      background-color 220ms ease,
+      border-color 220ms ease,
+      color 220ms ease;
   }
 
   .hero-overline,
   .hero h1 em,
   .hero-meta span {
-    transition: color 260ms ease;
+    transition: color 220ms ease;
   }
 }
 

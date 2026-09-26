@@ -7,6 +7,7 @@ const root = document.documentElement;
 const themeSelect = document.querySelector<HTMLSelectElement>("#theme-choice");
 const accentSelect =
   document.querySelector<HTMLSelectElement>("#accent-choice");
+const appearance = document.querySelector<HTMLDetailsElement>(".appearance");
 
 function storedValue(key: string): string | null {
   try {
@@ -65,5 +66,21 @@ if (themeSelect && accentSelect) {
     if (!isAccent(accentSelect.value)) return;
     applyAccent(accentSelect.value);
     saveValue("kinein-accent", accentSelect.value);
+  });
+}
+
+if (appearance) {
+  appearance.addEventListener("keydown", (event) => {
+    if (event.key !== "Escape" || !appearance.open) return;
+    appearance.open = false;
+    appearance.querySelector("summary")?.focus();
+  });
+
+  document.addEventListener("pointerdown", (event) => {
+    if (!appearance.open) return;
+    const target = event.target;
+    if (target instanceof Node && !appearance.contains(target)) {
+      appearance.open = false;
+    }
   });
 }

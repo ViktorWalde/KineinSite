@@ -19,6 +19,12 @@
   gap: clamp(1rem, 2.5vw, 2.4rem);
 }
 
+.header-inner > *,
+.primary-nav,
+.header-tools {
+  min-width: 0;
+}
+
 .brand {
   display: inline-flex;
   flex: none;
@@ -32,6 +38,7 @@
 }
 
 .brand img {
+  flex: none;
   width: 2.625rem;
   height: 2.625rem;
   border: 1px solid var(--border);
@@ -52,6 +59,9 @@
 
 .primary-nav a,
 .header-repo {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
   padding-block: 0.6rem;
   color: var(--muted);
   font-size: 0.9rem;
@@ -116,6 +126,10 @@ a.footer-discord span {
   font-weight: 700;
   text-decoration: none;
   white-space: nowrap;
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease;
 }
 
 .footer-discord:hover {
@@ -137,7 +151,8 @@ a.footer-discord span {
 
 @media (prefers-reduced-motion: reduce) {
   .primary-nav a,
-  .header-repo {
+  .header-repo,
+  .footer-discord {
     transition: none;
   }
 }
@@ -162,6 +177,12 @@ a.footer-discord span {
 
   .brand span {
     font-size: 0.92rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .brand {
+    min-width: 0;
   }
 
   .header-inner {

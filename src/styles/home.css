@@ -153,6 +153,11 @@
 
 .journey-arrow {
   color: var(--accent);
+  transition: transform 180ms ease;
+}
+
+.journey a:hover .journey-arrow {
+  transform: translate(2px, -2px);
 }
 
 .journey strong {
@@ -201,8 +206,13 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .journey a {
+  .journey a,
+  .journey-arrow {
     transition: none;
+  }
+
+  .journey a:hover .journey-arrow {
+    transform: none;
   }
 }
 
