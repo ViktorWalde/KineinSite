@@ -5,7 +5,8 @@ Este documento descreve **o site**, não o cronograma de recursos da Kinein Vect
 ## Entregue
 
 - Site estático no GitHub Pages com página inicial, índice de documentação e um estudo de C++20.
-- Distinção visual entre beta público 0.2.0, desenvolvimento da 0.3.0 e direção futura da IDE.
+- Distinção visual entre beta público, próxima versão em desenvolvimento e direção futura da IDE.
+- Área de Atualizações com uma nota por versão publicada e a mais recente em destaque na página inicial.
 - Temas claro, escuro e quente com três cores de destaque, sem exigir conta.
 - Validação de tipos, estilos, formatação, HTML e links internos no build; publicação por `gh-pages`.
 - Documentação técnica para colaboração e build local obrigatório antes da publicação.

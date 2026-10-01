@@ -8,12 +8,13 @@ O site é estático, feito com Astro 7 e publicado no GitHub Pages. Não há ser
 
 | Endereço | Conteúdo |
 | --- | --- |
-| `/` | Versão pública da IDE, estágio de desenvolvimento e direção do produto, com rótulos distintos. |
+| `/` | Nota de atualização mais recente em destaque, versão pública da IDE, estágio de desenvolvimento e direção do produto, com rótulos distintos. |
+| `/atualizacoes/` | Lista das notas de atualização, da mais recente para a mais antiga; cada nota tem sua página em `/atualizacoes/<versão>/`. |
 | `/documentacao/` | Índice do manual, release, referências e estudos já disponíveis. |
 | `/estudos/cpp/telemetria-local/` | Primeiro estudo autoral de C++20, testado no Linux. |
 | `/documentacao/site/` | Como o site funciona, como colaborar e próximos passos verificáveis. |
 
-O beta público indicado no site é o 0.2.0 para Linux x86_64. A situação da 0.3.0 vem de [`src/data/development.ts`](src/data/development.ts) e deve ser revista com o mantenedor antes de mudar. O roteiro de evolução **deste site** está em [docs/ROADMAP.md](docs/ROADMAP.md).
+O beta público indicado no site é o 0.3.5 para Linux x86_64, definido em `publicVersion`/`publicTag` de [`src/site.ts`](src/site.ts). A situação da próxima versão vem de [`src/data/development.ts`](src/data/development.ts) e deve ser revista com o mantenedor antes de mudar. O roteiro de evolução **deste site** está em [docs/ROADMAP.md](docs/ROADMAP.md).
 
 ## Desenvolvimento local
 
@@ -43,6 +44,18 @@ No preview do build para Pages, abra <http://127.0.0.1:4321/KineinSite/>. O buil
 - `assets/`: originais de imagem, com termos próprios descritos nos arquivos README da pasta.
 
 Links internos devem passar por `sitePath()` em [`src/site.ts`](src/site.ts), pois a versão publicada usa a base `/KineinSite/`. O conteúdo técnico deve distinguir o que foi testado na versão pública da IDE do que está em desenvolvimento ou planejado.
+
+## Publicar uma nota de atualização
+
+Cada versão publicada da IDE ganha uma nota em `src/content/atualizacoes/`. A nota mais recente aparece sozinha em destaque na página inicial e no topo de `/atualizacoes/`.
+
+1. Publique a release no repositório da IDE. Os botões da nota apontam para a tag.
+2. Copie a nota anterior para `src/content/atualizacoes/<versão-com-hífens>.md` (exemplo: `0-3-6.md`) e reescreva o frontmatter e o texto. O schema em `src/content.config.ts` recusa um campo faltando ou mal formado: `version`, `tag`, `title`, `date`, `channel`, `summary`, `highlights` (1 a 6 itens `title`/`text`) e `limits`.
+3. Troque `publicVersion` e `publicTag` em `src/site.ts`. Cabeçalho, rodapé, home e documentação passam a mostrar a versão nova.
+4. Atualize `src/data/development.ts` com a próxima versão em desenvolvimento.
+5. Rode `npm run build:pages`, faça o commit em `main` e publique como descrito abaixo.
+
+Escreva a nota para quem usa a IDE: o que mudou, como instalar e os limites conhecidos. O detalhe técnico fica no `CHANGELOG.md` do projeto.
 
 ## Publicação
 

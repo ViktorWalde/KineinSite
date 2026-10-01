@@ -1,0 +1,59 @@
+---
+import { releaseUrlFor, sitePath } from "../../site";
+import { formatUpdateDate, type UpdateEntry } from "./updates";
+
+// O mesmo destaque na home e no topo de /atualizacoes/. Na home ele só leva à
+// nota (o download já está no hero); na lista ele também oferece a release.
+interface Props {
+  entry: UpdateEntry;
+  variant: "home" | "list";
+}
+
+const { entry, variant } = Astro.props;
+const notePath = sitePath(`/atualizacoes/${entry.id}/`);
+const headingId = `destaque-${entry.id}`;
+---
+
+<section class="latest-update" aria-labelledby={headingId}>
+  <div class="latest-update-head">
+    <p class="kicker">
+      {variant === "home" ? "NOVIDADE" : "MAIS RECENTE"} · VERSÃO{" "}
+      {entry.data.version} ·{" "}
+      <time datetime={entry.data.date.toISOString().slice(0, 10)}>
+        {formatUpdateDate(entry.data.date).toUpperCase()}
+      </time>
+    </p>
+    <h2 id={headingId}>
+      {variant === "home" ? `${entry.data.title} chegou.` : entry.data.title}
+    </h2>
+    <p class="latest-update-summary">{entry.data.summary}</p>
+    <div class="latest-update-actions">
+      <a class="button button-primary" href={notePath}>
+        Ler a nota completa
+      </a>
+      {variant === "list" && (
+        <a
+          class="button button-secondary"
+          href={releaseUrlFor(entry.data.tag)}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Baixar a {entry.data.version} <span aria-hidden="true">↗</span>
+        </a>
+      )}
+      {variant === "home" && (
+        <a class="inline-link" href={sitePath("/atualizacoes/")}>
+          Histórico de versões
+        </a>
+      )}
+    </div>
+  </div>
+  <ul class="latest-update-highlights">
+    {entry.data.highlights.slice(0, 4).map((item) => (
+      <li>
+        <strong>{item.title}</strong>
+        <p>{item.text}</p>
+      </li>
+    ))}
+  </ul>
+</section>

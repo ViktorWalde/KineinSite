@@ -1,0 +1,254 @@
+/* Destaque da versão mais recente na página inicial. */
+.latest-update {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: clamp(1.5rem, 4vw, 3rem);
+  margin-block: clamp(2rem, 5vw, 3.5rem);
+  padding: clamp(1.5rem, 4vw, 2.75rem);
+  border: 1px solid var(--accent);
+  border-radius: 0.9rem;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.latest-update h2 {
+  margin-block: 0.5rem 1rem;
+  font-size: clamp(1.9rem, 4vw, 2.8rem);
+}
+
+.latest-update-summary {
+  max-width: 60ch;
+  color: var(--muted);
+  font-size: 1.08rem;
+}
+
+.latest-update-actions,
+.update-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1.25rem;
+  margin-block-start: 1.5rem;
+}
+
+.latest-update-highlights,
+.update-highlights ul {
+  display: grid;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.latest-update-highlights li,
+.update-highlights li {
+  padding-inline-start: 1rem;
+  border-inline-start: 2px solid var(--accent);
+}
+
+.latest-update-highlights strong,
+.update-highlights strong {
+  display: block;
+  margin-block-end: 0.25rem;
+}
+
+.latest-update-highlights p,
+.update-highlights p {
+  margin: 0;
+  color: var(--muted);
+}
+
+/* Links de texto da página de uma nota. */
+.update-breadcrumb a,
+.update-end-nav a,
+.update-article a {
+  color: var(--accent);
+}
+
+/* Lista de notas: a mais recente em destaque, as anteriores em cards. */
+.updates-shell {
+  max-width: 68rem;
+  padding-block: clamp(2rem, 5vw, 4rem) 6rem;
+}
+
+.update-shell {
+  max-width: 54rem;
+  padding-block: clamp(2rem, 5vw, 4rem) 6rem;
+}
+
+.updates-intro {
+  padding-block-end: 0.5rem;
+}
+
+.updates-intro h1,
+.update-header h1 {
+  margin-block: 0.5rem 1rem;
+  font-size: clamp(2.4rem, 5vw, 4rem);
+}
+
+.updates-intro-copy,
+.update-summary {
+  max-width: 66ch;
+  color: var(--muted);
+  font-size: 1.12rem;
+}
+
+.updates-history h2 {
+  margin-block: 1rem 1.25rem;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+}
+
+.updates-history-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 18rem), 1fr));
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.update-card {
+  display: grid;
+  gap: 0.75rem;
+  height: 100%;
+  padding: clamp(1.1rem, 2.5vw, 1.5rem);
+  border: 1px solid var(--border);
+  border-radius: 0.7rem;
+  background: var(--surface);
+  color: var(--text);
+  text-decoration: none;
+  transition: border-color 180ms ease;
+}
+
+.update-card:hover,
+.update-card:focus-visible {
+  border-color: var(--accent);
+}
+
+.update-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.9rem;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+.update-version {
+  color: var(--text);
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.update-channel {
+  padding: 0.1rem 0.55rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-size: 0.78rem;
+}
+
+.update-card-summary {
+  color: var(--muted);
+}
+
+.update-card-more {
+  align-self: end;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* Página de uma nota. */
+.update-breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.update-header {
+  padding-block: 2rem 2.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.update-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 2rem;
+  margin: 1.75rem 0 0;
+}
+
+.update-meta dt {
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.update-meta dd {
+  margin: 0.15rem 0 0;
+  font-weight: 650;
+}
+
+.update-highlights,
+.update-limits {
+  padding-block: 2.5rem 0;
+}
+
+.update-highlights h2,
+.update-limits h2,
+.update-article h2 {
+  margin-block: 0 1.25rem;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+}
+
+.update-article {
+  max-width: 72ch;
+  padding-block: 2.5rem 0;
+  font-size: 1.05rem;
+  line-height: 1.75;
+}
+
+.update-article h2 {
+  margin-block-start: 2.5rem;
+}
+
+.update-article pre {
+  overflow-x: auto;
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  background: var(--surface-soft);
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
+.update-article pre code {
+  padding: 0;
+  background: none;
+  font-size: inherit;
+}
+
+.update-limits ul {
+  margin: 0;
+  padding-inline-start: 1.25rem;
+  color: var(--muted);
+}
+
+.update-limits li + li {
+  margin-block-start: 0.5rem;
+}
+
+.update-end-nav {
+  padding-block-start: 3rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .update-card {
+    transition: none;
+  }
+}
+
+@media (width <= 820px) {
+  .latest-update {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

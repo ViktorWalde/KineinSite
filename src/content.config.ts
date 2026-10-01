@@ -30,4 +30,23 @@ const estudos = defineCollection({
   }),
 });
 
-export const collections = { aprender, estudos };
+// Uma nota por versão publicada; a mais recente vira o destaque da página
+// inicial. O nome do arquivo é a parte da URL: 0-3-5.md -> /atualizacoes/0-3-5/.
+const atualizacoes = defineCollection({
+  loader: glob({ pattern: "*.md", base: "./src/content/atualizacoes" }),
+  schema: z.object({
+    version: z.string().regex(/^\d+\.\d+\.\d+$/),
+    tag: z.string().regex(/^v\d+\.\d+\.\d+$/),
+    title: z.string().min(1),
+    date: z.coerce.date(),
+    channel: z.enum(["beta", "estável"]),
+    summary: z.string().min(1),
+    highlights: z
+      .array(z.object({ title: z.string().min(1), text: z.string().min(1) }))
+      .min(1)
+      .max(6),
+    limits: z.array(z.string().min(1)).default([]),
+  }),
+});
+
+export const collections = { aprender, estudos, atualizacoes };

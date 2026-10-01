@@ -1,4 +1,6 @@
 ---
+import { getImage } from "astro:assets";
+import shareSource from "../../assets/backgrounds/wallpaper-site.png";
 import SiteFooter from "../components/SiteFooter.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import "../styles/tokens.css";
@@ -9,14 +11,26 @@ import "../styles/home.css";
 import "../styles/home-sections.css";
 import "../styles/development.css";
 import "../styles/docs.css";
+import "../features/atualizacoes/updates.css";
 
 interface Props {
   title: string;
   description: string;
-  current: "home" | "docs";
+  current: "home" | "docs" | "updates";
 }
 
 const { title, description, current } = Astro.props;
+// Cartão de link (Discord, redes): a imagem do hero, em tamanho de prévia.
+const shareImage = await getImage({
+  src: shareSource,
+  width: 1200,
+  format: "jpeg",
+  quality: 78,
+});
+const pageUrl = Astro.site
+  ? new URL(Astro.url.pathname, Astro.site)
+  : undefined;
+const imageUrl = Astro.site ? new URL(shareImage.src, Astro.site) : undefined;
 ---
 
 <!doctype html>
@@ -27,6 +41,15 @@ const { title, description, current } = Astro.props;
     <meta name="color-scheme" content="light dark" />
     <meta name="referrer" content="no-referrer" />
     <meta name="description" content={description} />
+    <meta property="og:site_name" content="Kinein Vectis" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    {pageUrl && <meta property="og:url" content={pageUrl.href} />}
+    {pageUrl && <link rel="canonical" href={pageUrl.href} />}
+    {imageUrl && <meta property="og:image" content={imageUrl.href} />}
+    <meta name="twitter:card" content="summary_large_image" />
     <title>{title} | Kinein Vectis</title>
   </head>
   <body>

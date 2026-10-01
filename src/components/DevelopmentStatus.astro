@@ -1,6 +1,9 @@
 ---
 import { developmentSnapshot } from "../data/development";
-import { releaseUrl } from "../site";
+import { formatUpdateDate } from "../features/atualizacoes/updates";
+import { publicVersion, releaseUrl } from "../site";
+
+const updatedAt = new Date(`${developmentSnapshot.updatedAt}T00:00:00Z`);
 ---
 
 <section
@@ -10,21 +13,22 @@ import { releaseUrl } from "../site";
 >
   <div class="section-intro">
     <p class="kicker">PRÓXIMA VERSÃO · EM DESENVOLVIMENTO</p>
-    <h2 id="desenvolvimento-title">A 0.3.0 avança por partes.</h2>
+    <h2 id="desenvolvimento-title">
+      A {developmentSnapshot.version} vai {developmentSnapshot.focus}.
+    </h2>
     <p class="section-intro-copy">
-      Este é o andamento informado pelo mantenedor em{" "}
+      Este é o plano informado pelo mantenedor em{" "}
       <time datetime={developmentSnapshot.updatedAt}>
-        25 de setembro de 2026
+        {formatUpdateDate(updatedAt)}
       </time>
-      . As fatias fechadas pertencem ao desenvolvimento da 0.3.0; a versão
-      pública disponível para download continua sendo a{" "}
+      . Nada desta lista faz parte do download ainda; a versão pública é a{" "}
       <a
         class="inline-link"
         href={releaseUrl}
         target="_blank"
         rel="noopener noreferrer"
       >
-        0.2.0 beta <span aria-hidden="true">↗</span>
+        {publicVersion} beta <span aria-hidden="true">↗</span>
       </a>
       .
     </p>
@@ -48,6 +52,7 @@ import { releaseUrl } from "../site";
     ))}
   </div>
   <p class="development-note">
-    O escopo e a ordem podem mudar até o fechamento e a distribuição da 0.3.0.
+    O escopo e a ordem podem mudar até o fechamento e a distribuição da{" "}
+    {developmentSnapshot.version}.
   </p>
 </section>

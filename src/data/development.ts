@@ -1,45 +1,39 @@
-// Estado informado pelo mantenedor em 2026-09-25. Revisar antes de publicar
-// uma nova versão do site ou quando a 0.3.0 for distribuída.
+// Estado informado pelo mantenedor em 2026-10-01, com a 0.3.5 publicada.
+// Fonte: roadmap 49 do projeto (casca da IDE na 0.3.6). Revisar a cada fatia.
 export const developmentSnapshot = {
-  version: "0.3.0",
-  updatedAt: "2026-09-25",
+  version: "0.3.6",
+  focus: "reorganizar a interface da IDE em torno do editor",
+  updatedAt: "2026-10-01",
   groups: [
     {
-      status: "Fechado no desenvolvimento",
+      status: "Planejado",
       items: [
-        { code: "V0", title: "Base e decisões da versão" },
-        { code: "V1", title: "Ergonomia do terminal" },
-        { code: "V2", title: "Descoberta de conexões Remote" },
-        { code: "V5", title: "Abas e Markdown" },
+        {
+          code: "F0",
+          title: "Inventário e medidas",
+          detail:
+            "Cada elemento da tela com dono e custo medido antes de mudar.",
+        },
+        { code: "F1", title: "Trilho curto por áreas" },
+        { code: "F2", title: "Painéis contextuais e presets de layout" },
       ],
     },
     {
-      status: "Em integração",
+      status: "Em seguida",
       items: [
-        {
-          code: "V3",
-          title: "Comandos e janelas de ferramentas",
-          detail: "Falta concluir a ligação de componentes das janelas.",
-        },
-        {
-          code: "V4",
-          title: "Remote como janela de ferramentas",
-          detail: "Falta o caminho até o shell pelo terminal integrado.",
-        },
-        {
-          code: "P0–P3",
-          title: "Launcher e projeto cotidiano",
-          detail: "O primeiro passo é parcial; falta o comando kinein.",
-        },
+        { code: "F3", title: "Cabeçalho e status com o contexto efetivo" },
+        { code: "F4", title: "Foco, teclado, densidade e modo Foco" },
+        { code: "F5", title: "Prova antes/depois" },
       ],
     },
     {
-      status: "Ainda não iniciado",
+      status: "Depois da 0.3.6",
       items: [
-        { code: "V6", title: "Símbolos e indentação" },
-        { code: "V7", title: "Painel Grafana" },
-        { code: "H0", title: "Bordas e cabeçalho" },
-        { code: "V8", title: "Fechamento e distribuição" },
+        { code: "0.4", title: "Versão dedicada aos embarcados" },
+        {
+          code: "0.5",
+          title: "Library por capacidades, Welcome e assistente de projeto",
+        },
       ],
     },
   ],

@@ -1,11 +1,11 @@
 ---
 import { getImage } from "astro:assets";
 import icon from "../../assets/icon-amber.png";
-import { discordUrl, releaseUrl, sitePath } from "../site";
+import { discordUrl, publicVersion, releaseUrl, sitePath } from "../site";
 import ThemeControls from "./ThemeControls.astro";
 
 interface Props {
-  current: "home" | "docs";
+  current: "home" | "docs" | "updates";
 }
 
 const { current } = Astro.props;
@@ -39,6 +39,12 @@ const optimizedIcon = await getImage({ src: icon, width: 84, format: "webp" });
         Estado atual
       </a>
       <a
+        href={sitePath("/atualizacoes/")}
+        aria-current={current === "updates" ? "page" : undefined}
+      >
+        Atualizações
+      </a>
+      <a
         href={sitePath("/documentacao/")}
         aria-current={current === "docs" ? "page" : undefined}
       >
@@ -57,7 +63,7 @@ const optimizedIcon = await getImage({ src: icon, width: 84, format: "webp" });
         target="_blank"
         rel="noopener noreferrer"
       >
-        Baixar 0.2.0 <span aria-hidden="true">↗</span>
+        Baixar {publicVersion} <span aria-hidden="true">↗</span>
       </a>
     </div>
   </div>

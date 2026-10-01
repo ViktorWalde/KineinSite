@@ -21,7 +21,7 @@ Estudos de linguagem ficam em `src/content/estudos/<linguagem>/`. O texto e o ex
 
 Um estudo só deve receber `verified` quando todos os comandos forem executados e o resultado esperado for conferido no ambiente declarado. Indique pré-requisitos, unidades, limitações e como reconhecer erros comuns. Evite copiar documentação ou exemplos de terceiros; cite a fonte consultada e redija a explicação com suas palavras.
 
-Os capítulos que ensinam tarefas **na Vectis** pertencem à coleção `src/content/aprender/`. Essa coleção ainda não tem rota pública. Antes de publicar um capítulo, é preciso implementar a rota e reproduzir os passos na versão pública da IDE citada. Não apresente recursos da 0.3.0 em desenvolvimento como disponíveis na release 0.2.0.
+Os capítulos que ensinam tarefas **na Vectis** pertencem à coleção `src/content/aprender/`. Essa coleção ainda não tem rota pública. Antes de publicar um capítulo, é preciso implementar a rota e reproduzir os passos na versão pública da IDE citada. Não apresente recursos da versão em desenvolvimento como disponíveis na release pública.
 
 ## Revisão de interface
 

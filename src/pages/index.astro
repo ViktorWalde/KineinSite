@@ -5,7 +5,15 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import CurrentStatus from "../components/CurrentStatus.astro";
 import DevelopmentStatus from "../components/DevelopmentStatus.astro";
 import FocusAreas from "../components/FocusAreas.astro";
-import { discordUrl, releaseUrl, repositoryUrl, sitePath } from "../site";
+import LatestUpdate from "../features/atualizacoes/LatestUpdate.astro";
+import { developmentSnapshot } from "../data/development";
+import {
+  discordUrl,
+  publicVersion,
+  releaseUrl,
+  repositoryUrl,
+  sitePath,
+} from "../site";
 
 const wallpaper = await getImage({
   src: wallpaperSource,
@@ -17,7 +25,7 @@ const wallpaper = await getImage({
 <BaseLayout
   current="home"
   title="O ambiente do seu projeto à vista"
-  description="Conheça o beta público 0.2.0 da Kinein Vectis para Linux x86_64, acompanhe a 0.3.0 em desenvolvimento e veja a direção futura para embarcados, IoT/IIoT, backend e ROS 2."
+  description={`Conheça o beta público ${publicVersion} da Kinein Vectis para Linux x86_64, leia a nota de atualização, acompanhe a ${developmentSnapshot.version} em desenvolvimento e veja a direção futura para embarcados, IoT/IIoT, backend e ROS 2.`}
 >
   <section class="hero" aria-labelledby="hero-title">
     <img
@@ -32,7 +40,8 @@ const wallpaper = await getImage({
       <div class="hero-art" aria-hidden="true"></div>
       <div class="hero-copy">
         <p class="hero-overline">
-          <span aria-hidden="true">∭</span> BETA PÚBLICO 0.2.0 · LINUX X86_64
+          <span aria-hidden="true">∭</span> BETA PÚBLICO {publicVersion} · LINUX
+          X86_64
         </p>
         <h1 id="hero-title">
           O ambiente do seu projeto, <em>à vista.</em>
@@ -50,20 +59,24 @@ const wallpaper = await getImage({
             target="_blank"
             rel="noopener noreferrer"
           >
-            Ver beta para Linux <span aria-hidden="true">↗</span>
+            Baixar a {publicVersion} para Linux{" "}
+            <span aria-hidden="true">↗</span>
           </a>
           <a class="button button-quiet" href={sitePath("/documentacao/")}>
             Começar pela documentação
           </a>
         </div>
         <p class="hero-meta">
-          Disponível agora: beta 0.2.0 <span aria-hidden="true">·</span> Linux
-          x86_64 <span aria-hidden="true">·</span> A 0.3.0 está em
-          desenvolvimento
+          Disponível agora: beta {publicVersion}{" "}
+          <span aria-hidden="true">·</span> Linux x86_64{" "}
+          <span aria-hidden="true">·</span> A {developmentSnapshot.version} está
+          em desenvolvimento
         </p>
       </div>
     </div>
   </section>
+
+  <LatestUpdate />
 
   <nav class="journey shell" aria-label="Caminhos rápidos">
     <a href="#estado">
@@ -75,7 +88,7 @@ const wallpaper = await getImage({
     </a>
     <a href="#desenvolvimento">
       <span class="journey-label">02 / EM DESENVOLVIMENTO</span>
-      <strong>Acompanhe a 0.3.0</strong>
+      <strong>Acompanhe a {developmentSnapshot.version}</strong>
       <span class="journey-arrow" aria-hidden="true">
         ↗
       </span>
@@ -145,8 +158,8 @@ const wallpaper = await getImage({
       </article>
     </div>
     <p class="direction-note">
-      Esta é a direção do produto. O beta 0.2.0 ainda não oferece esse fluxo
-      completo para todos os projetos e ecossistemas.
+      Esta é a direção do produto. O beta {publicVersion} ainda não oferece esse
+      fluxo completo para todos os projetos e ecossistemas.
     </p>
   </section>
 
@@ -202,8 +215,8 @@ const wallpaper = await getImage({
           Explore o beta. Ajude a definir os próximos fluxos.
         </h2>
         <p>
-          Confira requisitos, notas da versão e integridade do pacote na release
-          oficial.
+          Baixe o AppImage, confira o checksum e conte no Discord o que
+          funcionou e o que faltou no seu projeto.
         </p>
       </div>
       <div class="closing-actions">
@@ -213,7 +226,7 @@ const wallpaper = await getImage({
           target="_blank"
           rel="noopener noreferrer"
         >
-          Abrir release oficial <span aria-hidden="true">↗</span>
+          Baixar a {publicVersion} <span aria-hidden="true">↗</span>
         </a>
         <a
           class="inline-link"

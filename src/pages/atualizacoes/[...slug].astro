@@ -1,0 +1,103 @@
+---
+import { render } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import {
+  formatUpdateDate,
+  getUpdates,
+  type UpdateEntry,
+} from "../../features/atualizacoes/updates";
+import { releaseUrlFor, sitePath } from "../../site";
+
+export async function getStaticPaths() {
+  const entries = await getUpdates();
+  return entries.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+interface Props {
+  entry: UpdateEntry;
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const releaseUrl = releaseUrlFor(entry.data.tag);
+---
+
+<BaseLayout
+  current="updates"
+  title={entry.data.title}
+  description={entry.data.summary}
+>
+  <div class="update-shell shell">
+    <nav class="update-breadcrumb" aria-label="Caminho">
+      <a href={sitePath("/atualizacoes/")}>Atualizações</a>
+      <span aria-hidden="true">/</span>
+      <span>{entry.data.version}</span>
+    </nav>
+
+    <header class="update-header">
+      <p class="kicker">
+        NOTA DE ATUALIZAÇÃO · {entry.data.channel.toUpperCase()}
+      </p>
+      <h1>{entry.data.title}</h1>
+      <p class="update-summary">{entry.data.summary}</p>
+      <dl class="update-meta">
+        <div>
+          <dt>Publicada em</dt>
+          <dd>
+            <time datetime={entry.data.date.toISOString().slice(0, 10)}>
+              {formatUpdateDate(entry.data.date)}
+            </time>
+          </dd>
+        </div>
+        <div>
+          <dt>Release</dt>
+          <dd>{entry.data.tag}</dd>
+        </div>
+      </dl>
+      <div class="update-actions">
+        <a
+          class="button button-primary"
+          href={releaseUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Baixar a {entry.data.version} <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </header>
+
+    <section class="update-highlights" aria-labelledby="destaques-title">
+      <h2 id="destaques-title">Destaques</h2>
+      <ul>
+        {entry.data.highlights.map((item) => (
+          <li>
+            <strong>{item.title}</strong>
+            <p>{item.text}</p>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <article class="update-article">
+      <Content />
+    </article>
+
+    {entry.data.limits.length > 0 && (
+      <section class="update-limits" aria-labelledby="limites-title">
+        <h2 id="limites-title">Limites conhecidos</h2>
+        <ul>
+          {entry.data.limits.map((limit) => (
+            <li>{limit}</li>
+          ))}
+        </ul>
+      </section>
+    )}
+
+    <nav class="update-end-nav" aria-label="Outras notas">
+      <a href={sitePath("/atualizacoes/")}>← Ver todas as atualizações</a>
+    </nav>
+  </div>
+</BaseLayout>

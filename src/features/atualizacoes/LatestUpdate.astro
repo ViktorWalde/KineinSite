@@ -1,0 +1,12 @@
+---
+import UpdateFeature from "./UpdateFeature.astro";
+import { getLatestUpdate } from "./updates";
+
+const latest = await getLatestUpdate();
+---
+
+{latest && (
+  <div id="novidades" class="shell">
+    <UpdateFeature entry={latest} variant="home" />
+  </div>
+)}

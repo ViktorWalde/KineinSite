@@ -1,0 +1,67 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import UpdateFeature from "../../features/atualizacoes/UpdateFeature.astro";
+import {
+  formatUpdateDate,
+  getUpdates,
+} from "../../features/atualizacoes/updates";
+import { changelogUrl, sitePath } from "../../site";
+
+const [latest, ...older] = await getUpdates();
+---
+
+<BaseLayout
+  current="updates"
+  title="Atualizações"
+  description="Notas de atualização da Kinein Vectis: a versão mais recente em destaque e o histórico das anteriores."
+>
+  <div class="updates-shell shell">
+    <header class="updates-intro">
+      <p class="kicker">NOTAS DE ATUALIZAÇÃO</p>
+      <h1>Atualizações da Kinein Vectis</h1>
+      <p class="updates-intro-copy">
+        O que mudou em cada versão publicada, como instalar e o que ainda tem
+        limite. O detalhe técnico de cada mudança fica no{" "}
+        <a
+          class="inline-link"
+          href={changelogUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          changelog do projeto <span aria-hidden="true">↗</span>
+        </a>
+        .
+      </p>
+    </header>
+
+    {latest && <UpdateFeature entry={latest} variant="list" />}
+
+    {older.length > 0 && (
+      <section class="updates-history" aria-labelledby="historico-title">
+        <h2 id="historico-title">Histórico</h2>
+        <ol class="updates-history-grid">
+          {older.map((entry) => (
+            <li>
+              <a
+                class="update-card"
+                href={sitePath(`/atualizacoes/${entry.id}/`)}
+              >
+                <span class="update-card-meta">
+                  <span class="update-version">{entry.data.version}</span>
+                  <span class="update-channel">{entry.data.channel}</span>
+                  <time datetime={entry.data.date.toISOString().slice(0, 10)}>
+                    {formatUpdateDate(entry.data.date)}
+                  </time>
+                </span>
+                <span class="update-card-summary">{entry.data.summary}</span>
+                <span class="update-card-more">
+                  Ler a nota <span aria-hidden="true">→</span>
+                </span>
+              </a>
+            </li>
+          ))}
+        </ol>
+      </section>
+    )}
+  </div>
+</BaseLayout>

@@ -13,10 +13,13 @@ Astro gera HTML, CSS, JavaScript e imagens estáticos em `dist/`. O GitHub Pages
 | `src/components/` | Cabeçalho, rodapé e seções reutilizadas. |
 | `src/styles/tokens.css` | Cores por tema e por destaque; os outros CSS consomem esses tokens. |
 | `src/scripts/theme.ts` | Preferências de tema e cor guardadas no navegador. |
-| `src/data/development.ts` | Retrato editorial da 0.3.0 informado pelo mantenedor; não substitui a release. |
+| `src/data/development.ts` | Retrato editorial da próxima versão informado pelo mantenedor; não substitui a release. |
+| `src/features/atualizacoes/` | Área de Atualizações: ordenação das notas (`updates.ts`), destaque da home (`LatestUpdate.astro`) e estilos (`updates.css`). |
 | `src/data/references.ts` | Lista de fontes externas exibida no índice de documentação. |
 | `src/content.config.ts` | Esquemas das coleções Markdown. |
 | `assets/` | Arquivos de origem das imagens, otimizados pelo Astro no build. |
+
+`atualizacoes` contém uma nota por versão publicada da IDE. `src/pages/atualizacoes/index.astro` lista todas e `src/pages/atualizacoes/[...slug].astro` publica cada uma, usando o nome do arquivo como parte da URL. `src/features/atualizacoes/LatestUpdate.astro` mostra a mais recente na página inicial. `publicVersion` e `publicTag` em `src/site.ts` são a única fonte da versão pública exibida no site.
 
 `estudos` contém material de linguagem que pode ser executado sem a IDE. `src/pages/estudos/[...slug].astro` publica somente entradas com `status: verified`, usando o identificador da pasta como parte da URL. `aprender` é a coleção prevista para Guia da IDE e projetos guiados; ainda não tem rota renderizada. Um arquivo `verified` nessa coleção não aparece automaticamente no site.
 
