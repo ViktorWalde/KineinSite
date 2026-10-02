@@ -1,0 +1,57 @@
+# Reprodução do capítulo "Busca e atalhos" (scripts/capturar-tutorial.sh).
+# Recria o ola-kinein do capítulo 2 pela tela inicial.
+pasta .
+bloco 1
+bloco 2
+conferir fdfind
+conferir ripgrep
+abrir
+esperar 10
+clicar 552 460         # Novo C++ / CMake
+esperar 2
+clicar 660 332         # + pasta
+esperar 1
+digitar projetos
+tecla Return
+esperar 1.5
+clicar 800 292         # campo do caminho
+tecla End
+digitar /projetos
+tecla Return
+esperar 1.5
+clicar 744 332         # + projeto
+esperar 1
+digitar ola-kinein
+clicar 1075 380        # Criar
+esperar 10
+tecla ctrl+shift+n      # Search Everywhere
+esperar 1.5
+digitar main
+esperar 2
+foto busca-arquivo 480 285 640 150
+tecla Return           # abre src/main.cpp
+esperar 3
+tecla ctrl+shift+f     # Busca no projeto
+esperar 2
+digitar Kinein
+tecla Return
+esperar 3
+foto busca-projeto 376 686 1216 240
+clicar 520 912         # README.md:3 na lista
+esperar 2
+clicar 440 115         # volta ao main.cpp pela aba
+esperar 2
+clicar 900 400
+tecla ctrl+f           # Busca no arquivo
+esperar 1
+digitar cout
+esperar 1
+foto busca-arquivo-aberto 380 90 1220 180
+tecla Escape
+tecla ctrl+shift+n
+esperar 1.5
+digitar build
+esperar 2
+foto comandos 480 285 640 290
+tecla Return           # Build Project, o primeiro da lista
+esperar 8
