@@ -1,12 +1,15 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import LanguageTracks from "../../components/LanguageTracks.astro";
-import LearningPaths from "../../components/LearningPaths.astro";
-import SiteProjectLink from "../../components/SiteProjectLink.astro";
+import DocsSidebar from "../../features/documentacao/DocsSidebar.astro";
+import LanguageTracks from "../../features/documentacao/LanguageTracks.astro";
+import LearningPaths from "../../features/documentacao/LearningPaths.astro";
+import SiteProjectLink from "../../features/documentacao/SiteProjectLink.astro";
+import "../../features/documentacao/documentacao.css";
 import { developmentSnapshot } from "../../data/development";
 import { references } from "../../data/references";
 import {
   discordUrl,
+  installTutorialUrl,
   manualUrl,
   publicVersion,
   releaseUrl,
@@ -18,27 +21,26 @@ import {
 <BaseLayout
   current="docs"
   title="Documentação"
-  description="Manual, release oficial e roteiro de guias da Kinein Vectis para embarcados, IoT/IIoT, backend e a futura integração ROS 2."
+  description="Instalação, manual, estudos e trilhas da Kinein Vectis para embarcados, IoT, backend e, no futuro, ROS 2."
 >
   <div class="docs-shell shell">
-    <aside class="docs-sidebar" aria-label="Navegação desta página">
-      <p>DOCUMENTAÇÃO</p>
-      <nav aria-label="Seções da documentação">
-        <a href="#comece">Comece por aqui</a>
-        <a href="#guias">Aprender na Vectis</a>
-        <a href="#trilhas">Áreas e trilhas</a>
-        <a href="#linguagens">Por linguagem</a>
-        <a href="#referencias">Referências externas</a>
-        <a href="#ajuda">Comunidade e ajuda</a>
-        <a href="#site">Sobre este site</a>
-      </nav>
-      <div class="docs-sidebar-note">
-        Conteúdo público, sem conta para leitura.
-      </div>
-    </aside>
+    <DocsSidebar
+      title="Documentação"
+      label="Seções da documentação"
+      links={[
+        { href: "#comece", text: "Comece por aqui" },
+        { href: "#guias", text: "Aprender na Vectis" },
+        { href: "#trilhas", text: "Áreas e trilhas" },
+        { href: "#linguagens", text: "Por linguagem" },
+        { href: "#referencias", text: "Referências externas" },
+        { href: "#ajuda", text: "Comunidade e ajuda" },
+        { href: "#site", text: "Sobre este site" },
+      ]}
+      note="Conteúdo público, sem conta para leitura."
+    />
 
     <div class="docs-main">
-      <header class="docs-intro">
+      <header class="docs-intro enter">
         <p class="kicker">LEIA NO SEU RITMO</p>
         <h1>Documentação da Kinein Vectis</h1>
         <p class="docs-intro-copy">
@@ -46,14 +48,14 @@ import {
           projetos guiados, com cada tarefa testada na versão indicada.
         </p>
         <div class="docs-status">
-          <span aria-hidden="true">●</span> Versão pública indicada:{" "}
-          {publicVersion} beta para Linux x86_64. Confira a release antes de
+          <span aria-hidden="true">●</span> Versão pública atual: beta{" "}
+          {publicVersion} para Linux x86_64. Confira a release antes de
           instalar.
         </div>
         <p class="docs-release-note">
           A {developmentSnapshot.version} está em desenvolvimento. Veja o{" "}
           <a class="inline-link" href={sitePath("/#desenvolvimento")}>
-            andamento das etapas
+            o que ela traz
           </a>
           ; os recursos dessa versão ainda não fazem parte do download público.
         </p>
@@ -61,17 +63,32 @@ import {
 
       <section id="comece" class="docs-section" aria-labelledby="comece-title">
         <div class="docs-heading">
-          <span>01 / COMEÇAR</span>
+          <span class="label">01 / COMEÇAR</span>
           <h2 id="comece-title">Do download ao primeiro contato.</h2>
         </div>
-        <div class="docs-card-grid">
+        <div class="docs-card-grid docs-card-grid-3 auto-grid">
           <a
-            class="docs-card"
+            class="docs-card card card-interactive"
+            href={installTutorialUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span class="label">
+              INSTALAÇÃO · {publicVersion} <span aria-hidden="true">↗</span>
+            </span>
+            <h3>Tutorial de instalação</h3>
+            <p>
+              Conferir se o computador é compatível, verificar o download,
+              instalar o atalho e abrir o primeiro projeto.
+            </p>
+          </a>
+          <a
+            class="docs-card card card-interactive"
             href={releaseUrl}
             target="_blank"
             rel="noopener noreferrer"
           >
-            <span>
+            <span class="label">
               ORIGEM OFICIAL <span aria-hidden="true">↗</span>
             </span>
             <h3>Release e pacote</h3>
@@ -80,28 +97,25 @@ import {
             </p>
           </a>
           <a
-            class="docs-card"
+            class="docs-card card card-interactive"
             href={manualUrl}
             target="_blank"
             rel="noopener noreferrer"
           >
-            <span>
-              MANUAL DA IDE <span aria-hidden="true">↗</span>
+            <span class="label">
+              REFERÊNCIA DE USO <span aria-hidden="true">↗</span>
             </span>
-            <h3>Entenda a Vectis</h3>
-            <p>Consulte a documentação mantida junto ao código do projeto.</p>
+            <h3>Manual da IDE</h3>
+            <p>
+              Fluxos, recursos, atalhos e o que fazer quando algo dá errado.
+            </p>
           </a>
         </div>
-        <p class="docs-note">
-          O tutorial público de instalação ainda precisa ser alinhado à versão
-          do pacote atual. Até essa revisão, use a release e o README como
-          fontes para instalação.
-        </p>
       </section>
 
       <section id="guias" class="docs-section" aria-labelledby="guias-title">
         <div class="docs-heading">
-          <span>02 / APRENDER</span>
+          <span class="label">02 / APRENDER</span>
           <h2 id="guias-title">Primeiro a IDE, depois os projetos.</h2>
         </div>
         <p>
@@ -110,14 +124,14 @@ import {
           Vectis. Os guias de uso da IDE seguirão esta ordem:
         </p>
         <ol class="learning-sequence">
-          <li>
+          <li class="card">
             <strong>Guia da IDE</strong>
             <p>
               Instalação, interface, primeiro projeto, build, execução, testes,
               depuração e solução de problemas na versão citada.
             </p>
           </li>
-          <li>
+          <li class="card">
             <strong>Projetos guiados</strong>
             <p>
               Exemplos locais e pequenos que introduzem C++, C, Python e Rust
@@ -126,10 +140,10 @@ import {
           </li>
         </ol>
         <a
-          class="docs-card study-entry-card"
+          class="docs-card study-entry-card card card-interactive"
           href={sitePath("/estudos/cpp/telemetria-local/")}
         >
-          <span>ESTUDO DE LINGUAGEM · C++20</span>
+          <span class="label">ESTUDO DE LINGUAGEM · C++20</span>
           <h3>Processe telemetria local</h3>
           <p>
             Um primeiro programa de software para IoT: amostras simuladas, média
@@ -153,7 +167,7 @@ import {
         aria-labelledby="referencias-title"
       >
         <div class="docs-heading">
-          <span>05 / APROFUNDAR</span>
+          <span class="label">05 / APROFUNDAR</span>
           <h2 id="referencias-title">Referências dos ecossistemas.</h2>
         </div>
         <p>
@@ -161,7 +175,7 @@ import {
           configuração da Vectis serão publicados neste site; o rótulo abaixo
           indica quem mantém cada referência.
         </p>
-        <ul class="reference-list">
+        <ul class="reference-list reveal-children">
           {references.map((reference) => (
             <li>
               <a
@@ -184,7 +198,7 @@ import {
 
       <section id="ajuda" class="docs-section" aria-labelledby="ajuda-title">
         <div class="docs-heading">
-          <span>06 / PARTICIPAR</span>
+          <span class="label">06 / PARTICIPAR</span>
           <h2 id="ajuda-title">Dúvida, problema ou sugestão?</h2>
         </div>
         <p>
@@ -192,7 +206,7 @@ import {
           recebe dúvidas, relatos de defeito e sugestões sobre os próximos
           fluxos da IDE.
         </p>
-        <div class="help-panel">
+        <div class="help-panel card reveal">
           <div>
             <strong>Um relato útil inclui</strong>
             <p>

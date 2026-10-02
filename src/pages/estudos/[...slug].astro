@@ -1,8 +1,9 @@
 ---
 import { getCollection, render, type CollectionEntry } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { sitePath } from "../../site";
-import "../../styles/study.css";
+import "../../features/codigo/codigo.css";
+import { formatDate, sitePath } from "../../site";
+import "../../features/estudos/estudos.css";
 
 export async function getStaticPaths() {
   const entries = await getCollection(
@@ -21,9 +22,7 @@ interface Props {
 
 const { entry } = Astro.props;
 const { Content } = await render(entry);
-const tested = new Intl.DateTimeFormat("pt-BR", { timeZone: "UTC" }).format(
-  entry.data.lastTested,
-);
+const tested = formatDate(entry.data.lastTested);
 ---
 
 <BaseLayout
@@ -38,7 +37,7 @@ const tested = new Intl.DateTimeFormat("pt-BR", { timeZone: "UTC" }).format(
       <span>Estudos de {entry.data.language}</span>
     </nav>
 
-    <header class="study-header">
+    <header class="study-header enter">
       <p class="kicker">ESTUDO PRÁTICO · {entry.data.language}</p>
       <h1>{entry.data.title}</h1>
       <p class="study-summary">{entry.data.summary}</p>
@@ -60,7 +59,7 @@ const tested = new Intl.DateTimeFormat("pt-BR", { timeZone: "UTC" }).format(
       </dl>
     </header>
 
-    <article class="study-article">
+    <article class="study-article prose">
       <Content />
     </article>
 
@@ -69,3 +68,7 @@ const tested = new Intl.DateTimeFormat("pt-BR", { timeZone: "UTC" }).format(
     </nav>
   </div>
 </BaseLayout>
+
+<script>
+  import "../../features/codigo/code-copy";
+</script>

@@ -1,0 +1,69 @@
+/* Página 404: o número grande em degradê OKLCH do destaque, três saídas. */
+.not-found {
+  max-width: 60rem;
+  padding-block: var(--space-2xl) var(--space-3xl);
+}
+
+.not-found-code {
+  margin: 0;
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: clamp(4.5rem, 3rem + 8vw, 9rem);
+  font-weight: 700;
+  letter-spacing: -0.06em;
+  line-height: 1;
+}
+
+@supports (background-clip: text) {
+  .not-found-code {
+    background: linear-gradient(
+      120deg in oklch,
+      var(--accent),
+      color-mix(in oklch, var(--accent) 45%, var(--text))
+    );
+    background-clip: text;
+    color: transparent;
+  }
+}
+
+.not-found-intro h1 {
+  margin-block: var(--space-s) var(--space-m);
+  font-size: var(--text-4xl);
+}
+
+.not-found-intro p:not(.not-found-code) {
+  max-width: 55ch;
+  color: var(--muted);
+  font-size: var(--text-lg);
+}
+
+.not-found-links {
+  --grid-min: 14rem;
+
+  margin: var(--space-xl) 0;
+  padding: 0;
+  list-style: none;
+}
+
+.not-found-card {
+  display: grid;
+  align-content: start;
+  gap: var(--space-2xs);
+  height: 100%;
+  padding: var(--space-l);
+}
+
+.not-found-card span:not(.arrow) {
+  color: var(--muted);
+  font-size: var(--text-sm);
+}
+
+.not-found-card .arrow {
+  color: var(--accent);
+}
+
+.not-found-note {
+  max-width: 70ch;
+  color: var(--muted);
+  font-size: var(--text-sm);
+}

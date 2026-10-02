@@ -1,0 +1,77 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { releaseUrl, sitePath, siteRepositoryUrl } from "../site";
+import "../features/erro/erro.css";
+
+// O GitHub Pages serve dist/404.html em qualquer caminho inexistente do
+// site, então todo link aqui é absoluto (sitePath) e a página não é indexada.
+const destinations = [
+  {
+    href: sitePath("/"),
+    label: "Página inicial",
+    detail: "Versão pública, novidades e o que vem a seguir.",
+  },
+  {
+    href: sitePath("/documentacao/"),
+    label: "Documentação",
+    detail: "Manual, trilhas de estudo e referências.",
+  },
+  {
+    href: sitePath("/atualizacoes/"),
+    label: "Atualizações",
+    detail: "Notas de cada versão publicada.",
+  },
+];
+---
+
+<BaseLayout
+  title="Página não encontrada"
+  description="O endereço pedido não existe no site da Kinein Vectis."
+  noindex
+>
+  <div class="not-found shell">
+    <header class="not-found-intro enter">
+      <p class="not-found-code" aria-hidden="true">
+        404
+      </p>
+      <h1>Esta página não existe.</h1>
+      <p>
+        O endereço pode ter mudado ou ter sido digitado com algum erro. Escolha
+        um ponto de partida abaixo.
+      </p>
+    </header>
+    <ul class="not-found-links auto-grid">
+      {destinations.map((item) => (
+        <li>
+          <a class="not-found-card card card-interactive" href={item.href}>
+            <strong>
+              {item.label} <span class="arrow">→</span>
+            </strong>
+            <span>{item.detail}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+    <p class="not-found-note">
+      Chegou aqui por um link do próprio site? Avise no{" "}
+      <a
+        class="inline-link"
+        href={`${siteRepositoryUrl}/issues`}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        repositório do site <span aria-hidden="true">↗</span>
+      </a>
+      . Procurando a IDE? O{" "}
+      <a
+        class="inline-link"
+        href={releaseUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        download está na release <span aria-hidden="true">↗</span>
+      </a>
+      .
+    </p>
+  </div>
+</BaseLayout>

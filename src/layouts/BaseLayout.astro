@@ -1,25 +1,26 @@
 ---
 import { getImage } from "astro:assets";
 import shareSource from "../../assets/backgrounds/wallpaper-site.png";
+import iconSource from "../../assets/icon-amber.png";
 import SiteFooter from "../components/SiteFooter.astro";
 import SiteHeader from "../components/SiteHeader.astro";
+import { themeBootValues } from "../scripts/theme-preferences";
 import "../styles/tokens.css";
 import "../styles/base.css";
 import "../styles/layout.css";
 import "../styles/components.css";
-import "../styles/home.css";
-import "../styles/home-sections.css";
-import "../styles/development.css";
-import "../styles/docs.css";
-import "../features/atualizacoes/updates.css";
+import "../styles/theme-panel.css";
 
 interface Props {
   title: string;
   description: string;
-  current: "home" | "docs" | "updates";
+  current?: "home" | "docs" | "updates";
+  // Páginas que não devem ser indexadas nem ter endereço canônico (a 404 é
+  // servida em qualquer caminho inexistente).
+  noindex?: boolean;
 }
 
-const { title, description, current } = Astro.props;
+const { title, description, current, noindex = false } = Astro.props;
 // Cartão de link (Discord, redes): a imagem do hero, em tamanho de prévia.
 const shareImage = await getImage({
   src: shareSource,
@@ -27,9 +28,21 @@ const shareImage = await getImage({
   format: "jpeg",
   quality: 78,
 });
-const pageUrl = Astro.site
-  ? new URL(Astro.url.pathname, Astro.site)
-  : undefined;
+// Ícone da aba e do atalho na tela inicial do celular.
+const favicon = await getImage({
+  src: iconSource,
+  width: 32,
+  height: 32,
+  format: "png",
+});
+const touchIcon = await getImage({
+  src: iconSource,
+  width: 180,
+  height: 180,
+  format: "png",
+});
+const pageUrl =
+  Astro.site && !noindex ? new URL(Astro.url.pathname, Astro.site) : undefined;
 const imageUrl = Astro.site ? new URL(shareImage.src, Astro.site) : undefined;
 ---
 
@@ -38,9 +51,36 @@ const imageUrl = Astro.site ? new URL(shareImage.src, Astro.site) : undefined;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {/* Clássico e síncrono: aplica o tema salvo antes da primeira pintura.
+         Como módulo no fim do body, ele rodava depois dela, e cada navegação
+         mostrava o tema padrão seguido da transição de cor para o salvo. */}
+    <script define:vars={themeBootValues}>
+      try {
+        const root = document.documentElement;
+        const theme = localStorage.getItem(themeKey);
+        const accent = localStorage.getItem(accentKey);
+        if (themes.includes(theme)) root.dataset.theme = theme;
+        if (accents.includes(accent)) root.dataset.accent = accent;
+      } catch {
+        // Sem armazenamento local, vale o padrão do CSS.
+      }
+    </script>
     <meta name="color-scheme" content="light dark" />
+    <meta
+      name="theme-color"
+      content="#20262b"
+      media="(prefers-color-scheme: dark)"
+    />
+    <meta
+      name="theme-color"
+      content="#faf8f2"
+      media="(prefers-color-scheme: light)"
+    />
+    <link rel="icon" type="image/png" sizes="32x32" href={favicon.src} />
+    <link rel="apple-touch-icon" href={touchIcon.src} />
     <meta name="referrer" content="no-referrer" />
     <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex" />}
     <meta property="og:site_name" content="Kinein Vectis" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="pt_BR" />

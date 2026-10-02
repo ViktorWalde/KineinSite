@@ -5,7 +5,7 @@ import { discordUrl, publicVersion, releaseUrl, sitePath } from "../site";
 import ThemeControls from "./ThemeControls.astro";
 
 interface Props {
-  current: "home" | "docs" | "updates";
+  current?: "home" | "docs" | "updates" | undefined;
 }
 
 const { current } = Astro.props;
@@ -21,8 +21,8 @@ const optimizedIcon = await getImage({ src: icon, width: 84, format: "webp" });
     >
       <img
         src={optimizedIcon.src}
-        width="42"
-        height="42"
+        width="34"
+        height="34"
         alt=""
         decoding="async"
       />
@@ -33,10 +33,10 @@ const optimizedIcon = await getImage({ src: icon, width: 84, format: "webp" });
 
     <nav class="primary-nav" aria-label="Navegação principal">
       <a
-        href={sitePath("/#estado")}
+        href={sitePath("/")}
         aria-current={current === "home" ? "page" : undefined}
       >
-        Estado atual
+        Início
       </a>
       <a
         href={sitePath("/atualizacoes/")}
@@ -50,7 +50,12 @@ const optimizedIcon = await getImage({ src: icon, width: 84, format: "webp" });
       >
         Documentação
       </a>
-      <a href={discordUrl} target="_blank" rel="noopener noreferrer">
+      <a
+        class="nav-external"
+        href={discordUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         Discord <span aria-hidden="true">↗</span>
       </a>
     </nav>
@@ -58,7 +63,7 @@ const optimizedIcon = await getImage({ src: icon, width: 84, format: "webp" });
     <div class="header-tools">
       <ThemeControls />
       <a
-        class="header-repo"
+        class="button button-primary button-small header-download"
         href={releaseUrl}
         target="_blank"
         rel="noopener noreferrer"

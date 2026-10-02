@@ -1,6 +1,6 @@
 .study-shell {
   max-width: 54rem;
-  padding-block: clamp(2rem, 5vw, 4rem) 6rem;
+  padding-block: var(--space-xl) var(--space-3xl);
 }
 
 .study-breadcrumb {
@@ -8,7 +8,7 @@
   flex-wrap: wrap;
   gap: 0.55rem;
   color: var(--muted);
-  font-size: 0.9rem;
+  font-size: var(--text-sm);
 }
 
 .study-breadcrumb a,
@@ -25,13 +25,13 @@
 .study-header h1 {
   max-width: 18ch;
   margin-block: 0.5rem 1rem;
-  font-size: clamp(2.4rem, 5vw, 4rem);
+  font-size: var(--text-4xl);
 }
 
 .study-summary {
   max-width: 66ch;
   color: var(--muted);
-  font-size: 1.15rem;
+  font-size: var(--text-lg);
 }
 
 .study-meta {
@@ -47,7 +47,7 @@
 
 .study-meta dt {
   color: var(--muted);
-  font-size: 0.8rem;
+  font-size: var(--text-sm);
 }
 
 .study-meta dd {
@@ -58,18 +58,13 @@
 .study-article {
   max-width: 72ch;
   padding-block: 2.5rem;
-  font-size: 1.08rem;
+  font-size: var(--text-lg);
   line-height: 1.8;
-}
-
-.study-article h2,
-.study-article h3 {
-  scroll-margin-top: 6rem;
 }
 
 .study-article h2 {
   margin-block: 3rem 1rem;
-  font-size: clamp(1.65rem, 3vw, 2.2rem);
+  font-size: var(--text-2xl);
 }
 
 .study-article h3 {
@@ -90,31 +85,11 @@
   overflow-wrap: anywhere;
 }
 
-.study-article pre {
-  max-width: 100%;
-  overflow-x: auto;
-  margin-block: 1.5rem;
-  padding: 1.2rem;
-  border: 1px solid var(--border);
-  border-radius: 0.6rem;
-  background: var(--surface);
-  color: var(--text);
-  font-size: 0.9rem;
-  line-height: 1.6;
-  tab-size: 2;
-}
-
-.study-article pre code {
-  padding: 0;
-  background: transparent;
-  color: inherit;
-  font-size: inherit;
-}
-
 .study-article blockquote {
   margin: 1.5rem 0;
   padding: 0.8rem 1.2rem;
   border-left: 3px solid var(--accent);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
   background: var(--surface);
   color: var(--muted);
 }

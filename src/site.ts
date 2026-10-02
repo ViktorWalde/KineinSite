@@ -13,6 +13,8 @@ export function releaseUrlFor(tag: string): string {
 export const releaseUrl = releaseUrlFor(publicTag);
 export const manualUrl =
   "https://github.com/ViktorWalde/KineinVectis/blob/main/DocsPublic/manual.md";
+export const installTutorialUrl =
+  "https://github.com/ViktorWalde/KineinVectis/blob/main/DocsPublic/tutorial.md";
 export const changelogUrl =
   "https://github.com/ViktorWalde/KineinVectis/blob/main/CHANGELOG.md";
 export const siteRepositoryUrl = "https://github.com/ViktorWalde/KineinSite";
@@ -22,4 +24,15 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 
 export function sitePath(path: `/${string}`): string {
   return `${base}${path}`;
+}
+
+// Datas exibidas no site, sempre por extenso ("1 de outubro de 2026"). Em UTC
+// porque as datas do conteúdo não têm hora e não podem virar o dia anterior.
+export function formatDate(date: Date): string {
+  return new Intl.DateTimeFormat("pt-BR", {
+    timeZone: "UTC",
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  }).format(date);
 }

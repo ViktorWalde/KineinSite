@@ -1,0 +1,26 @@
+---
+// Índice lateral das páginas de documentação. Âncoras (#...) recebem a marca
+// de seção em leitura; links para outras páginas ficam como estão.
+interface Props {
+  title: string;
+  label: string;
+  links: readonly { href: string; text: string }[];
+  note?: string;
+}
+
+const { title, label, links, note } = Astro.props;
+---
+
+<aside class="docs-sidebar" aria-label="Navegação desta página">
+  <p class="label">{title}</p>
+  <nav aria-label={label}>
+    {links.map((link) => (
+      <a href={link.href}>{link.text}</a>
+    ))}
+  </nav>
+  {note && <div class="docs-sidebar-note">{note}</div>}
+</aside>
+
+<script>
+  import "./section-nav";
+</script>

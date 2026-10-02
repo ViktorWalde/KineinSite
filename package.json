@@ -15,9 +15,11 @@
     "check:format": "prettier --check astro.config.mjs eslint.config.mjs stylelint.config.mjs prettier.config.mjs scripts/*.mjs 'src/**/*.{astro,ts,css}' package.json tsconfig.json",
     "check:html": "html-validate 'dist/**/*.html' --max-warnings 0",
     "check:links": "node scripts/check-links.mjs",
-    "check": "npm run check:types && npm run check:lint && npm run check:css && npm run check:architecture && npm run check:format",
-    "build": "npm run check && ASTRO_TELEMETRY_DISABLED=1 astro build && npm run check:html && npm run check:links",
-    "build:pages": "KINEIN_PAGES_BUILD=1 npm run build"
+    "check": "npm run check:types && npm run check:lint && npm run check:css && npm run check:architecture && npm run check:contrast && npm run check:format",
+    "build": "npm run check && ASTRO_TELEMETRY_DISABLED=1 astro build && npm run check:html && npm run check:links && npm run check:security",
+    "build:pages": "KINEIN_PAGES_BUILD=1 npm run build",
+    "check:security": "node scripts/check-html-security.mjs",
+    "check:contrast": "node scripts/check-contrast.mjs"
   },
   "devDependencies": {
     "@astrojs/check": "0.9.10",

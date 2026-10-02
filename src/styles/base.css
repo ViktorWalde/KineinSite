@@ -1,116 +1,231 @@
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
+/* Camadas do CSS global, da mais fraca para a mais forte. O CSS de cada
+   página (src/features/) fica FORA de camada e por isso sempre vence o
+   global, qualquer que seja a ordem em que o Astro carrega os arquivos (ele
+   embute os pequenos no <head>, às vezes antes do global). tokens.css também
+   fica fora: só define propriedades personalizadas. */
+@layer base, components, layout;
 
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 5.5rem;
-}
-
-body {
-  margin: 0;
-  background: var(--page);
-  color: var(--text);
-  font-family:
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    sans-serif;
-  font-size: 1rem;
-  line-height: 1.65;
-}
-
-::selection {
-  background: var(--accent);
-  color: var(--accent-on);
-}
-
-a {
-  color: inherit;
-  text-decoration-thickness: 0.07em;
-  text-underline-offset: 0.18em;
-}
-
-a:hover {
-  color: var(--accent);
-}
-
-:focus-visible {
-  outline: 3px solid var(--focus);
-  outline-offset: 3px;
-}
-
-img {
-  display: block;
-  max-width: 100%;
-}
-
-h1,
-h2,
-h3,
-p {
-  margin-block-start: 0;
-}
-
-h1,
-h2,
-h3 {
-  line-height: 1.14;
-  letter-spacing: -0.03em;
-}
-
-h1 {
-  font-size: clamp(2.5rem, 5vw, 5rem);
-}
-
-h2 {
-  font-size: clamp(2rem, 3.1vw, 3.2rem);
-}
-
-h3 {
-  font-size: 1.25rem;
-}
-
-code {
-  padding: 0.08em 0.28em;
-  border-radius: 0.25rem;
-  background: var(--surface-soft);
-  font-size: 0.9em;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  body,
-  .site-header,
-  .site-footer,
-  .flow-section,
-  .closing-section,
-  .status-panel,
-  .current-capabilities > div,
-  .development-card,
-  .development-code,
-  .principle-card,
-  .area-card,
-  .path-card,
-  .help-panel,
-  .appearance-panel {
-    transition:
-      background-color 220ms ease,
-      border-color 220ms ease,
-      color 220ms ease;
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
   }
 
-  .hero-overline,
-  .hero h1 em,
-  .hero-meta span {
-    transition: color 220ms ease;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
   html {
-    scroll-behavior: auto;
+    scroll-behavior: smooth;
+    scroll-padding-top: calc(var(--header-height) + 1.5rem);
+  }
+
+  /* Fundo: um brilho da cor de destaque no topo, interpolado em OKLab (o
+     sRGB padrão deixaria o meio acinzentado), e por cima o pontilhado de
+     assets/textures/noise.png, que desfaz as faixas que a tela de 8 bits
+     cria num degradê tão suave. Navegador sem "in oklab" descarta a
+     declaração e fica a cor lisa. */
+  body {
+    margin: 0;
+    background-color: var(--page);
+    background-image:
+      url("../../assets/textures/noise.png"),
+      radial-gradient(
+        72rem 38rem at 88% -14% in oklab,
+        var(--glow),
+        transparent 72%
+      );
+    background-repeat: repeat, no-repeat;
+    color: var(--text);
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    line-height: 1.65;
+  }
+
+  /* Fora da vista, mas lido por leitores de tela. */
+  .visually-hidden {
+    position: absolute;
+    overflow: hidden;
+    width: 1px;
+    height: 1px;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  ::selection {
+    background: var(--accent);
+    color: var(--accent-on);
+  }
+
+  a {
+    color: inherit;
+    text-decoration-thickness: 0.07em;
+    text-underline-offset: 0.18em;
+  }
+
+  a:hover {
+    color: var(--accent);
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--focus);
+    outline-offset: 3px;
+  }
+
+  img {
+    display: block;
+    max-width: 100%;
+  }
+
+  h1,
+  h2,
+  h3,
+  p {
+    margin-block-start: 0;
+  }
+
+  h1,
+  h2,
+  h3 {
+    overflow-wrap: break-word;
+    line-height: 1.12;
+    letter-spacing: -0.035em;
+    text-wrap: balance;
+  }
+
+  p,
+  li {
+    text-wrap: pretty;
+  }
+
+  h1 {
+    font-size: var(--text-5xl);
+  }
+
+  h2 {
+    font-size: var(--text-3xl);
+  }
+
+  h3 {
+    font-size: var(--text-xl);
+  }
+
+  code,
+  pre {
+    font-family: var(--font-mono);
+  }
+
+  code {
+    padding: 0.08em 0.32em;
+    border-radius: var(--radius-sm);
+    background: var(--surface-soft);
+    font-size: 0.88em;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+}
+
+/* Entrada de página: os filhos de .enter sobem e aparecem em sequência,
+   só com opacidade e deslocamento (o compositor anima sem refazer layout).
+   Com movimento reduzido, duração e escalonamento valem zero. */
+.enter > * {
+  animation: enter var(--duration-slow) var(--ease-out) both;
+}
+
+.enter > :nth-child(2) {
+  animation-delay: var(--stagger);
+}
+
+.enter > :nth-child(3) {
+  animation-delay: calc(var(--stagger) * 2);
+}
+
+.enter > :nth-child(n + 4) {
+  animation-delay: calc(var(--stagger) * 3);
+}
+
+@keyframes enter {
+  from {
+    opacity: 0;
+    translate: 0 14px;
+  }
+}
+
+/* Revelação ao rolar, pelo motor de animação do navegador e sem
+   JavaScript: o progresso segue a posição do elemento na tela. Usa translate
+   e scale individuais para não brigar com o transform do hover. Sem suporte
+   a animation-timeline, ou com movimento reduzido, o conteúdo só aparece. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal,
+    .reveal-children > * {
+      /* Propriedades separadas de propósito: o minificador do build junta
+         "animation" + "animation-timeline" num atalho só, e a especificação
+         não aceita a timeline dentro do atalho (a declaração inteira cai). */
+      animation-name: reveal;
+      animation-timing-function: linear;
+      animation-fill-mode: both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 22%;
+    }
+  }
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+    translate: 0 1.75rem;
+    scale: 0.985;
+  }
+}
+
+/* Navegação entre páginas com a transição nativa do navegador, sem
+   JavaScript: o cabeçalho fica parado, a página antiga some rápido e a nova
+   entra subindo. Navegador sem suporte, ou movimento reduzido, troca de
+   página como sempre. */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
+}
+
+.site-header {
+  view-transition-name: site-header;
+}
+
+::view-transition-old(root) {
+  animation: 150ms ease-in both page-out;
+}
+
+::view-transition-new(root) {
+  animation: 300ms var(--ease-out) both page-in;
+}
+
+@keyframes page-out {
+  to {
+    opacity: 0;
+  }
+}
+
+/* Troca de tema (theme.ts): esmaecimento cruzado puro, sem deslocar. */
+:root[data-switching="theme"]::view-transition-old(root) {
+  animation: 320ms ease both page-out;
+}
+
+:root[data-switching="theme"]::view-transition-new(root) {
+  animation: 320ms ease both theme-in;
+}
+
+@keyframes theme-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes page-in {
+  from {
+    opacity: 0;
+    translate: 0 10px;
   }
 }

@@ -1,12 +1,12 @@
 ---
-import { manualUrl, repositoryUrl, sitePath } from "../site";
+import { manualUrl, repositoryUrl, sitePath } from "../../site";
 
 const tracks = [
   {
     language: "C",
     status: "EM PREPARAÇÃO",
     path: "Programa local de amostras: compilar, executar e verificar resultados. Firmware vem depois.",
-    destination: "Ver C na IDE",
+    destination: "C e C++ no README",
     href: `${repositoryUrl}#c-e-c`,
     external: true,
   },
@@ -22,7 +22,7 @@ const tracks = [
     language: "Rust",
     status: "EM PREPARAÇÃO",
     path: "Projeto local com Cargo, tratamento de erros e testes. Targets específicos vêm depois.",
-    destination: "Ver Rust na IDE",
+    destination: "Rust no README",
     href: `${repositoryUrl}#rust`,
     external: true,
   },
@@ -43,7 +43,7 @@ const tracks = [
   aria-labelledby="linguagens-title"
 >
   <div class="docs-heading">
-    <span>04 / LINGUAGENS</span>
+    <span class="label">04 / LINGUAGENS</span>
     <h2 id="linguagens-title">Quatro percursos de linguagem.</h2>
   </div>
   <p>
@@ -51,10 +51,10 @@ const tracks = [
     estudos de linguagem mostram conceitos executados e verificados; os projetos
     na IDE virão após o teste na versão indicada.
   </p>
-  <div class="path-grid">
+  <div class="path-grid auto-grid reveal-children">
     {tracks.map((track) => (
-      <article class="path-card">
-        <span>{track.status}</span>
+      <article class="path-card card">
+        <span class="label">{track.status}</span>
         <h3>{track.language}</h3>
         <p>{track.path}</p>
         <a

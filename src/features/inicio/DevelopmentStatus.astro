@@ -1,7 +1,6 @@
 ---
-import { developmentSnapshot } from "../data/development";
-import { formatUpdateDate } from "../features/atualizacoes/updates";
-import { publicVersion, releaseUrl } from "../site";
+import { developmentSnapshot } from "../../data/development";
+import { formatDate, publicVersion, releaseUrl } from "../../site";
 
 const updatedAt = new Date(`${developmentSnapshot.updatedAt}T00:00:00Z`);
 ---
@@ -11,7 +10,7 @@ const updatedAt = new Date(`${developmentSnapshot.updatedAt}T00:00:00Z`);
   class="section shell development-section"
   aria-labelledby="desenvolvimento-title"
 >
-  <div class="section-intro">
+  <div class="section-intro reveal">
     <p class="kicker">PRÓXIMA VERSÃO · EM DESENVOLVIMENTO</p>
     <h2 id="desenvolvimento-title">
       A {developmentSnapshot.version} vai {developmentSnapshot.focus}.
@@ -19,7 +18,7 @@ const updatedAt = new Date(`${developmentSnapshot.updatedAt}T00:00:00Z`);
     <p class="section-intro-copy">
       Este é o plano informado pelo mantenedor em{" "}
       <time datetime={developmentSnapshot.updatedAt}>
-        {formatUpdateDate(updatedAt)}
+        {formatDate(updatedAt)}
       </time>
       . Nada desta lista faz parte do download ainda; a versão pública é a{" "}
       <a
@@ -33,9 +32,9 @@ const updatedAt = new Date(`${developmentSnapshot.updatedAt}T00:00:00Z`);
       .
     </p>
   </div>
-  <div class="development-grid">
+  <div class="development-grid auto-grid reveal-children">
     {developmentSnapshot.groups.map((group) => (
-      <article class="development-card">
+      <article class="development-card card">
         <h3>{group.status}</h3>
         <ul>
           {group.items.map((item) => (
@@ -52,7 +51,9 @@ const updatedAt = new Date(`${developmentSnapshot.updatedAt}T00:00:00Z`);
     ))}
   </div>
   <p class="development-note">
-    O escopo e a ordem podem mudar até o fechamento e a distribuição da{" "}
-    {developmentSnapshot.version}.
+    O escopo e a ordem podem mudar até o lançamento da{" "}
+    {developmentSnapshot.version}. Depois dela vem a{" "}
+    <strong>{developmentSnapshot.next.version}</strong>,{" "}
+    {developmentSnapshot.next.summary}.
   </p>
 </section>

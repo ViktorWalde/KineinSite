@@ -1,6 +1,7 @@
 ---
-import { releaseUrlFor, sitePath } from "../../site";
-import { formatUpdateDate, type UpdateEntry } from "./updates";
+import { formatDate, releaseUrlFor, sitePath } from "../../site";
+import { type UpdateEntry } from "./updates";
+import "./updates.css";
 
 // O mesmo destaque na home e no topo de /atualizacoes/. Na home ele só leva à
 // nota (o download já está no hero); na lista ele também oferece a release.
@@ -14,13 +15,13 @@ const notePath = sitePath(`/atualizacoes/${entry.id}/`);
 const headingId = `destaque-${entry.id}`;
 ---
 
-<section class="latest-update" aria-labelledby={headingId}>
+<section class="latest-update card" aria-labelledby={headingId}>
   <div class="latest-update-head">
     <p class="kicker">
       {variant === "home" ? "NOVIDADE" : "MAIS RECENTE"} · VERSÃO{" "}
       {entry.data.version} ·{" "}
       <time datetime={entry.data.date.toISOString().slice(0, 10)}>
-        {formatUpdateDate(entry.data.date).toUpperCase()}
+        {formatDate(entry.data.date).toUpperCase()}
       </time>
     </p>
     <h2 id={headingId}>
@@ -48,7 +49,7 @@ const headingId = `destaque-${entry.id}`;
       )}
     </div>
   </div>
-  <ul class="latest-update-highlights">
+  <ul class="latest-update-highlights auto-grid">
     {entry.data.highlights.slice(0, 4).map((item) => (
       <li>
         <strong>{item.title}</strong>

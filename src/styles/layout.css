@@ -1,219 +1,225 @@
-.shell {
-  width: min(calc(100% - 3rem), var(--content-width));
-  margin-inline: auto;
-}
-
-.site-header {
-  position: relative;
-  z-index: 20;
-  border-bottom: 1px solid var(--border);
-  background: var(--surface);
-}
-
-.header-inner {
-  position: relative;
-  display: flex;
-  min-height: 5.1rem;
-  align-items: center;
-  justify-content: space-between;
-  gap: clamp(1rem, 2.5vw, 2.4rem);
-}
-
-.header-inner > *,
-.primary-nav,
-.header-tools {
-  min-width: 0;
-}
-
-.brand {
-  display: inline-flex;
-  flex: none;
-  align-items: center;
-  gap: 0.75rem;
-  font-size: 1rem;
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  text-decoration: none;
-  white-space: nowrap;
-}
-
-.brand img {
-  flex: none;
-  width: 2.625rem;
-  height: 2.625rem;
-  border: 1px solid var(--border);
-  border-radius: 0.55rem;
-  object-fit: cover;
-}
-
-.brand strong {
-  color: var(--accent);
-}
-
-.primary-nav,
-.header-tools {
-  display: flex;
-  align-items: center;
-  gap: clamp(0.7rem, 2vw, 1.6rem);
-}
-
-.primary-nav a,
-.header-repo {
-  display: inline-flex;
-  min-height: 2.75rem;
-  align-items: center;
-  padding-block: 0.6rem;
-  color: var(--muted);
-  font-size: 0.9rem;
-  font-weight: 600;
-  text-decoration: none;
-  white-space: nowrap;
-  transition: color 180ms ease;
-}
-
-.primary-nav a span,
-a.footer-discord span {
-  color: var(--accent);
-}
-
-.header-repo {
-  color: var(--text);
-}
-
-.primary-nav a:hover,
-.header-repo:hover,
-.primary-nav a[aria-current="page"] {
-  color: var(--text);
-}
-
-.primary-nav a[aria-current="page"] {
-  box-shadow: 0 2px 0 var(--accent);
-}
-
-.site-footer {
-  border-top: 1px solid var(--border);
-  background: var(--surface);
-}
-
-.footer-top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 2rem;
-  padding-block: 2.2rem;
-}
-
-.footer-intro strong {
-  font-size: 1.05rem;
-}
-
-.footer-intro p {
-  margin: 0.3rem 0 0;
-  color: var(--muted);
-  font-size: 0.9rem;
-}
-
-.footer-discord {
-  display: inline-flex;
-  min-height: 2.75rem;
-  align-items: center;
-  gap: 0.7rem;
-  padding: 0.55rem 0.95rem;
-  border: 1px solid var(--accent);
-  border-radius: 0.45rem;
-  color: var(--text);
-  font-size: 0.9rem;
-  font-weight: 700;
-  text-decoration: none;
-  white-space: nowrap;
-  transition:
-    background-color 180ms ease,
-    border-color 180ms ease,
-    color 180ms ease;
-}
-
-.footer-discord:hover {
-  background: var(--surface-soft);
-  color: var(--text);
-}
-
-.footer-bottom {
-  padding-block: 1.25rem 2rem;
-  border-top: 1px solid var(--border);
-}
-
-.footer-bottom nav {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.7rem 1.3rem;
-  font-size: 0.9rem;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .primary-nav a,
-  .header-repo,
-  .footer-discord {
-    transition: none;
-  }
-}
-
-@media (width <= 920px) {
-  .header-inner {
-    flex-wrap: wrap;
-    padding-block: 0.75rem;
-  }
-
-  .primary-nav {
-    order: 3;
-    width: 100%;
-    justify-content: space-between;
-  }
-}
-
-@media (width <= 560px) {
+/* Moldura do site: largura, cabeçalho e rodapé. Vem depois de components
+   porque especializa componentes (ex.: o botão de download some no celular). */
+@layer layout {
   .shell {
-    width: min(calc(100% - 2rem), var(--content-width));
+    width: min(calc(100% - 3rem), var(--content-width));
+    margin-inline: auto;
   }
 
-  .brand span {
-    font-size: 0.92rem;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  /* Cabeçalho fixo e translúcido: o conteúdo passa por baixo, desfocado. Sem
+   suporte a backdrop-filter, o fundo fica sólido. */
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    border-bottom: 1px solid var(--border);
+    background: color-mix(in srgb, var(--surface) 82%, transparent);
+    backdrop-filter: blur(14px) saturate(150%);
+  }
+
+  @supports not (backdrop-filter: blur(1px)) {
+    .site-header {
+      background: var(--surface);
+    }
+  }
+
+  .header-inner {
+    position: relative;
+    display: flex;
+    min-height: var(--header-height);
+    align-items: center;
+    gap: clamp(0.75rem, 2.5vw, 2rem);
   }
 
   .brand {
-    min-width: 0;
+    display: inline-flex;
+    flex: none;
+    align-items: center;
+    gap: 0.65rem;
+    font-weight: 650;
+    letter-spacing: -0.02em;
+    text-decoration: none;
+    white-space: nowrap;
   }
 
-  .header-inner {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    gap: 0.45rem 0.75rem;
+  .brand img {
+    width: 2.125rem;
+    height: 2.125rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    object-fit: cover;
   }
 
-  .header-tools {
-    justify-self: end;
+  .brand strong {
+    color: var(--accent);
   }
 
   .primary-nav {
-    grid-column: 1 / -1;
-    order: initial;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    gap: 0.85rem;
+    display: flex;
+    min-width: 0;
+    align-items: center;
+    gap: 0.25rem;
   }
 
   .primary-nav a {
-    font-size: 0.85rem;
+    display: inline-flex;
+    min-height: 2.25rem;
+    flex: none;
+    align-items: center;
+    gap: 0.3rem;
+    padding-inline: 0.75rem;
+    border-radius: var(--radius-md);
+    color: var(--muted);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+    transition:
+      background-color var(--duration-fast) ease,
+      color var(--duration-fast) ease;
   }
 
-  .header-repo {
-    display: none;
+  .primary-nav a:hover {
+    background: var(--surface-soft);
+    color: var(--text);
   }
 
-  .footer-top {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 1rem;
+  .primary-nav a[aria-current="page"] {
+    background: color-mix(in srgb, var(--accent) 15%, transparent);
+    color: var(--text);
+  }
+
+  .primary-nav a span {
+    color: var(--accent);
+  }
+
+  .header-tools {
+    display: flex;
+    flex: none;
+    align-items: center;
+    gap: 0.6rem;
+    margin-inline-start: auto;
+  }
+
+  .site-footer {
+    border-top: 1px solid var(--border);
+    background: var(--surface);
+  }
+
+  .footer-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xl) var(--space-l);
+    padding-block: var(--space-2xl) var(--space-xl);
+  }
+
+  .footer-intro {
+    flex: 2 1 18rem;
+  }
+
+  .footer-intro strong {
+    font-size: var(--text-base);
+  }
+
+  .footer-intro strong span {
+    color: var(--accent);
+  }
+
+  .footer-intro p {
+    max-width: 34ch;
+    margin: 0.5rem 0 0;
+    color: var(--muted);
+    font-size: var(--text-sm);
+  }
+
+  .footer-group {
+    display: grid;
+    flex: 1 1 8rem;
+    align-content: start;
+    gap: 0.55rem;
+    font-size: var(--text-sm);
+  }
+
+  .footer-group .label {
+    margin: 0 0 0.25rem;
+  }
+
+  .footer-link {
+    justify-self: start;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color var(--duration-fast) ease;
+  }
+
+  .footer-link:hover {
+    color: var(--text);
+  }
+
+  .footer-group .footer-link span {
+    color: var(--accent);
+  }
+
+  .footer-bottom {
+    padding-block: 1.25rem 2rem;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: var(--text-sm);
+  }
+
+  .footer-bottom p {
+    margin: 0;
+  }
+
+  @media (pointer: coarse) {
+    .primary-nav a {
+      min-height: 2.75rem;
+    }
+  }
+
+  /* Abaixo de 54rem (864 px com a fonte padrão) a navegação vai para uma segunda linha, que rola na
+   horizontal em vez de quebrar; o cabeçalho deixa de ser fixo para não
+   ocupar a tela do celular. */
+  @media (width <= 54rem) {
+    html {
+      scroll-padding-top: 1.5rem;
+    }
+
+    .site-header {
+      position: relative;
+    }
+
+    .header-inner {
+      flex-wrap: wrap;
+      row-gap: 0;
+      padding-block-start: 0.4rem;
+    }
+
+    .primary-nav {
+      order: 3;
+      width: calc(100% + 0.75rem);
+      margin-inline-start: -0.75rem;
+      padding-block: 0.15rem 0.5rem;
+      overflow-x: auto;
+      mask-image: linear-gradient(90deg, #000 calc(100% - 2rem), transparent);
+      scrollbar-width: none;
+    }
+  }
+
+  @media (width <= 35rem) {
+    .shell {
+      width: min(calc(100% - 2rem), var(--content-width));
+    }
+
+    .primary-nav a {
+      padding-inline: 0.6rem;
+      font-size: var(--text-sm);
+    }
+
+    /* No celular o Discord fica no rodapé e no fim da página inicial, e o
+     download fica no topo da página inicial. */
+    .primary-nav .nav-external,
+    .header-tools .header-download {
+      display: none;
+    }
   }
 }

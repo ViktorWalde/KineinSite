@@ -1,11 +1,8 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import UpdateFeature from "../../features/atualizacoes/UpdateFeature.astro";
-import {
-  formatUpdateDate,
-  getUpdates,
-} from "../../features/atualizacoes/updates";
-import { changelogUrl, sitePath } from "../../site";
+import { getUpdates } from "../../features/atualizacoes/updates";
+import { changelogUrl, formatDate, sitePath } from "../../site";
 
 const [latest, ...older] = await getUpdates();
 ---
@@ -16,7 +13,7 @@ const [latest, ...older] = await getUpdates();
   description="Notas de atualização da Kinein Vectis: a versão mais recente em destaque e o histórico das anteriores."
 >
   <div class="updates-shell shell">
-    <header class="updates-intro">
+    <header class="updates-intro enter">
       <p class="kicker">NOTAS DE ATUALIZAÇÃO</p>
       <h1>Atualizações da Kinein Vectis</h1>
       <p class="updates-intro-copy">
@@ -39,18 +36,18 @@ const [latest, ...older] = await getUpdates();
     {older.length > 0 && (
       <section class="updates-history" aria-labelledby="historico-title">
         <h2 id="historico-title">Histórico</h2>
-        <ol class="updates-history-grid">
+        <ol class="updates-history-grid auto-grid reveal-children">
           {older.map((entry) => (
             <li>
               <a
-                class="update-card"
+                class="update-card card card-interactive"
                 href={sitePath(`/atualizacoes/${entry.id}/`)}
               >
                 <span class="update-card-meta">
                   <span class="update-version">{entry.data.version}</span>
                   <span class="update-channel">{entry.data.channel}</span>
                   <time datetime={entry.data.date.toISOString().slice(0, 10)}>
-                    {formatUpdateDate(entry.data.date)}
+                    {formatDate(entry.data.date)}
                   </time>
                 </span>
                 <span class="update-card-summary">{entry.data.summary}</span>
