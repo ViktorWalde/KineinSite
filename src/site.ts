@@ -13,6 +13,8 @@ export function releaseUrlFor(tag: string): string {
 export const releaseUrl = releaseUrlFor(publicTag);
 export const manualUrl =
   "https://github.com/ViktorWalde/KineinVectis/blob/main/DocsPublic/manual.md";
+export const installTutorialUrl =
+  "https://github.com/ViktorWalde/KineinVectis/blob/main/DocsPublic/tutorial.md";
 export const changelogUrl =
   "https://github.com/ViktorWalde/KineinVectis/blob/main/CHANGELOG.md";
 export const siteRepositoryUrl = "https://github.com/ViktorWalde/KineinSite";

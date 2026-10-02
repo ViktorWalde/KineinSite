@@ -142,6 +142,11 @@
   margin-block-end: var(--space-m);
 }
 
+.docs-card-grid-3 {
+  --grid-min: 13rem;
+  --grid-max: 3;
+}
+
 .docs-card {
   padding: var(--space-l);
 }
