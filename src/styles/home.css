@@ -28,13 +28,18 @@
   content: "";
 }
 
-/* Funde a base do hero com a página, em vez de um corte seco. */
+/* Funde a base do hero com a página nos temas escuros. No claro o hero
+   escuro sobre página creme viraria uma faixa leitosa, então o corte fica
+   seco (light-dark segue o color-scheme de cada tema em tokens.css). */
 .hero::after {
   position: absolute;
   z-index: -1;
   inset: auto 0 0;
   height: 6rem;
-  background: linear-gradient(transparent, var(--page));
+  background: linear-gradient(
+    transparent,
+    light-dark(transparent, var(--page))
+  );
   content: "";
 }
 

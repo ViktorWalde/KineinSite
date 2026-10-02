@@ -60,7 +60,7 @@ O que está ao alcance do site é não oferecer arquivo grande para ser repetido
 
 ### Privacidade
 
-O código do site não coleta dados: a única preferência (tema e cor) fica no `localStorage` do navegador. A hospedagem é outra coisa: segundo a documentação do GitHub ("What is GitHub Pages?", seção *Data collection*), o IP de cada visitante é registrado e guardado por segurança. O rodapé do site diz isso.
+O código do site não coleta dados: a única preferência (tema e cor) fica no `localStorage` do navegador. A hospedagem é outra coisa: segundo a documentação do GitHub ("What is GitHub Pages?", seção *Data collection*), o IP de cada visitante é registrado e guardado por segurança. O site não afirma ao visitante que nada é coletado, porque isso não depende só do código dele.
 
 ## Publicação
 
