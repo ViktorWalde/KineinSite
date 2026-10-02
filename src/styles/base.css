@@ -109,21 +109,6 @@
     font-size: 0.88em;
   }
 
-  /* Troca de tema: só cor, no tempo dos tokens (zero com movimento reduzido). */
-  body,
-  .site-header,
-  .site-footer,
-  .flow-section,
-  .closing-section,
-  .card,
-  .development-code,
-  .appearance-panel {
-    transition:
-      background-color var(--duration-base) ease,
-      border-color var(--duration-base) ease,
-      color var(--duration-base) ease;
-  }
-
   @media (prefers-reduced-motion: reduce) {
     html {
       scroll-behavior: auto;
@@ -209,6 +194,21 @@
 
 @keyframes page-out {
   to {
+    opacity: 0;
+  }
+}
+
+/* Troca de tema (theme.ts): esmaecimento cruzado puro, sem deslocar. */
+:root[data-switching="theme"]::view-transition-old(root) {
+  animation: 320ms ease both page-out;
+}
+
+:root[data-switching="theme"]::view-transition-new(root) {
+  animation: 320ms ease both theme-in;
+}
+
+@keyframes theme-in {
+  from {
     opacity: 0;
   }
 }

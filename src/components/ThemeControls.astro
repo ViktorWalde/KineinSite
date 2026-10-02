@@ -1,22 +1,66 @@
+---
+import {
+  accentChoices,
+  themeChoices,
+  type Accent,
+  type Theme,
+} from "../scripts/theme-preferences";
+
+// Rádios nativos: setas trocam a opção e o leitor de tela anuncia o grupo,
+// sem código extra. As amostras de cor herdam o destaque do tema atual pelo
+// data-accent (tokens.css), sem repetir valor de cor aqui.
+const themeLabels: Record<Theme, string> = {
+  system: "Sistema",
+  light: "Claro",
+  dark: "Escuro",
+  warm: "Quente",
+};
+const accentLabels: Record<Accent, string> = {
+  amber: "Âmbar",
+  blue: "Azul",
+  teal: "Verde-azulado",
+};
+const themeIcons: Record<Theme, string> = {
+  system:
+    "M5 4h14a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zM8 20h8M12 16v4",
+  light:
+    "M12 8a4 4 0 1 0 0 8 4 4 0 1 0 0-8zM12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4",
+  dark: "M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z",
+  warm: "M12 3c1 3.5 5 5.5 5 10a5 5 0 0 1-10 0c0-2.5 1.5-4 2.5-5 .3 1.7 1.2 2.6 2 3 .3-3-.5-5.5.5-8z",
+};
+---
+
 <details class="appearance">
   <summary>
     Tema <span aria-hidden="true">⌄</span>
   </summary>
   <div class="appearance-panel">
-    <label for="theme-choice">Tema</label>
-    <select id="theme-choice" name="theme">
-      <option value="system">Seguir o sistema</option>
-      <option value="light">Claro</option>
-      <option value="dark">Escuro</option>
-      <option value="warm">Quente</option>
-    </select>
-
-    <label for="accent-choice">Cor de destaque</label>
-    <select id="accent-choice" name="accent">
-      <option value="amber">Âmbar</option>
-      <option value="blue">Azul</option>
-      <option value="teal">Verde-azulado</option>
-    </select>
+    <fieldset class="appearance-group">
+      <legend class="label">Tema</legend>
+      <div class="theme-options">
+        {themeChoices.map((theme) => (
+          <label class="theme-option">
+            <input type="radio" name="theme" value={theme} />
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d={themeIcons[theme]} />
+            </svg>
+            {themeLabels[theme]}
+          </label>
+        ))}
+      </div>
+    </fieldset>
+    <fieldset class="appearance-group">
+      <legend class="label">Cor de destaque</legend>
+      <div class="accent-options">
+        {accentChoices.map((accent) => (
+          <label class="accent-option">
+            <input type="radio" name="accent" value={accent} />
+            <span class="swatch" data-accent={accent} aria-hidden="true" />
+            {accentLabels[accent]}
+          </label>
+        ))}
+      </div>
+    </fieldset>
     <p>A preferência fica somente neste navegador.</p>
   </div>
 </details>

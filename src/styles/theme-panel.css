@@ -1,0 +1,192 @@
+/* Painel de tema (ThemeControls.astro): botão, painel e opções. */
+@layer components {
+  .appearance {
+    position: relative;
+    visibility: hidden;
+    color: var(--text);
+    font-size: var(--text-sm);
+  }
+
+  :root[data-enhanced="true"] .appearance {
+    visibility: visible;
+  }
+
+  .appearance summary {
+    display: inline-flex;
+    min-height: 2.25rem;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.35rem 0.7rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    font-weight: 600;
+    list-style: none;
+    white-space: nowrap;
+    transition:
+      border-color var(--duration-fast) ease,
+      background-color var(--duration-fast) ease;
+  }
+
+  .appearance summary:hover,
+  .appearance[open] summary {
+    border-color: var(--accent);
+    background: var(--surface-soft);
+  }
+
+  .appearance summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .appearance summary span {
+    color: var(--accent);
+    transition: transform var(--duration-fast) var(--ease-out);
+  }
+
+  .appearance[open] summary span {
+    transform: rotate(180deg);
+  }
+
+  .appearance-panel {
+    position: absolute;
+    z-index: 40;
+    top: calc(100% + 0.5rem);
+    right: 0;
+    display: grid;
+    width: min(19rem, calc(100vw - 2rem));
+    gap: var(--space-s);
+    padding: 1rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+    box-shadow: var(--edge), var(--shadow);
+  }
+
+  .appearance[open] .appearance-panel {
+    animation: panel-in var(--duration-base) var(--ease-out);
+  }
+
+  @keyframes panel-in {
+    from {
+      opacity: 0;
+      transform: translateY(-4px) scale(0.98);
+    }
+  }
+
+  .appearance-group {
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+
+  .appearance-group legend {
+    margin-block-end: 0.5rem;
+    padding: 0;
+  }
+
+  .theme-options {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.35rem;
+  }
+
+  .accent-options {
+    display: grid;
+    gap: 0.2rem;
+  }
+
+  /* Opção = rótulo inteiro clicável; o rádio fica invisível mas continua
+     focável e anunciado. Estado marcado e foco aparecem no rótulo (:has). */
+  .theme-option,
+  .accent-option {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.45rem 0.6rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    font-weight: 600;
+    transition:
+      background-color var(--duration-fast) ease,
+      border-color var(--duration-fast) ease;
+  }
+
+  .accent-option {
+    border-color: transparent;
+  }
+
+  .theme-option:hover,
+  .accent-option:hover {
+    background: var(--surface-soft);
+  }
+
+  .theme-option:has(input:checked),
+  .accent-option:has(input:checked) {
+    border-color: var(--accent);
+    background: color-mix(in oklab, var(--accent) 14%, transparent);
+  }
+
+  .theme-option:has(input:focus-visible),
+  .accent-option:has(input:focus-visible) {
+    outline: 3px solid var(--focus);
+    outline-offset: 2px;
+  }
+
+  .theme-option input,
+  .accent-option input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .theme-option svg {
+    width: 1.1rem;
+    height: 1.1rem;
+    flex: none;
+    fill: none;
+    stroke: var(--accent);
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 2;
+  }
+
+  .swatch {
+    width: 1.15rem;
+    height: 1.15rem;
+    flex: none;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: inset 0 0 0 1px rgb(0 0 0 / 18%);
+    transition: box-shadow var(--duration-fast) ease;
+  }
+
+  .accent-option:has(input:checked) .swatch {
+    box-shadow:
+      0 0 0 2px var(--surface),
+      0 0 0 4px var(--accent);
+  }
+
+  .appearance-panel p {
+    margin: 0;
+    color: var(--muted);
+    font-size: var(--text-sm);
+  }
+
+  @media (width <= 680px) {
+    .appearance {
+      position: static;
+    }
+
+    .appearance-panel {
+      top: calc(100% + 0.35rem);
+      right: 0;
+      left: 0;
+      width: auto;
+      max-height: min(70dvh, 24rem);
+      overflow-y: auto;
+    }
+  }
+}

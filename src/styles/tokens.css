@@ -1,5 +1,8 @@
-:root {
-  /* Escala que não muda com o tema: tipografia, raio, movimento e cabeçalho. */
+:root,
+[data-accent="amber"] {
+  /* Os seletores [data-accent] sem :root servem às amostras do painel de tema:
+     um elemento com data-accent recebe o destaque daquela cor no tema atual,
+     sem repetir valor nenhum. Escala que não muda com o tema: tipografia, raio, movimento e cabeçalho. */
   --font-sans:
     system-ui, -apple-system, blinkmacsystemfont, "Segoe UI", sans-serif;
   --font-mono:
@@ -67,6 +70,7 @@
   --edge: inset 0 1px 0 rgb(255 255 255 / 4%);
 }
 
+[data-accent="blue"],
 :root[data-accent="blue"] {
   --page: #171d25;
   --surface: #202a35;
@@ -81,6 +85,7 @@
   --closing-bg: #202b38;
 }
 
+[data-accent="teal"],
 :root[data-accent="teal"] {
   --page: #17201f;
   --surface: #202d2b;
@@ -95,7 +100,8 @@
   --closing-bg: #20312d;
 }
 
-:root[data-theme="light"] {
+:root[data-theme="light"],
+:root[data-theme="light"] [data-accent="amber"] {
   color-scheme: light;
 
   --page: #f3f0e8;
@@ -113,7 +119,8 @@
   --closing-bg: #28323a;
 }
 
-:root[data-theme="light"][data-accent="blue"] {
+:root[data-theme="light"][data-accent="blue"],
+:root[data-theme="light"] [data-accent="blue"] {
   --page: #eef2f6;
   --surface: #f7f9fb;
   --surface-soft: #e3eaf0;
@@ -124,7 +131,8 @@
   --closing-bg: #263849;
 }
 
-:root[data-theme="light"][data-accent="teal"] {
+:root[data-theme="light"][data-accent="teal"],
+:root[data-theme="light"] [data-accent="teal"] {
   --page: #edf3f0;
   --surface: #f7faf7;
   --surface-soft: #e1ebe5;
@@ -135,7 +143,8 @@
   --closing-bg: #263b34;
 }
 
-:root[data-theme="warm"] {
+:root[data-theme="warm"],
+:root[data-theme="warm"] [data-accent="amber"] {
   color-scheme: dark;
 
   --page: #211d19;
@@ -151,7 +160,8 @@
   --closing-bg: #29231f;
 }
 
-:root[data-theme="warm"][data-accent="blue"] {
+:root[data-theme="warm"][data-accent="blue"],
+:root[data-theme="warm"] [data-accent="blue"] {
   --page: #20202a;
   --surface: #2a2935;
   --surface-soft: #353441;
@@ -162,7 +172,8 @@
   --closing-bg: #292936;
 }
 
-:root[data-theme="warm"][data-accent="teal"] {
+:root[data-theme="warm"][data-accent="teal"],
+:root[data-theme="warm"] [data-accent="teal"] {
   --page: #1e2420;
   --surface: #292f28;
   --surface-soft: #343b32;
@@ -174,7 +185,8 @@
 }
 
 @media (prefers-color-scheme: light) {
-  :root:not([data-theme]) {
+  :root:not([data-theme]),
+  :root:not([data-theme]) [data-accent="amber"] {
     color-scheme: light;
 
     --page: #f3f0e8;
@@ -192,7 +204,8 @@
     --closing-bg: #28323a;
   }
 
-  :root:not([data-theme])[data-accent="blue"] {
+  :root:not([data-theme])[data-accent="blue"],
+  :root:not([data-theme]) [data-accent="blue"] {
     --page: #eef2f6;
     --surface: #f7f9fb;
     --surface-soft: #e3eaf0;
@@ -203,7 +216,8 @@
     --closing-bg: #263849;
   }
 
-  :root:not([data-theme])[data-accent="teal"] {
+  :root:not([data-theme])[data-accent="teal"],
+  :root:not([data-theme]) [data-accent="teal"] {
     --page: #edf3f0;
     --surface: #f7faf7;
     --surface-soft: #e1ebe5;
