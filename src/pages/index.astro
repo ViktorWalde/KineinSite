@@ -38,16 +38,19 @@ const wallpaper = await getImage({
   description={`Conheça o beta público ${publicVersion} da Kinein Vectis para Linux x86_64, leia a nota de atualização, acompanhe a ${developmentSnapshot.version} em desenvolvimento e veja a direção futura para embarcados, IoT/IIoT, backend e ROS 2.`}
 >
   <section class="hero" aria-labelledby="hero-title">
-    <img
-      class="hero-bg"
-      src={wallpaper.src}
-      srcset={wallpaper.srcSet.attribute}
-      sizes="100vw"
-      width={wallpaper.attributes["width"]}
-      height={wallpaper.attributes["height"]}
-      alt=""
-      fetchpriority="high"
-    />
+    <div class="hero-media" aria-hidden="true">
+      <img
+        class="hero-bg"
+        src={wallpaper.src}
+        srcset={wallpaper.srcSet.attribute}
+        sizes="100vw"
+        width={wallpaper.attributes["width"]}
+        height={wallpaper.attributes["height"]}
+        alt=""
+        fetchpriority="high"
+      />
+      <div class="hero-shine"></div>
+    </div>
     <div class="shell hero-layout">
       <div class="hero-art" aria-hidden="true"></div>
       <div class="hero-copy enter">

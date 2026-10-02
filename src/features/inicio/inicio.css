@@ -1,18 +1,113 @@
+/* overflow: clip, e não hidden: hidden cria um contêiner de rolagem, e o
+   view() da paralaxe passaria a medir em relação a ele, que nunca rola. */
 .hero {
   position: relative;
   isolation: isolate;
-  overflow: hidden;
+  overflow: clip;
   background-color: #0d1015;
   color: #ded7cb;
 }
 
-.hero-bg {
+/* Imagem principal viva, em três camadas com uma animação cada (o
+   minificador junta propriedades de animação de um mesmo elemento de um
+   jeito que a especificação não aceita):
+   - .hero-media: paralaxe ao rolar, o fundo anda mais devagar que o texto;
+   - .hero-bg: deriva lenta de aproximação, 34 s, ida e volta;
+   - .hero-shine: um reflexo de luz quente atravessa o metal do K a cada 9 s.
+   Só transform e opacity, que o compositor anima sem refazer layout nem
+   pintura. Com movimento reduzido nada se move. */
+.hero-media {
   position: absolute;
   z-index: -2;
   inset: 0;
+  overflow: clip;
+}
+
+.hero-bg {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transform-origin: 32% 45%;
+}
+
+.hero-shine {
+  position: absolute;
+  inset: -20% auto -20% 0;
+  width: 22%;
+  translate: -100% 0;
+  rotate: 14deg;
+
+  /* overlay clareia os tons claros e quase não mexe no preto: o brilho
+     aparece no metal do K e o fundo continua escuro (screen e soft-light
+     foram testados: um acinzenta o fundo, o outro mal aparece). */
+  background: linear-gradient(
+    90deg in oklab,
+    transparent 20%,
+    rgb(255 240 220 / 85%) 50%,
+    transparent 80%
+  );
+  mix-blend-mode: overlay;
+  opacity: 0;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-bg {
+    animation: hero-drift 34s ease-in-out infinite alternate;
+  }
+
+  .hero-shine {
+    animation: hero-shine 9s cubic-bezier(0.45, 0, 0.25, 1) 1.2s infinite;
+  }
+
+  @supports (animation-timeline: view()) {
+    .hero-media {
+      animation-name: hero-parallax;
+      animation-timing-function: linear;
+      animation-fill-mode: both;
+      animation-timeline: view();
+      animation-range: exit 0% exit 100%;
+    }
+  }
+}
+
+@keyframes hero-drift {
+  from {
+    scale: 1.02;
+  }
+
+  to {
+    scale: 1.09;
+    translate: -1.2% -0.8%;
+  }
+}
+
+@keyframes hero-shine {
+  0% {
+    opacity: 0;
+    translate: -100% 0;
+  }
+
+  6% {
+    opacity: 1;
+  }
+
+  30% {
+    opacity: 1;
+  }
+
+  36%,
+  100% {
+    opacity: 0;
+    translate: 300% 0;
+  }
+}
+
+@keyframes hero-parallax {
+  to {
+    translate: 0 22%;
+  }
 }
 
 .hero::before {
