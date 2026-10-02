@@ -1,0 +1,48 @@
+/* A lista numerada de capítulos do Guia, em /aprender/ e na página de
+   documentação. */
+.learn-list {
+  display: grid;
+  gap: var(--space-s);
+  margin: var(--space-l) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.learn-card {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: var(--space-m);
+  padding: var(--space-m) var(--space-l);
+}
+
+.learn-number {
+  color: var(--accent);
+  font: 700 var(--text-lg) / 1 var(--font-mono);
+}
+
+.learn-text {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.learn-text span {
+  color: var(--muted);
+  font-size: var(--text-sm);
+}
+
+.learn-meta {
+  color: var(--muted);
+  font: 600 var(--text-xs) / 1.4 var(--font-mono);
+  white-space: nowrap;
+}
+
+@media (width <= 35rem) {
+  .learn-card {
+    grid-template-columns: auto 1fr;
+  }
+
+  .learn-meta {
+    grid-column: 2;
+  }
+}

@@ -1,6 +1,6 @@
 ---
 import { getLatestUpdate } from "../atualizacoes/updates";
-import { changelogUrl, manualUrl, publicVersion, sitePath } from "../../site";
+import { changelogUrl, publicVersion, sitePath } from "../../site";
 
 const latest = await getLatestUpdate();
 const notePath = sitePath(
@@ -33,13 +33,8 @@ const notePath = sitePath(
       </p>
     </div>
     <div class="status-actions">
-      <a
-        class="button button-secondary"
-        href={manualUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Ler o manual da IDE <span aria-hidden="true">↗</span>
+      <a class="button button-secondary" href={sitePath("/manual/")}>
+        Ler o manual da IDE
       </a>
     </div>
   </div>

@@ -192,4 +192,57 @@
   .inline-link:hover {
     color: var(--text);
   }
+
+  /* Tabelas de artigo (Guia, manual). As células quebram o texto onde for
+     preciso (overflow-wrap: anywhere), então a largura mínima da tabela cabe
+     na coluna e o celular não ganha rolagem lateral; a tabela continua sendo
+     tabela para leitores de tela, sem display: block. */
+  .prose table {
+    width: 100%;
+    margin-block: var(--space-m) var(--space-l);
+    border: 1px solid var(--border);
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: var(--radius-lg);
+    background: var(--card);
+    font-size: var(--text-sm);
+    line-height: 1.55;
+  }
+
+  .prose th,
+  .prose td {
+    padding: 0.55rem 0.85rem;
+    border-bottom: 1px solid var(--border);
+    overflow-wrap: anywhere;
+    text-align: left;
+    vertical-align: top;
+  }
+
+  .prose th {
+    background: var(--surface);
+    font-weight: 650;
+  }
+
+  .prose th:first-child {
+    border-start-start-radius: var(--radius-lg);
+  }
+
+  .prose th:last-child {
+    border-start-end-radius: var(--radius-lg);
+  }
+
+  .prose tr:last-child td {
+    border-bottom: 0;
+  }
+
+  @media (width <= 35rem) {
+    .prose table {
+      font-size: var(--text-xs);
+    }
+
+    .prose th,
+    .prose td {
+      padding: 0.45rem 0.5rem;
+    }
+  }
 }

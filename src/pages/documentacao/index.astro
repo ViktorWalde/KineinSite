@@ -3,25 +3,30 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import DocsSidebar from "../../features/documentacao/DocsSidebar.astro";
 import LanguageTracks from "../../features/documentacao/LanguageTracks.astro";
 import LearningPaths from "../../features/documentacao/LearningPaths.astro";
+import GuideList from "../../features/aprender/GuideList.astro";
+import { getPublishedGuides, sectionOf } from "../../features/aprender/guides";
 import SiteProjectLink from "../../features/documentacao/SiteProjectLink.astro";
 import "../../features/documentacao/documentacao.css";
 import { developmentSnapshot } from "../../data/development";
 import { references } from "../../data/references";
 import {
   discordUrl,
-  installTutorialUrl,
-  manualUrl,
   publicVersion,
   releaseUrl,
   repositoryUrl,
   sitePath,
 } from "../../site";
+
+const ideGuides = (await getPublishedGuides()).filter(
+  (guide) => sectionOf(guide) === "ide",
+);
+const firstGuide = ideGuides[0];
 ---
 
 <BaseLayout
   current="docs"
   title="Documentação"
-  description="Instalação, manual, estudos e trilhas da Kinein Vectis para embarcados, IoT, backend e, no futuro, ROS 2."
+  description="Guia da IDE, manual, estudos e trilhas da Kinein Vectis para embarcados, IoT, backend e, no futuro, ROS 2."
 >
   <div class="docs-shell shell">
     <DocsSidebar
@@ -44,8 +49,8 @@ import {
         <p class="kicker">LEIA NO SEU RITMO</p>
         <h1>Documentação da Kinein Vectis</h1>
         <p class="docs-intro-copy">
-          Comece pela versão pública e pelo manual. O Guia da IDE virá antes dos
-          projetos guiados, com cada tarefa testada na versão indicada.
+          Comece pelo Guia da IDE: da instalação ao primeiro projeto, cada passo
+          reproduzido na versão pública. O manual cobre o resto.
         </p>
         <div class="docs-status">
           <span aria-hidden="true">●</span> Versão pública atual: beta{" "}
@@ -67,21 +72,16 @@ import {
           <h2 id="comece-title">Do download ao primeiro contato.</h2>
         </div>
         <div class="docs-card-grid docs-card-grid-3 auto-grid">
-          <a
-            class="docs-card card card-interactive"
-            href={installTutorialUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <span class="label">
-              INSTALAÇÃO · {publicVersion} <span aria-hidden="true">↗</span>
-            </span>
-            <h3>Tutorial de instalação</h3>
-            <p>
-              Conferir se o computador é compatível, verificar o download,
-              instalar o atalho e abrir o primeiro projeto.
-            </p>
-          </a>
+          {firstGuide && (
+            <a
+              class="docs-card card card-interactive"
+              href={sitePath(`/aprender/${firstGuide.id}/`)}
+            >
+              <span class="label">GUIA DA IDE · CAPÍTULO 1</span>
+              <h3>{firstGuide.data.title}</h3>
+              <p>{firstGuide.data.summary}</p>
+            </a>
+          )}
           <a
             class="docs-card card card-interactive"
             href={releaseUrl}
@@ -98,13 +98,9 @@ import {
           </a>
           <a
             class="docs-card card card-interactive"
-            href={manualUrl}
-            target="_blank"
-            rel="noopener noreferrer"
+            href={sitePath("/manual/")}
           >
-            <span class="label">
-              REFERÊNCIA DE USO <span aria-hidden="true">↗</span>
-            </span>
+            <span class="label">REFERÊNCIA DE USO · {publicVersion}</span>
             <h3>Manual da IDE</h3>
             <p>
               Fluxos, recursos, atalhos e o que fazer quando algo dá errado.
@@ -119,26 +115,21 @@ import {
           <h2 id="guias-title">Primeiro a IDE, depois os projetos.</h2>
         </div>
         <p>
-          O manual técnico já está disponível no repositório da IDE. Os estudos
-          de linguagem podem começar sem depender de recursos específicos da
-          Vectis. Os guias de uso da IDE seguirão esta ordem:
+          O{" "}
+          <a class="inline-link" href={sitePath("/aprender/")}>
+            Guia da IDE
+          </a>{" "}
+          ensina o uso da Vectis em capítulos curtos, na ordem em que você vai
+          precisar deles. Cada passo foi reproduzido na IDE, com as telas que
+          aparecem para você.
         </p>
-        <ol class="learning-sequence">
-          <li class="card">
-            <strong>Guia da IDE</strong>
-            <p>
-              Instalação, interface, primeiro projeto, build, execução, testes,
-              depuração e solução de problemas na versão citada.
-            </p>
-          </li>
-          <li class="card">
-            <strong>Projetos guiados</strong>
-            <p>
-              Exemplos locais e pequenos que introduzem C++, C, Python e Rust
-              junto com as tarefas feitas na Vectis.
-            </p>
-          </li>
-        </ol>
+        <GuideList guides={ideGuides} />
+        <p>
+          Depois do Guia vêm os <strong>projetos guiados</strong>: exemplos
+          pequenos e locais que ensinam C++, C, Python e Rust junto com as
+          tarefas feitas na Vectis. Enquanto eles não chegam, os estudos de
+          linguagem funcionam sem a IDE:
+        </p>
         <a
           class="docs-card study-entry-card card card-interactive"
           href={sitePath("/estudos/cpp/telemetria-local/")}
@@ -151,9 +142,8 @@ import {
           </p>
         </a>
         <p>
-          Os estudos de linguagem indicam o ambiente em que foram testados. Os
-          guias da IDE incluirão a versão usada, os passos, o resultado esperado
-          e a solução de problemas após a reprodução do fluxo descrito.
+          Estudos e capítulos indicam o ambiente e a versão em que foram
+          testados.
         </p>
       </section>
 

@@ -1,0 +1,61 @@
+# Reprodução do capítulo "Primeiro projeto em Python" (scripts/capturar-tutorial.sh).
+# Rodar com KINEIN_DEMO_PATH=/usr/bin:/bin num sistema com outros Pythons em
+# /usr/local/bin: as capturas devem mostrar o Python 3.12 do Ubuntu 24.04.
+pasta .
+bloco 1                # python3-venv, pipx e basedpyright
+bloco 2                # versões
+conferir Python 3.12
+conferir basedpyright
+abrir
+esperar 10
+tecla ctrl+o           # Abrir workspace
+esperar 2
+clicar 660 332         # + pasta: o leitor já tem ~/projetos do capítulo 2
+esperar 1
+digitar projetos
+tecla Return
+esperar 1.5
+clicar 800 292         # campo do caminho
+tecla End
+digitar /projetos
+tecla Return           # Ir
+esperar 1.5
+clicar 744 332         # + projeto
+esperar 1
+digitar ola-python
+clicar 666 413         # Python
+esperar 1
+foto novo-projeto 440 220 720 345
+clicar 1075 380        # Criar
+esperar 10
+clicar 150 237         # main.py
+esperar 4
+foto python-sistema 800 968 800 32
+bloco 3                # python3 -m venv .venv
+esperar 2
+clicar 186 61          # menu do projeto
+esperar 1
+clicar 82 215          # Fechar workspace
+esperar 3
+clicar 560 615         # ola-python nos recentes
+esperar 10
+foto python-venv 800 968 800 32
+clicar 150 261         # main.py (a árvore agora tem .venv)
+esperar 3
+tecla alt+F12          # o terminal antes de executar
+esperar 2
+clicar 1499 61         # ▶
+esperar 5
+foto executado 376 690 820 150
+tecla ctrl+shift+F9    # testes, ainda sem pytest
+esperar 6
+foto testes-sem-pytest 376 686 1216 270
+bloco 4                # pip install pytest no .venv
+conferir Successfully installed
+tecla ctrl+shift+F9    # testes de novo
+esperar 8
+foto testes 376 686 1216 270
+fechar
+pasta projetos/ola-python
+bloco 5                # pytest pelo terminal
+conferir 1 passed

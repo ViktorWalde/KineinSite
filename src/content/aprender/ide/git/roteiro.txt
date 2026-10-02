@@ -1,0 +1,88 @@
+# Reprodução do capítulo "Git" (scripts/capturar-tutorial.sh).
+# Recria o ola-kinein do capítulo 2 pela tela inicial.
+pasta .
+bloco 1                # apt install git e git config
+bloco 2                # git --version
+conferir git version 2.
+abrir
+esperar 10
+clicar 552 460         # Novo C++ / CMake
+esperar 2
+clicar 660 332         # + pasta
+esperar 1
+digitar projetos
+tecla Return
+esperar 1.5
+clicar 800 292         # campo do caminho
+tecla End
+digitar /projetos
+tecla Return
+esperar 1.5
+clicar 744 332         # + projeto
+esperar 1
+digitar ola-kinein
+clicar 1075 380        # Criar
+esperar 10
+bloco 3                # git init (a IDE ainda não percebe: a 0.3.5 ignora eventos em .git/)
+conferir Initialized empty Git repository
+esperar 3
+clicar 150 237         # .gitignore
+esperar 2
+clicar 900 500
+tecla ctrl+End
+digitar /.kinein/
+tecla Return
+tecla Escape
+tecla ctrl+s           # salvar um arquivo do projeto faz a IDE notar o repositório
+esperar 6
+foto gitignore 380 90 820 150
+foto repositorio 0 40 820 300
+clicar 262 61          # o widget da branch abre a janela do Git
+esperar 2
+clicar 90 169
+clicar 90 193
+clicar 90 217
+clicar 90 241
+clicar 90 265
+clicar 217 908         # mensagem
+digitar Primeiro commit
+esperar 1
+foto primeiro-commit 60 90 320 880
+clicar 329 941         # Commit (5)
+esperar 3
+tecla ctrl+shift+n     # a janela do Git ocupa o lugar da árvore: abre pelo nome
+esperar 1.5
+digitar main
+esperar 2
+tecla Return
+esperar 3
+clicar 900 500
+clicar 700 246         # linha 5
+tecla End Left Left Left Left Left Left Left Left Left Left
+tecla BackSpace BackSpace BackSpace BackSpace BackSpace BackSpace BackSpace BackSpace BackSpace BackSpace BackSpace BackSpace BackSpace
+digitar Olá, Git!
+tecla Escape
+tecla ctrl+s
+esperar 3
+foto modificado 0 40 820 300
+clicar 150 169         # o nome do arquivo na janela do Git: o diff
+esperar 3
+foto diff 376 90 1000 260
+tecla Escape
+esperar 1
+clicar 90 169
+clicar 217 908
+digitar Muda a mensagem
+clicar 329 941         # Commit (1)
+esperar 3
+clicar 197 111         # aba Log
+esperar 2.5
+foto log 60 90 320 160
+clicar 200 202         # o último commit
+esperar 2.5
+foto commit 376 90 1000 280
+fechar
+pasta projetos/ola-kinein
+bloco 4                # git log pelo terminal
+conferir Muda a mensagem
+conferir Primeiro commit

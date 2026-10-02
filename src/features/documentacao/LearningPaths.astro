@@ -1,5 +1,5 @@
 ---
-import { manualUrl, repositoryUrl } from "../../site";
+import { repositoryUrl, sitePath } from "../../site";
 
 const paths = [
   {
@@ -13,6 +13,7 @@ const paths = [
       {
         label: "Ver embarcados no README",
         href: `${repositoryUrl}#embedded--firmware`,
+        external: true,
       },
     ],
   },
@@ -27,6 +28,7 @@ const paths = [
       {
         label: "Entender o escopo de IoT",
         href: `${repositoryUrl}#iot-edge-e-software-de-apoio`,
+        external: true,
       },
     ],
   },
@@ -40,11 +42,13 @@ const paths = [
     links: [
       {
         label: "Python no manual",
-        href: `${manualUrl}#10-python`,
+        href: sitePath("/manual/#10-python"),
+        external: false,
       },
       {
         label: "Bancos no manual",
-        href: `${manualUrl}#banco-de-dados`,
+        href: sitePath("/manual/#banco-de-dados"),
+        external: false,
       },
     ],
   },
@@ -81,8 +85,13 @@ const paths = [
         {path.links.length > 0 && (
           <div class="path-card-links">
             {path.links.map((link) => (
-              <a href={link.href} target="_blank" rel="noopener noreferrer">
-                {link.label} <span aria-hidden="true">↗</span>
+              <a
+                href={link.href}
+                target={link.external ? "_blank" : undefined}
+                rel={link.external ? "noopener noreferrer" : undefined}
+              >
+                {link.label}{" "}
+                <span aria-hidden="true">{link.external ? "↗" : "→"}</span>
               </a>
             ))}
           </div>

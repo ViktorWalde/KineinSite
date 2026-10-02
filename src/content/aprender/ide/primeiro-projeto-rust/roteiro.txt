@@ -1,0 +1,54 @@
+# Reprodução do capítulo "Primeiro projeto em Rust" (scripts/capturar-tutorial.sh).
+pasta .
+bloco 1                # apt install rustup (no ambiente de teste, já instalado)
+bloco 2                # toolchain estável e rust-analyzer: baixa de static.rust-lang.org
+bloco 3                # versões
+conferir cargo 1.
+conferir rust-analyzer 1.
+conferir clippy 0.
+abrir
+esperar 10
+clicar 724 460         # Novo Rust / Cargo
+esperar 2
+clicar 660 332         # + pasta (o leitor já tem ~/projetos do capítulo 2)
+esperar 1
+digitar projetos
+tecla Return
+esperar 1.5
+clicar 800 292         # campo do caminho (a lista de pastas muda com o que há na HOME)
+tecla End
+digitar /projetos
+tecla Return           # Ir: entra em projetos, como os dois cliques do texto
+esperar 1.5
+clicar 744 332         # + projeto
+esperar 1
+digitar ola-rust
+esperar 1
+foto novo-projeto 440 220 720 345
+clicar 1075 380        # Criar
+esperar 12
+clicar 133 141         # src
+esperar 1
+clicar 160 165         # main.rs
+esperar 4
+foto projeto-criado 0 40 1000 300
+tecla alt+F12          # o terminal antes de executar
+esperar 2
+clicar 1499 61         # ▶ (cargo run)
+esperar 15             # compila e roda
+foto primeira-execucao 376 690 820 150
+clicar 900 500
+clicar 700 195         # linha 2
+tecla End Left Left Left
+tecla BackSpace BackSpace BackSpace BackSpace BackSpace BackSpace BackSpace BackSpace BackSpace BackSpace BackSpace BackSpace BackSpace
+digitar Olá, Rust!
+tecla Escape
+tecla ctrl+s
+esperar 2
+clicar 1499 61         # ▶ de novo, sem compilar à parte
+esperar 12
+foto executado 376 690 820 150
+fechar
+pasta projetos/ola-rust
+bloco 4
+conferir Olá, Rust!

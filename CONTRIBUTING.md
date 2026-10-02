@@ -21,7 +21,9 @@ Estudos de linguagem ficam em `src/content/estudos/<linguagem>/`. O texto e o ex
 
 Um estudo só deve receber `verified` quando todos os comandos forem executados e o resultado esperado for conferido no ambiente declarado. Indique pré-requisitos, unidades, limitações e como reconhecer erros comuns. Evite copiar documentação ou exemplos de terceiros; cite a fonte consultada e redija a explicação com suas palavras.
 
-Os capítulos que ensinam tarefas **na Vectis** pertencem à coleção `src/content/aprender/`. Essa coleção ainda não tem rota pública. Antes de publicar um capítulo, é preciso implementar a rota e reproduzir os passos na versão pública da IDE citada. Não apresente recursos da versão em desenvolvimento como disponíveis na release pública.
+O manual em `src/content/manual/` é uma cópia fiel do manual da IDE e não se edita aqui: o build recusa uma cópia alterada. Correções vão para o repositório da IDE e voltam por `scripts/sincronizar-manual.mjs`.
+
+Os capítulos que ensinam tarefas **na Vectis** pertencem à coleção `src/content/aprender/` e aparecem em `/aprender/`. Cada capítulo tem um `roteiro.txt` que `scripts/capturar-tutorial.sh` executa na IDE de verdade (formato no cabeçalho do script). Um capítulo só recebe `status: verified` depois de reproduzido por inteiro na versão de `ideVersion`, no ambiente de `platform`, com as capturas geradas pelo roteiro. Descreva a versão pública como ela é, inclusive o que não funciona como deveria; não apresente recursos da versão em desenvolvimento como disponíveis na release pública.
 
 ## Revisão de interface
 
