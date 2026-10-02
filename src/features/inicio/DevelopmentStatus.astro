@@ -1,7 +1,6 @@
 ---
 import { developmentSnapshot } from "../../data/development";
-import { formatUpdateDate } from "../atualizacoes/updates";
-import { publicVersion, releaseUrl } from "../../site";
+import { formatDate, publicVersion, releaseUrl } from "../../site";
 
 const updatedAt = new Date(`${developmentSnapshot.updatedAt}T00:00:00Z`);
 ---
@@ -19,7 +18,7 @@ const updatedAt = new Date(`${developmentSnapshot.updatedAt}T00:00:00Z`);
     <p class="section-intro-copy">
       Este é o plano informado pelo mantenedor em{" "}
       <time datetime={developmentSnapshot.updatedAt}>
-        {formatUpdateDate(updatedAt)}
+        {formatDate(updatedAt)}
       </time>
       . Nada desta lista faz parte do download ainda; a versão pública é a{" "}
       <a

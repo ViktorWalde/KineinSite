@@ -3,11 +3,10 @@ import { render } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import "../../features/codigo/codigo.css";
 import {
-  formatUpdateDate,
   getUpdates,
   type UpdateEntry,
 } from "../../features/atualizacoes/updates";
-import { releaseUrlFor, sitePath } from "../../site";
+import { formatDate, releaseUrlFor, sitePath } from "../../site";
 import "../../features/atualizacoes/updates.css";
 
 export async function getStaticPaths() {
@@ -29,7 +28,7 @@ const releaseUrl = releaseUrlFor(entry.data.tag);
 
 <BaseLayout
   current="updates"
-  title={entry.data.title}
+  title={`Versão ${entry.data.version}`}
   description={entry.data.summary}
 >
   <div class="update-shell shell">
@@ -50,7 +49,7 @@ const releaseUrl = releaseUrlFor(entry.data.tag);
           <dt>Publicada em</dt>
           <dd>
             <time datetime={entry.data.date.toISOString().slice(0, 10)}>
-              {formatUpdateDate(entry.data.date)}
+              {formatDate(entry.data.date)}
             </time>
           </dd>
         </div>

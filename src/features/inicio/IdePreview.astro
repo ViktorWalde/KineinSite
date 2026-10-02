@@ -1,7 +1,7 @@
 ---
 import { getImage } from "astro:assets";
 import { ideScreens } from "../../data/ide-screens";
-import { formatUpdateDate } from "../atualizacoes/updates";
+import { formatDate } from "../../site";
 import "./ide-preview.css";
 
 // As dimensões vêm do getImage: ler image.width faria o Astro publicar o PNG
@@ -73,7 +73,7 @@ const capturedAt = new Date(`${ideScreens.capturedAt}T00:00:00Z`);
           <span>
             Kinein Vectis {ideScreens.version}, {ideScreens.environment},{" "}
             <time datetime={ideScreens.capturedAt}>
-              {formatUpdateDate(capturedAt)}
+              {formatDate(capturedAt)}
             </time>
             .
           </span>

@@ -1,11 +1,8 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import UpdateFeature from "../../features/atualizacoes/UpdateFeature.astro";
-import {
-  formatUpdateDate,
-  getUpdates,
-} from "../../features/atualizacoes/updates";
-import { changelogUrl, sitePath } from "../../site";
+import { getUpdates } from "../../features/atualizacoes/updates";
+import { changelogUrl, formatDate, sitePath } from "../../site";
 
 const [latest, ...older] = await getUpdates();
 ---
@@ -50,7 +47,7 @@ const [latest, ...older] = await getUpdates();
                   <span class="update-version">{entry.data.version}</span>
                   <span class="update-channel">{entry.data.channel}</span>
                   <time datetime={entry.data.date.toISOString().slice(0, 10)}>
-                    {formatUpdateDate(entry.data.date)}
+                    {formatDate(entry.data.date)}
                   </time>
                 </span>
                 <span class="update-card-summary">{entry.data.summary}</span>

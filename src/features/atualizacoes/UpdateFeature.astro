@@ -1,6 +1,6 @@
 ---
-import { releaseUrlFor, sitePath } from "../../site";
-import { formatUpdateDate, type UpdateEntry } from "./updates";
+import { formatDate, releaseUrlFor, sitePath } from "../../site";
+import { type UpdateEntry } from "./updates";
 import "./updates.css";
 
 // O mesmo destaque na home e no topo de /atualizacoes/. Na home ele só leva à
@@ -21,7 +21,7 @@ const headingId = `destaque-${entry.id}`;
       {variant === "home" ? "NOVIDADE" : "MAIS RECENTE"} · VERSÃO{" "}
       {entry.data.version} ·{" "}
       <time datetime={entry.data.date.toISOString().slice(0, 10)}>
-        {formatUpdateDate(entry.data.date).toUpperCase()}
+        {formatDate(entry.data.date).toUpperCase()}
       </time>
     </p>
     <h2 id={headingId}>

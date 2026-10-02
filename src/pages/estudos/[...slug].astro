@@ -2,7 +2,7 @@
 import { getCollection, render, type CollectionEntry } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import "../../features/codigo/codigo.css";
-import { sitePath } from "../../site";
+import { formatDate, sitePath } from "../../site";
 import "../../features/estudos/estudos.css";
 
 export async function getStaticPaths() {
@@ -22,9 +22,7 @@ interface Props {
 
 const { entry } = Astro.props;
 const { Content } = await render(entry);
-const tested = new Intl.DateTimeFormat("pt-BR", { timeZone: "UTC" }).format(
-  entry.data.lastTested,
-);
+const tested = formatDate(entry.data.lastTested);
 ---
 
 <BaseLayout
