@@ -34,7 +34,9 @@
 #
 # Blocos e IDE rodam com um ambiente mínimo (env -i): HOME, PATH do sistema,
 # idioma e proxy, se houver. Nada da sua sessão (tokens, variáveis do Qt)
-# chega à IDE nem aparece nas capturas.
+# chega à IDE nem aparece nas capturas. KINEIN_DEMO_PATH troca a parte do
+# sistema no PATH (padrão /usr/local/bin:/usr/bin:/bin), para excluir
+# ferramentas que um Ubuntu recém-instalado não teria.
 #
 # Requer xvfb (Xvfb), xdotool, ImageMagick (import, convert), curl e unzip,
 # mais as ferramentas que cada capítulo usa (cmake, g++, git, clangd...).
@@ -50,6 +52,7 @@ repo_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
 content_dir="$repo_dir/src/content/aprender"
 demo_home="${KINEIN_DEMO_HOME:-/tmp/kinein-demo/home}"
 user_name="$(id -un)"
+system_path="${KINEIN_DEMO_PATH:-/usr/local/bin:/usr/bin:/bin}"
 width=1600
 height=1000
 scale="${KINEIN_SCALE:-2}"
@@ -139,7 +142,7 @@ run_chapter() {
     "XDG_CONFIG_HOME=$demo_home/.config"
     "XDG_DATA_HOME=$demo_home/.local/share"
     "XDG_CACHE_HOME=$demo_home/.cache"
-    "PATH=$demo_home/.local/bin:/usr/local/bin:/usr/bin:/bin"
+    "PATH=$demo_home/.local/bin:$system_path"
     "KINEIN_APPIMAGE=$appimage"
     "APPIMAGE_EXTRACT_AND_RUN=1"
     "QT_SCALE_FACTOR=$scale"
