@@ -19,10 +19,16 @@
   position: absolute;
   z-index: -1;
   inset: 0;
+
+  /* Véu sobre a imagem com paradas em curva suave (e não três retas), para
+     o escurecimento atrás do texto não ter "joelho" visível. */
   background: linear-gradient(
-    90deg,
+    90deg in oklab,
     rgb(7 10 14 / 6%) 0%,
-    rgb(7 10 14 / 32%) 41%,
+    rgb(7 10 14 / 12%) 22%,
+    rgb(7 10 14 / 30%) 40%,
+    rgb(7 10 14 / 58%) 58%,
+    rgb(7 10 14 / 80%) 76%,
     rgb(7 10 14 / 91%) 100%
   );
   content: "";
@@ -55,31 +61,6 @@
 .hero-copy {
   max-width: 38rem;
   justify-self: end;
-}
-
-/* Entrada do hero: só opacidade e deslocamento, sem mexer no layout. Com
-   movimento reduzido a duração é zero e o texto aparece pronto. */
-.hero-copy > * {
-  animation: hero-rise var(--duration-slow) var(--ease-out) both;
-}
-
-.hero-copy > :nth-child(2) {
-  animation-delay: 60ms;
-}
-
-.hero-copy > :nth-child(3) {
-  animation-delay: 120ms;
-}
-
-.hero-copy > :nth-child(n + 4) {
-  animation-delay: 180ms;
-}
-
-@keyframes hero-rise {
-  from {
-    opacity: 0;
-    transform: translateY(14px);
-  }
 }
 
 .hero-overline {
@@ -117,6 +98,22 @@
 .hero h1 em {
   color: var(--hero-accent);
   font-style: normal;
+}
+
+/* "à vista." em degradê do destaque para o tom mais claro, em OKLCH (mesmo
+   matiz, sem passar por cinza). Só onde background-clip: text existe; fora
+   disso fica a cor lisa, nunca texto transparente. */
+@supports (background-clip: text) {
+  .hero h1 em {
+    background: linear-gradient(
+      100deg in oklch,
+      var(--hero-accent) 15%,
+      var(--hero-accent-hover) 60%,
+      var(--hero-accent) 95%
+    );
+    background-clip: text;
+    color: transparent;
+  }
 }
 
 .hero-lead {

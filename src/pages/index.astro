@@ -49,7 +49,7 @@ const wallpaper = await getImage({
     />
     <div class="shell hero-layout">
       <div class="hero-art" aria-hidden="true"></div>
-      <div class="hero-copy">
+      <div class="hero-copy enter">
         <p class="hero-overline">
           <span aria-hidden="true">∭</span> BETA PÚBLICO {publicVersion} · LINUX
           X86_64
@@ -89,7 +89,10 @@ const wallpaper = await getImage({
 
   <LatestUpdate />
 
-  <nav class="journey shell card auto-grid" aria-label="Caminhos rápidos">
+  <nav
+    class="journey shell card auto-grid reveal"
+    aria-label="Caminhos rápidos"
+  >
     <a href="#estado">
       <span class="journey-label label">01 / PRESENTE</span>
       <strong>Veja o estado do beta</strong>
@@ -124,7 +127,7 @@ const wallpaper = await getImage({
     class="section shell"
     aria-labelledby="experiencia-title"
   >
-    <div class="section-intro">
+    <div class="section-intro reveal">
       <p class="kicker">EXPERIÊNCIA EM DESENVOLVIMENTO</p>
       <h2 id="experiencia-title">
         Menos configuração manual. Mais tempo para projetar e testar.
@@ -136,7 +139,7 @@ const wallpaper = await getImage({
         edite JSON da IDE ou peça a uma IA para fazê-lo.
       </p>
     </div>
-    <div class="principle-grid auto-grid">
+    <div class="principle-grid auto-grid reveal-children">
       <article class="principle-card card">
         <span class="card-glyph" aria-hidden="true">
           ◇
@@ -176,7 +179,7 @@ const wallpaper = await getImage({
 
   <section class="flow-section" aria-labelledby="flow-title">
     <div class="shell flow-layout">
-      <div class="section-intro">
+      <div class="section-intro reveal">
         <p class="kicker">O QUE MUDA NA LEITURA DO PROJETO</p>
         <h2 id="flow-title">Do encontrado ao efetivo.</h2>
         <p class="section-intro-copy">
@@ -192,7 +195,7 @@ const wallpaper = await getImage({
           Leia a visão no README oficial <span aria-hidden="true">↗</span>
         </a>
       </div>
-      <ol class="state-flow">
+      <ol class="state-flow reveal-children">
         <li>
           <span class="step-number">01</span>
           <div>
@@ -219,7 +222,7 @@ const wallpaper = await getImage({
   </section>
 
   <section class="closing-section" aria-labelledby="closing-title">
-    <div class="shell closing-layout">
+    <div class="shell closing-layout reveal">
       <div>
         <p class="kicker">COMECE COM INFORMAÇÃO CLARA</p>
         <h2 id="closing-title">

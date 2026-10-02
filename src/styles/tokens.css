@@ -15,6 +15,7 @@
   --duration-slow: 600ms;
   --lift: -2px;
   --nudge: 2px;
+  --stagger: 70ms;
   --header-height: 4rem;
 
   /* Escalas fluidas (método Utopia): cada valor cresce em linha reta entre
@@ -43,6 +44,7 @@
   --content-width: clamp(73.75rem, 46.6667rem + 27.083vw, 90rem);
   --card: color-mix(in srgb, var(--surface) 96%, var(--accent));
   --card-hover: color-mix(in srgb, var(--surface) 90%, var(--accent));
+  --glow: color-mix(in oklab, var(--accent) 13%, transparent);
 
   /* Tema escuro com destaque âmbar: a paleta base. */
   color-scheme: dark;
@@ -223,5 +225,6 @@
     --duration-slow: 0ms;
     --lift: 0;
     --nudge: 0;
+    --stagger: 0ms;
   }
 }

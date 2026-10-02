@@ -42,7 +42,7 @@ const areas = [
 ---
 
 <section id="foco" class="section shell" aria-labelledby="foco-title">
-  <div class="section-intro">
+  <div class="section-intro reveal">
     <p class="kicker">PARA ONDE A VECTIS CAMINHA</p>
     <h2 id="foco-title">Da placa ao backend, com o ambiente à vista.</h2>
     <p class="section-intro-copy">
@@ -50,7 +50,7 @@ const areas = [
       futuramente, ROS 2. Cada área abaixo indica seu estágio atual.
     </p>
   </div>
-  <div class="area-grid auto-grid">
+  <div class="area-grid auto-grid reveal-children">
     {areas.map((area) => (
       <article class="area-card card">
         <span class="label">

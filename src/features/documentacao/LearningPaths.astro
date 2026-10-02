@@ -69,7 +69,7 @@ const paths = [
     Estas são as áreas que vão organizar os tutoriais do site. O status em cada
     cartão distingue a documentação disponível dos fluxos ainda planejados.
   </p>
-  <div class="path-grid auto-grid">
+  <div class="path-grid auto-grid reveal-children">
     {paths.map((path) => (
       <article class="path-card card" id={path.id}>
         <span class="label">{path.status}</span>

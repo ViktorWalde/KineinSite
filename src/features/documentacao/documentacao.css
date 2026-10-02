@@ -121,7 +121,8 @@
 
 .docs-section {
   padding-block: var(--space-2xl);
-  border-top: 1px solid var(--border);
+  border-top: 1px solid;
+  border-image: linear-gradient(90deg in oklab, var(--border), transparent) 1;
 }
 
 .docs-section > p {

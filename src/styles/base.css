@@ -17,9 +17,22 @@
     scroll-padding-top: calc(var(--header-height) + 1.5rem);
   }
 
+  /* Fundo: um brilho da cor de destaque no topo, interpolado em OKLab (o
+     sRGB padrão deixaria o meio acinzentado), e por cima o pontilhado de
+     assets/textures/noise.png, que desfaz as faixas que a tela de 8 bits
+     cria num degradê tão suave. Navegador sem "in oklab" descarta a
+     declaração e fica a cor lisa. */
   body {
     margin: 0;
-    background: var(--page);
+    background-color: var(--page);
+    background-image:
+      url("../../assets/textures/noise.png"),
+      radial-gradient(
+        72rem 38rem at 88% -14% in oklab,
+        var(--glow),
+        transparent 72%
+      );
+    background-repeat: repeat, no-repeat;
     color: var(--text);
     font-family: var(--font-sans);
     font-size: var(--text-base);
@@ -118,10 +131,64 @@
   }
 }
 
+/* Entrada de página: os filhos de .enter sobem e aparecem em sequência,
+   só com opacidade e deslocamento (o compositor anima sem refazer layout).
+   Com movimento reduzido, duração e escalonamento valem zero. */
+.enter > * {
+  animation: enter var(--duration-slow) var(--ease-out) both;
+}
+
+.enter > :nth-child(2) {
+  animation-delay: var(--stagger);
+}
+
+.enter > :nth-child(3) {
+  animation-delay: calc(var(--stagger) * 2);
+}
+
+.enter > :nth-child(n + 4) {
+  animation-delay: calc(var(--stagger) * 3);
+}
+
+@keyframes enter {
+  from {
+    opacity: 0;
+    translate: 0 14px;
+  }
+}
+
+/* Revelação ao rolar, pelo motor de animação do navegador e sem
+   JavaScript: o progresso segue a posição do elemento na tela. Usa translate
+   e scale individuais para não brigar com o transform do hover. Sem suporte
+   a animation-timeline, ou com movimento reduzido, o conteúdo só aparece. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal,
+    .reveal-children > * {
+      /* Propriedades separadas de propósito: o minificador do build junta
+         "animation" + "animation-timeline" num atalho só, e a especificação
+         não aceita a timeline dentro do atalho (a declaração inteira cai). */
+      animation-name: reveal;
+      animation-timing-function: linear;
+      animation-fill-mode: both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 22%;
+    }
+  }
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+    translate: 0 1.75rem;
+    scale: 0.985;
+  }
+}
+
 /* Navegação entre páginas com a transição nativa do navegador, sem
-   JavaScript: o cabeçalho fica parado e o conteúdo troca com um esmaecimento
-   curto. Navegador sem suporte, ou movimento reduzido, troca de página como
-   sempre. */
+   JavaScript: o cabeçalho fica parado, a página antiga some rápido e a nova
+   entra subindo. Navegador sem suporte, ou movimento reduzido, troca de
+   página como sempre. */
 @media (prefers-reduced-motion: no-preference) {
   @view-transition {
     navigation: auto;
@@ -132,7 +199,23 @@
   view-transition-name: site-header;
 }
 
-::view-transition-old(root),
+::view-transition-old(root) {
+  animation: 150ms ease-in both page-out;
+}
+
 ::view-transition-new(root) {
-  animation-duration: var(--duration-base);
+  animation: 300ms var(--ease-out) both page-in;
+}
+
+@keyframes page-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes page-in {
+  from {
+    opacity: 0;
+    translate: 0 10px;
+  }
 }

@@ -16,7 +16,7 @@ const [latest, ...older] = await getUpdates();
   description="Notas de atualização da Kinein Vectis: a versão mais recente em destaque e o histórico das anteriores."
 >
   <div class="updates-shell shell">
-    <header class="updates-intro">
+    <header class="updates-intro enter">
       <p class="kicker">NOTAS DE ATUALIZAÇÃO</p>
       <h1>Atualizações da Kinein Vectis</h1>
       <p class="updates-intro-copy">
@@ -39,7 +39,7 @@ const [latest, ...older] = await getUpdates();
     {older.length > 0 && (
       <section class="updates-history" aria-labelledby="historico-title">
         <h2 id="historico-title">Histórico</h2>
-        <ol class="updates-history-grid auto-grid">
+        <ol class="updates-history-grid auto-grid reveal-children">
           {older.map((entry) => (
             <li>
               <a

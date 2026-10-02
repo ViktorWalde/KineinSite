@@ -11,7 +11,7 @@ const updatedAt = new Date(`${developmentSnapshot.updatedAt}T00:00:00Z`);
   class="section shell development-section"
   aria-labelledby="desenvolvimento-title"
 >
-  <div class="section-intro">
+  <div class="section-intro reveal">
     <p class="kicker">PRÓXIMA VERSÃO · EM DESENVOLVIMENTO</p>
     <h2 id="desenvolvimento-title">
       A {developmentSnapshot.version} vai {developmentSnapshot.focus}.
@@ -33,7 +33,7 @@ const updatedAt = new Date(`${developmentSnapshot.updatedAt}T00:00:00Z`);
       .
     </p>
   </div>
-  <div class="development-grid auto-grid">
+  <div class="development-grid auto-grid reveal-children">
     {developmentSnapshot.groups.map((group) => (
       <article class="development-card card">
         <h3>{group.status}</h3>

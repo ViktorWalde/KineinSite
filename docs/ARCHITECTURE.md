@@ -29,6 +29,12 @@ O CSS global vai para três camadas declaradas no topo de `base.css`, da mais fr
 
 O HTML gerado não usa realce de sintaxe com cores fixas. Blocos de código herdam as cores do tema, inclusive no modo claro e quente. Eles permitem rolagem horizontal quando o código é mais largo que a tela.
 
+### Movimento e degradês
+
+Animações só mexem em `opacity`, `translate` e `scale`, que o navegador compõe sem refazer o layout; durações e deslocamentos vêm de tokens em `tokens.css` e valem zero com "reduzir movimento". A entrada de página usa `.enter`; a revelação ao rolar usa `.reveal` e `.reveal-children` com `animation-timeline: view()`, sem JavaScript, e onde não há suporte o conteúdo aparece direto. As propriedades de animação ficam separadas de propósito: o minificador junta `animation` e `animation-timeline` num atalho que a especificação não aceita, e a revelação deixava de existir. A troca de página usa a transição nativa (`@view-transition`).
+
+Degradês interpolam em OKLab (`in oklab`), ou em OKLCH entre cores do mesmo matiz, para o meio não ficar acinzentado como no sRGB padrão. Fundos com degradê suave recebem `assets/textures/noise.png` por cima, um pontilhado que desfaz as faixas de cor; o arquivo é gerado por `scripts/generate-noise.mjs`.
+
 ## Verificações
 
 `npm run build:pages` executa `astro check`, ESLint, Stylelint, verificação de arquitetura, Prettier, build, `html-validate`, `scripts/check-links.mjs` e `scripts/check-html-security.mjs`. O último confere arquivos e âncoras de links **internos** no HTML gerado; links externos exigem revisão editorial. A validação automática de push e pull request está pausada porque os jobs do GitHub Actions não estão iniciando nesta conta. `validate.yml` guarda a configuração para execução manual após a liberação dos jobs. Até lá, o mantenedor executa o build local antes de publicar. Nenhum desses checks substitui a revisão visual e de teclado no navegador.

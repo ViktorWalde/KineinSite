@@ -4,7 +4,19 @@
   gap: var(--space-xl);
   margin-block: var(--space-xl);
   padding: var(--space-xl);
-  border-color: color-mix(in srgb, var(--accent) 55%, var(--border));
+
+  /* Borda em degradê: o fundo do cartão no padding-box e, por baixo, um
+     degradê em OKLab no border-box, visível só no 1 px da borda. */
+  border-color: transparent;
+  background:
+    linear-gradient(var(--card), var(--card)) padding-box,
+    linear-gradient(
+        135deg in oklab,
+        var(--accent),
+        var(--border) 48%,
+        color-mix(in oklab, var(--accent) 35%, var(--border))
+      )
+      border-box;
   border-radius: var(--radius-xl);
   box-shadow: var(--edge), var(--shadow);
 }
