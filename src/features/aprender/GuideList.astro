@@ -1,0 +1,33 @@
+---
+import { sitePath } from "../../site";
+import type { Guide } from "./guides";
+import "./guide-list.css";
+
+interface Props {
+  guides: Guide[];
+}
+
+const { guides } = Astro.props;
+---
+
+<ol class="learn-list reveal-children">
+  {guides.map((guide) => (
+    <li>
+      <a
+        class="learn-card card card-interactive"
+        href={sitePath(`/aprender/${guide.id}/`)}
+      >
+        <span class="learn-number" aria-hidden="true">
+          {String(guide.data.order).padStart(2, "0")}
+        </span>
+        <span class="learn-text">
+          <strong>{guide.data.title}</strong>
+          <span>{guide.data.summary}</span>
+        </span>
+        <span class="learn-meta">
+          {guide.data.minutes} min · {guide.data.ideVersion}
+        </span>
+      </a>
+    </li>
+  ))}
+</ol>

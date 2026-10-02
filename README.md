@@ -41,7 +41,7 @@ No preview do build para Pages, abra <http://127.0.0.1:4321/KineinSite/>. O buil
 - [SECURITY.md](SECURITY.md): como relatar uma vulnerabilidade do site.
 - [docs/ROADMAP.md](docs/ROADMAP.md): trabalho do site com pré-requisitos e critérios de conclusão.
 - `src/content/estudos/`: estudos de linguagem independentes da IDE, publicados somente com `status: verified`.
-- `src/content/aprender/`: estrutura reservada para o Guia da IDE e projetos guiados; ainda não há rota pública para essa coleção.
+- `src/content/aprender/`: o Guia da IDE, publicado em `/aprender/`. Cada capítulo é reproduzido na IDE por `scripts/capturar-tutorial.sh`, que também gera as capturas.
 - `assets/`: originais de imagem, com termos próprios descritos nos arquivos README da pasta.
 
 Links internos devem passar por `sitePath()` em [`src/site.ts`](src/site.ts), pois a versão publicada usa a base `/KineinSite/`. O conteúdo técnico deve distinguir o que foi testado na versão pública da IDE do que está em desenvolvimento ou planejado.

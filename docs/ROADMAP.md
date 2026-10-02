@@ -12,13 +12,14 @@ Este documento descreve **o site**, não o cronograma de recursos da Kinein Vect
 - Documentação técnica para colaboração e build local obrigatório antes da publicação.
 - Revisão visual (2026-10-02): tokens de raio, movimento e elevação; cartões e rótulos unificados; cabeçalho fixo no desktop e compacto no celular; índice da documentação com a seção em leitura; transição nativa entre páginas; tema aplicado antes da primeira pintura; sem rolagem horizontal a 320 px.
 - Dimensionamento fluido, camadas de CSS, animações sem JavaScript, degradês em OKLab, capturas reais da IDE, página 404, botão de copiar código e verificação de contraste WCAG no build (2026-10-02). As telas de 320 px, o contraste dos temas e o movimento reduzido, antes prioridade 1, foram conferidos.
+- Guia da IDE em `/aprender/` (2026-10-02): oito capítulos, da instalação ao Git e aos erros, cada um reproduzido no AppImage 0.3.5 por um roteiro que roda os comandos do texto e gera as capturas.
 - Segurança (2026-10-02): política de conteúdo (CSP) em todas as páginas, verificada no build e provada por mutação; dependências sem scripts de instalação; actions fixadas por SHA; deploy sem o PNG original de 2 MB. Detalhes e limites em [ARCHITECTURE.md](ARCHITECTURE.md#segurança).
 
 ## Próximas entregas do site
 
 | Prioridade | Trabalho | Condição para concluir |
 | --- | --- | --- |
-| 1 | Publicar o Guia básico da IDE. | Implementar a rota da coleção `aprender` e reproduzir instalação, interface e primeiro projeto na versão pública indicada, com comandos e resultados. |
+| 1 | Recapturar o Guia da IDE na 0.3.6. | Rodar todos os roteiros no AppImage 0.3.6, ajustar texto e coordenadas onde a interface mudou, tirar os avisos que a 0.3.6 corrigir e conferir num desktop real. |
 | 2 | Continuar os estudos de C++ para software de IoT: entrada validada, módulos e CMake/CTest. | Compilar e executar os exemplos, testar casos de erro e registrar ferramenta, plataforma e data no guia. |
 | 3 | Melhorar a navegação entre estudos e documentação quando houver mais conteúdo verificado. | Cada cartão aponta para uma página distinta e útil; nenhum link leva a um capítulo vazio. |
 | 4 | Reativar a validação automática de pull requests. | Confirmar que a conta pode iniciar jobs do GitHub Actions e que o workflow passa em um push e em um pull request. Até lá, usar `npm run build:pages` localmente. |

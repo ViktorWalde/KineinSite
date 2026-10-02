@@ -1,11 +1,12 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import GuideList from "../../features/aprender/GuideList.astro";
 import {
   getPublishedGuides,
   sectionNames,
   sectionOf,
 } from "../../features/aprender/guides";
-import { publicVersion, sitePath } from "../../site";
+import { publicVersion } from "../../site";
 import "../../features/aprender/aprender.css";
 
 const guides = await getPublishedGuides();
@@ -43,27 +44,7 @@ const chapterCount =
       <h2 id="guia-title" class="visually-hidden">
         {sectionNames.ide}
       </h2>
-      <ol class="learn-list reveal-children">
-        {ideGuides.map((guide) => (
-          <li>
-            <a
-              class="learn-card card card-interactive"
-              href={sitePath(`/aprender/${guide.id}/`)}
-            >
-              <span class="learn-number" aria-hidden="true">
-                {String(guide.data.order).padStart(2, "0")}
-              </span>
-              <span class="learn-text">
-                <strong>{guide.data.title}</strong>
-                <span>{guide.data.summary}</span>
-              </span>
-              <span class="learn-meta">
-                {guide.data.minutes} min · {guide.data.ideVersion}
-              </span>
-            </a>
-          </li>
-        ))}
-      </ol>
+      <GuideList guides={ideGuides} />
       {ideGuides.length === 0 && (
         <p class="learn-empty">
           Os primeiros capítulos estão sendo reproduzidos na {publicVersion}.
