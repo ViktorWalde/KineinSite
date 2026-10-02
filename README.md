@@ -54,7 +54,8 @@ Cada versão publicada da IDE ganha uma nota em `src/content/atualizacoes/`. A n
 2. Copie a nota anterior para `src/content/atualizacoes/<versão-com-hífens>.md` (exemplo: `0-3-6.md`) e reescreva o frontmatter e o texto. O schema em `src/content.config.ts` recusa um campo faltando ou mal formado: `version`, `tag`, `title`, `date`, `channel`, `summary`, `highlights` (1 a 6 itens `title`/`text`) e `limits`.
 3. Troque `publicVersion` e `publicTag` em `src/site.ts`. Cabeçalho, rodapé, home e documentação passam a mostrar a versão nova.
 4. Atualize `src/data/development.ts` com a próxima versão em desenvolvimento.
-5. Rode `npm run build:pages`, faça o commit em `main` e publique como descrito abaixo.
+5. Se a interface mudou, regenere as capturas da página inicial com `bash scripts/capturar-ide.sh <AppImage>` (requer `xvfb-run`, `cmake`, `g++`, `git` e `clangd`) e troque `version` e `capturedAt` em `src/data/ide-screens.ts`.
+6. Rode `npm run build:pages`, faça o commit em `main` e publique como descrito abaixo.
 
 Escreva a nota para quem usa a IDE: o que mudou, como instalar e os limites conhecidos. O detalhe técnico fica no `CHANGELOG.md` do projeto.
 

@@ -5,6 +5,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import CurrentStatus from "../features/inicio/CurrentStatus.astro";
 import DevelopmentStatus from "../features/inicio/DevelopmentStatus.astro";
 import FocusAreas from "../features/inicio/FocusAreas.astro";
+import IdePreview from "../features/inicio/IdePreview.astro";
 import LatestUpdate from "../features/atualizacoes/LatestUpdate.astro";
 import "../features/inicio/inicio.css";
 import "../features/inicio/secoes.css";
@@ -115,6 +116,8 @@ const wallpaper = await getImage({
       </span>
     </a>
   </nav>
+
+  <IdePreview />
 
   <CurrentStatus />
 
