@@ -85,28 +85,6 @@
   overflow-wrap: anywhere;
 }
 
-.study-article pre {
-  max-width: 100%;
-  overflow-x: auto;
-  margin-block: 1.5rem;
-  padding: 1.2rem;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  background: var(--surface);
-  box-shadow: var(--edge);
-  color: var(--text);
-  font-size: var(--text-sm);
-  line-height: 1.6;
-  tab-size: 2;
-}
-
-.study-article pre code {
-  padding: 0;
-  background: transparent;
-  color: inherit;
-  font-size: inherit;
-}
-
 .study-article blockquote {
   margin: 1.5rem 0;
   padding: 0.8rem 1.2rem;

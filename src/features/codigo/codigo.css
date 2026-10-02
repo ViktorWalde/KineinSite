@@ -1,0 +1,97 @@
+/* Blocos de código dos artigos (.prose: estudos e notas de versão). Um dono
+   só para o visual do <pre>, que antes era definido duas vezes, e para a
+   barra com a linguagem e o botão Copiar que code-copy.ts acrescenta. */
+.prose pre {
+  max-width: 100%;
+  overflow-x: auto;
+  margin-block: 1.5rem;
+  padding: var(--space-m) var(--space-l);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  box-shadow: var(--edge);
+  color: var(--text);
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  tab-size: 2;
+}
+
+.prose pre code {
+  padding: 0;
+  background: transparent;
+  color: inherit;
+  font-size: inherit;
+}
+
+/* Com o script: a moldura passa do <pre> para o bloco, que ganha a barra
+   no topo, como a aba de um editor. */
+.prose .code-block {
+  overflow: hidden;
+  margin-block: 1.5rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  box-shadow: var(--edge);
+}
+
+.prose .code-block pre {
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.code-block-bar {
+  display: flex;
+  min-height: 2.5rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-s);
+  padding: 0.3rem 0.4rem 0.3rem var(--space-l);
+  border-bottom: 1px solid var(--border);
+  background: color-mix(in oklab, var(--surface-soft) 60%, var(--surface));
+}
+
+.code-block-bar .label {
+  color: var(--muted);
+}
+
+.code-copy {
+  display: inline-flex;
+  min-height: 1.9rem;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.2rem 0.7rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  font: 600 var(--text-xs) / 1 var(--font-mono);
+  transition:
+    border-color var(--duration-fast) ease,
+    color var(--duration-fast) ease,
+    background-color var(--duration-fast) ease;
+}
+
+.code-copy:hover {
+  border-color: var(--accent);
+  color: var(--text);
+}
+
+.code-copy[data-state="done"] {
+  border-color: var(--accent);
+  background: color-mix(in oklab, var(--accent) 14%, transparent);
+  color: var(--text);
+}
+
+.code-copy[data-state="error"] {
+  border-color: var(--text);
+  color: var(--text);
+}
+
+@media (pointer: coarse) {
+  .code-copy {
+    min-height: 2.5rem;
+  }
+}

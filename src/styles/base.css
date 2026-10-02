@@ -39,6 +39,16 @@
     line-height: 1.65;
   }
 
+  /* Fora da vista, mas lido por leitores de tela. */
+  .visually-hidden {
+    position: absolute;
+    overflow: hidden;
+    width: 1px;
+    height: 1px;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
   ::selection {
     background: var(--accent);
     color: var(--accent-on);
