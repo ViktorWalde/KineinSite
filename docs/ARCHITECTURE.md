@@ -37,7 +37,7 @@ Degradês interpolam em OKLab (`in oklab`), ou em OKLCH entre cores do mesmo mat
 
 ## Verificações
 
-`npm run build:pages` executa `astro check`, ESLint, Stylelint, verificação de arquitetura, Prettier, build, `html-validate`, `scripts/check-links.mjs` e `scripts/check-html-security.mjs`. O último confere arquivos e âncoras de links **internos** no HTML gerado; links externos exigem revisão editorial. A validação automática de push e pull request está pausada porque os jobs do GitHub Actions não estão iniciando nesta conta. `validate.yml` guarda a configuração para execução manual após a liberação dos jobs. Até lá, o mantenedor executa o build local antes de publicar. Nenhum desses checks substitui a revisão visual e de teclado no navegador.
+`npm run build:pages` executa `astro check`, ESLint, Stylelint, verificação de arquitetura, contraste (`scripts/check-contrast.mjs`: os pares de texto, rótulo e foco de `tokens.css` nas 12 combinações de tema e destaque, com o mínimo da WCAG 2.2 — 4,5:1 para texto, 3:1 para foco), Prettier, build, `html-validate`, `scripts/check-links.mjs` e `scripts/check-html-security.mjs`. O último confere arquivos e âncoras de links **internos** no HTML gerado; links externos exigem revisão editorial. A validação automática de push e pull request está pausada porque os jobs do GitHub Actions não estão iniciando nesta conta. `validate.yml` guarda a configuração para execução manual após a liberação dos jobs. Até lá, o mantenedor executa o build local antes de publicar. Nenhum desses checks substitui a revisão visual e de teclado no navegador.
 
 ## Segurança
 
