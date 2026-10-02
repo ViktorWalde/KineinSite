@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import DocsSidebar from "../../components/DocsSidebar.astro";
 import LanguageTracks from "../../components/LanguageTracks.astro";
 import LearningPaths from "../../components/LearningPaths.astro";
 import SiteProjectLink from "../../components/SiteProjectLink.astro";
@@ -21,21 +22,20 @@ import {
   description="Manual, release oficial e roteiro de guias da Kinein Vectis para embarcados, IoT/IIoT, backend e a futura integração ROS 2."
 >
   <div class="docs-shell shell">
-    <aside class="docs-sidebar" aria-label="Navegação desta página">
-      <p>DOCUMENTAÇÃO</p>
-      <nav aria-label="Seções da documentação">
-        <a href="#comece">Comece por aqui</a>
-        <a href="#guias">Aprender na Vectis</a>
-        <a href="#trilhas">Áreas e trilhas</a>
-        <a href="#linguagens">Por linguagem</a>
-        <a href="#referencias">Referências externas</a>
-        <a href="#ajuda">Comunidade e ajuda</a>
-        <a href="#site">Sobre este site</a>
-      </nav>
-      <div class="docs-sidebar-note">
-        Conteúdo público, sem conta para leitura.
-      </div>
-    </aside>
+    <DocsSidebar
+      title="Documentação"
+      label="Seções da documentação"
+      links={[
+        { href: "#comece", text: "Comece por aqui" },
+        { href: "#guias", text: "Aprender na Vectis" },
+        { href: "#trilhas", text: "Áreas e trilhas" },
+        { href: "#linguagens", text: "Por linguagem" },
+        { href: "#referencias", text: "Referências externas" },
+        { href: "#ajuda", text: "Comunidade e ajuda" },
+        { href: "#site", text: "Sobre este site" },
+      ]}
+      note="Conteúdo público, sem conta para leitura."
+    />
 
     <div class="docs-main">
       <header class="docs-intro">
@@ -61,17 +61,17 @@ import {
 
       <section id="comece" class="docs-section" aria-labelledby="comece-title">
         <div class="docs-heading">
-          <span>01 / COMEÇAR</span>
+          <span class="label">01 / COMEÇAR</span>
           <h2 id="comece-title">Do download ao primeiro contato.</h2>
         </div>
         <div class="docs-card-grid">
           <a
-            class="docs-card"
+            class="docs-card card card-interactive"
             href={releaseUrl}
             target="_blank"
             rel="noopener noreferrer"
           >
-            <span>
+            <span class="label">
               ORIGEM OFICIAL <span aria-hidden="true">↗</span>
             </span>
             <h3>Release e pacote</h3>
@@ -80,12 +80,12 @@ import {
             </p>
           </a>
           <a
-            class="docs-card"
+            class="docs-card card card-interactive"
             href={manualUrl}
             target="_blank"
             rel="noopener noreferrer"
           >
-            <span>
+            <span class="label">
               MANUAL DA IDE <span aria-hidden="true">↗</span>
             </span>
             <h3>Entenda a Vectis</h3>
@@ -101,7 +101,7 @@ import {
 
       <section id="guias" class="docs-section" aria-labelledby="guias-title">
         <div class="docs-heading">
-          <span>02 / APRENDER</span>
+          <span class="label">02 / APRENDER</span>
           <h2 id="guias-title">Primeiro a IDE, depois os projetos.</h2>
         </div>
         <p>
@@ -110,14 +110,14 @@ import {
           Vectis. Os guias de uso da IDE seguirão esta ordem:
         </p>
         <ol class="learning-sequence">
-          <li>
+          <li class="card">
             <strong>Guia da IDE</strong>
             <p>
               Instalação, interface, primeiro projeto, build, execução, testes,
               depuração e solução de problemas na versão citada.
             </p>
           </li>
-          <li>
+          <li class="card">
             <strong>Projetos guiados</strong>
             <p>
               Exemplos locais e pequenos que introduzem C++, C, Python e Rust
@@ -126,10 +126,10 @@ import {
           </li>
         </ol>
         <a
-          class="docs-card study-entry-card"
+          class="docs-card study-entry-card card card-interactive"
           href={sitePath("/estudos/cpp/telemetria-local/")}
         >
-          <span>ESTUDO DE LINGUAGEM · C++20</span>
+          <span class="label">ESTUDO DE LINGUAGEM · C++20</span>
           <h3>Processe telemetria local</h3>
           <p>
             Um primeiro programa de software para IoT: amostras simuladas, média
@@ -153,7 +153,7 @@ import {
         aria-labelledby="referencias-title"
       >
         <div class="docs-heading">
-          <span>05 / APROFUNDAR</span>
+          <span class="label">05 / APROFUNDAR</span>
           <h2 id="referencias-title">Referências dos ecossistemas.</h2>
         </div>
         <p>
@@ -184,7 +184,7 @@ import {
 
       <section id="ajuda" class="docs-section" aria-labelledby="ajuda-title">
         <div class="docs-heading">
-          <span>06 / PARTICIPAR</span>
+          <span class="label">06 / PARTICIPAR</span>
           <h2 id="ajuda-title">Dúvida, problema ou sugestão?</h2>
         </div>
         <p>
@@ -192,7 +192,7 @@ import {
           recebe dúvidas, relatos de defeito e sugestões sobre os próximos
           fluxos da IDE.
         </p>
-        <div class="help-panel">
+        <div class="help-panel card">
           <div>
             <strong>Um relato útil inclui</strong>
             <p>

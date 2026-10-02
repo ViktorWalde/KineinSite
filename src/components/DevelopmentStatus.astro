@@ -35,7 +35,7 @@ const updatedAt = new Date(`${developmentSnapshot.updatedAt}T00:00:00Z`);
   </div>
   <div class="development-grid">
     {developmentSnapshot.groups.map((group) => (
-      <article class="development-card">
+      <article class="development-card card">
         <h3>{group.status}</h3>
         <ul>
           {group.items.map((item) => (

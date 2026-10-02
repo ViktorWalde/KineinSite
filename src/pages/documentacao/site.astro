@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import DocsSidebar from "../../components/DocsSidebar.astro";
 import { sitePath, siteRepositoryUrl } from "../../site";
 
 const projectDocs = [
@@ -36,16 +37,17 @@ const projectDocs = [
   description="Arquitetura, processo de contribuição e roadmap verificável do site público da Kinein Vectis."
 >
   <div class="docs-shell shell">
-    <aside class="docs-sidebar" aria-label="Navegação desta página">
-      <p>PROJETO DO SITE</p>
-      <nav aria-label="Seções sobre o site">
-        <a href="#estado-site">Estado atual</a>
-        <a href="#arquitetura-site">Arquitetura</a>
-        <a href="#roteiro-site">Próximas entregas</a>
-        <a href="#colaborar-site">Como colaborar</a>
-        <a href={sitePath("/documentacao/")}>Voltar à documentação</a>
-      </nav>
-    </aside>
+    <DocsSidebar
+      title="Projeto do site"
+      label="Seções sobre o site"
+      links={[
+        { href: "#estado-site", text: "Estado atual" },
+        { href: "#arquitetura-site", text: "Arquitetura" },
+        { href: "#roteiro-site", text: "Próximas entregas" },
+        { href: "#colaborar-site", text: "Como colaborar" },
+        { href: sitePath("/documentacao/"), text: "Voltar à documentação" },
+      ]}
+    />
 
     <div class="docs-main">
       <header class="docs-intro">
@@ -68,7 +70,7 @@ const projectDocs = [
         aria-labelledby="estado-site-title"
       >
         <div class="docs-heading">
-          <span>01 / PUBLICADO</span>
+          <span class="label">01 / PUBLICADO</span>
           <h2 id="estado-site-title">O que existe hoje.</h2>
         </div>
         <p>
@@ -95,7 +97,7 @@ const projectDocs = [
         aria-labelledby="arquitetura-site-title"
       >
         <div class="docs-heading">
-          <span>02 / COMO FUNCIONA</span>
+          <span class="label">02 / COMO FUNCIONA</span>
           <h2 id="arquitetura-site-title">
             Páginas estáticas e conteúdo verificado.
           </h2>
@@ -120,34 +122,34 @@ const projectDocs = [
         aria-labelledby="roteiro-site-title"
       >
         <div class="docs-heading">
-          <span>03 / ROADMAP DO SITE</span>
+          <span class="label">03 / ROADMAP DO SITE</span>
           <h2 id="roteiro-site-title">
             Próximos trabalhos, com critério de conclusão.
           </h2>
         </div>
         <ol class="learning-sequence">
-          <li>
+          <li class="card">
             <strong>Revisar leitura e navegação</strong>
             <p>
               Conferir telas estreitas, contraste dos temas, foco por teclado e
               movimento reduzido. Corrigir cada defeito reproduzido.
             </p>
           </li>
-          <li>
+          <li class="card">
             <strong>Ampliar os estudos verificados</strong>
             <p>
               Validar entradas e testes em C++ com exemplos executados. Melhorar
               a navegação entre estudos quando houver mais páginas.
             </p>
           </li>
-          <li>
+          <li class="card">
             <strong>Publicar o Guia básico da IDE</strong>
             <p>
               Criar a rota própria e testar instalação, interface e primeiro
               projeto na versão pública citada antes de publicar.
             </p>
           </li>
-          <li>
+          <li class="card">
             <strong>Manter a base técnica</strong>
             <p>
               Reduzir avisos de coesão de CSS e conferir os links externos
@@ -174,7 +176,7 @@ const projectDocs = [
         aria-labelledby="colaborar-site-title"
       >
         <div class="docs-heading">
-          <span>04 / CONTRIBUIR</span>
+          <span class="label">04 / CONTRIBUIR</span>
           <h2 id="colaborar-site-title">Correções e estudos são bem-vindos.</h2>
         </div>
         <p>
@@ -185,12 +187,12 @@ const projectDocs = [
         <div class="docs-card-grid">
           {projectDocs.map((doc) => (
             <a
-              class="docs-card"
+              class="docs-card card card-interactive"
               href={doc.href}
               target="_blank"
               rel="noopener noreferrer"
             >
-              <span>{doc.label} ↗</span>
+              <span class="label">{doc.label} ↗</span>
               <h3>{doc.title}</h3>
               <p>{doc.detail}</p>
             </a>

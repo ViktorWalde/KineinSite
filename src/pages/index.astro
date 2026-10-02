@@ -15,10 +15,14 @@ import {
   sitePath,
 } from "../site";
 
+// O hero é o maior elemento da primeira tela: largura certa por tela
+// (srcset) e prioridade de rede alta.
 const wallpaper = await getImage({
   src: wallpaperSource,
   format: "webp",
   quality: 76,
+  widths: [768, 1280, wallpaperSource.width],
+  sizes: "100vw",
 });
 ---
 
@@ -31,10 +35,12 @@ const wallpaper = await getImage({
     <img
       class="hero-bg"
       src={wallpaper.src}
+      srcset={wallpaper.srcSet.attribute}
+      sizes="100vw"
       width={wallpaperSource.width}
       height={wallpaperSource.height}
       alt=""
-      decoding="async"
+      fetchpriority="high"
     />
     <div class="shell hero-layout">
       <div class="hero-art" aria-hidden="true"></div>
@@ -78,23 +84,23 @@ const wallpaper = await getImage({
 
   <LatestUpdate />
 
-  <nav class="journey shell" aria-label="Caminhos rápidos">
+  <nav class="journey shell card" aria-label="Caminhos rápidos">
     <a href="#estado">
-      <span class="journey-label">01 / PRESENTE</span>
+      <span class="journey-label label">01 / PRESENTE</span>
       <strong>Veja o estado do beta</strong>
       <span class="journey-arrow" aria-hidden="true">
         ↗
       </span>
     </a>
     <a href="#desenvolvimento">
-      <span class="journey-label">02 / EM DESENVOLVIMENTO</span>
+      <span class="journey-label label">02 / EM DESENVOLVIMENTO</span>
       <strong>Acompanhe a {developmentSnapshot.version}</strong>
       <span class="journey-arrow" aria-hidden="true">
         ↗
       </span>
     </a>
     <a href="#foco">
-      <span class="journey-label">03 / DIREÇÃO</span>
+      <span class="journey-label label">03 / DIREÇÃO</span>
       <strong>Conheça os próximos focos</strong>
       <span class="journey-arrow" aria-hidden="true">
         ↗
@@ -126,7 +132,7 @@ const wallpaper = await getImage({
       </p>
     </div>
     <div class="principle-grid">
-      <article class="principle-card">
+      <article class="principle-card card">
         <span class="card-glyph" aria-hidden="true">
           ◇
         </span>
@@ -136,7 +142,7 @@ const wallpaper = await getImage({
           projeto.
         </p>
       </article>
-      <article class="principle-card">
+      <article class="principle-card card">
         <span class="card-glyph" aria-hidden="true">
           ⌁
         </span>
@@ -146,7 +152,7 @@ const wallpaper = await getImage({
           caminho.
         </p>
       </article>
-      <article class="principle-card">
+      <article class="principle-card card">
         <span class="card-glyph" aria-hidden="true">
           ▣
         </span>

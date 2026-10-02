@@ -12,9 +12,6 @@
 .development-card {
   min-width: 0;
   padding: clamp(1.2rem, 2vw, 1.6rem);
-  border: 1px solid var(--border);
-  border-radius: 0.7rem;
-  background: var(--surface);
 }
 
 .development-card h3 {
@@ -40,10 +37,11 @@
 .development-code {
   padding-block: 0.12rem;
   border: 1px solid var(--border);
-  border-radius: 0.3rem;
+  border-radius: var(--radius-sm);
   color: var(--accent);
+  font-family: var(--font-mono);
   font-size: 0.72rem;
-  font-weight: 800;
+  font-weight: 700;
   line-height: 1.5;
   text-align: center;
 }

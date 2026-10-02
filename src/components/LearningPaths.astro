@@ -62,7 +62,7 @@ const paths = [
 
 <section id="trilhas" class="docs-section" aria-labelledby="trilhas-title">
   <div class="docs-heading">
-    <span>03 / ESCOLHER UM CAMINHO</span>
+    <span class="label">03 / ESCOLHER UM CAMINHO</span>
     <h2 id="trilhas-title">Aprenda pela tarefa e pelo ambiente.</h2>
   </div>
   <p>
@@ -71,8 +71,8 @@ const paths = [
   </p>
   <div class="path-grid">
     {paths.map((path) => (
-      <article class="path-card" id={path.id}>
-        <span>{path.status}</span>
+      <article class="path-card card" id={path.id}>
+        <span class="label">{path.status}</span>
         <h3>{path.title}</h3>
         <p>{path.description}</p>
         <p>

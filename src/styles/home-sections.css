@@ -5,9 +5,6 @@
   gap: 2rem;
   margin-block-start: 2rem;
   padding: clamp(1.4rem, 3vw, 2rem);
-  border: 1px solid var(--border);
-  border-radius: 0.7rem;
-  background: color-mix(in srgb, var(--surface) 94%, var(--accent));
 }
 
 .status-panel h3 {
@@ -36,8 +33,6 @@
 
 .current-capabilities > div {
   padding: 1.2rem;
-  border: 1px solid var(--border);
-  border-radius: 0.6rem;
 }
 
 .current-capabilities h3 {
@@ -88,8 +83,9 @@
 
 .step-number {
   color: var(--accent);
+  font-family: var(--font-mono);
   font-size: 0.8rem;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .state-flow strong {
@@ -100,17 +96,6 @@
   margin: 0.35rem 0 0;
   color: var(--muted);
   font-size: 0.9rem;
-}
-
-.area-card > span {
-  color: var(--accent);
-  font-size: 0.7rem;
-  font-weight: 800;
-  letter-spacing: 0.1em;
-}
-
-.area-card h3 {
-  margin-block-start: 2.3rem;
 }
 
 .closing-section {

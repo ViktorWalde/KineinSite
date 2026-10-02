@@ -43,7 +43,7 @@ const [latest, ...older] = await getUpdates();
           {older.map((entry) => (
             <li>
               <a
-                class="update-card"
+                class="update-card card card-interactive"
                 href={sitePath(`/atualizacoes/${entry.id}/`)}
               >
                 <span class="update-card-meta">

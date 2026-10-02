@@ -28,6 +28,16 @@
   content: "";
 }
 
+/* Funde a base do hero com a página, em vez de um corte seco. */
+.hero::after {
+  position: absolute;
+  z-index: -1;
+  inset: auto 0 0;
+  height: 6rem;
+  background: linear-gradient(transparent, var(--page));
+  content: "";
+}
+
 .hero-layout {
   display: grid;
   min-height: 37rem;
@@ -42,15 +52,41 @@
   justify-self: end;
 }
 
+/* Entrada do hero: só opacidade e deslocamento, sem mexer no layout. Com
+   movimento reduzido a duração é zero e o texto aparece pronto. */
+.hero-copy > * {
+  animation: hero-rise var(--duration-slow) var(--ease-out) both;
+}
+
+.hero-copy > :nth-child(2) {
+  animation-delay: 60ms;
+}
+
+.hero-copy > :nth-child(3) {
+  animation-delay: 120ms;
+}
+
+.hero-copy > :nth-child(n + 4) {
+  animation-delay: 180ms;
+}
+
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+}
+
 .hero-overline {
   display: flex;
   align-items: center;
   gap: 0.75rem;
   margin-block-end: 1.3rem;
   color: var(--hero-accent);
+  font-family: var(--font-mono);
   font-size: 0.75rem;
-  font-weight: 800;
-  letter-spacing: 0.13em;
+  font-weight: 700;
+  letter-spacing: 0.08em;
 }
 
 .hero-overline span {
@@ -59,7 +95,7 @@
   height: 2rem;
   place-items: center;
   border: 1px solid var(--hero-accent);
-  border-radius: 0.4rem;
+  border-radius: var(--radius-sm);
   font-family: Georgia, serif;
   font-size: 1rem;
   letter-spacing: normal;
@@ -68,7 +104,6 @@
 .hero h1 {
   max-width: 12ch;
   margin-block-end: 1.35rem;
-  text-wrap: balance;
 }
 
 .hero h1 em {
@@ -78,7 +113,7 @@
 
 .hero-lead {
   max-width: 56ch;
-  margin-block-end: 1.6rem;
+  margin-block-end: 1.75rem;
   color: #c5beb1;
   font-size: clamp(1.05rem, 1.5vw, 1.2rem);
 }
@@ -113,25 +148,22 @@
   color: var(--hero-accent);
 }
 
+/* Três atalhos para as seções da página, numa faixa só. */
 .journey {
   display: grid;
+  overflow: hidden;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  margin-block: -0.1rem 0;
-  border: 1px solid var(--border);
-  border-top: 0;
-  border-radius: 0 0 0.75rem 0.75rem;
-  background: var(--surface);
 }
 
 .journey a {
   display: grid;
-  min-height: 7.2rem;
+  min-height: 6.5rem;
   grid-template-columns: 1fr auto;
   align-content: center;
-  gap: 0.5rem;
-  padding: 1.35rem;
+  gap: 0.45rem;
+  padding: 1.25rem 1.35rem;
   text-decoration: none;
-  transition: background-color 180ms ease;
+  transition: background-color var(--duration-fast) ease;
 }
 
 .journey a + a {
@@ -140,28 +172,25 @@
 
 .journey a:hover,
 .journey a:focus-visible {
-  background-color: color-mix(in srgb, var(--surface) 90%, var(--accent));
+  background-color: var(--card-hover);
+  color: inherit;
+}
+
+.journey a:focus-visible {
+  outline-offset: -3px;
 }
 
 .journey-label {
   grid-column: 1 / -1;
-  color: var(--accent);
-  font-size: 0.7rem;
-  font-weight: 800;
-  letter-spacing: 0.1em;
 }
 
 .journey-arrow {
   color: var(--accent);
-  transition: transform 180ms ease;
+  transition: transform var(--duration-base) var(--ease-out);
 }
 
 .journey a:hover .journey-arrow {
-  transform: translate(2px, -2px);
-}
-
-.journey strong {
-  font-size: 1rem;
+  transform: translate(var(--nudge), calc(var(--nudge) * -1));
 }
 
 .section {
@@ -200,27 +229,19 @@
 .principle-card,
 .area-card {
   padding: 1.55rem;
-  border: 1px solid var(--border);
-  border-radius: 0.7rem;
-  background: color-mix(in srgb, var(--surface) 95%, var(--accent));
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .journey a,
-  .journey-arrow {
-    transition: none;
-  }
-
-  .journey a:hover .journey-arrow {
-    transform: none;
-  }
 }
 
 .card-glyph {
-  display: block;
-  margin-block-end: 1.7rem;
+  display: inline-grid;
+  width: 2.5rem;
+  height: 2.5rem;
+  place-items: center;
+  margin-block-end: 1.4rem;
+  border: 1px solid color-mix(in srgb, var(--accent) 40%, var(--border));
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
   color: var(--accent);
-  font-size: 1.5rem;
+  font-size: 1.2rem;
 }
 
 .principle-card h3,
@@ -233,6 +254,10 @@
   margin: 0;
   color: var(--muted);
   font-size: 0.94rem;
+}
+
+.area-card h3 {
+  margin-block-start: 2rem;
 }
 
 .area-card .inline-link {

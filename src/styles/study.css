@@ -62,11 +62,6 @@
   line-height: 1.8;
 }
 
-.study-article h2,
-.study-article h3 {
-  scroll-margin-top: 6rem;
-}
-
 .study-article h2 {
   margin-block: 3rem 1rem;
   font-size: clamp(1.65rem, 3vw, 2.2rem);
@@ -96,8 +91,9 @@
   margin-block: 1.5rem;
   padding: 1.2rem;
   border: 1px solid var(--border);
-  border-radius: 0.6rem;
+  border-radius: var(--radius-lg);
   background: var(--surface);
+  box-shadow: var(--edge);
   color: var(--text);
   font-size: 0.9rem;
   line-height: 1.6;
@@ -115,6 +111,7 @@
   margin: 1.5rem 0;
   padding: 0.8rem 1.2rem;
   border-left: 3px solid var(--accent);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
   background: var(--surface);
   color: var(--muted);
 }
