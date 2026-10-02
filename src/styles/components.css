@@ -1,276 +1,279 @@
-.skip-link {
-  position: fixed;
-  z-index: 100;
-  top: 0.5rem;
-  left: 0.5rem;
-  padding: 0.65rem 0.9rem;
-  transform: translateY(-180%);
-  border-radius: var(--radius-md);
-  background: var(--accent);
-  color: var(--accent-on);
-  font-weight: 700;
-}
-
-.skip-link:focus {
-  transform: translateY(0);
-}
-
-/* Superfície comum de cartões e painéis: borda, raio, fundo e o fio de luz
-   no topo. Cada componente define só o espaçamento e o conteúdo. */
-.card {
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  background: var(--card);
-  box-shadow: var(--edge);
-}
-
-/* Cartão que é um link inteiro: sobe, ganha sombra e borda de destaque. */
-.card-interactive {
-  display: block;
-  color: inherit;
-  text-decoration: none;
-  transition:
-    background-color var(--duration-base) var(--ease-out),
-    border-color var(--duration-base) var(--ease-out),
-    box-shadow var(--duration-base) var(--ease-out),
-    transform var(--duration-base) var(--ease-out);
-}
-
-.card-interactive:hover,
-.card-interactive:focus-visible {
-  border-color: var(--accent);
-  background-color: var(--card-hover);
-  color: inherit;
-}
-
-.card-interactive:hover {
-  transform: translateY(var(--lift));
-  box-shadow: var(--edge), var(--shadow-sm);
-}
-
-.card-interactive:active {
-  transform: translateY(0);
-}
-
-/* Rótulos técnicos (seção, estado, versão) em fonte mono: a identidade de
-   ferramenta de desenvolvimento sem baixar fonte nenhuma. */
-.kicker,
-.label {
-  color: var(--accent);
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-
-.kicker {
-  margin-block-end: 1rem;
-}
-
-.appearance {
-  position: relative;
-  visibility: hidden;
-  color: var(--text);
-  font-size: 0.86rem;
-}
-
-:root[data-enhanced="true"] .appearance {
-  visibility: visible;
-}
-
-.appearance summary {
-  display: inline-flex;
-  min-height: 2.25rem;
-  align-items: center;
-  gap: 0.4rem;
-  padding: 0.35rem 0.7rem;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  cursor: pointer;
-  font-weight: 600;
-  list-style: none;
-  white-space: nowrap;
-  transition:
-    border-color var(--duration-fast) ease,
-    background-color var(--duration-fast) ease;
-}
-
-.appearance summary:hover,
-.appearance[open] summary {
-  border-color: var(--accent);
-  background: var(--surface-soft);
-}
-
-.appearance summary::-webkit-details-marker {
-  display: none;
-}
-
-.appearance summary span {
-  color: var(--accent);
-  transition: transform var(--duration-fast) var(--ease-out);
-}
-
-.appearance[open] summary span {
-  transform: rotate(180deg);
-}
-
-.appearance-panel {
-  position: absolute;
-  z-index: 40;
-  top: calc(100% + 0.5rem);
-  right: 0;
-  display: grid;
-  width: min(17rem, calc(100vw - 2rem));
-  gap: 0.45rem;
-  padding: 1rem;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  background: var(--surface);
-  box-shadow: var(--edge), var(--shadow);
-}
-
-.appearance[open] .appearance-panel {
-  animation: panel-in var(--duration-base) var(--ease-out);
-}
-
-@keyframes panel-in {
-  from {
-    opacity: 0;
-    transform: translateY(-4px) scale(0.98);
+/* Componentes reutilizáveis: botões, cartões, rótulos e o painel de tema. */
+@layer components {
+  .skip-link {
+    position: fixed;
+    z-index: 100;
+    top: 0.5rem;
+    left: 0.5rem;
+    padding: 0.65rem 0.9rem;
+    transform: translateY(-180%);
+    border-radius: var(--radius-md);
+    background: var(--accent);
+    color: var(--accent-on);
+    font-weight: 700;
   }
-}
 
-.appearance-panel label {
-  font-weight: 700;
-}
+  .skip-link:focus {
+    transform: translateY(0);
+  }
 
-.appearance-panel select {
-  width: 100%;
-  margin-block-end: 0.55rem;
-  padding: 0.55rem;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  background: var(--page);
-  color: var(--text);
-  font: inherit;
-}
+  /* Superfície comum de cartões e painéis: borda, raio, fundo e o fio de luz
+   no topo. Cada componente define só o espaçamento e o conteúdo. */
+  .card {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--card);
+    box-shadow: var(--edge);
+  }
 
-.appearance-panel p {
-  margin: 0;
-  color: var(--muted);
-  font-size: 0.78rem;
-}
+  /* Cartão que é um link inteiro: sobe, ganha sombra e borda de destaque. */
+  .card-interactive {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+    transition:
+      background-color var(--duration-base) var(--ease-out),
+      border-color var(--duration-base) var(--ease-out),
+      box-shadow var(--duration-base) var(--ease-out),
+      transform var(--duration-base) var(--ease-out);
+  }
 
-.button {
-  display: inline-flex;
-  min-height: 2.75rem;
-  align-items: center;
-  justify-content: center;
-  gap: 0.45rem;
-  padding: 0.65rem 1.15rem;
-  border: 1px solid transparent;
-  border-radius: var(--radius-md);
-  font-size: 0.92rem;
-  font-weight: 700;
-  line-height: 1.25;
-  text-align: center;
-  text-decoration: none;
-  transition:
-    background-color var(--duration-base) var(--ease-out),
-    border-color var(--duration-base) var(--ease-out),
-    color var(--duration-base) var(--ease-out),
-    box-shadow var(--duration-base) var(--ease-out),
-    transform var(--duration-base) var(--ease-out);
-}
+  .card-interactive:hover,
+  .card-interactive:focus-visible {
+    border-color: var(--accent);
+    background-color: var(--card-hover);
+    color: inherit;
+  }
 
-.button:hover {
-  transform: translateY(var(--lift));
-  box-shadow: var(--shadow-sm);
-}
+  .card-interactive:hover {
+    transform: translateY(var(--lift));
+    box-shadow: var(--edge), var(--shadow-sm);
+  }
 
-.button:active {
-  transform: translateY(0);
-  box-shadow: none;
-}
+  .card-interactive:active {
+    transform: translateY(0);
+  }
 
-.button-small {
-  min-height: 2.25rem;
-  padding: 0.35rem 0.85rem;
-  font-size: 0.86rem;
-}
+  /* Rótulos técnicos (seção, estado, versão) em fonte mono: a identidade de
+   ferramenta de desenvolvimento sem baixar fonte nenhuma. */
+  .kicker,
+  .label {
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
 
-/* Seta de link externo ou de avanço: anda um pouco no hover. */
-.button span[aria-hidden="true"],
-.footer-discord span[aria-hidden="true"],
-.card-interactive .arrow {
-  display: inline-block;
-  transition: transform var(--duration-base) var(--ease-out);
-}
+  .kicker {
+    margin-block-end: 1rem;
+  }
 
-.button:hover span[aria-hidden="true"],
-.footer-discord:hover span[aria-hidden="true"],
-.card-interactive:hover .arrow {
-  transform: translate(var(--nudge), calc(var(--nudge) * -1));
-}
-
-.button-primary {
-  border-color: var(--accent);
-  background: var(--accent);
-  color: var(--accent-on);
-}
-
-.button-primary:hover {
-  border-color: var(--focus);
-  background: var(--focus);
-  color: var(--accent-on);
-}
-
-.button-secondary {
-  border-color: var(--border);
-  background: var(--surface-soft);
-  color: var(--text);
-}
-
-.button-secondary:hover {
-  border-color: var(--accent);
-  color: var(--text);
-}
-
-.button-quiet {
-  border-color: rgb(217 209 197 / 45%);
-  background: rgb(6 9 13 / 50%);
-  color: #d9d1c5;
-  backdrop-filter: blur(6px);
-}
-
-.button-quiet:hover {
-  border-color: #d9d1c5;
-  color: #e6ded1;
-}
-
-.inline-link {
-  color: var(--accent);
-  font-weight: 700;
-  text-underline-offset: 0.22em;
-  transition: color var(--duration-fast) ease;
-}
-
-.inline-link:hover {
-  color: var(--text);
-}
-
-@media (width <= 680px) {
   .appearance {
-    position: static;
+    position: relative;
+    visibility: hidden;
+    color: var(--text);
+    font-size: 0.86rem;
+  }
+
+  :root[data-enhanced="true"] .appearance {
+    visibility: visible;
+  }
+
+  .appearance summary {
+    display: inline-flex;
+    min-height: 2.25rem;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.35rem 0.7rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    font-weight: 600;
+    list-style: none;
+    white-space: nowrap;
+    transition:
+      border-color var(--duration-fast) ease,
+      background-color var(--duration-fast) ease;
+  }
+
+  .appearance summary:hover,
+  .appearance[open] summary {
+    border-color: var(--accent);
+    background: var(--surface-soft);
+  }
+
+  .appearance summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .appearance summary span {
+    color: var(--accent);
+    transition: transform var(--duration-fast) var(--ease-out);
+  }
+
+  .appearance[open] summary span {
+    transform: rotate(180deg);
   }
 
   .appearance-panel {
-    top: calc(100% + 0.35rem);
+    position: absolute;
+    z-index: 40;
+    top: calc(100% + 0.5rem);
     right: 0;
-    left: 0;
-    width: auto;
-    max-height: min(70dvh, 24rem);
-    overflow-y: auto;
+    display: grid;
+    width: min(17rem, calc(100vw - 2rem));
+    gap: 0.45rem;
+    padding: 1rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+    box-shadow: var(--edge), var(--shadow);
+  }
+
+  .appearance[open] .appearance-panel {
+    animation: panel-in var(--duration-base) var(--ease-out);
+  }
+
+  @keyframes panel-in {
+    from {
+      opacity: 0;
+      transform: translateY(-4px) scale(0.98);
+    }
+  }
+
+  .appearance-panel label {
+    font-weight: 700;
+  }
+
+  .appearance-panel select {
+    width: 100%;
+    margin-block-end: 0.55rem;
+    padding: 0.55rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--page);
+    color: var(--text);
+    font: inherit;
+  }
+
+  .appearance-panel p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.78rem;
+  }
+
+  .button {
+    display: inline-flex;
+    min-height: 2.75rem;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    padding: 0.65rem 1.15rem;
+    border: 1px solid transparent;
+    border-radius: var(--radius-md);
+    font-size: 0.92rem;
+    font-weight: 700;
+    line-height: 1.25;
+    text-align: center;
+    text-decoration: none;
+    transition:
+      background-color var(--duration-base) var(--ease-out),
+      border-color var(--duration-base) var(--ease-out),
+      color var(--duration-base) var(--ease-out),
+      box-shadow var(--duration-base) var(--ease-out),
+      transform var(--duration-base) var(--ease-out);
+  }
+
+  .button:hover {
+    transform: translateY(var(--lift));
+    box-shadow: var(--shadow-sm);
+  }
+
+  .button:active {
+    transform: translateY(0);
+    box-shadow: none;
+  }
+
+  .button-small {
+    min-height: 2.25rem;
+    padding: 0.35rem 0.85rem;
+    font-size: 0.86rem;
+  }
+
+  /* Seta de link externo ou de avanço: anda um pouco no hover. */
+  .button span[aria-hidden="true"],
+  .footer-discord span[aria-hidden="true"],
+  .card-interactive .arrow {
+    display: inline-block;
+    transition: transform var(--duration-base) var(--ease-out);
+  }
+
+  .button:hover span[aria-hidden="true"],
+  .footer-discord:hover span[aria-hidden="true"],
+  .card-interactive:hover .arrow {
+    transform: translate(var(--nudge), calc(var(--nudge) * -1));
+  }
+
+  .button-primary {
+    border-color: var(--accent);
+    background: var(--accent);
+    color: var(--accent-on);
+  }
+
+  .button-primary:hover {
+    border-color: var(--focus);
+    background: var(--focus);
+    color: var(--accent-on);
+  }
+
+  .button-secondary {
+    border-color: var(--border);
+    background: var(--surface-soft);
+    color: var(--text);
+  }
+
+  .button-secondary:hover {
+    border-color: var(--accent);
+    color: var(--text);
+  }
+
+  .button-quiet {
+    border-color: rgb(217 209 197 / 45%);
+    background: rgb(6 9 13 / 50%);
+    color: #d9d1c5;
+    backdrop-filter: blur(6px);
+  }
+
+  .button-quiet:hover {
+    border-color: #d9d1c5;
+    color: #e6ded1;
+  }
+
+  .inline-link {
+    color: var(--accent);
+    font-weight: 700;
+    text-underline-offset: 0.22em;
+    transition: color var(--duration-fast) ease;
+  }
+
+  .inline-link:hover {
+    color: var(--text);
+  }
+
+  @media (width <= 680px) {
+    .appearance {
+      position: static;
+    }
+
+    .appearance-panel {
+      top: calc(100% + 0.35rem);
+      right: 0;
+      left: 0;
+      width: auto;
+      max-height: min(70dvh, 24rem);
+      overflow-y: auto;
+    }
   }
 }

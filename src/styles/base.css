@@ -1,106 +1,121 @@
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
+/* Camadas do CSS global, da mais fraca para a mais forte. O CSS de cada
+   página (src/features/) fica FORA de camada e por isso sempre vence o
+   global, qualquer que seja a ordem em que o Astro carrega os arquivos (ele
+   embute os pequenos no <head>, às vezes antes do global). tokens.css também
+   fica fora: só define propriedades personalizadas. */
+@layer base, components, layout;
 
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: calc(var(--header-height) + 1.5rem);
-}
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
 
-body {
-  margin: 0;
-  background: var(--page);
-  color: var(--text);
-  font-family: var(--font-sans);
-  font-size: 1rem;
-  line-height: 1.65;
-}
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: calc(var(--header-height) + 1.5rem);
+  }
 
-::selection {
-  background: var(--accent);
-  color: var(--accent-on);
-}
+  body {
+    margin: 0;
+    background: var(--page);
+    color: var(--text);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.65;
+  }
 
-a {
-  color: inherit;
-  text-decoration-thickness: 0.07em;
-  text-underline-offset: 0.18em;
-}
+  ::selection {
+    background: var(--accent);
+    color: var(--accent-on);
+  }
 
-a:hover {
-  color: var(--accent);
-}
+  a {
+    color: inherit;
+    text-decoration-thickness: 0.07em;
+    text-underline-offset: 0.18em;
+  }
 
-:focus-visible {
-  outline: 3px solid var(--focus);
-  outline-offset: 3px;
-}
+  a:hover {
+    color: var(--accent);
+  }
 
-img {
-  display: block;
-  max-width: 100%;
-}
+  :focus-visible {
+    outline: 3px solid var(--focus);
+    outline-offset: 3px;
+  }
 
-h1,
-h2,
-h3,
-p {
-  margin-block-start: 0;
-}
+  img {
+    display: block;
+    max-width: 100%;
+  }
 
-h1,
-h2,
-h3 {
-  overflow-wrap: break-word;
-  line-height: 1.12;
-  letter-spacing: -0.035em;
-  text-wrap: balance;
-}
+  h1,
+  h2,
+  h3,
+  p {
+    margin-block-start: 0;
+  }
 
-p,
-li {
-  text-wrap: pretty;
-}
+  h1,
+  h2,
+  h3 {
+    overflow-wrap: break-word;
+    line-height: 1.12;
+    letter-spacing: -0.035em;
+    text-wrap: balance;
+  }
 
-h1 {
-  font-size: clamp(2.5rem, 5vw, 5rem);
-}
+  p,
+  li {
+    text-wrap: pretty;
+  }
 
-h2 {
-  font-size: clamp(2rem, 3.1vw, 3.2rem);
-}
+  h1 {
+    font-size: clamp(2.5rem, 5vw, 5rem);
+  }
 
-h3 {
-  font-size: 1.25rem;
-}
+  h2 {
+    font-size: clamp(2rem, 3.1vw, 3.2rem);
+  }
 
-code,
-pre {
-  font-family: var(--font-mono);
-}
+  h3 {
+    font-size: 1.25rem;
+  }
 
-code {
-  padding: 0.08em 0.32em;
-  border-radius: var(--radius-sm);
-  background: var(--surface-soft);
-  font-size: 0.88em;
-}
+  code,
+  pre {
+    font-family: var(--font-mono);
+  }
 
-/* Troca de tema: só cor, no tempo dos tokens (zero com movimento reduzido). */
-body,
-.site-header,
-.site-footer,
-.flow-section,
-.closing-section,
-.card,
-.development-code,
-.appearance-panel {
-  transition:
-    background-color var(--duration-base) ease,
-    border-color var(--duration-base) ease,
-    color var(--duration-base) ease;
+  code {
+    padding: 0.08em 0.32em;
+    border-radius: var(--radius-sm);
+    background: var(--surface-soft);
+    font-size: 0.88em;
+  }
+
+  /* Troca de tema: só cor, no tempo dos tokens (zero com movimento reduzido). */
+  body,
+  .site-header,
+  .site-footer,
+  .flow-section,
+  .closing-section,
+  .card,
+  .development-code,
+  .appearance-panel {
+    transition:
+      background-color var(--duration-base) ease,
+      border-color var(--duration-base) ease,
+      color var(--duration-base) ease;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
 }
 
 /* Navegação entre páginas com a transição nativa do navegador, sem
@@ -120,10 +135,4 @@ body,
 ::view-transition-old(root),
 ::view-transition-new(root) {
   animation-duration: var(--duration-base);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
 }

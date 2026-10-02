@@ -1,228 +1,232 @@
-.shell {
-  width: min(calc(100% - 3rem), var(--content-width));
-  margin-inline: auto;
-}
+/* Moldura do site: largura, cabeçalho e rodapé. Vem depois de components
+   porque especializa componentes (ex.: o botão de download some no celular). */
+@layer layout {
+  .shell {
+    width: min(calc(100% - 3rem), var(--content-width));
+    margin-inline: auto;
+  }
 
-/* Cabeçalho fixo e translúcido: o conteúdo passa por baixo, desfocado. Sem
+  /* Cabeçalho fixo e translúcido: o conteúdo passa por baixo, desfocado. Sem
    suporte a backdrop-filter, o fundo fica sólido. */
-.site-header {
-  position: sticky;
-  top: 0;
-  z-index: 20;
-  border-bottom: 1px solid var(--border);
-  background: color-mix(in srgb, var(--surface) 82%, transparent);
-  backdrop-filter: blur(14px) saturate(150%);
-}
-
-@supports not (backdrop-filter: blur(1px)) {
   .site-header {
-    background: var(--surface);
-  }
-}
-
-.header-inner {
-  position: relative;
-  display: flex;
-  min-height: var(--header-height);
-  align-items: center;
-  gap: clamp(0.75rem, 2.5vw, 2rem);
-}
-
-.brand {
-  display: inline-flex;
-  flex: none;
-  align-items: center;
-  gap: 0.65rem;
-  font-weight: 650;
-  letter-spacing: -0.02em;
-  text-decoration: none;
-  white-space: nowrap;
-}
-
-.brand img {
-  width: 2.125rem;
-  height: 2.125rem;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  object-fit: cover;
-}
-
-.brand strong {
-  color: var(--accent);
-}
-
-.primary-nav {
-  display: flex;
-  min-width: 0;
-  align-items: center;
-  gap: 0.25rem;
-}
-
-.primary-nav a {
-  display: inline-flex;
-  min-height: 2.25rem;
-  flex: none;
-  align-items: center;
-  gap: 0.3rem;
-  padding-inline: 0.75rem;
-  border-radius: var(--radius-md);
-  color: var(--muted);
-  font-size: 0.9rem;
-  font-weight: 600;
-  text-decoration: none;
-  white-space: nowrap;
-  transition:
-    background-color var(--duration-fast) ease,
-    color var(--duration-fast) ease;
-}
-
-.primary-nav a:hover {
-  background: var(--surface-soft);
-  color: var(--text);
-}
-
-.primary-nav a[aria-current="page"] {
-  background: color-mix(in srgb, var(--accent) 15%, transparent);
-  color: var(--text);
-}
-
-.primary-nav a span {
-  color: var(--accent);
-}
-
-.header-tools {
-  display: flex;
-  flex: none;
-  align-items: center;
-  gap: 0.6rem;
-  margin-inline-start: auto;
-}
-
-.site-footer {
-  border-top: 1px solid var(--border);
-  background: var(--surface);
-}
-
-.footer-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1.6fr) repeat(3, minmax(0, 1fr));
-  gap: 2rem;
-  padding-block: 3rem 2.5rem;
-}
-
-.footer-intro strong {
-  font-size: 1.05rem;
-}
-
-.footer-intro strong span {
-  color: var(--accent);
-}
-
-.footer-intro p {
-  max-width: 34ch;
-  margin: 0.5rem 0 0;
-  color: var(--muted);
-  font-size: 0.9rem;
-}
-
-.footer-group {
-  display: grid;
-  align-content: start;
-  gap: 0.55rem;
-  font-size: 0.92rem;
-}
-
-.footer-group .label {
-  margin: 0 0 0.25rem;
-}
-
-.footer-link {
-  justify-self: start;
-  color: var(--muted);
-  text-decoration: none;
-  transition: color var(--duration-fast) ease;
-}
-
-.footer-link:hover {
-  color: var(--text);
-}
-
-.footer-group .footer-link span {
-  color: var(--accent);
-}
-
-.footer-bottom {
-  padding-block: 1.25rem 2rem;
-  border-top: 1px solid var(--border);
-  color: var(--muted);
-  font-size: 0.82rem;
-}
-
-.footer-bottom p {
-  margin: 0;
-}
-
-@media (pointer: coarse) {
-  .primary-nav a {
-    min-height: 2.75rem;
-  }
-}
-
-/* Abaixo de 860 px a navegação vai para uma segunda linha, que rola na
-   horizontal em vez de quebrar; o cabeçalho deixa de ser fixo para não
-   ocupar a tela do celular. */
-@media (width <= 860px) {
-  html {
-    scroll-padding-top: 1.5rem;
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    border-bottom: 1px solid var(--border);
+    background: color-mix(in srgb, var(--surface) 82%, transparent);
+    backdrop-filter: blur(14px) saturate(150%);
   }
 
-  .site-header {
-    position: relative;
+  @supports not (backdrop-filter: blur(1px)) {
+    .site-header {
+      background: var(--surface);
+    }
   }
 
   .header-inner {
-    flex-wrap: wrap;
-    row-gap: 0;
-    padding-block-start: 0.4rem;
+    position: relative;
+    display: flex;
+    min-height: var(--header-height);
+    align-items: center;
+    gap: clamp(0.75rem, 2.5vw, 2rem);
+  }
+
+  .brand {
+    display: inline-flex;
+    flex: none;
+    align-items: center;
+    gap: 0.65rem;
+    font-weight: 650;
+    letter-spacing: -0.02em;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .brand img {
+    width: 2.125rem;
+    height: 2.125rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    object-fit: cover;
+  }
+
+  .brand strong {
+    color: var(--accent);
   }
 
   .primary-nav {
-    order: 3;
-    width: calc(100% + 0.75rem);
-    margin-inline-start: -0.75rem;
-    padding-block: 0.15rem 0.5rem;
-    overflow-x: auto;
-    mask-image: linear-gradient(90deg, #000 calc(100% - 2rem), transparent);
-    scrollbar-width: none;
-  }
-
-  .footer-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  .footer-intro {
-    grid-column: 1 / -1;
-  }
-}
-
-@media (width <= 560px) {
-  .shell {
-    width: min(calc(100% - 2rem), var(--content-width));
+    display: flex;
+    min-width: 0;
+    align-items: center;
+    gap: 0.25rem;
   }
 
   .primary-nav a {
-    padding-inline: 0.6rem;
-    font-size: 0.86rem;
+    display: inline-flex;
+    min-height: 2.25rem;
+    flex: none;
+    align-items: center;
+    gap: 0.3rem;
+    padding-inline: 0.75rem;
+    border-radius: var(--radius-md);
+    color: var(--muted);
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+    transition:
+      background-color var(--duration-fast) ease,
+      color var(--duration-fast) ease;
   }
 
-  /* No celular o Discord fica no rodapé e no fim da página inicial, e o
-     download fica no topo da página inicial. */
-  .primary-nav .nav-external,
-  .header-tools .header-download {
-    display: none;
+  .primary-nav a:hover {
+    background: var(--surface-soft);
+    color: var(--text);
+  }
+
+  .primary-nav a[aria-current="page"] {
+    background: color-mix(in srgb, var(--accent) 15%, transparent);
+    color: var(--text);
+  }
+
+  .primary-nav a span {
+    color: var(--accent);
+  }
+
+  .header-tools {
+    display: flex;
+    flex: none;
+    align-items: center;
+    gap: 0.6rem;
+    margin-inline-start: auto;
+  }
+
+  .site-footer {
+    border-top: 1px solid var(--border);
+    background: var(--surface);
   }
 
   .footer-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    display: grid;
+    grid-template-columns: minmax(0, 1.6fr) repeat(3, minmax(0, 1fr));
+    gap: 2rem;
+    padding-block: 3rem 2.5rem;
+  }
+
+  .footer-intro strong {
+    font-size: 1.05rem;
+  }
+
+  .footer-intro strong span {
+    color: var(--accent);
+  }
+
+  .footer-intro p {
+    max-width: 34ch;
+    margin: 0.5rem 0 0;
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+
+  .footer-group {
+    display: grid;
+    align-content: start;
+    gap: 0.55rem;
+    font-size: 0.92rem;
+  }
+
+  .footer-group .label {
+    margin: 0 0 0.25rem;
+  }
+
+  .footer-link {
+    justify-self: start;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color var(--duration-fast) ease;
+  }
+
+  .footer-link:hover {
+    color: var(--text);
+  }
+
+  .footer-group .footer-link span {
+    color: var(--accent);
+  }
+
+  .footer-bottom {
+    padding-block: 1.25rem 2rem;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 0.82rem;
+  }
+
+  .footer-bottom p {
+    margin: 0;
+  }
+
+  @media (pointer: coarse) {
+    .primary-nav a {
+      min-height: 2.75rem;
+    }
+  }
+
+  /* Abaixo de 860 px a navegação vai para uma segunda linha, que rola na
+   horizontal em vez de quebrar; o cabeçalho deixa de ser fixo para não
+   ocupar a tela do celular. */
+  @media (width <= 860px) {
+    html {
+      scroll-padding-top: 1.5rem;
+    }
+
+    .site-header {
+      position: relative;
+    }
+
+    .header-inner {
+      flex-wrap: wrap;
+      row-gap: 0;
+      padding-block-start: 0.4rem;
+    }
+
+    .primary-nav {
+      order: 3;
+      width: calc(100% + 0.75rem);
+      margin-inline-start: -0.75rem;
+      padding-block: 0.15rem 0.5rem;
+      overflow-x: auto;
+      mask-image: linear-gradient(90deg, #000 calc(100% - 2rem), transparent);
+      scrollbar-width: none;
+    }
+
+    .footer-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .footer-intro {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media (width <= 560px) {
+    .shell {
+      width: min(calc(100% - 2rem), var(--content-width));
+    }
+
+    .primary-nav a {
+      padding-inline: 0.6rem;
+      font-size: 0.86rem;
+    }
+
+    /* No celular o Discord fica no rodapé e no fim da página inicial, e o
+     download fica no topo da página inicial. */
+    .primary-nav .nav-external,
+    .header-tools .header-download {
+      display: none;
+    }
+
+    .footer-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
   }
 }

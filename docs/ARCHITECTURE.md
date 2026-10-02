@@ -8,16 +8,20 @@ Astro gera HTML, CSS, JavaScript e imagens estáticos em `dist/`. O GitHub Pages
 
 | Local | Responsabilidade |
 | --- | --- |
-| `src/pages/` | Rotas estáticas e geração de páginas de estudo. |
-| `src/layouts/BaseLayout.astro` | Estrutura HTML, metadados e imports dos estilos globais. |
-| `src/components/` | Cabeçalho, rodapé e seções reutilizadas. |
-| `src/styles/tokens.css` | Cores por tema e por destaque; os outros CSS consomem esses tokens. |
-| `src/scripts/theme.ts` | Preferências de tema e cor guardadas no navegador. |
+| `src/pages/` | Rotas. Cada página só compõe: importa o layout, os componentes e o CSS da sua funcionalidade. |
+| `src/layouts/BaseLayout.astro` | Estrutura HTML, metadados, script de tema do `<head>` e os estilos globais. |
+| `src/components/` | Só o que toda página usa: cabeçalho, rodapé e controles de tema. |
+| `src/features/<funcionalidade>/` | Componentes, estilos e scripts de uma área do site, juntos: `inicio/`, `documentacao/`, `estudos/` e `atualizacoes/` (esta também com a ordenação das notas, `updates.ts`). |
+| `src/styles/` | CSS global. `tokens.css` tem as cores por tema e destaque e a escala de raio, movimento e tipografia; `base.css`, `components.css` e `layout.css` ficam em camadas (`@layer`). |
+| `src/scripts/` | Scripts de navegador comuns: preferências de tema (`theme-preferences.ts`, lido também pelo `<head>`) e o painel de tema (`theme.ts`). |
 | `src/data/development.ts` | Retrato editorial da próxima versão informado pelo mantenedor; não substitui a release. |
-| `src/features/atualizacoes/` | Área de Atualizações: ordenação das notas (`updates.ts`), destaque da home (`LatestUpdate.astro`) e estilos (`updates.css`). |
 | `src/data/references.ts` | Lista de fontes externas exibida no índice de documentação. |
 | `src/content.config.ts` | Esquemas das coleções Markdown. |
 | `assets/` | Arquivos de origem das imagens, otimizados pelo Astro no build. |
+
+### Ordem do CSS
+
+O CSS global vai para três camadas declaradas no topo de `base.css`, da mais fraca para a mais forte: `base` (elementos HTML), `components` (botões, cartões, rótulos) e `layout` (cabeçalho e rodapé, que especializam componentes). O CSS de `src/features/` fica fora de camada e por isso sempre vence o global, como manda a especificação de cascade layers. Isso importa porque o Astro embute no `<head>` as folhas pequenas de uma página, às vezes **antes** da global: sem camadas, o `.card` global sobrescrevia o cartão de novidade na lista de atualizações. Cada página carrega só o CSS que usa.
 
 `atualizacoes` contém uma nota por versão publicada da IDE. `src/pages/atualizacoes/index.astro` lista todas e `src/pages/atualizacoes/[...slug].astro` publica cada uma, usando o nome do arquivo como parte da URL. `src/features/atualizacoes/LatestUpdate.astro` mostra a mais recente na página inicial. `publicVersion` e `publicTag` em `src/site.ts` são a única fonte da versão pública exibida no site.
 

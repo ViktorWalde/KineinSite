@@ -2,10 +2,13 @@
 import { getImage } from "astro:assets";
 import wallpaperSource from "../../assets/backgrounds/wallpaper-site.png";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import CurrentStatus from "../components/CurrentStatus.astro";
-import DevelopmentStatus from "../components/DevelopmentStatus.astro";
-import FocusAreas from "../components/FocusAreas.astro";
+import CurrentStatus from "../features/inicio/CurrentStatus.astro";
+import DevelopmentStatus from "../features/inicio/DevelopmentStatus.astro";
+import FocusAreas from "../features/inicio/FocusAreas.astro";
 import LatestUpdate from "../features/atualizacoes/LatestUpdate.astro";
+import "../features/inicio/inicio.css";
+import "../features/inicio/secoes.css";
+import "../features/inicio/desenvolvimento.css";
 import { developmentSnapshot } from "../data/development";
 import {
   discordUrl,
