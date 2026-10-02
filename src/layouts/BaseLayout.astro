@@ -14,10 +14,13 @@ import "../styles/theme-panel.css";
 interface Props {
   title: string;
   description: string;
-  current: "home" | "docs" | "updates";
+  current?: "home" | "docs" | "updates";
+  // Páginas que não devem ser indexadas nem ter endereço canônico (a 404 é
+  // servida em qualquer caminho inexistente).
+  noindex?: boolean;
 }
 
-const { title, description, current } = Astro.props;
+const { title, description, current, noindex = false } = Astro.props;
 // Cartão de link (Discord, redes): a imagem do hero, em tamanho de prévia.
 const shareImage = await getImage({
   src: shareSource,
@@ -38,9 +41,8 @@ const touchIcon = await getImage({
   height: 180,
   format: "png",
 });
-const pageUrl = Astro.site
-  ? new URL(Astro.url.pathname, Astro.site)
-  : undefined;
+const pageUrl =
+  Astro.site && !noindex ? new URL(Astro.url.pathname, Astro.site) : undefined;
 const imageUrl = Astro.site ? new URL(shareImage.src, Astro.site) : undefined;
 ---
 
@@ -78,6 +80,7 @@ const imageUrl = Astro.site ? new URL(shareImage.src, Astro.site) : undefined;
     <link rel="apple-touch-icon" href={touchIcon.src} />
     <meta name="referrer" content="no-referrer" />
     <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex" />}
     <meta property="og:site_name" content="Kinein Vectis" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="pt_BR" />

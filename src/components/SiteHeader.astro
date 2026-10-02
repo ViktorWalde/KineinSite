@@ -5,7 +5,7 @@ import { discordUrl, publicVersion, releaseUrl, sitePath } from "../site";
 import ThemeControls from "./ThemeControls.astro";
 
 interface Props {
-  current: "home" | "docs" | "updates";
+  current?: "home" | "docs" | "updates" | undefined;
 }
 
 const { current } = Astro.props;
