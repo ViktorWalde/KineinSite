@@ -70,7 +70,7 @@
     padding-inline: 0.75rem;
     border-radius: var(--radius-md);
     color: var(--muted);
-    font-size: 0.9rem;
+    font-size: var(--text-sm);
     font-weight: 600;
     text-decoration: none;
     white-space: nowrap;
@@ -107,14 +107,18 @@
   }
 
   .footer-grid {
-    display: grid;
-    grid-template-columns: minmax(0, 1.6fr) repeat(3, minmax(0, 1fr));
-    gap: 2rem;
-    padding-block: 3rem 2.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xl) var(--space-l);
+    padding-block: var(--space-2xl) var(--space-xl);
+  }
+
+  .footer-intro {
+    flex: 2 1 18rem;
   }
 
   .footer-intro strong {
-    font-size: 1.05rem;
+    font-size: var(--text-base);
   }
 
   .footer-intro strong span {
@@ -125,14 +129,15 @@
     max-width: 34ch;
     margin: 0.5rem 0 0;
     color: var(--muted);
-    font-size: 0.9rem;
+    font-size: var(--text-sm);
   }
 
   .footer-group {
     display: grid;
+    flex: 1 1 8rem;
     align-content: start;
     gap: 0.55rem;
-    font-size: 0.92rem;
+    font-size: var(--text-sm);
   }
 
   .footer-group .label {
@@ -158,7 +163,7 @@
     padding-block: 1.25rem 2rem;
     border-top: 1px solid var(--border);
     color: var(--muted);
-    font-size: 0.82rem;
+    font-size: var(--text-sm);
   }
 
   .footer-bottom p {
@@ -171,10 +176,10 @@
     }
   }
 
-  /* Abaixo de 860 px a navegação vai para uma segunda linha, que rola na
+  /* Abaixo de 54rem (864 px com a fonte padrão) a navegação vai para uma segunda linha, que rola na
    horizontal em vez de quebrar; o cabeçalho deixa de ser fixo para não
    ocupar a tela do celular. */
-  @media (width <= 860px) {
+  @media (width <= 54rem) {
     html {
       scroll-padding-top: 1.5rem;
     }
@@ -198,24 +203,16 @@
       mask-image: linear-gradient(90deg, #000 calc(100% - 2rem), transparent);
       scrollbar-width: none;
     }
-
-    .footer-grid {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-
-    .footer-intro {
-      grid-column: 1 / -1;
-    }
   }
 
-  @media (width <= 560px) {
+  @media (width <= 35rem) {
     .shell {
       width: min(calc(100% - 2rem), var(--content-width));
     }
 
     .primary-nav a {
       padding-inline: 0.6rem;
-      font-size: 0.86rem;
+      font-size: var(--text-sm);
     }
 
     /* No celular o Discord fica no rodapé e no fim da página inicial, e o
@@ -223,10 +220,6 @@
     .primary-nav .nav-external,
     .header-tools .header-download {
       display: none;
-    }
-
-    .footer-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
 }

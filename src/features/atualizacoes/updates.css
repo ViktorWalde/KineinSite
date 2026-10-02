@@ -1,10 +1,9 @@
 /* Destaque da versão mais recente na página inicial. */
 .latest-update {
   display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-  gap: clamp(1.5rem, 4vw, 3rem);
-  margin-block: clamp(2rem, 5vw, 3.5rem);
-  padding: clamp(1.5rem, 4vw, 2.75rem);
+  gap: var(--space-xl);
+  margin-block: var(--space-xl);
+  padding: var(--space-xl);
   border-color: color-mix(in srgb, var(--accent) 55%, var(--border));
   border-radius: var(--radius-xl);
   box-shadow: var(--edge), var(--shadow);
@@ -12,13 +11,13 @@
 
 .latest-update h2 {
   margin-block: 0.5rem 1rem;
-  font-size: clamp(1.9rem, 4vw, 2.8rem);
+  font-size: var(--text-2xl);
 }
 
 .latest-update-summary {
   max-width: 60ch;
   color: var(--muted);
-  font-size: 1.08rem;
+  font-size: var(--text-lg);
 }
 
 .latest-update-actions,
@@ -32,8 +31,10 @@
 
 .latest-update-highlights,
 .update-highlights ul {
-  display: grid;
-  gap: 1rem;
+  --grid-min: 18rem;
+  --grid-max: 2;
+  --grid-gap: var(--space-l);
+
   margin: 0;
   padding: 0;
   list-style: none;
@@ -67,12 +68,12 @@
 /* Lista de notas: a mais recente em destaque, as anteriores em cards. */
 .updates-shell {
   max-width: 68rem;
-  padding-block: clamp(2rem, 5vw, 4rem) 6rem;
+  padding-block: var(--space-xl) var(--space-3xl);
 }
 
 .update-shell {
   max-width: 54rem;
-  padding-block: clamp(2rem, 5vw, 4rem) 6rem;
+  padding-block: var(--space-xl) var(--space-3xl);
 }
 
 .updates-intro {
@@ -82,25 +83,24 @@
 .updates-intro h1,
 .update-header h1 {
   margin-block: 0.5rem 1rem;
-  font-size: clamp(2.4rem, 5vw, 4rem);
+  font-size: var(--text-4xl);
 }
 
 .updates-intro-copy,
 .update-summary {
   max-width: 66ch;
   color: var(--muted);
-  font-size: 1.12rem;
+  font-size: var(--text-lg);
 }
 
 .updates-history h2 {
   margin-block: 1rem 1.25rem;
-  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-size: var(--text-2xl);
 }
 
 .updates-history-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 18rem), 1fr));
-  gap: 1rem;
+  --grid-min: 18rem;
+
   margin: 0;
   padding: 0;
   list-style: none;
@@ -110,7 +110,7 @@
   display: grid;
   gap: 0.75rem;
   height: 100%;
-  padding: clamp(1.1rem, 2.5vw, 1.5rem);
+  padding: var(--space-l);
 }
 
 .update-card-meta {
@@ -119,13 +119,13 @@
   align-items: center;
   gap: 0.5rem 0.9rem;
   color: var(--muted);
-  font-size: 0.88rem;
+  font-size: var(--text-sm);
 }
 
 .update-version {
   color: var(--text);
   font-family: var(--font-mono);
-  font-size: 1.15rem;
+  font-size: var(--text-lg);
   font-weight: 700;
 }
 
@@ -133,7 +133,7 @@
   padding: 0.1rem 0.55rem;
   border: 1px solid var(--border);
   border-radius: 999px;
-  font-size: 0.78rem;
+  font-size: var(--text-sm);
 }
 
 .update-card-summary {
@@ -152,7 +152,7 @@
   flex-wrap: wrap;
   gap: 0.55rem;
   color: var(--muted);
-  font-size: 0.9rem;
+  font-size: var(--text-sm);
 }
 
 .update-header {
@@ -169,7 +169,7 @@
 
 .update-meta dt {
   color: var(--muted);
-  font-size: 0.8rem;
+  font-size: var(--text-sm);
 }
 
 .update-meta dd {
@@ -186,13 +186,13 @@
 .update-limits h2,
 .update-article h2 {
   margin-block: 0 1.25rem;
-  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-size: var(--text-2xl);
 }
 
 .update-article {
   max-width: 72ch;
   padding-block: 2.5rem 0;
-  font-size: 1.05rem;
+  font-size: var(--text-base);
   line-height: 1.75;
 }
 
@@ -206,7 +206,7 @@
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
   background: var(--surface-soft);
-  font-size: 0.92rem;
+  font-size: var(--text-sm);
   line-height: 1.6;
 }
 
@@ -228,10 +228,4 @@
 
 .update-end-nav {
   padding-block-start: 3rem;
-}
-
-@media (width <= 820px) {
-  .latest-update {
-    grid-template-columns: minmax(0, 1fr);
-  }
 }

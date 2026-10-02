@@ -16,6 +16,31 @@
   --lift: -2px;
   --nudge: 2px;
   --header-height: 4rem;
+
+  /* Escalas fluidas (método Utopia): cada valor cresce em linha reta entre
+     telas de 360 e 1600 px e para nos dois extremos. Em rem, para respeitar o
+     tamanho de fonte escolhido no navegador. */
+  --text-xs: clamp(0.7rem, 0.6826rem + 0.077vw, 0.76rem);
+  --text-sm: clamp(0.875rem, 0.8532rem + 0.097vw, 0.95rem);
+  --text-base: clamp(1rem, 0.9637rem + 0.161vw, 1.125rem);
+  --text-lg: clamp(1.075rem, 1.0242rem + 0.226vw, 1.25rem);
+  --text-xl: clamp(1.2rem, 1.1419rem + 0.258vw, 1.4rem);
+  --text-2xl: clamp(1.6rem, 1.3677rem + 1.032vw, 2.4rem);
+  --text-3xl: clamp(2rem, 1.6516rem + 1.548vw, 3.2rem);
+  --text-4xl: clamp(2rem, 1.4194rem + 2.581vw, 4rem);
+  --text-5xl: clamp(2.5rem, 1.7742rem + 3.226vw, 5rem);
+  --space-2xs: clamp(0.25rem, 0.2355rem + 0.065vw, 0.3rem);
+  --space-xs: clamp(0.5rem, 0.471rem + 0.129vw, 0.6rem);
+  --space-s: clamp(0.75rem, 0.7065rem + 0.194vw, 0.9rem);
+  --space-m: clamp(1rem, 0.9274rem + 0.323vw, 1.25rem);
+  --space-l: clamp(1.4rem, 1.2548rem + 0.645vw, 1.9rem);
+  --space-xl: clamp(2rem, 1.7097rem + 1.29vw, 3rem);
+  --space-2xl: clamp(3rem, 2.5645rem + 1.935vw, 4.5rem);
+  --space-3xl: clamp(4rem, 3.129rem + 3.871vw, 7rem);
+
+  /* Largura do conteúdo: 1180 px até telas de 1600 px, crescendo até 1440 px
+     numa tela de 2560 px, para não sobrar mais da metade vazia. */
+  --content-width: clamp(73.75rem, 46.6667rem + 27.083vw, 90rem);
   --card: color-mix(in srgb, var(--surface) 96%, var(--accent));
   --card-hover: color-mix(in srgb, var(--surface) 90%, var(--accent));
 
@@ -38,7 +63,6 @@
   --shadow: 0 18px 50px rgb(0 0 0 / 24%);
   --shadow-sm: 0 10px 28px rgb(0 0 0 / 28%);
   --edge: inset 0 1px 0 rgb(255 255 255 / 4%);
-  --content-width: 1180px;
 }
 
 :root[data-accent="blue"] {

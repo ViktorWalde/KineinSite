@@ -2,13 +2,13 @@
   display: grid;
   grid-template-columns: 13rem minmax(0, 1fr);
   align-items: start;
-  gap: clamp(2rem, 5vw, 5rem);
-  padding-block: 3.5rem 7rem;
+  gap: var(--space-2xl);
+  padding-block: var(--space-xl) var(--space-3xl);
 }
 
 .path-card a {
   color: var(--accent);
-  font-size: 0.9rem;
+  font-size: var(--text-sm);
   font-weight: 700;
 }
 
@@ -40,7 +40,7 @@
   padding: 0.4rem 0.75rem;
   border-left: 2px solid var(--border);
   color: var(--muted);
-  font-size: 0.95rem;
+  font-size: var(--text-sm);
   text-decoration: none;
   transition:
     border-color var(--duration-fast) ease,
@@ -71,30 +71,30 @@
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
   color: var(--muted);
-  font-size: 0.8rem;
+  font-size: var(--text-sm);
 }
 
 .docs-main {
   min-width: 0;
   max-width: 55rem;
-  font-size: 1.1rem;
+  font-size: var(--text-lg);
   line-height: 1.75;
 }
 
 .docs-intro {
-  padding-block: 0.25rem 3.2rem;
+  padding-block: 0.25rem var(--space-xl);
 }
 
 .docs-intro h1 {
   max-width: 15ch;
   margin-block-end: 1.2rem;
-  font-size: clamp(2rem, 1.2rem + 4vw, 4rem);
+  font-size: var(--text-4xl);
 }
 
 .docs-intro-copy {
   max-width: 65ch;
   color: var(--muted);
-  font-size: 1.15rem;
+  font-size: var(--text-lg);
 }
 
 .docs-status,
@@ -104,7 +104,7 @@
   border-radius: var(--radius-md);
   background: var(--surface);
   color: var(--muted);
-  font-size: 0.9rem;
+  font-size: var(--text-sm);
 }
 
 .docs-status span {
@@ -116,11 +116,11 @@
   max-width: 65ch;
   margin-block: 0.9rem 0;
   color: var(--muted);
-  font-size: 0.94rem;
+  font-size: var(--text-sm);
 }
 
 .docs-section {
-  padding-block: 3rem;
+  padding-block: var(--space-2xl);
   border-top: 1px solid var(--border);
 }
 
@@ -131,18 +131,18 @@
 
 .docs-heading h2 {
   margin-block: 0.75rem 1.5rem;
-  font-size: clamp(1.8rem, 3vw, 2.7rem);
+  font-size: var(--text-2xl);
 }
 
 .docs-card-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1rem;
-  margin-block-end: 1rem;
+  --grid-min: 15rem;
+  --grid-max: 2;
+
+  margin-block-end: var(--space-m);
 }
 
 .docs-card {
-  padding: 1.3rem;
+  padding: var(--space-l);
 }
 
 .docs-card h3 {
@@ -152,7 +152,7 @@
 .docs-card p {
   margin: 0;
   color: var(--muted);
-  font-size: 0.98rem;
+  font-size: var(--text-sm);
 }
 
 .study-entry-card {
@@ -161,13 +161,12 @@
 }
 
 .path-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1rem;
+  --grid-min: 17rem;
+  --grid-max: 2;
 }
 
 .path-card {
-  padding: 1.35rem;
+  padding: var(--space-l);
 }
 
 .path-card:target {
@@ -180,7 +179,7 @@
 
 .path-card p {
   color: var(--muted);
-  font-size: 0.98rem;
+  font-size: var(--text-sm);
 }
 
 .learning-sequence {
@@ -195,8 +194,8 @@
 .learning-sequence li {
   display: grid;
   grid-template-columns: 2.5rem minmax(0, 1fr);
-  column-gap: 1rem;
-  padding: 1.1rem;
+  column-gap: var(--space-m);
+  padding: var(--space-m);
   counter-increment: learning-step;
 }
 
@@ -204,7 +203,7 @@
   grid-row: span 2;
   color: var(--accent);
   font-family: var(--font-mono);
-  font-size: 0.8rem;
+  font-size: var(--text-sm);
   font-weight: 700;
   content: counter(learning-step, decimal-leading-zero);
 }
@@ -212,10 +211,12 @@
 .learning-sequence p {
   margin: 0.3rem 0 0;
   color: var(--muted);
-  font-size: 0.98rem;
+  font-size: var(--text-sm);
 }
 
+/* A lista se adapta à largura da coluna em que está, não à da tela. */
 .reference-list {
+  container-type: inline-size;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -247,7 +248,7 @@
 
 .reference-link > span:nth-child(2) {
   color: var(--muted);
-  font-size: 0.98rem;
+  font-size: var(--text-sm);
 }
 
 .reference-link > span:last-child {
@@ -261,22 +262,23 @@
 
 .reference-list small {
   color: var(--muted);
-  font-size: 0.85rem;
+  font-size: var(--text-sm);
 }
 
 .help-panel {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 1.5rem;
-  padding: 1.4rem;
+  gap: var(--space-l);
+  padding: var(--space-l);
 }
 
 .help-panel p {
   max-width: 48ch;
   margin: 0.4rem 0 0;
   color: var(--muted);
-  font-size: 0.98rem;
+  font-size: var(--text-sm);
 }
 
 .help-panel .button {
@@ -285,7 +287,7 @@
 
 /* Abaixo de 850 px o índice vira uma linha que rola na horizontal, logo
    acima do conteúdo, em vez de um bloco alto de links quebrados. */
-@media (width <= 850px) {
+@media (width <= 54rem) {
   .docs-shell {
     grid-template-columns: minmax(0, 1fr);
     gap: 1.5rem;
@@ -317,7 +319,7 @@
     padding: 0.35rem 0.8rem;
     border: 1px solid var(--border);
     border-radius: 999px;
-    font-size: 0.86rem;
+    font-size: var(--text-sm);
     white-space: nowrap;
   }
 
@@ -326,19 +328,9 @@
   }
 }
 
-@media (width <= 600px) {
-  .docs-card-grid,
-  .path-grid,
+@container (width < 36rem) {
   .reference-link {
     grid-template-columns: 1fr;
-  }
-
-  .reference-link {
-    gap: 0.35rem;
-  }
-
-  .help-panel {
-    align-items: start;
-    flex-direction: column;
+    gap: var(--space-2xs);
   }
 }

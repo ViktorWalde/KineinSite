@@ -39,7 +39,7 @@ const [latest, ...older] = await getUpdates();
     {older.length > 0 && (
       <section class="updates-history" aria-labelledby="historico-title">
         <h2 id="historico-title">Histórico</h2>
-        <ol class="updates-history-grid">
+        <ol class="updates-history-grid auto-grid">
           {older.map((entry) => (
             <li>
               <a

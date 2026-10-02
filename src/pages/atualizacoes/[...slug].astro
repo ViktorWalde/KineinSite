@@ -72,7 +72,7 @@ const releaseUrl = releaseUrlFor(entry.data.tag);
 
     <section class="update-highlights" aria-labelledby="destaques-title">
       <h2 id="destaques-title">Destaques</h2>
-      <ul>
+      <ul class="auto-grid">
         {entry.data.highlights.map((item) => (
           <li>
             <strong>{item.title}</strong>
