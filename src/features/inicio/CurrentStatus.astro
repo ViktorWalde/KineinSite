@@ -8,10 +8,10 @@ import { changelogUrl, manualUrl, publicVersion, sitePath } from "../../site";
     <h2 id="estado-title">O que já funciona hoje.</h2>
     <p class="section-intro-copy">
       A versão pública é a{" "}
-      <strong>{publicVersion} beta para Linux x86_64</strong>. Ela reúne edição
-      e navegação de projeto com tarefas de desenvolvimento e painéis de
-      ambiente. O que funciona em cada projeto depende das ferramentas e do alvo
-      disponíveis.
+      <strong>{publicVersion} beta para Linux x86_64</strong>. O pacote traz a
+      interface, o core e o Qt; compiladores, SDKs e ferramentas vêm do seu
+      sistema, então o que funciona em cada projeto depende do que está
+      instalado e do alvo.
     </p>
   </div>
   <div class="status-panel card reveal">
@@ -40,19 +40,23 @@ import { changelogUrl, manualUrl, publicVersion, sitePath } from "../../site";
   <div class="current-capabilities auto-grid reveal-children">
     <div class="card">
       <h3>Projeto e editor</h3>
-      <p>Explorer, editor, navegação por símbolos e estado do projeto.</p>
+      <p>
+        Árvore do projeto, editor com Tree-sitter e inteligência de código por
+        clangd, rust-analyzer e basedpyright.
+      </p>
     </div>
     <div class="card">
       <h3>Executar e investigar</h3>
       <p>
-        Build, testes, depuração e execução em uma aba do terminal integrado.
+        Build, testes, cobertura e depuração como tarefas canceláveis, e um
+        terminal integrado de verdade (PTY).
       </p>
     </div>
     <div class="card">
-      <h3>Ferramentas de apoio</h3>
+      <h3>Além do editor</h3>
       <p>
-        Git, embarcados, containers e bancos em fluxos com pré-requisitos
-        próprios.
+        Git, Remote SSH, embarcados, containers, bancos e Grafana, cada um com
+        os próprios pré-requisitos.
       </p>
     </div>
   </div>

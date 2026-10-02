@@ -63,9 +63,9 @@ const wallpaper = await getImage({
         </h1>
         <p class="hero-lead">
           A Kinein Vectis é uma IDE open source para C, C++, Rust e Python,
-          voltada a sistemas, embarcados e software de apoio ao dispositivo. Ela
-          reúne o projeto, as ferramentas encontradas e as escolhas usadas em
-          build, testes e depuração.
+          feita para firmware, sistemas, Linux embarcado e IoT. Ela lê o projeto
+          e o ambiente, mostra o que encontrou, explica o que será usado e deixa
+          a decisão com você.
         </p>
         <div class="hero-actions">
           <a
@@ -82,10 +82,8 @@ const wallpaper = await getImage({
           </a>
         </div>
         <p class="hero-meta">
-          Disponível agora: beta {publicVersion}{" "}
-          <span aria-hidden="true">·</span> Linux x86_64{" "}
-          <span aria-hidden="true">·</span> A {developmentSnapshot.version} está
-          em desenvolvimento
+          Open source, MIT ou Apache-2.0 <span aria-hidden="true">·</span> Sem
+          telemetria <span aria-hidden="true">·</span> Sem IA embutida
         </p>
       </div>
     </div>
@@ -101,21 +99,21 @@ const wallpaper = await getImage({
       <span class="journey-label label">01 / PRESENTE</span>
       <strong>Veja o estado do beta</strong>
       <span class="journey-arrow" aria-hidden="true">
-        ↗
+        ↓
       </span>
     </a>
     <a href="#desenvolvimento">
       <span class="journey-label label">02 / EM DESENVOLVIMENTO</span>
       <strong>Acompanhe a {developmentSnapshot.version}</strong>
       <span class="journey-arrow" aria-hidden="true">
-        ↗
+        ↓
       </span>
     </a>
     <a href="#foco">
       <span class="journey-label label">03 / DIREÇÃO</span>
       <strong>Conheça os próximos focos</strong>
       <span class="journey-arrow" aria-hidden="true">
-        ↗
+        ↓
       </span>
     </a>
   </nav>
@@ -134,103 +132,65 @@ const wallpaper = await getImage({
     aria-labelledby="experiencia-title"
   >
     <div class="section-intro reveal">
-      <p class="kicker">EXPERIÊNCIA EM DESENVOLVIMENTO</p>
-      <h2 id="experiencia-title">
-        Menos configuração manual. Mais tempo para projetar e testar.
-      </h2>
+      <p class="kicker">COMO A VECTIS LÊ O PROJETO</p>
+      <h2 id="experiencia-title">Do encontrado ao efetivo.</h2>
       <p class="section-intro-copy">
-        A meta é abrir um projeto compatível, reconhecer o ambiente e oferecer
-        escolhas claras pela interface. Arquivos de configuração podem continuar
-        existindo para as ferramentas; o fluxo comum não deveria exigir que você
-        edite JSON da IDE ou peça a uma IA para fazê-lo.
+        Compilador, toolchain, alvo, sysroot, preset, language server e debugger
+        continuam escolhas suas. A IDE torna essa cadeia visível e explicável,
+        sem que o fluxo comum exija editar JSON da IDE ou pedir a uma IA para
+        fazê-lo.
       </p>
     </div>
     <div class="principle-grid auto-grid reveal-children">
       <article class="principle-card card">
         <span class="card-glyph" aria-hidden="true">
-          ◇
+          01
         </span>
-        <h3>Reconhecer</h3>
+        <h3>Detectado</h3>
         <p>
-          Mostrar ferramentas, SDKs, ambientes e destinos encontrados para o
-          projeto.
+          O que existe na máquina e no projeto: compiladores, SDKs, language
+          servers, debuggers e dispositivos.
         </p>
       </article>
       <article class="principle-card card">
         <span class="card-glyph" aria-hidden="true">
-          ⌁
+          02
         </span>
-        <h3>Escolher pela interface</h3>
+        <h3>Escolhido</h3>
         <p>
-          Explicar alternativas e pedir sua decisão quando houver mais de um
-          caminho.
+          O que você seleciona quando há mais de um caminho, com as alternativas
+          explicadas antes de qualquer mudança.
         </p>
       </article>
       <article class="principle-card card">
         <span class="card-glyph" aria-hidden="true">
-          ▣
+          03
         </span>
-        <h3>Trabalhar com contexto</h3>
+        <h3>Efetivo</h3>
         <p>
-          Deixar visível o ambiente efetivo de build, teste, execução e
-          depuração.
+          O que build, testes e depuração realmente usam, e de onde veio cada
+          valor.
         </p>
       </article>
     </div>
     <p class="direction-note">
-      Esta é a direção do produto. O beta {publicVersion} ainda não oferece esse
-      fluxo completo para todos os projetos e ecossistemas.
+      Esta é a direção do produto: a {publicVersion} ainda não oferece esse
+      fluxo completo para todos os projetos e ecossistemas.{" "}
+      <a
+        class="inline-link"
+        href={`${repositoryUrl}#readme`}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Leia a visão no README <span aria-hidden="true">↗</span>
+      </a>
     </p>
-  </section>
-
-  <section class="flow-section" aria-labelledby="flow-title">
-    <div class="shell flow-layout">
-      <div class="section-intro reveal">
-        <p class="kicker">O QUE MUDA NA LEITURA DO PROJETO</p>
-        <h2 id="flow-title">Do encontrado ao efetivo.</h2>
-        <p class="section-intro-copy">
-          O fluxo abaixo representa a proposta da IDE. Ele é conceitual e não
-          uma captura da interface.
-        </p>
-        <a
-          class="inline-link"
-          href={`${repositoryUrl}#readme`}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Leia a visão no README oficial <span aria-hidden="true">↗</span>
-        </a>
-      </div>
-      <ol class="state-flow reveal-children">
-        <li>
-          <span class="step-number">01</span>
-          <div>
-            <strong>Detectado</strong>
-            <p>Ferramentas, SDKs e destinos disponíveis.</p>
-          </div>
-        </li>
-        <li>
-          <span class="step-number">02</span>
-          <div>
-            <strong>Escolhido</strong>
-            <p>Configuração que você seleciona para trabalhar.</p>
-          </div>
-        </li>
-        <li>
-          <span class="step-number">03</span>
-          <div>
-            <strong>Efetivo</strong>
-            <p>Ambiente que a tarefa realmente utiliza.</p>
-          </div>
-        </li>
-      </ol>
-    </div>
   </section>
 
   <section class="closing-section" aria-labelledby="closing-title">
     <div class="shell closing-layout reveal">
       <div>
-        <p class="kicker">COMECE COM INFORMAÇÃO CLARA</p>
+        <p class="kicker">BETA PÚBLICO {publicVersion}</p>
         <h2 id="closing-title">
           Explore o beta. Ajude a definir os próximos fluxos.
         </h2>
