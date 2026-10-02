@@ -1,0 +1,51 @@
+# Reprodução do capítulo "Conhecer a tela" (scripts/capturar-tutorial.sh).
+# Recria o projeto do capítulo anterior pela tela inicial, como o leitor fez.
+abrir
+esperar 10
+clicar 552 460         # Novo C++ / CMake
+esperar 2
+clicar 660 332         # + pasta
+esperar 1
+digitar projetos
+tecla Return
+esperar 1.5
+duplo 520 435          # projetos
+esperar 1.5
+clicar 744 332         # + projeto
+esperar 1
+digitar ola-kinein
+clicar 1075 380        # Criar
+esperar 10
+fechar
+abrir                  # tela inicial, agora com o projeto nos recentes
+esperar 10
+foto recentes 440 330 800 420
+clicar 560 615         # ola-kinein nos recentes
+esperar 10
+clicar 133 165         # src
+esperar 1
+clicar 160 189         # main.cpp
+esperar 3
+tecla ctrl+alt+b       # compila, para o painel de baixo ter conteúdo
+esperar 6
+tecla alt+F12
+esperar 2
+clicar 1499 61         # ▶
+esperar 4
+foto visao-geral
+foto cabecalho 0 0 820 100
+foto acoes 800 0 800 100
+clicar 33 944          # expande o trilho
+esperar 1.5
+foto trilho 0 85 820 330
+clicar 91 944          # recolher
+esperar 1
+clicar 900 400         # foco no editor
+tecla alt+7            # Símbolos
+esperar 2
+foto simbolos 980 150 620 140
+clicar 724 704         # aba Jobs
+esperar 1.5
+foto jobs 376 686 1216 200
+foto status-esquerda 0 968 820 32
+foto status-direita 800 968 800 32
