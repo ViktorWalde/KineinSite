@@ -1,0 +1,55 @@
+# Reprodução do capítulo "Primeiro projeto em C++" (scripts/capturar-tutorial.sh).
+# Coordenadas na janela de 1600x1000 da 0.3.5.
+pasta .
+bloco 1                # apt install (no ambiente de teste, já instalado)
+bloco 2                # versões
+conferir g++ (Ubuntu
+conferir cmake version 3.
+abrir
+esperar 10
+clicar 552 460         # Novo C++ / CMake
+esperar 2
+clicar 660 332         # + pasta
+esperar 1
+digitar projetos
+tecla Return           # Criar
+esperar 1.5
+duplo 520 435          # entra em projetos
+esperar 1.5
+clicar 744 332         # + projeto
+esperar 1
+digitar ola-kinein
+esperar 1
+foto novo-projeto 440 220 720 345
+clicar 1075 380        # Criar
+esperar 10             # abre o projeto e roda o configure
+clicar 133 165         # src
+esperar 1
+clicar 160 189         # main.cpp
+esperar 4
+foto projeto-criado 0 40 1000 380
+tecla ctrl+alt+b       # Compilar
+esperar 8
+foto compilado 376 690 820 140
+tecla alt+F12          # abre o terminal antes de executar
+esperar 2
+clicar 1499 61         # ▶
+esperar 4
+foto primeira-execucao 376 690 820 140
+clicar 900 500         # foco no editor
+clicar 700 246         # linha 5
+tecla End Left Left Left Left Left Left Left Left Left Left
+tecla BackSpace BackSpace BackSpace BackSpace BackSpace BackSpace BackSpace BackSpace BackSpace BackSpace BackSpace BackSpace BackSpace
+digitar Olá, Kinein!
+tecla Escape
+tecla ctrl+s
+esperar 2
+tecla ctrl+alt+b       # Compilar
+esperar 8
+clicar 1499 61         # ▶
+esperar 4
+foto executado 376 690 820 140
+fechar
+pasta projetos/ola-kinein
+bloco 3                # o executável pelo terminal
+conferir Olá, Kinein!

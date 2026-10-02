@@ -4,7 +4,7 @@ summary: "Baixe a versão pública, confira se o arquivo chegou íntegro, instal
 order: 1
 minutes: 10
 ideVersion: "0.3.5"
-platform: "Ubuntu 24.04 x86_64, X11"
+platform: "Ubuntu 24.04 x86_64, X11 (Xvfb)"
 lastTested: 2026-10-02
 status: verified
 prerequisites:

@@ -16,6 +16,7 @@
 #   tecla <combinação>      no formato do xdotool: ctrl+shift+a, Return, Escape
 #   digitar <texto>
 #   clicar <x> <y>          coordenadas na janela de 1600x1000
+#   duplo <x> <y>           clique duplo
 #   foto <nome> [x y l a]   salva capturas/<nome>.png, opcionalmente recortada
 #   fechar                  encerra a IDE
 #
@@ -26,9 +27,17 @@
 # estreitos que isso aparecem ampliados; inclua contexto em volta.
 #
 # A HOME de demonstração é descartável (KINEIN_DEMO_HOME, padrão
-# /tmp/kinein-demo/home): nada toca na sua configuração. Requer xvfb (Xvfb),
-# xdotool, ImageMagick (import, convert), curl e unzip, mais as ferramentas
-# que cada capítulo usa (cmake, g++, git, clangd...).
+# /tmp/kinein-demo/home): nada toca na sua configuração. Ela é esvaziada a cada
+# capítulo, por isso o script só aceita uma pasta vazia ou criada por ele. As
+# capturas publicadas usam KINEIN_DEMO_HOME=/home/voce, o caminho que o texto
+# mostra (crie com: sudo install -d -o "$USER" /home/voce).
+#
+# Blocos e IDE rodam com um ambiente mínimo (env -i): HOME, PATH do sistema,
+# idioma e proxy, se houver. Nada da sua sessão (tokens, variáveis do Qt)
+# chega à IDE nem aparece nas capturas.
+#
+# Requer xvfb (Xvfb), xdotool, ImageMagick (import, convert), curl e unzip,
+# mais as ferramentas que cada capítulo usa (cmake, g++, git, clangd...).
 set -euo pipefail
 
 appimage="$(realpath "${1:?Informe o caminho do AppImage da Kinein Vectis.}")"
@@ -40,6 +49,7 @@ shift
 repo_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
 content_dir="$repo_dir/src/content/aprender"
 demo_home="${KINEIN_DEMO_HOME:-/tmp/kinein-demo/home}"
+user_name="$(id -un)"
 width=1600
 height=1000
 scale="${KINEIN_SCALE:-2}"
@@ -93,6 +103,20 @@ fail() {
   exit 1
 }
 
+# Esvazia a HOME de demonstração. A marca garante que só uma pasta vazia ou
+# criada por este script é apagada; a pasta em si fica (em /home/voce, quem
+# roda o script não pode recriá-la).
+reset_demo_home() {
+  local marker="$demo_home/.capturar-tutorial"
+  mkdir -p "$demo_home"
+  if [[ ! -e "$marker" && -n "$(ls -A "$demo_home")" ]]; then
+    echo "$demo_home não está vazia e não foi criada por este script." >&2
+    exit 1
+  fi
+  find "$demo_home" -mindepth 1 -delete
+  touch "$marker"
+}
+
 run_chapter() {
   chapter="$1"
   local dir="$content_dir/$chapter"
@@ -103,19 +127,28 @@ run_chapter() {
   mkdir -p "$dir/capturas"
 
   # HOME limpa por capítulo, com caminho fixo (ele aparece nas capturas).
-  rm -rf -- "$demo_home"
-  mkdir -p "$demo_home"
+  reset_demo_home
   local cwd="$demo_home" output="" window=""
   local env_vars=(
+    "DISPLAY=$DISPLAY"
     "HOME=$demo_home"
+    "USER=$user_name"
+    "LOGNAME=$user_name"
+    "SHELL=/bin/bash"
+    "LANG=C.UTF-8"
     "XDG_CONFIG_HOME=$demo_home/.config"
     "XDG_DATA_HOME=$demo_home/.local/share"
     "XDG_CACHE_HOME=$demo_home/.cache"
-    "PATH=$demo_home/.local/bin:$PATH"
+    "PATH=$demo_home/.local/bin:/usr/local/bin:/usr/bin:/bin"
     "KINEIN_APPIMAGE=$appimage"
     "APPIMAGE_EXTRACT_AND_RUN=1"
     "QT_SCALE_FACTOR=$scale"
   )
+  local name
+  for name in http_proxy https_proxy HTTP_PROXY HTTPS_PROXY no_proxy NO_PROXY \
+    SSL_CERT_FILE CURL_CA_BUNDLE; do
+    [[ -n "${!name:-}" ]] && env_vars+=("$name=${!name}")
+  done
 
   line_number=0
   while IFS= read -r raw || [[ -n "$raw" ]]; do
@@ -133,7 +166,7 @@ run_chapter() {
         local block="$work/bloco-$rest.sh"
         [[ -f "$block" ]] || fail "o index.md não tem o bloco bash $rest"
         echo "  bloco $rest em ${cwd#"$demo_home"/}"
-        output="$(cd "$cwd" && env "${env_vars[@]}" bash -e "$block" 2>&1)" ||
+        output="$(cd "$cwd" && env -i "${env_vars[@]}" bash -e "$block" 2>&1)" ||
           fail "o bloco $rest falhou:"$'\n'"$output"
         ;;
       conferir)
@@ -143,7 +176,7 @@ run_chapter() {
       abrir)
         local target=()
         [[ -n "$rest" ]] && target=("$demo_home/$rest")
-        (cd "$demo_home" && exec setsid env "${env_vars[@]}" \
+        (cd "$demo_home" && exec setsid env -i "${env_vars[@]}" \
           "$appimage" "${target[@]}" >"$work/ide.log" 2>&1) &
         ide_pid=$!
         window="$(xdotool search --sync --onlyvisible --class kinein 2>/dev/null | head -1)" ||
@@ -160,11 +193,16 @@ run_chapter() {
         xdotool key --clearmodifiers $rest
         ;;
       digitar)
-        xdotool type --delay 60 -- "$rest"
+        LC_ALL=C.UTF-8 xdotool type --delay 60 -- "$rest"
         ;;
       clicar)
         read -r x y <<<"$rest"
         xdotool mousemove "$((x * scale))" "$((y * scale))" click 1
+        ;;
+      duplo)
+        read -r x y <<<"$rest"
+        xdotool mousemove "$((x * scale))" "$((y * scale))" \
+          click --repeat 2 --delay 120 1
         ;;
       foto)
         read -r name x y w h <<<"$rest"
