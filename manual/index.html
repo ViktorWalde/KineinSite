@@ -1,0 +1,1496 @@
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><script>(function(){const themeKey = "kinein-theme";
+const accentKey = "kinein-accent";
+const themes = ["light","dark","warm"];
+const accents = ["blue","teal"];
+
+      try {
+        const root = document.documentElement;
+        const theme = localStorage.getItem(themeKey);
+        const accent = localStorage.getItem(accentKey);
+        if (themes.includes(theme)) root.dataset.theme = theme;
+        if (accents.includes(accent)) root.dataset.accent = accent;
+      } catch {
+        // Sem armazenamento local, vale o padrão do CSS.
+      }
+    })();</script><meta name="color-scheme" content="light dark"><meta name="theme-color" content="#20262b" media="(prefers-color-scheme: dark)"><meta name="theme-color" content="#faf8f2" media="(prefers-color-scheme: light)"><link rel="icon" type="image/png" sizes="32x32" href="/KineinSite/_astro/icon-amber.DfSfEzUf_9iApe.png"><link rel="apple-touch-icon" href="/KineinSite/_astro/icon-amber.DfSfEzUf_Z2tY6mp.png"><meta name="referrer" content="no-referrer"><meta name="description" content="Manual de uso da Kinein Vectis 0.3.5: layout, editor, build, testes, depuração, Git, terminal, Python, embarcados e atalhos."><meta property="og:site_name" content="Kinein Vectis"><meta property="og:type" content="website"><meta property="og:locale" content="pt_BR"><meta property="og:title" content="Manual da IDE"><meta property="og:description" content="Manual de uso da Kinein Vectis 0.3.5: layout, editor, build, testes, depuração, Git, terminal, Python, embarcados e atalhos."><meta property="og:url" content="https://viktorwalde.github.io/KineinSite/manual/"><link rel="canonical" href="https://viktorwalde.github.io/KineinSite/manual/"><meta property="og:image" content="https://viktorwalde.github.io/KineinSite/_astro/wallpaper-site.BEfluGg9_2mvUPM.jpeg"><meta name="twitter:card" content="summary_large_image"><title>Manual da IDE | Kinein Vectis</title><meta http-equiv="content-security-policy" content="default-src 'self';img-src 'self';connect-src 'self';object-src 'none';base-uri 'self';form-action 'none';upgrade-insecure-requests; script-src 'self' 'sha256-NIviOxNzNFzN42nbnerMgOiRROP/T4MgmZwJbfr5EPU=' 'sha256-w/gI9JUbtv3A5ZvxoAmnwNPetRxnn47xWR2o9C5j7xk=' 'sha256-BmLhwiRkUVEGg0m+cOdXSkvcwW91DCHyzvqDqiT0EG4=' 'sha256-BF0290pkb3jxQsE7z00xR8Imp8X34FLC88L0lkMnrGw=' 'sha256-QzWFZi+FLIx23tnm9SBU4aEgx4x8DsuASP07mfqol/c=' 'sha256-0chmwFk0zaA528yFfGV7J9ppIpdfTPPULncDF3WG7Zs=' 'sha256-eIXWvAmxkr251LJZkjniEK5LcPF3NkapbJepohwYRIc=' 'sha256-Q2BPg90ZMplYY+FSdApNErhpWafg2hcRRbndmvxuL/Q='; style-src 'self' 'sha256-rUrtqGzC1GUWhRgKcJB6zVgC2rOulzh4j6a7Xe9Lxw4=' 'sha256-tlS/ruqAauOAEurtAFZWm92cLO7grx4MhPW+OoNj0hE=' 'sha256-BP4gWQ4tgTaxxTC4lwaxxOj4bXC4z+kJIkJK0GplJIo=' 'sha256-/IEHOPhpOKLsPaC4TsUHUGsUdrqFcOxKaascQDRXcA4=' 'sha256-mttLNkvNsX1GwtRRwNuLX1YtCUD4ZVX0YBX+tR/mYUg=' 'sha256-uthJnTdw6kBOLCK/8+M165WV5AxJcezizTb8Tq/A1sM=' 'sha256-+RoxR8hMb12BZ7K9Ug1x+CNVtw0Humy6VMRVJYrgGz8=' 'sha256-Rhe8Vyb3MOr4Un4PvQmfvSZK6IrpuCxeGce/XCTw6b0=' 'sha256-47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=';"><style>.prose pre{max-width:100%;padding:var(--space-m) var(--space-l);border:1px solid var(--border);border-radius:var(--radius-lg);background:var(--surface);box-shadow:var(--edge);color:var(--text);font-size:var(--text-sm);tab-size:2;margin-block:1.5rem;line-height:1.6;overflow-x:auto}.prose pre code{color:inherit;font-size:inherit;background:0 0;padding:0}.prose .code-block{border:1px solid var(--border);border-radius:var(--radius-lg);background:var(--surface);box-shadow:var(--edge);margin-block:1.5rem;overflow:hidden}.prose .code-block pre{box-shadow:none;border:0;border-radius:0;margin:0}.code-block-bar{justify-content:space-between;align-items:center;gap:var(--space-s);min-height:2.5rem;padding:.3rem .4rem .3rem var(--space-l);border-bottom:1px solid var(--border);background:color-mix(in oklab, var(--surface-soft) 60%, var(--surface));display:flex}.code-block-bar .label{color:var(--muted)}.code-copy{border:1px solid var(--border);border-radius:var(--radius-sm);min-height:1.9rem;color:var(--muted);cursor:pointer;font:600 var(--text-xs) / 1 var(--font-mono);transition:border-color var(--duration-fast) ease, color var(--duration-fast) ease, background-color var(--duration-fast) ease;background:0 0;align-items:center;gap:.35rem;padding:.2rem .7rem;display:inline-flex}.code-copy:hover{border-color:var(--accent);color:var(--text)}.code-copy[data-state=done]{border-color:var(--accent);background:color-mix(in oklab, var(--accent) 14%, transparent);color:var(--text)}.code-copy[data-state=error]{border-color:var(--text);color:var(--text)}@media (pointer:coarse){.code-copy{min-height:2.5rem}}.prose kbd{border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--surface);min-width:1.6em;font:600 .82em / 1.5 var(--font-mono);text-align:center;white-space:nowrap;border-bottom-width:2px;padding:.05em .45em;display:inline-block}
+</style><link rel="stylesheet" href="/KineinSite/_astro/documentacao.CTkbuAji.css"><style>.manual-header{padding-block:var(--space-xl) 0}.manual-source{max-width:62ch;margin-block:var(--space-xs) 0;color:var(--muted);font-size:var(--text-sm);line-height:1.7}.manual-outdated{margin-block:var(--space-s) 0;padding:var(--space-s) var(--space-m);border:1px solid var(--accent);border-radius:var(--radius-md);background:color-mix(in oklab, var(--accent) 10%, transparent);font-size:var(--text-sm)}.manual-article{max-width:72ch;padding-block:var(--space-s) var(--space-2xl);overflow-wrap:break-word;font-size:var(--text-base);line-height:1.8}.manual-article h1{margin-block:var(--space-xs) var(--space-m);font-size:var(--text-4xl)}.manual-article h2{margin-block:var(--space-2xl) var(--space-s);border-top:1px solid var(--border);font-size:var(--text-2xl);padding-block-start:var(--space-l)}.manual-article h3{margin-block:var(--space-l) var(--space-xs);font-size:var(--text-xl)}.manual-article p,.manual-article ul,.manual-article ol{margin-block:0 1.2rem}.manual-article li+li{margin-block-start:.4rem}.manual-article a{color:var(--accent)}.manual-article hr{display:none}.manual-article blockquote{margin:var(--space-m) 0;padding:var(--space-s) var(--space-m);border-left:3px solid var(--accent);border-radius:0 var(--radius-md) var(--radius-md) 0;background:var(--surface);color:var(--muted)}.manual-article blockquote p:last-child{margin-block-end:0}.manual-article :not(pre)>code{overflow-wrap:anywhere}
+</style><link rel="stylesheet" href="/KineinSite/_astro/BaseLayout.DRDb8x_o.css"></head><body><a class="skip-link" href="#conteudo">Pular para o conteúdo</a><header class="site-header"><div class="shell header-inner"><a class="brand" href="/KineinSite/" aria-label="Kinein Vectis, página inicial"><img src="/KineinSite/_astro/icon-amber.DfSfEzUf_Z5y0ai.webp" width="34" height="34" alt="" decoding="async"><span>Kinein <strong>Vectis</strong></span></a><nav class="primary-nav" aria-label="Navegação principal"><a href="/KineinSite/aprender/">Guia</a><a href="/KineinSite/manual/" aria-current="page">Manual</a><a href="/KineinSite/documentacao/">Documentação</a><a href="/KineinSite/atualizacoes/">Atualizações</a><a class="nav-external" href="https://discord.gg/cWRkUGUmQU" target="_blank" rel="noopener noreferrer">Discord <span aria-hidden="true">↗</span></a></nav><div class="header-tools"><details class="appearance"><summary>Tema <span aria-hidden="true">⌄</span></summary><div class="appearance-panel"><fieldset class="appearance-group"><legend class="label">Tema</legend><div class="theme-options"><label class="theme-option"><input type="radio" name="theme" value="system"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h14a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zM8 20h8M12 16v4"></path></svg>Sistema</label><label class="theme-option"><input type="radio" name="theme" value="light"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 8a4 4 0 1 0 0 8 4 4 0 1 0 0-8zM12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>Claro</label><label class="theme-option"><input type="radio" name="theme" value="dark"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"></path></svg>Escuro</label><label class="theme-option"><input type="radio" name="theme" value="warm"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3c1 3.5 5 5.5 5 10a5 5 0 0 1-10 0c0-2.5 1.5-4 2.5-5 .3 1.7 1.2 2.6 2 3 .3-3-.5-5.5.5-8z"></path></svg>Quente</label></div></fieldset><fieldset class="appearance-group"><legend class="label">Cor de destaque</legend><div class="accent-options"><label class="accent-option"><input type="radio" name="accent" value="amber"><span class="swatch" data-accent="amber" aria-hidden="true"></span>Âmbar</label><label class="accent-option"><input type="radio" name="accent" value="blue"><span class="swatch" data-accent="blue" aria-hidden="true"></span>Azul</label><label class="accent-option"><input type="radio" name="accent" value="teal"><span class="swatch" data-accent="teal" aria-hidden="true"></span>Verde-azulado</label></div></fieldset><p>A preferência fica somente neste navegador.</p></div></details><a class="button button-primary button-small header-download" href="https://github.com/ViktorWalde/KineinVectis/releases/tag/v0.3.5" target="_blank" rel="noopener noreferrer">Baixar 0.3.5 <span aria-hidden="true">↗</span></a></div></div></header><main id="conteudo"><div class="docs-shell shell"><aside class="docs-sidebar" aria-label="Navegação desta página"><p class="label">Manual · 0.3.5</p><nav aria-label="Seções do manual"><a href="#1-primeiros-passos">1. Primeiros passos</a><a href="#2-o-layout">2. O layout</a><a href="#3-editor">3. Editor</a><a href="#4-build-testes-e-análise">4. Build, testes e análise</a><a href="#5-terminal-shell-e-execução">5. Terminal (shell e execução)</a><a href="#6-usar-uma-cli-de-ia-claude-codex">6. Usar uma CLI de IA (Claude, Codex…)</a><a href="#7-configurações-ctrlalts">7. Configurações (Ctrl+Alt+S)</a><a href="#8-aba-ferramentas-e-saúde-do-ambiente">8. Aba Ferramentas e saúde do ambiente</a><a href="#9-menu-ambiente--preparar-o-projeto-antes-de-compilar">9. Menu Ambiente — preparar o projeto antes de compilar</a><a href="#10-python">10. Python</a><a href="#11-quando-algo-der-errado">11. Quando algo der errado</a><a href="#12-tabela-resumo-de-todos-os-atalhos">12. Tabela-resumo de todos os atalhos</a></nav><div class="docs-sidebar-note">O texto é o do repositório da IDE, sem alterações.</div></aside><script type="module">var e=Array.from(document.querySelectorAll(`.docs-sidebar a[href^="#"]`)),t=e.map(e=>document.getElementById(decodeURIComponent(e.hash.slice(1)))),n=!1;function r(){n=!1;let r=window.innerHeight*.3,i=window.innerHeight+window.scrollY>=document.documentElement.scrollHeight-2,a=-1;t.forEach((e,t)=>{e&&e.getBoundingClientRect().top<=r&&(a=t)}),i&&(a=t.length-1),e.forEach((e,t)=>{t===a?e.setAttribute(`aria-current`,`true`):e.removeAttribute(`aria-current`)})}function i(){n||(n=!0,requestAnimationFrame(r))}e.length>0&&(window.addEventListener(`scroll`,i,{passive:!0}),window.addEventListener(`resize`,i),r());</script><div class="docs-main"><header class="manual-header enter"><p class="kicker">MANUAL DA IDE · VERSÃO 0.3.5</p><p class="manual-source">Este é o texto oficial do repositório da Kinein Vectis, reproduzido sem alterações a partir da tag <a class="inline-link" href="https://github.com/ViktorWalde/KineinVectis/blob/v0.3.5/DocsPublic/manual.md" target="_blank" rel="noopener noreferrer">v0.3.5 <span aria-hidden="true">↗</span></a> (commit <code>e3368a5</code>, copiado em 2 de outubro de 2026). Para aprender passo a passo, o <a class="inline-link" href="/KineinSite/aprender/">Guia da IDE</a> mostra cada tarefa reproduzida na IDE.</p></header><article class="manual-article prose"><h1 id="manual-do-kinein-vectis">Manual do Kinein Vectis</h1>
+<p>Guia completo para usar e testar a IDE depois que ela estiver aberta. Este
+documento cobre os fluxos, recursos, atalhos e problemas encontrados durante o
+uso.</p>
+<blockquote>
+<p><strong>O que é:</strong> Kinein Vectis é uma IDE para C, C++, Rust, Python e sistemas
+embarcados. Ela orquestra ferramentas maduras (clangd, rust-analyzer,
+basedpyright, cargo, CMake, pytest, debugpy, clang-format, ruff…) em vez
+de reimplementá-las. Os fluxos da IDE
+são locais e não têm telemetria; somente uma CLI externa iniciada
+explicitamente por você no terminal pode usar rede conforme a política dela.</p>
+<p><strong>Estado atual:</strong> em desenvolvimento ativo. A interface já segue o sistema
+visual Kinein (App Bar, toolbar principal, ícones vetoriais e Start Screen);
+a validação visual final em hardware real continua pendente.</p>
+</blockquote>
+<hr>
+<h2 id="1-primeiros-passos">1. Primeiros passos</h2>
+<ol>
+<li>A IDE abre na <strong>Start Screen</strong>, que mostra o estado das ferramentas sem
+instalar ou alterar nada automaticamente. Clique em <strong>Abrir workspace</strong>
+(ou <code>Ctrl+O</code>).</li>
+<li>Navegue até a pasta do seu projeto (qualquer projeto com <code>Cargo.toml</code> ou
+<code>CMakeLists.txt</code> é detectado automaticamente) e confirme.</li>
+<li>A árvore de arquivos aparece à esquerda. Clique num arquivo para editar.</li>
+</ol>
+<p>Se a raiz tiver <code>Cargo.toml</code> <strong>e</strong> <code>CMakeLists.txt</code>, a Kinein reconhece o
+workspace híbrido: menus e barra superior oferecem Build/Teste Cargo e CMake
+separadamente, e o Project Health verifica as duas toolchains.
+4. Ao reabrir o mesmo projeto depois, <strong>suas abas voltam como estavam</strong>
+(sessão automática).</p>
+<p>Depois da primeira abertura bem-sucedida, o projeto aparece em <strong>Workspaces
+recentes</strong> na Start Screen e em <strong>Arquivo → Abrir recente</strong>. Um clique reabre o
+workspace e restaura suas abas. Na Start Screen também é possível <strong>fixar</strong> os
+projetos mais importantes no topo, remover uma entrada ou limpar toda a lista.
+Se uma pasta foi movida ou apagada, ela aparece como <strong>caminho ausente</strong>, fica
+desabilitada e pode ser removida com segurança.</p>
+<p>Também dá para <strong>criar</strong> um projeto novo (Rust/Cargo ou C++/CMake) pela Start
+Screen. O seletor mostra antes os arquivos e comandos que serão usados. O
+template C++ é C++23 target-based, com Ninja, presets Debug/Release,
+<code>src/</code>, <code>include/</code>, <code>tests/</code> e <code>.gitignore</code>; o Rust delega a criação ao Cargo.</p>
+<p>Um banner discreto de <strong>Project Health</strong> aparece acima do editor quando
+algo do ambiente merece atenção (ex.: ferramentas faltando para o tipo do
+projeto, ou projeto CMake ainda sem configure), com botão para
+verificar/resolver. Quando está tudo bem, ele some.</p>
+<p><strong>Projetos CMake:</strong> ao abrir um projeto CMake ainda não configurado, a
+IDE roda o configure <strong>sozinha</strong> (aviso discreto acima do editor;
+progresso na aba <strong>Jobs</strong>) — é o passo que gera o build system e o
+<code>compile_commands.json</code> que deixa a análise do clangd precisa. Salvar o
+<code>CMakeLists.txt</code>/<code>CMakePresets.json</code> pela IDE reconfigura
+automaticamente. O botão <strong>[Configurar CMake]</strong> da barra superior segue
+existindo para reconfigurar na mão (ex.: mudou algo por fora). Depois do
+primeiro configure, reabra o arquivo (ou o projeto) para o clangd usar
+os flags reais. Projetos Rust não têm esse passo (o cargo se vira).</p>
+<hr>
+<p><strong>Abrir direto num projeto</strong> (desde 2026-09-18): <code>kinein-vectis /caminho/do/projeto</code>
+abre a pasta sem passar pela tela inicial — serve para um lançador, um
+atalho de área de trabalho ou um <code>alias</code>. Com <code>KINEIN_STARTUP_COMMANDS=build.run</code>
+(ids da paleta, separados por vírgula) a IDE executa os comandos logo depois
+de abrir — é o que os testes headless usam para fotografar um estado.</p>
+<h2 id="2-o-layout">2. O layout</h2>
+<pre><code class="language-text">┌──────────────────────────────────────────────────────────────┐
+│ App Bar: Arquivo · Editar · Exibir · Navegar · Código ...    │
+│ Barra: [Projeto ▾] [⎇ git]           [config ▾] ▶ 🐞 [⋯]   │
+├───┬───────────────┬─────────────────────────────┬────────────┤
+│ R │ Projeto OU    │ Editor (abas + código;      │ Símbolos   │
+│ a │ Git (Commit/  │  o diff/commit do Git abre  │ (estrutura │
+│ i │ Log, em pé)   │  aqui como visualização)    │  + busca)  │
+│ l │               │                             │            │
+├───┴───────────────┴─────────────────────────────┴────────────┤
+│ Painel inferior: Build | Jobs | Problemas | Testes |         │
+│                  Terminal | Debug | Busca | IDE |            │
+│                  Ferramentas                                 │
+├──────────────────────────────────────────────────────────────┤
+│ Status: projeto · toolchain │ job em curso ▬▬ ✕ │ LSP · IDE · core│
+└──────────────────────────────────────────────────────────────┘
+</code></pre>
+<ul>
+<li><strong>Barra principal</strong> (desde 2026-09-18, Etapa 2 F1): <strong>três widgets</strong>, como
+nas IDEs JetBrains. <em>Projeto</em> — o nome do workspace, o que ele é (Cargo +
+CMake) e o ponto do core; o clique abre recentes, abrir e fechar. <em>Git</em> —
+a branch, ↑↓ e o contador de alterações; o clique abre a janela do Git.
+<em>Executar</em> — a configuração ativa (▾ troca), <strong>▶ Rodar</strong>, <strong>🐞 Depurar</strong> e
+o menu <strong>⋯</strong> com Compilar/Testar/Análise/Cobertura/Configurar de cada
+sistema que o projeto tem, com rótulo (antes eram dois pares de botões
+iguais sem rótulo). Um ponto pulsa no ⋯ enquanto um build, teste ou
+análise roda.</li>
+<li><strong>Barra de status</strong> (desde 2026-09-18, Etapa 2 F2): diz <strong>o que está
+acontecendo</strong>. À esquerda o projeto e a toolchain; no centro o <strong>job em
+curso</strong> — build, testes, índice, configure, deploy — com o título, uma
+barra de progresso (que anda sozinha quando o job não mede), a última
+linha da saída e o ✕ para cancelar (clicar no título abre a aba Jobs);
+sem job, os resumos do projeto. À direita, os <strong>servidores de linguagem</strong>
+(<code>LSP ● 2</code> todos rodando, <code>LSP … cpp</code> subindo, <code>LSP ✗ python</code> caiu — o
+motivo ao pairar; antes isso só existia no log da aba IDE), o botão IDE e
+o core.</li>
+<li><strong>Editor e explorer</strong> (desde 2026-09-18, Etapa 2 F3): a <strong>aba ativa</strong> tem
+o fundo do editor e uma borda de acento em cima; o arquivo modificado
+mostra <strong>●</strong> no lugar do ✕ (o ✕ volta ao pairar); o número da <strong>linha
+atual</strong> fica em destaque na calha; o <strong>explorer segue o arquivo ativo</strong>
+(abre as pastas até ele e o seleciona). O botão “Salvar” saiu: <strong>Ctrl+S</strong>
+ou o <strong>salvar automático</strong> — ligado por padrão: 2 s depois de você parar
+de digitar, ao trocar de aba e ao sair do editor; um arquivo mudado por
+fora nunca é sobrescrito (a IDE compara antes de salvar e avisa); o
+rascunho de segurança continua gravando entre um salvar e outro. Desliga
+em Configurações → “Salvar automaticamente”.</li>
+<li><strong>Explorer</strong> (desde 2026-09-18, Etapa 2 F4): as pastas do projeto vêm
+primeiro; as da máquina (<code>.git</code>, <code>.idea</code>, <code>.kinein</code>, <code>build</code>, <code>target</code>,
+<code>dist</code>, <code>.venv</code>, <code>node_modules</code>…) ficam em cinza e depois delas; os
+arquivos por último. O que o projeto é (Cargo + CMake) está no widget de
+projeto da barra principal, não mais num chip no explorer.</li>
+<li><strong>Problemas com o próximo passo</strong> (desde 2026-09-18, Etapa 2 F5): cada
+problema mostra, à direita, o que fazer com ele — <strong>Ações</strong> (o Alt+Enter,
+quando o servidor de linguagem oferece correção), <strong>Configurar CMake</strong>
+(quando a mensagem diz que falta a <code>compile_commands.json</code>) ou
+<strong>Ferramentas</strong> (quando falta um programa). O que não tem passo conhecido
+fica só com o clique que abre a linha. A aba mostra a contagem.</li>
+<li><strong>Rail</strong> (coluna fininha à esquerda; o <code>›</code> do pé expande com os
+rótulos): <strong>Projeto · Git · Embarcados · Banco · Containers · Grafana ·
+Ferramentas</strong>. Projeto e Git alternam no mesmo slot à esquerda; os
+outros abrem o painel de cada um. Busca, Build e Debug <strong>não estão</strong> no
+rail (desde a Etapa 3): a busca no projeto é <code>Ctrl+Shift+F</code> / a aba
+Busca; Build e Debug são o widget Executar do cabeçalho (▶ 🐞 ⋯), o
+menu Build e o painel inferior.</li>
+<li>Clicar numa aba do painel inferior que já está aberta <strong>recolhe</strong> o
+painel.</li>
+<li>Os painéis laterais e o painel inferior são <strong>redimensionáveis</strong>: arraste
+a borda entre eles e o editor.</li>
+<li>A aba <strong>Símbolos</strong> (borda direita do editor; <code>Alt+7</code>) nasce <strong>recolhida</strong>:
+uma aba estreita no centro da borda direita; clicar nela (ou <code>Alt+7</code>) abre
+o painel. Sem texto no campo, ele mostra a <strong>estrutura do arquivo</strong> aberto;
+com texto, busca <strong>declarações por nome no projeto inteiro</strong> (o índice da
+IDE, sem esperar language server) — primeiro as da <strong>pasta do arquivo
+aberto</strong>, depois as do projeto — e <code>Enter</code>/clique abre <code>arquivo:linha</code>.
+O painel pode ser redimensionado e recolhido pelo botão próprio; a escolha
+fica salva e <strong>não muda sozinha</strong> com a largura da janela.</li>
+<li><strong>Ajuda → Manual da IDE</strong> abre este mesmo <code>DocsPublic/manual.md</code> numa visualização
+Markdown renderizada dentro da Kinein; não abre editor externo nem mantém
+uma segunda documentação divergente.</li>
+</ul>
+<h3 id="arquivos-e-pastas-do-projeto-checkout-da-série-03-em-2026-09-30">Arquivos e pastas do projeto (checkout da série 0.3, em 2026-09-30)</h3>
+<p>Com foco na árvore, use setas, Home/End, Enter e digitação do nome para
+navegar. Ctrl seleciona itens separados; Shift seleciona um intervalo;
+<code>Ctrl+A</code> seleciona os itens visíveis. Clique direito, tecla Menu ou
+<code>Shift+F10</code> abrem o mesmo menu contextual. Nele você pode criar, renomear,
+copiar caminho absoluto ou relativo, abrir a pasta no gerenciador de arquivos
+ou abrir um terminal nela.</p>
+<p><code>Ctrl+C</code>, <code>Ctrl+X</code> e <code>Ctrl+V</code> na árvore copiam, recortam e colam <strong>arquivos</strong>.
+Antes de escrever, a IDE mostra origem e destino; em seleção múltipla, cada
+item pode receber outro nome ou ser pulado. Uma colisão não sobrescreve o
+destino. O recorte só deixa de apontar para a origem depois de um movimento
+bem-sucedido. Transferências demoradas aparecem em Jobs, onde podem ser
+canceladas; um lote interrompido pode ter itens já concluídos, indicados no
+diálogo.</p>
+<p>Arrastar dentro da árvore move por padrão; manter Ctrl durante o gesto copia.
+Arrastar arquivos do gerenciador para a árvore <strong>importa por cópia</strong>, sem
+apagar a origem. Soltar uma pasta na tela inicial abre um workspace; soltar um
+arquivo da árvore no editor abre sua aba, sem mover o arquivo. Essas rotas
+foram conferidas com o mouse real em X11; em Wayland, a do gerenciador para o
+editor. Arrastar da árvore para o gerenciador de arquivos
+<strong>copia</strong> o item para a pasta de destino, e a origem continua no projeto.
+Soltar <strong>um arquivo local externo</strong> diretamente no
+editor abre uma aba <strong>somente leitura</strong>, com o caminho externo indicado. O
+arquivo não é importado nem entra na sessão restaurada; digitar, substituir,
+formatar, salvar e salvar tudo não escrevem na origem. A leitura aceita texto
+UTF-8 de até 1 MiB; link simbólico, diretório, binário, URL remota e seleção
+de vários arquivos são recusados. Soltar o mesmo arquivo novamente atualiza
+a mesma aba com o conteúdo atual do disco. Para editar, importe o arquivo
+pela árvore e abra a cópia no projeto.</p>
+<p><strong>Remover</strong> oferece primeiro <strong>Mover para a lixeira</strong>, a mesma Lixeira do
+desktop: no GNOME, abra <strong>Lixeira</strong> no Arquivos (Nautilus) e use <strong>Restaurar</strong>.
+Um projeto em outro volume (outro disco, ou <code>/tmp</code>) usa a lixeira daquele
+volume, e o gerenciador pode não exibi-la. <strong>Excluir
+permanentemente</strong> é uma ação separada e explícita. A IDE não apresenta um
+desfazer de arquivo que ainda não implementou.</p>
+<hr>
+<h2 id="3-editor">3. Editor</h2>
+<h3 id="31-edição">3.1 Edição</h3>
+<table>
+<thead>
+<tr>
+<th>Atalho</th>
+<th>Ação</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Ctrl+S</code></td>
+<td>Salvar</td>
+</tr>
+<tr>
+<td><code>Ctrl+Shift+S</code></td>
+<td><strong>Salvar tudo</strong> (respeita format-on-save, em fila)</td>
+</tr>
+<tr>
+<td><code>Ctrl+D</code></td>
+<td>Duplicar linha atual ou seleção</td>
+</tr>
+<tr>
+<td><code>Alt+Shift+↑</code> / <code>↓</code></td>
+<td>Mover linha (ou seleção) para cima/baixo</td>
+</tr>
+<tr>
+<td><code>Ctrl+/</code></td>
+<td>Comentar/descomentar linha ou seleção</td>
+</tr>
+<tr>
+<td><code>Ctrl+Y</code></td>
+<td>Deletar linha atual</td>
+</tr>
+<tr>
+<td><code>Ctrl+G</code></td>
+<td>Ir para linha (aceita <code>linha</code> ou <code>linha:coluna</code>)</td>
+</tr>
+<tr>
+<td><code>Ctrl+F</code></td>
+<td><strong>Localizar no arquivo</strong> (abre a barra de busca)</td>
+</tr>
+<tr>
+<td><code>Ctrl+H</code></td>
+<td><strong>Substituir no arquivo</strong> (busca + substituição)</td>
+</tr>
+<tr>
+<td><code>F3</code> ou <code>Ctrl+Alt+G</code></td>
+<td>Próxima ocorrência</td>
+</tr>
+<tr>
+<td><code>Shift+F3</code> ou <code>Ctrl+Alt+Shift+G</code></td>
+<td>Ocorrência anterior</td>
+</tr>
+<tr>
+<td><code>Ctrl+W</code> / <code>Ctrl+Shift+W</code></td>
+<td>Expandir / encolher seleção (palavra → parênteses → linha → bloco → arquivo)</td>
+</tr>
+<tr>
+<td><code>Home</code> / <code>Shift+Home</code></td>
+<td>Início do texto da linha ↔ coluna 0 (alterna; com <code>Shift</code>, seleciona)</td>
+</tr>
+<tr>
+<td><code>Tab</code> / <code>Shift+Tab</code></td>
+<td>Indentar / desindentar seleção</td>
+</tr>
+<tr>
+<td><code>Ctrl+Alt+L</code></td>
+<td><strong>Formatar o arquivo</strong> (rustfmt/clang-format do projeto)</td>
+</tr>
+</tbody>
+</table>
+<p>Ao digitar <code>(</code>, <code>[</code>, <code>{</code>, <code>"</code> ou <code>'</code>, o par fecha sozinho com o cursor no
+meio; digitar o fechador “pula por cima” do que já existe; <code>Backspace</code>
+entre um par vazio apaga os dois; e digitar um abridor com texto
+<strong>selecionado</strong> envolve a seleção (ex.: selecionar <code>nome</code> e digitar <code>"</code>
+vira <code>"nome"</code>). Aspas coladas em palavras não duplicam (para não quebrar
+apóstrofos).</p>
+<p><code>Enter</code> preserva a indentação da linha. Entre <code>{</code> e <code>}</code>, ele abre uma linha
+interna indentada e deixa o <code>}</code> na linha seguinte; em comentários iniciados
+por <code>//</code> ou dentro de <code>/* ... */</code>, continua o prefixo do comentário.</p>
+<p>Digitar <code>}</code> numa linha vazia (só espaços) alinha o fechador sozinho com a
+linha do <code>{</code> correspondente — fechar um bloco à mão não exige acertar a
+indentação.</p>
+<p><strong>Rede de segurança contra perda de dado.</strong> Suas edições não salvas são
+autosalvas localmente enquanto você digita (num banco <code>SQLite</code> em
+<code>.kinein/kinein.db</code>, sem rede). Se a IDE fechar de forma abrupta (crash,
+queda de energia) <strong>antes de você salvar</strong>, ao reabrir o projeto os
+arquivos afetados voltam com as alterações <strong>marcadas como não salvas</strong>
+(aba modificada) — é só conferir e salvar (<code>Ctrl+S</code>) ou reverter. Salvar
+ou fechar a aba normalmente limpa o rascunho. Além disso, o salvamento em
+disco é <strong>atômico</strong>: uma interrupção no meio de um <code>Ctrl+S</code> nunca deixa o
+arquivo truncado/zerado — ele fica com o conteúdo antigo ou o novo, nunca
+pela metade.</p>
+<p>Se Git, um formatter ou outro editor mudar no disco um arquivo aberto, a IDE
+detecta automaticamente. Uma aba sem edições locais é recarregada preservando
+o cursor. Se também houver mudanças locais, aparece um aviso sem descartar o
+buffer: <strong>Recarregar do disco</strong> aceita a versão externa; <strong>Manter local</strong> torna
+a versão externa a nova base e permite um save explícito por cima dela. Mesmo
+se o monitor do sistema falhar, <code>Ctrl+S</code> compara o snapshot e recusa
+sobrescrever silenciosamente um arquivo mais novo.</p>
+<p>O realce de sintaxe é imediato: palavras-chave, tipos e funções da
+biblioteca padrão (em C/C++: <code>std</code>, <code>cout</code>/<code>cin</code>, <code>printf</code>, <code>string</code>,
+<code>vector</code>, <code>size_t</code>…; em Rust: <code>Vec</code>, <code>Option</code>, <code>println!</code>, tipos
+primitivos…) já aparecem coloridos, e as <strong>variáveis ficam claras/quase
+brancas</strong> para se distinguir na hora. Alguns segundos depois de abrir um
+arquivo Rust/C++, as <strong>cores semânticas</strong> do servidor de linguagem
+(clangd / rust-analyzer) refinam ainda mais o realce (tipos, funções,
+campos, lifetimes, membros…).</p>
+<p>A base imediata é o <strong>Tree-sitter incremental</strong>: ela também alimenta folds e
+o Outline em árvore mesmo quando clangd/rust-analyzer estiver reiniciando. O
+LSP continua sendo a autoridade para tipos, referências e refatorações.</p>
+<p>Ao completar código, as <strong>sugestões do servidor de linguagem</strong> aparecem
+sozinhas enquanto você digita (também depois de <code>.</code> e <code>::</code>); <code>Tab</code> ou
+<code>Enter</code> aceita a selecionada, <code>↑</code>/<code>↓</code> navega e <code>Esc</code> fecha — sem
+atrapalhar quem só quer digitar. <code>Ctrl+Space</code> força a lista a qualquer
+momento.</p>
+<p>Digitar <code>&lt;</code> logo depois de <code>#include </code> já fecha em <code>&lt;&gt;</code> com o cursor no
+meio (só nesse contexto — em comparações e templates o <code>&lt;</code> fica normal).</p>
+<h3 id="32-inteligência-de-código-lsp">3.2 Inteligência de código (LSP)</h3>
+<p>Funciona em Rust (rust-analyzer) e C/C++ (clangd). Os servidores sobem
+sozinhos ao abrir o primeiro arquivo da linguagem — a primeira resposta
+pode demorar alguns segundos enquanto o projeto é indexado. Nesse intervalo,
+o autocomplete já mostra símbolos locais do Tree-sitter; quando o LSP responde,
+a lista é enriquecida/substituída pelo resultado semântico autoritativo.</p>
+<table>
+<thead>
+<tr>
+<th>Atalho</th>
+<th>Ação</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Ctrl+B</code></td>
+<td>Ir para a definição do símbolo sob o cursor</td>
+</tr>
+<tr>
+<td><code>Ctrl+Q</code></td>
+<td>Documentação/tipo do símbolo (hover)</td>
+</tr>
+<tr>
+<td><code>Ctrl+Space</code></td>
+<td>Completar código (também abre sozinho ao digitar)</td>
+</tr>
+<tr>
+<td><code>Alt+F7</code> ou <code>Ctrl+Shift+U</code></td>
+<td>Encontrar usos do símbolo</td>
+</tr>
+<tr>
+<td><code>Shift+F6</code> ou <code>Ctrl+Shift+R</code></td>
+<td>Renomear símbolo (em todos os arquivos afetados)</td>
+</tr>
+<tr>
+<td><code>Alt+Enter</code></td>
+<td><strong>Quick fixes / ações de código</strong> no cursor (↑↓ escolhe, Enter aplica)</td>
+</tr>
+<tr>
+<td><code>Alt+O</code></td>
+<td><strong>C/C++: alternar header/source</strong> (<code>.h</code> ↔ <code>.cpp</code> do mesmo componente, via clangd)</td>
+</tr>
+<tr>
+<td><code>F2</code> ou <code>Ctrl+Alt+E</code></td>
+<td>Ir para o <strong>próximo problema</strong> do arquivo</td>
+</tr>
+<tr>
+<td><code>Shift+F2</code> ou <code>Ctrl+Alt+Shift+E</code></td>
+<td>Ir para o <strong>problema anterior</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Erros e avisos do servidor de linguagem aparecem <strong>na hora, enquanto você
+digita</strong> (uma fração de segundo depois de parar): sublinhado ondulado sob
+o trecho com problema (vermelho = erro, âmbar = aviso, azul = nota), uma
+<strong>marca colorida na régua de linhas</strong> (passe o mouse nela para ler a
+mensagem) e a lista completa na aba <strong>Problemas</strong>. Na aba Problemas cada
+item mostra o arquivo:linha, o <strong>código/regra</strong> (ex.: <code>E0425</code>,
+<code>unused_variables</code>) e a mensagem; clique para saltar até ele.</p>
+<p><code>Alt+O</code> só vale para C/C++ e depende do clangd; se não houver contraparte
+(um <code>.h</code> sem <code>.cpp</code>, por exemplo), nada acontece.</p>
+<p>Rename e quick fixes que afetam arquivos mostram primeiro um <strong>preview lado a
+lado</strong>. <strong>Aplicar</strong> revalida todos os snapshots e grava tudo como uma única
+transação; <strong>Cancelar</strong> não toca no disco. Se algum arquivo mudou desde o
+preview, a operação inteira é recusada e nenhum arquivo fica parcialmente
+alterado.</p>
+<h3 id="33-navegação-e-busca">3.3 Navegação e busca</h3>
+<table>
+<thead>
+<tr>
+<th>Atalho</th>
+<th>Ação</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Ctrl+Shift+N</code> ou <code>Ctrl+Shift+A</code></td>
+<td><strong>Search Everywhere</strong>: arquivos por nome e comandos da IDE</td>
+</tr>
+<tr>
+<td><code>Ctrl+E</code></td>
+<td>Arquivos recentes, no mesmo Search Everywhere</td>
+</tr>
+<tr>
+<td><code>Alt+7</code></td>
+<td>Aba <strong>Símbolos</strong>: estrutura do arquivo e busca de declarações por nome no projeto</td>
+</tr>
+<tr>
+<td>— digite <code>@</code></td>
+<td>…símbolos do arquivo atual (estrutura); <code>@nome</code> filtra</td>
+</tr>
+<tr>
+<td>— digite <code>#nome</code></td>
+<td>…símbolos do workspace inteiro (structs, funções…)</td>
+</tr>
+<tr>
+<td><code>Ctrl+Shift+F</code></td>
+<td>Buscar texto em todos os arquivos (aba Busca)</td>
+</tr>
+<tr>
+<td><code>Ctrl+Shift+H</code></td>
+<td><strong>Substituir texto no projeto</strong> (resumo + confirmação)</td>
+</tr>
+<tr>
+<td><code>Ctrl+F</code> / <code>Ctrl+H</code></td>
+<td>Buscar/substituir <strong>dentro do arquivo aberto</strong> (barra no editor)</td>
+</tr>
+</tbody>
+</table>
+<p>No Search Everywhere: <code>↑↓</code> navegam, <code>Enter</code> abre, <code>Esc</code> fecha.</p>
+<p><strong>Busca no arquivo (<code>Ctrl+F</code>) vs. busca no projeto (<code>Ctrl+Shift+F</code>):</strong> a
+primeira procura só no arquivo que está na tela e realça as ocorrências ali
+mesmo; a segunda varre todos os arquivos do projeto e lista os resultados na
+aba Busca.</p>
+<p>Na substituição do projeto, informe busca/substituição na aba Busca e confirme
+o resumo. A IDE exige salvar ou descartar buffers sujos antes; o core aplica
+todos os arquivos de forma transacional e faz rollback em qualquer falha.</p>
+<p>Na barra do <code>Ctrl+F</code>: o texto <strong>selecionado</strong> (ou a palavra sob o cursor) já
+entra preenchido. <code>Enter</code> vai para a próxima ocorrência, <code>Shift+Enter</code> para a
+anterior, <code>Esc</code> fecha e devolve o foco ao editor. O contador mostra <strong>“3 de
+17”</strong>. Os três botões ligam <strong><code>Aa</code></strong> (diferenciar maiúsculas), <strong><code>W</code></strong> (só
+palavra inteira) e <strong><code>.*</code></strong> (expressão regular). Com <code>Ctrl+H</code>, aparece o campo
+de substituição: <strong>Substituir</strong> troca a ocorrência atual e avança, <strong>Tudo</strong>
+troca todas de uma vez. Em modo regex, <code>$1</code> no campo de substituição reusa o
+grupo capturado.</p>
+<hr>
+<h2 id="4-build-testes-e-análise">4. Build, testes e análise</h2>
+<table>
+<thead>
+<tr>
+<th>Atalho</th>
+<th>Ação</th>
+<th>Onde ver o resultado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Ctrl+F9</code> ou <code>Ctrl+Alt+B</code></td>
+<td><strong>Build</strong> do projeto (cargo build / cmake)</td>
+<td>aba Build + Problemas</td>
+</tr>
+<tr>
+<td><code>Ctrl+Shift+F9</code> ou <code>Ctrl+Alt+T</code></td>
+<td><strong>Testes</strong> (cargo test / ctest / <code>python -m pytest -v</code>)</td>
+<td>aba Testes</td>
+</tr>
+<tr>
+<td><code>Ctrl+Shift+L</code></td>
+<td><strong>Análise de qualidade</strong> (clippy / clang-tidy / <code>ruff check</code>)</td>
+<td>aba Problemas</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Todos esses também são <strong>botões na barra superior</strong> — atalho nenhum é
+obrigatório. Onde houver tecla <code>F1</code>–<code>F12</code> há sempre uma alternativa sem
+ela (para notebooks onde F-keys exigem <code>Fn</code>).</p>
+</blockquote>
+<p>Tudo roda em segundo plano como <em>job</em>: a barra de status mostra o
+progresso e um <strong>×</strong> para cancelar; a aba <strong>Jobs</strong> guarda o histórico.
+Clicar num problema abre o arquivo na linha exata.</p>
+<p><strong>Projetos Rust:</strong> além do build/clippy, há o <strong>“Cargo: Check”</strong> no Search
+Everywhere — feedback de tipos/borrow bem mais rápido que o build, com os
+problemas caindo na mesma aba Problemas. Se o <code>cargo metadata</code> do projeto
+estiver quebrado (Cargo.toml inválido), o banner de Project Health avisa
+com a mensagem do cargo e um botão para tentar de novo.</p>
+<p><strong>A árvore de testes.</strong> Na aba <strong>Testes</strong>, <strong>Listar testes</strong> mostra os casos
+<strong>sem rodar nenhum</strong> (<code>pytest --collect-only</code>, <code>cargo test -- --list</code>,
+<code>ctest -N</code>), e cada linha tem <strong>Rodar só este teste</strong>. O caso que roda pinta a
+própria linha com o resultado; a saída bruta do runner fica logo abaixo — e
+se o runner nem chegou a correr (sem <code>pytest</code> no ambiente, por exemplo), a aba
+mostra <strong>o motivo e o passo para instalar</strong>, em vez de “0 testes”.</p>
+<p><strong>gtest e Catch2 dentro dos binários.</strong> Num projeto CMake, <strong>Listar testes</strong>
+pergunta a cada executável do <code>ctest</code> quais casos ele tem (<code>--gtest_list_tests</code>
+ou <code>--list-tests</code> do Catch2) e os lista abaixo da linha do <code>ctest</code>, como
+<code>unit_tests::Math.Adds</code>; <strong>Rodar só este teste</strong> roda o binário com o filtro
+do framework, e cada <code>[ OK ]</code>/<code>[ FAILED ]</code> pinta a linha do caso.</p>
+<p><strong>Análise em C/C++.</strong> O clangd sobe com <code>--clang-tidy</code> e lê o <code>.clang-tidy</code>
+do projeto: os avisos aparecem no arquivo aberto como qualquer diagnóstico.
+A <strong>Análise de qualidade</strong> (<code>Ctrl+Shift+L</code>) num CMake ou Makefile roda o
+clang-tidy do projeto inteiro pela <code>compile_commands.json</code> (<code>run-clang-tidy</code>
+quando existe) e lista os avisos em Problemas — sem CDB, ela diz “configure”;
+sem <code>clang-tidy</code>, diz o pacote.</p>
+<p><strong>A lâmpada.</strong> Na linha do cursor com um diagnóstico, a calha mostra 💡 antes
+de você apertar <code>Alt+Enter</code>: é onde os quick fixes do clangd, rust-analyzer,
+basedpyright e ruff moram. Clicar nela é o mesmo que <code>Alt+Enter</code>.</p>
+<p><strong>Cobertura dos testes</strong> (menu Build → <strong>Cobertura dos testes</strong>, ou a
+paleta): Rust pelo <code>cargo llvm-cov</code> (<code>cargo install cargo-llvm-cov</code> e
+<code>rustup component add llvm-tools-preview</code>), Python pelo <code>coverage.py</code> do
+ambiente do projeto (<code>uv add --dev coverage pytest</code>). O job escreve
+<code>.kinein/coverage.lcov</code>, o resumo sai na aba Jobs e a <strong>calha do editor</strong>
+ganha uma barra ao lado da do git: verde, linha executada pelos testes;
+vermelha, instrumentada e nunca executada. C/C++ ainda não: exige compilar
+com <code>--coverage</code>, e a IDE não muda o seu build por conta própria.</p>
+<p><strong>Scripts do projeto:</strong> arquivos <code>.sh</code>, <code>.bash</code>, <code>.zsh</code> e <code>.py</code> mostram um
+botão de executar ao passar o mouse na árvore. A mesma ação fica no clique
+direito como <strong>Executar script</strong> (e <strong>Depurar</strong>, num <code>.py</code>). A saída abre
+numa <strong>aba do Terminal</strong> com o nome do comando (<code>▶ bash -- 'x.sh'</code>) e pode
+ser interrompida pelo controle normal de Run (ou pelo × da aba). Só arquivos dentro do workspace são aceitos; não é necessário abrir um
+terminal e digitar o caminho. O que a árvore aceita como executável é o core
+quem diz — a lista não mora na tela.</p>
+<hr>
+<h3 id="41-depurar-debugger">4.1 Depurar (debugger)</h3>
+<p>Funciona em C/C++ e Rust via <code>lldb-dap</code> (instalado junto com o lldb), em
+<strong>Python via <code>debugpy</code></strong> (o módulo do interpretador do projeto — veja §10) e,
+em projetos embarcados, pelo <code>gdb -i dap</code> contra o servidor de debug do kit
+(OpenOCD, QEMU, <code>probe-rs</code>) — veja §9, <em>Embarcados</em>.</p>
+<ol>
+<li><strong>Compile antes</strong> (<code>Ctrl+F9</code>) — o debug usa o binário já compilado.</li>
+<li>Clique na <strong>gutter</strong> (a coluna dos números de linha) para marcar
+breakpoints — a bolinha vermelha. Pode marcar antes mesmo de iniciar.</li>
+<li>Clique em <strong>[Debug]</strong> na barra superior (ou <code>Shift+F9</code> /
+<code>Ctrl+Alt+D</code>). O programa
+roda e <strong>para no primeiro breakpoint</strong>: a linha fica destacada e o
+arquivo abre sozinho na posição.</li>
+<li>Na aba <strong>Debug</strong> do painel inferior ficam os controles e a saída do
+programa.</li>
+</ol>
+<p><strong>Conectar a um Python já iniciado.</strong> No ambiente do serviço, rode:</p>
+<pre><code class="language-bash">python -m debugpy --listen 127.0.0.1:5678 --wait-for-client app.py
+</code></pre>
+<p>Abra as fontes correspondentes na IDE e marque os breakpoints. Na aba <strong>Debug</strong>,
+preencha <strong>Host do Python</strong> e <strong>Porta</strong> e clique <strong>Conectar ao Python</strong>.
+Frames, variáveis e watches usam os controles habituais. <strong>Desconectar</strong> encerra
+apenas a sessão de depuração; o serviço continua rodando. O adaptador precisa
+informar caminhos acessíveis neste workspace; SSH e mapeamento de caminhos
+remotos continuam na etapa de Linux embarcado.</p>
+<p>Todos os controles são <strong>botões clicáveis na aba Debug</strong> — dá para
+depurar inteiro sem atalho. Para quem prefere teclado (as duas colunas
+valem sempre; a segunda não depende de <code>Fn</code>):</p>
+<table>
+<thead>
+<tr>
+<th>Atalho clássico</th>
+<th>Sem F-keys</th>
+<th>Ação</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Shift+F9</code></td>
+<td><code>Ctrl+Alt+D</code></td>
+<td>Inicia o debug (o botão vira ■ para parar)</td>
+</tr>
+<tr>
+<td><code>F9</code></td>
+<td><code>Ctrl+Alt+C</code></td>
+<td>Continuar até o próximo breakpoint</td>
+</tr>
+<tr>
+<td><code>F8</code></td>
+<td><code>Ctrl+Alt+N</code></td>
+<td>Step over (executa a linha, sem entrar em funções)</td>
+</tr>
+<tr>
+<td><code>F7</code></td>
+<td><code>Ctrl+Alt+I</code></td>
+<td>Step into (entra na função da linha)</td>
+</tr>
+<tr>
+<td><code>Shift+F8</code></td>
+<td><code>Ctrl+Alt+U</code></td>
+<td>Step out (sai da função atual)</td>
+</tr>
+</tbody>
+</table>
+<p>O alvo é escolhido automaticamente (o binário único de <code>target/debug</code> no
+Rust, ou de <code>.kinein/build</code> no CMake; num projeto Python, o ponto de entrada —
+<code>main.py</code>, <code>app.py</code>, <code>__main__.py</code> ou um pacote com <code>__main__.py</code>, lançado
+como <code>-m pacote</code>). Se houver mais de um, a mensagem de erro lista os
+candidatos.</p>
+<p><strong>Inspecionar o estado:</strong> com o programa pausado, a aba Debug mostra os
+<strong>Frames</strong> (a pilha de chamadas — clique num frame para abrir o código
+dele e ver as variáveis daquele nível) e as <strong>Variáveis</strong> locais.
+Variáveis com <strong>▸</strong> são structs/objetos: clique para expandir os campos.
+Acima do editor, uma trilha (breadcrumbs) mostra onde o arquivo atual
+está no projeto; a linha do cursor fica levemente destacada.</p>
+<hr>
+<h3 id="42-git">4.2 Git</h3>
+<p>Se o projeto for um repositório git, a IDE mostra sem você pedir:</p>
+<ul>
+<li>
+<p><strong>Barra de status</strong> (embaixo): a branch atual (<code>⎇ main</code>), setas
+<code>↑</code>/<code>↓</code> quando há commits à frente/atrás do remoto e o total de
+alterações.</p>
+</li>
+<li>
+<p><strong>Árvore de arquivos</strong>: nomes coloridos — <strong>verde</strong> = arquivo novo
+(untracked/adicionado), <strong>azul</strong> = modificado/renomeado, <strong>apagado</strong> =
+deletado, <strong>vermelho</strong> = conflito.</p>
+</li>
+<li>
+<p><strong>Gutter do editor</strong>: uma barra fina colorida ao lado dos números de
+linha mostra o que mudou desde o último commit — verde = linhas
+novas, azul = linhas alteradas, um traço vermelho = linhas removidas
+ali. Atualiza ao salvar e ao trocar de aba (edição ainda não salva
+não aparece).</p>
+</li>
+<li>
+<p><strong>Diff do arquivo</strong>: rode <strong>“Git: Diff do arquivo”</strong> no Search
+Everywhere (<code>Ctrl+Shift+A</code>) para ver o diff completo do arquivo atual
+contra o HEAD, <strong>no lugar do editor</strong>, como uma aba de visualização
+(“diff: caminho”); o × (ou <code>Esc</code>) devolve o editor como estava.</p>
+</li>
+<li>
+<p><strong>Janela do Git</strong> (à esquerda, <strong>no lugar do explorer</strong> — o ícone Git do
+trilho, o widget da barra, <strong>Exibir → Git</strong> ou “Git: Commit…” abrem;
+o ícone Projeto traz o explorer de volta; o ícone do que está aberto
+fecha o slot — como Project/Commit nas IDEs JetBrains). Em pé, com
+duas abas no topo:</p>
+<ul>
+<li><strong>Commit</strong>: a linha do branch (branch · pull · push · stash · pop) e a
+lista de tudo que mudou, <strong>agrupada por pasta</strong> (o quadradinho da
+pasta marca/desmarca todos). Clique no <strong>quadradinho</strong> de um arquivo
+para marcar/desmarcar para commit (stage); clique no nome mostra o
+<strong>diff</strong> no editor; duplo clique/“abrir” abre o arquivo; passando o
+mouse aparece <strong>↩</strong> (descartar — pede confirmação, porque não tem
+desfazer). Digite a mensagem embaixo e clique <strong>Commit (N)</strong> — commita
+só o que está marcado; <strong>Commit e Push</strong> pede um segundo clique;
+<strong>Amend</strong> reescreve o último commit.</li>
+<li><strong>Log</strong>: o filtro (texto; o branch de onde partir) e a lista de
+commits com o grafo, os refs (chips) e a idade. Clique num commit
+para ver, no editor, o que ele mudou (autor, arquivos, patch).
+“Git: Historico” no Search Everywhere abre direto aqui; <strong>atualizar</strong>
+recarrega a lista.</li>
+</ul>
+</li>
+<li>
+<p><strong>Blame</strong> (autoria por linha): rode <strong>“Git: Blame do arquivo”</strong> no
+Search Everywhere para ligar/desligar uma coluna ao lado dos números
+de linha mostrando <strong>quem</strong> mudou cada linha e <strong>há quanto tempo</strong>.
+Linhas ainda não commitadas aparecem como “não commitado”. Acompanha o
+arquivo que você está editando.</p>
+</li>
+</ul>
+<p>O status atualiza sozinho ao salvar, criar, renomear ou excluir arquivos pela
+IDE <strong>e também</strong> quando o watcher detecta mudanças externas (por exemplo, um
+<code>git pull</code> no terminal). <strong>“Git: Atualizar status”</strong> no Search Everywhere
+continua disponível para atualização manual.</p>
+<p>Na janela do Git também é possível listar/trocar/criar branches, fazer <strong>Pull</strong> e
+<strong>Push</strong> como jobs (saída e cancelamento na aba Jobs) e guardar/restaurar o
+trabalho com <strong>Stash push/pop</strong>. Checkout, criação de branch e stash são
+recusados enquanto houver buffers sujos, evitando misturar estado do editor
+com mudanças do worktree. Metadados <code>.kinein</code> nunca entram no stash.</p>
+<hr>
+<h2 id="5-terminal-shell-e-execução">5. Terminal (shell e execução)</h2>
+<p>A aba <strong>Terminal</strong> tem várias sessões, alternáveis pelos chips no topo —
+shells e execuções, todas terminais de verdade:</p>
+<ul>
+<li><strong>terminal, terminal1, terminal2, …</strong>: shells completos e independentes em
+<strong>terminais de verdade</strong> (PTY real, <code>TERM=xterm-256color</code>), abertos na raiz
+do projeto. Têm <strong>cores</strong>, cursor, refluem ao redimensionar e rodam programas
+interativos/full-screen (vim,
+htop, o progresso do <code>cargo</code>). A digitação é <strong>caractere a caractere</strong>
+(como no VS Code/JetBrains): <code>Ctrl+C</code> interrompe mesmo com seleção,
+<code>Ctrl+Shift+C</code> copia; setas navegam o
+histórico, <code>Tab</code> completa — não é mais “escreva a linha e aperte Enter”.
+O cursor vertical acompanha a próxima célula de digitação. As cores ANSI
+seguem a paleta visual da Kinein; prompts que marcam usuário, máquina e
+pasta continuam sendo produzidos pelo shell, com peso moderado pela IDE.
+Clique em <strong>+</strong> para abrir outro terminal e em <strong>×</strong> no chip para fechar só
+aquela sessão; programas e histórico das outras abas continuam vivos.
+O próximo shell usa o primeiro nome livre; reutilizar o nome não restaura
+o conteúdo da sessão encerrada. O primeiro shell abre sob demanda.
+A barra de rolagem permanece visível desde o início, acompanha a saída ao
+vivo e coalesce movimentos rápidos. Ao digitar, o terminal retorna
+imediatamente ao prompt atual; rolar manualmente para cima preserva a leitura
+do histórico até o usuário voltar ao fundo ou começar um novo comando.</li>
+<li><strong>▶ <code>&lt;comando&gt;</code></strong>: a execução do seu projeto (<code>cargo run</code>, o executável do
+CMake, o <code>main.py</code> do interpretador do projeto) abre numa aba própria, um
+PTY como os shells — stdin, cores e programas de tela cheia funcionam;
+a bolinha verde acompanha enquanto roda. Quando termina, <strong>a aba fica</strong>,
+com o desfecho no nome (<code>✓</code> ou <code>✗ 101</code>), para você ler a saída; o × a
+fecha. (Até 2026-09-18 havia uma sessão “Execução” separada, por pipes,
+sem TTY — saiu: o terminal integrado já faz tudo o que ela fazia.)</li>
+</ul>
+<p>Clique direito (ou <code>Shift+F10</code>/tecla Menu com foco no terminal) abre Copiar,
+Colar, <strong>Selecionar Tudo</strong>, Selecionar área visível, Limpar tela, Limpar
+histórico, Novo e Fechar. Navegue com setas e confirme com Enter. Selecionar
+Tudo marca o buffer retido inteiro da sessão viva, incluindo até 5.000 linhas
+de histórico; só Copiar altera o clipboard. Na tela alternativa de uma TUI,
+a seleção alcança apenas esse buffer ativo. Saída nova, resize ou limpeza
+invalidam a seleção completa; rolar não a desfaz. Uma execução já encerrada
+permite copiar a área visível conservada na aba.</p>
+<p><code>Ctrl+V</code>, <code>Ctrl+Shift+V</code> e <code>Shift+Insert</code> colam; <code>Ctrl+Shift+C</code> copia sem
+consumir a seleção; Escape a desfaz. <code>Ctrl+A</code> continua sendo enviado ao shell.
+<code>Ctrl+Alt+V</code> envia o <code>^V</code> tradicional. Colagens arriscadas pedem confirmação,
+com preview e opção explícita de uma linha. Limpar tela envia <code>Ctrl+L</code> ao
+programa; Limpar histórico remove só o scrollback dessa sessão, sem apagar
+arquivos nem histórico de comandos do shell.</p>
+<p><strong>Configurações de execução:</strong> na barra superior há um seletor (começa em
+“Automático” — o menu abre por cima de tudo e fecha clicando fora). “Nova configuração…” salva um comando com nome (ex.:
+<code>cargo run --bin servidor</code>); a configuração ativa é o que o ▶ executa. Dá
+para editar/excluir a atual pelo mesmo menu, e a escolha fica salva com o
+projeto.</p>
+<table>
+<thead>
+<tr>
+<th>Atalho</th>
+<th>Ação</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Shift+F10</code> (fora do terminal) ou <code>Ctrl+Alt+R</code></td>
+<td>Executa o projeto — abre uma aba <strong>▶ comando</strong> no Terminal</td>
+</tr>
+<tr>
+<td><code>Ctrl+F2</code> ou <code>Ctrl+Alt+X</code></td>
+<td>Fecha a aba da execução em curso (mata o processo)</td>
+</tr>
+<tr>
+<td><code>Alt+F12</code> ou <code>Ctrl+` </code></td>
+<td>Abre a aba Terminal; cria o primeiro shell se necessário</td>
+</tr>
+</tbody>
+</table>
+<p>Enquanto um processo estiver rodando, a aba mostra <strong>Terminal ●</strong> e o chip
+da execução, a bolinha. (O botão <strong>limpar</strong> saiu junto com a sessão
+“Execução”: num terminal de verdade, <code>clear</code> ou <code>Ctrl+L</code>.)</p>
+<h2 id="6-usar-uma-cli-de-ia-claude-codex">6. Usar uma CLI de IA (Claude, Codex…)</h2>
+<p>Abra o terminal integrado (<code>Alt+F12</code>) e rode a ferramenta como faria fora da
+IDE:</p>
+<pre><code class="language-bash">claude
+codex
+</code></pre>
+<p>É isso. Não há painel dedicado, perfil a escolher nem configuração: para a
+Kinein, uma CLI de IA é <strong>um programa como outro qualquer</strong>. Ela roda no mesmo
+PTY real e no mesmo emulador de terminal de um <code>ls</code> ou de um <code>vim</code>, então a
+interface da ferramenta aparece exatamente como aparece no seu terminal.</p>
+<p>A IDE não instala, não autentica e não envia nada: rede, credenciais e política
+de dados pertencem à CLI que você iniciou.</p>
+<blockquote>
+<p><strong>Não existe painel de IA, e isso é decisão, não pendência.</strong> Um atalho visual
+dedicado para essas CLIs foi construído em 2026-07-17 e removido no mesmo dia,
+depois de rodar: ele só poupava digitar uma palavra, e cobrava por isso um
+seletor, um rótulo, uma aba e um ícone. Você roda o agente no terminal, como
+roda qualquer outro programa. A aba <strong>Ferramentas</strong> mostra se o binário está
+instalado.</p>
+</blockquote>
+<hr>
+<h2 id="7-configurações-ctrlalts">7. Configurações (<code>Ctrl+Alt+S</code>)</h2>
+<p>Abra as configurações com <code>Ctrl+Alt+S</code> (ou “Configurações” no Search
+Everywhere). No v1 há quatro opções, que valem para <strong>todos os projetos</strong>:</p>
+<ul>
+<li><strong>Tamanho da fonte do editor</strong>: <code>−</code>/<code>+</code> (8 a 40), aplica na hora.</li>
+<li><strong>Formatar ao salvar</strong>: quando ligado, <code>Ctrl+S</code> formata o arquivo
+(rustfmt/clang-format) e <strong>então</strong> salva. Se o formatador falhar, o
+arquivo é salvo assim mesmo.</li>
+<li><strong>Fechar pares automaticamente</strong>: liga/desliga o auto-fechamento de
+<code>( [ { " '</code> ao digitar.</li>
+<li><strong>Perfil de rigor</strong>: regula o quanto os botões <strong>[Verificar]</strong> e
+<strong>[Compilar]</strong> apertam <strong>o seu projeto</strong> (nunca o próprio Kinein).
+Três níveis:
+<ul>
+<li><strong>Estrito</strong> (padrão): clippy com <code>pedantic</code> + <code>nursery</code> e warning
+vira erro (<code>cargo build</code> também falha em warning). É a régua da casa
+— o código sai afiado.</li>
+<li><strong>Equilibrado</strong>: clippy padrão (bugs, estilo, performance), warnings
+aparecem mas não travam o build.</li>
+<li><strong>Relaxado</strong>: só o essencial (<code>clippy::correctness</code> — bugs reais);
+o resto é permitido. Bom para prototipar rápido.
+Só afeta projetos <strong>Rust</strong> no v1; trocar de perfil recompila o projeto
+(o <code>cargo</code> reavalia as flags).</li>
+</ul>
+</li>
+</ul>
+<p>As configurações ficam em <code>~/.config/kinein-vectis/settings.json</code>. Um
+projeto pode ter ajustes próprios em <code>.kinein/settings.json</code> (têm
+prioridade sobre o global) — por enquanto editando o arquivo à mão.</p>
+<hr>
+<h2 id="8-aba-ferramentas-e-saúde-do-ambiente">8. Aba Ferramentas e saúde do ambiente</h2>
+<p>A aba <strong>Ferramentas</strong> mostra o que a IDE encontrou na sua máquina (cargo,
+clangd, cmake…), com versão e, se faltar algo, a sugestão de pacote para
+instalar. O botão <strong>Redetectar</strong> atualiza a lista. O scan completo também
+pode ser disparado pelo banner de Project Health.</p>
+<hr>
+<h2 id="9-menu-ambiente--preparar-o-projeto-antes-de-compilar">9. Menu <strong>Ambiente</strong> — preparar o projeto antes de compilar</h2>
+<p>Este menu existe porque configurar o ambiente <strong>não é “ferramenta”</strong>: é o que se
+faz antes de compilar. São nove painéis, e todos seguem a mesma regra — a IDE
+<strong>mostra o que vai fazer e espera você aceitar</strong>; nenhum deles escreve no seu
+projeto sozinho. Os quatro que se usam todo dia também estão na <strong>barra lateral
+esquerda</strong>, nesta ordem: Banco de dados, Containers, Observabilidade e, por
+último, Ferramentas.</p>
+<h3 id="bibliotecas">Bibliotecas</h3>
+<p>Um catálogo <strong>curado</strong> de bibliotecas C/C++ — hoje 15 —, cada uma com a licença
+verificada na fonte, a versão fixada e a frase do que ela faz. A bolinha ao lado
+do nome diz o que está <strong>no seu projeto</strong>, não o que está instalado na máquina.</p>
+<p>Ativar escreve no <code>CMakeLists.txt</code> por meio de uma ação de configuração, com
+prévia. <strong>Desativar existe</strong> e usa o mesmo caminho — o botão diz qual dos dois
+vai acontecer.</p>
+<p>Uma biblioteca só entra no catálogo depois de auditada. Duas já foram
+<strong>recusadas</strong> por licença, e a recusa fica registrada.</p>
+<h3 id="ações-de-configuração">Ações de configuração</h3>
+<p>São <strong>18</strong>, e elas respondem duas perguntas diferentes: <em>o que o projeto tem</em>
+(dependência, feature, edição, alvo, preset) e <em>como ele compila</em> (rigor,
+sanitizers, OpenMP, <code>.hex</code>/<code>.bin</code>, alvo embarcado).</p>
+<p><strong>Nenhuma escreve sem prévia.</strong> A caixa mostra o arquivo como ele ficará, e o
+botão de aceitar só vale para o que está na tela. Os campos explicam o que
+esperam e sugerem valores lidos do <strong>seu</strong> projeto — não exemplos genéricos.</p>
+<h3 id="banco-de-dados">Banco de dados</h3>
+<p>A IDE guarda o <strong>perfil</strong> da conexão: motor, endereço, porta, base e usuário.
+<strong>Nunca a senha</strong> — quando ela é necessária, a IDE pede na hora, e nada de
+credencial vai para o disco. Três motores:</p>
+<pre><code class="language-text">PostgreSQL   e tudo que fala o protocolo dele — TimescaleDB incluso
+SQLite       um ARQUIVO: sem servidor, sem porta, sem usuario
+MongoDB      colecao -&gt; documento, e a tela dele e' OUTRA
+</code></pre>
+<p>O MongoDB tem uma forma de exibição própria de propósito: uma coluna de tabela
+garante que existe em toda linha, tem um tipo e não aninha, e <strong>nenhuma das três
+vale para um documento</strong>. Desenhar documento como linha faria a tela afirmar três
+coisas falsas.</p>
+<p>Além de testar a conexão, o painel <strong>lê o banco</strong>: esquemas, tabelas e colunas —
+ou coleções e a forma dos documentos.</p>
+<p><strong>Executar</strong> (desde 0.121.0): o campo <strong>Consulta</strong> aceita o que você escrever
+— <code>Ctrl+Enter</code> ou <strong>Executar</strong>. Uma leitura (<code>SELECT</code>, <code>WITH</code>, <code>VALUES</code>,
+<code>SHOW</code>, <code>EXPLAIN</code>) roda com teto de 500 linhas (a IDE põe o <code>LIMIT</code> por
+fora; “teto atingido” avisa) e <strong>de verdade só lê</strong>: no PostgreSQL vai numa
+transação <code>READ ONLY</code>, no SQLite o arquivo abre só para leitura — um <code>WITH … INSERT</code> disfarçado é recusado pelo próprio motor. Uma instrução que
+<strong>escreve</strong> (<code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code>, DDL) não roda de primeira: aparece
+o botão <em>“Esta instrução ESCREVE — executar mesmo assim”</em>, e só o clique nele
+executa; o resultado diz quantas linhas foram afetadas. A grade mostra
+toda célula como texto e <code>NULL</code> como <em>null</em> em itálico. No MongoDB a
+consulta é <code>&lt;coleção&gt; &lt;filtro JSON&gt;</code> (ex.: <code>sensores {"placa": "esp32"}</code>), só
+leitura, e cada chave de primeiro nível vira coluna.</p>
+<p><strong>TLS</strong> (PostgreSQL): o chip <strong>TLS verificado (verify-full)</strong> cifra a conexão
+e confere a cadeia <strong>e</strong> o nome do host — para um servidor com certificado
+próprio, aponte o PEM no campo que aparece. Não existe “cifra sem conferir”:
+é a opção que dá sensação de segurança sem a garantia.</p>
+<h3 id="abrir-um-projeto-pelo-terminal">Abrir um projeto pelo terminal</h3>
+<p>Depois de instalar (o script do AppImage, ou <code>scripts/instalar-atalho.sh</code> num
+checkout), o comando curto é <code>kinein</code>:</p>
+<pre><code class="language-text">kinein                  abre a pasta atual
+kinein ~/meu-projeto    abre essa pasta
+kinein --help           explica e sai, sem subir a IDE
+kinein --version        diz a versão e sai
+</code></pre>
+<p>O binário direto não assume a pasta atual, e isso é deliberado: o atalho do
+menu o executa sem argumento, de um diretório qualquer, e abrir o que estiver
+por perto seria pior que não abrir nada.</p>
+<pre><code class="language-text">scripts/kinein-vectis                      abre a IDE sem projeto
+scripts/kinein-vectis .                    abre a pasta atual
+scripts/kinein-vectis ~/meu-projeto        abre essa pasta
+</code></pre>
+<p>Caminho relativo vale, e espaço e acento também. <strong>Pasta vazia abre
+normalmente</strong>: a IDE não exige manifesto e não cria nada por conta própria.</p>
+<p>Caminho que não existe, arquivo no lugar de pasta, opção desconhecida ou dois
+caminhos de uma vez são <strong>recusados com o motivo</strong>, e a IDE não abre. Antes de
+2026-09-24 ela abria sem projeto e sem dizer nada, o que deixava um erro de
+digitação parecendo um defeito da IDE.</p>
+<p><strong>Uma janela por pasta.</strong> Se o projeto que você pediu já está aberto, a IDE não
+abre uma segunda janela: o terminal diz <em>“este projeto já está aberto”</em> e a
+janela existente é chamada para a frente. Outra pasta abre janela nova,
+normalmente.</p>
+<p>Isso não é conforto. A IDE guarda o estado do projeto em <code>.kinein/</code> — quais
+arquivos estavam abertos, o índice — e duas janelas na mesma pasta seriam duas
+donas do mesmo arquivo: a última a fechar apagaria o que a outra gravou, sem
+avisar ninguém.</p>
+<p><strong>No Wayland, trazer a janela para a frente é o compositor quem decide.</strong> Se o
+seu terminal fornece um token de ativação, ela sobe; se não, o GNOME pode
+apenas destacá-la na barra de tarefas. O que a IDE garante em qualquer caso é o
+que importa: a segunda janela não abre, e o terminal diz por quê.</p>
+<h3 id="alvo-remoto-ssh">Alvo remoto (SSH)</h3>
+<p>Uma Raspberry Pi, uma placa com imagem própria (Yocto, Buildroot) — um Linux
+que você alcança por SSH — vira <strong>recurso do projeto</strong>: menu Ambiente →
+<strong>Alvo remoto (SSH)…</strong> (ou <code>remote.list</code> na paleta). A IDE guarda o
+<strong>perfil</strong> (nome, host, usuário, porta, chave privada, pasta de deploy) em
+<code>.kinein/remotes.json</code>. <strong>Não há campo de senha, por desenho</strong>: SSH aqui é
+por chave — copie a sua com <code>ssh-copy-id usuario@host</code> uma vez; o que o
+<code>ssh</code> do sistema precisar perguntar (o host key novo, a senha da chave),
+pergunta no terminal da IDE. A IDE nunca digita nem guarda senha.</p>
+<p><strong>Se <code>ssh &lt;alias&gt;</code> já funciona na sua máquina, não preencha nada.</strong> No topo do
+painel, <strong>Usar o SSH que já funciona</strong> lista os aliases concretos do seu
+<code>~/.ssh/config</code> — e os dos arquivos que ele inclui —, dizendo de qual arquivo
+cada um veio. Clique num deles: a IDE cria o alvo com o nome e o host do alias,
+<strong>sem</strong> copiar usuário, porta nem caminho de chave, e mostra o que o <code>ssh</code>
+realmente faria (<code>o ssh vai em pi@192.168.0.42:2222</code>, mais quantas chaves ele
+tentaria e se há salto/proxy). Quem decide continua sendo o seu
+<code>~/.ssh/config</code> — a IDE só repete o que perguntou ao <code>ssh</code>. Nada disso conecta:
+é leitura do arquivo local mais um <code>ssh -G</code>, que imprime a configuração efetiva
+sem abrir sessão. Um <code>Host *</code> ou com curinga não aparece como alvo escolhível,
+porque não é um destino — mas continua valendo na resolução do OpenSSH. O
+formulário abaixo continua inteiro para <strong>configurar um servidor</strong> que ainda não
+está no seu <code>~/.ssh/config</code>.</p>
+<p><strong>Se a sonda disser que o alvo recusou a chave</strong>, o botão <strong>Copiar minha chave
+(ssh-copy-id)</strong> aparece ali mesmo, junto da explicação. Ele <strong>não</strong> executa nada:
+mostra a linha exata que rodaria, com a porta e a chave do seu perfil, e espera
+você confirmar em <strong>Rodar no terminal</strong>. A IDE nunca gera chave nem digita senha
+— quem pergunta é o <code>ssh</code>, no terminal, e o host key você aceita uma vez.
+Trocar de alvo cancela a linha, porque ela carrega um host.</p>
+<p><strong>Para um servidor que ainda não está no seu <code>~/.ssh/config</code></strong>, não preencha o
+formulário: em <strong>Configurar um servidor novo</strong>, cole a linha que você já usaria
+no terminal — <code>ssh -p 2222 pi@192.168.0.42</code>, ou só <code>pi@192.168.0.42</code> — e clique
+em <strong>Interpretar</strong>. A IDE <strong>lê</strong> a linha (nunca a executa) e preenche o
+formulário abaixo, dizendo de onde tirou cada campo, para você conferir antes de
+salvar. Se a linha trouxer algo que um perfil não reproduz, como <code>-J bastion</code>,
+ela diz qual é e pede que você deixe isso no <code>~/.ssh/config</code> — assim o alvo não
+fica prometendo uma conexão que não faria.</p>
+<pre><code class="language-text">Sondar          ssh -o BatchMode=yes -o ConnectTimeout=5 … 'uname -m; uname -sr; command -v …'
+                -&gt; arquitetura (aarch64), kernel e o que o alvo TEM: gdbserver, python3, rsync
+                   sem chave: falha em segundos e diz o `ssh-copy-id`
+Enviar (deploy) rsync -az --delete &lt;origem&gt; alvo:&lt;pasta&gt;/   (ou scp -r sem rsync)
+                origem padrao build/, pasta padrao ~/kinein/&lt;projeto&gt;
+Rodar em…       configuracao de execucao "Rodar em &lt;nome&gt;": ssh -tt alvo '&lt;programa&gt;'
+gdbserver → kit o kit ganha debugServer = ssh -tt alvo 'gdbserver :2345 &lt;programa&gt;' e
+                remoteTarget = host:2345 — o [Debug] de sempre sobe o servidor e conecta
+debugpy → config "debugpy em &lt;nome&gt;": python3 -m debugpy --listen 0.0.0.0:5678 --wait-for-client
+                &lt;script&gt;; depois, o attach TCP da aba Debug em host:5678
+Shell no terminal ssh alvo, no terminal da IDE
+</code></pre>
+<p>O campo <strong>Programa no alvo</strong> é o caminho DO OUTRO LADO: relativo entra na
+pasta de deploy (<code>app</code> → <code>~/kinein/&lt;projeto&gt;/app</code>), absoluto vai como está.
+Sondar e enviar só valem para um alvo <strong>salvo</strong> — o core só conhece o que
+está no arquivo. Cada botão mostra a linha que compôs (<code>$ …</code>), e o que ela
+virou (a configuração salva, o kit gravado).</p>
+<p><strong>Abrir a pasta do alvo como espelho</strong> (desde 0.122.0; navegador na candidata
+0.3.5): com um alvo salvo, clique <strong>Escolher…</strong> para listar a home do usuário
+no alvo. Entre numa subpasta, use <strong>Subir</strong> para voltar e clique <strong>Abrir esta
+pasta</strong>. O campo de caminho continua disponível para quem já conhece o path
+(<code>/home/pi/projeto</code>); nesse caso, clique <strong>Abrir espelho</strong>. A listagem é
+feita por SSH em Job e exige autenticação por chave. Pastas e arquivos com
+espaço no nome funcionam; o caminho digitado precisa ser absoluto (sem <code>~</code>). A IDE puxa a árvore por
+<code>rsync</code> para <code>~/.cache/kinein-vectis/remote/…</code> e abre esse espelho como um
+workspace comum — editor, busca, git, LSP, tudo funciona nele. A partir daí
+<strong>salvar um arquivo empurra só ele para o alvo</strong> (um job “Empurrar
+main.c para pi”, visível na aba Jobs). O painel Remoto mostra “este
+workspace é um espelho de pi:/home/pi/projeto” com <strong>Puxar do alvo</strong> (o que
+mudou lá) e <strong>Empurrar tudo</strong>. Nada apaga do outro lado: renomear ou apagar
+no espelho não propaga — é gesto seu, pelo shell. O que muda no alvo só
+aparece ao Puxar; se os dois lados editarem o mesmo arquivo, o rsync mais
+recente vence. O LSP resolve contra a sua máquina: para C/C++ cross, o
+sysroot do kit; um interpretador Python do alvo ainda não. Dica: com o
+espelho aberto, “Rodar em pi” roda o que você acabou de salvar.</p>
+<h3 id="observabilidade-grafana">Observabilidade (Grafana)</h3>
+<p>A IDE conversa com o Grafana pela <strong>HTTP API</strong> e nunca o embute — a licença dele
+(AGPL-3.0) decide essa forma. Ela guarda o endereço e a política; <strong>o token não
+tem onde ser gravado</strong>, e isso é garantia estrutural, não disciplina.</p>
+<p><strong>A integração é somente de leitura.</strong> A IDE pergunta a versão, a saúde, as
+fontes de dados e os dashboards. Ela não cria, não edita e não apaga nada no seu
+Grafana, e não o instala nem o configura. Os painéis abrem <strong>no seu navegador</strong>.</p>
+<p><strong>Primeiro uso.</strong> Só o endereço, e <code>Conectar</code> — que grava e mede no mesmo gesto.
+A política de token (variável de ambiente ou digitar na sessão) <strong>só aparece se
+o servidor pedir</strong>: sem token dá para ver a versão e a saúde, e é comum não
+precisar de mais nada.</p>
+<p><strong>Uso diário.</strong> O cabeçalho diz onde e quando — <em>autenticado em grafana.lab:3000
+· medido há 12 min</em> — e oferece um gesto só: <strong>Atualizar</strong>. A configuração fica
+recolhida em <code>configurar…</code> e volta sozinha quando o endereço é o problema.</p>
+<p><strong>O que a IDE tem e o navegador não:</strong> o cruzamento. Quais <strong>bancos deste
+projeto</strong> o seu Grafana já observa, com a justificativa do casamento ao lado —
+mesmo host, mesma base. Ele aparece antes das listas, porque é a resposta; as
+listas são inventário.</p>
+<p><strong>Teclado.</strong> <code>Ctrl+Alt+O</code> abre e o cursor já cai onde se digita: no endereço no
+primeiro uso, no filtro depois. O filtro atua sobre o que já chegou — não faz
+chamada nova a cada tecla — e <code>Esc</code> limpa. Nas listas, as setas andam, <code>Home</code> e
+<code>End</code> vão às pontas, <code>Enter</code> abre no navegador. <code>Esc</code> fecha o painel.</p>
+<p><strong>O token.</strong> Fica <strong>só em memória</strong>, some com a aplicação e nunca entra em
+perfil, workspace, log ou screenshot — o campo tem eco de senha. Ele está preso
+ao par <em>projeto + endereço confirmado</em>: mudar de projeto, confirmar outra URL,
+<code>Esquecer credencial</code> ou ter o token recusado apagam. Fechar e reabrir o painel
+<strong>não</strong> apaga, para que abrir uma janela não vire um login novo.</p>
+<h3 id="instalar-ferramentas">Instalar ferramentas</h3>
+<p>Falta o <code>cmake</code>, o <code>clangd</code> ou o <code>gdb</code>? Este painel mostra o passo a passo
+<strong>oficial</strong> para a sua distro — copiado da documentação do próprio projeto, com a
+URL e a data em que foi conferida. Onde a fonte oficial não cobre a sua família
+de distro, <strong>a entrada não existe</strong>: a IDE mostra o link e diz que não tem passo
+a passo, em vez de traduzir um comando de outra distro.</p>
+<p><strong>A IDE não instala nada sozinha.</strong> O botão escreve os comandos no terminal
+dela, visível, e quem aperta Enter é você.</p>
+<p>O painel cobre o banco, o Grafana, as ferramentas Python e — desde
+2026-09-17 — as de embarcados: <code>esptool</code>, <code>mpremote</code>, <code>espflash</code>,
+<code>probe-rs</code>, <code>picotool</code>, <code>dfu-util</code>, <code>tio</code>, <code>picocom</code>, o GCC ARM
+(<code>arm-none-eabi</code> + GDB), o QEMU (ARM e RISC-V) e o OpenOCD. Cada uma diz se
+já está instalada (a mesma detecção do resto da IDE) e, quando há guia para
+a sua distro, os passos com a fonte. As regras udev de sonda e do
+ModemManager não estão aqui: são o botão <strong>Permissões</strong> do painel de
+Embarcados, que as mede na sua máquina.</p>
+<h3 id="toolchain-e-kits">Toolchain e kits</h3>
+<p>Qual executável cumpre cada papel — compilador C/C++, gerador, <code>cmake</code>, <code>cargo</code>.
+Sem escolha, o <code>PATH</code> decide, que é o comportamento de sempre. A escolha é do
+<strong>kit</strong>, e um kit é um preset mais o sysroot e o <em>triple</em> do alvo — é assim que
+compilação cruzada e embarcados entram sem um segundo mecanismo.</p>
+<p>A IDE escolhe automaticamente quando dá, e <strong>mostra que escolheu</strong>.</p>
+<p><strong>O kit manda no configure e nos servidores.</strong> Com um kit ativo, o configure
+(automático ao abrir, ou o botão Configurar) usa o preset dele; sem kit, o
+preset padrão do projeto — o primeiro do seu <code>CMakeUserPresets.json</code>, senão
+do <code>CMakePresets.json</code> — e a aba IDE diz qual (<code>preset de: kit | CMakeUserPresets.json | CMakePresets.json</code>). O <code>targetTriple</code> do kit vai ao
+<code>cargo build</code> e ao rust-analyzer (que reinicia ao trocar de kit); o
+compilador cross vai ao clangd. <strong>Escolher o preset</strong> (desde 2026-09-18):
+num projeto com <code>CMakePresets.json</code>, o painel de Embarcados → Alvo do kit
+mostra os presets como chips (<code>padrão</code>, <code>dev</code>, <code>release</code>…); clicar num
+torna o kit dele o ativo, e o próximo configure usa esse preset.</p>
+<p><strong>Projeto só com Makefile.</strong> É reconhecido como “Make”: Build roda <code>bear -- make</code> quando o <code>bear</code> está instalado — é ele que escreve o
+<code>compile_commands.json</code> que o clangd lê — e <code>make</code> a seco quando não, dizendo
+isso; o Project Health nomeia o <code>bear</code> como ferramenta ausente e o painel
+Instalar ferramentas tem o passo. Um Makefile ao lado de um <code>CMakeLists.txt</code>
+continua sendo um projeto CMake.</p>
+<p><strong>Sysroot e SDK do alvo.</strong> O campo “Pasta/SDK” aceita digitação ou
+<strong>Escolher pasta…</strong> — o mesmo navegador de pastas da Start Screen, não um
+diálogo do sistema. “Ler sysroot” diz o que a pasta contém; “Importar kit”
+lê um SDK Yocto (<code>environment-setup-*</code>), uma árvore Buildroot
+(<code>output/host</code>), um <strong>Zephyr SDK</strong> (a raiz <code>zephyr-sdk-*</code>, com as toolchains
+que o <code>setup.sh</code> instalou — a IDE propõe a <code>arm-zephyr-eabi</code> quando há
+várias e lista as outras) ou uma pasta de toolchain, e mostra a proposta
+antes de “Aplicar proposta ao kit”. Nada é gravado sem o segundo clique.</p>
+<h3 id="embarcados-ctrlaltm-ou-o-chip-no-rail">Embarcados (<code>Ctrl+Alt+M</code>, ou o chip no rail)</h3>
+<p>O painel de quem escreve firmware, em <strong>quatro abas</strong> (desde a Etapa 3)
+com o veredito da placa no cabeçalho (“ESP32-D0WD-V3 em /dev/ttyUSB0”,
+ou “1 porta(s) serial(is); nenhuma placa identificada ainda”, ou
+“nenhuma placa”): <strong>Placa</strong> (portas seriais, identificar, permissões,
+sonda, arquivos na placa) · <strong>Projeto</strong> (o framework e o modelo, o tamanho
+do binário) · <strong>Gravar</strong> (o motor, a prévia, o firmware) · <strong>Kit</strong> (chip,
+alvo, sysroot, SVD, o depurador, instalar toolchain, importar de SDK —
+<strong>Aplicar ao kit</strong> no pé). Cada aba cabe sem rolar numa janela de 800 px.
+Ele <strong>lê</strong>, e diz o que leu:</p>
+<pre><code class="language-text">o projeto        o framework pelos marcadores dele (ESP-IDF, Zephyr, pico-sdk,
+                 PlatformIO, STM32Cube, Rust bare metal, MicroPython, Yocto,
+                 Buildroot), o alvo deduzido, o que falta na maquina com o
+                 passo oficial, e o que o modelo NAO conseguiu decidir
+compilar pelo    o botao Compilar usa o WRAPPER do framework quando ele tem
+framework        um: `pio run` (platformio.ini — vence tudo), `idf.py build`
+                 dentro do ambiente ativado (o export.sh de IDF_PATH/
+                 ~/esp/esp-idf, ou o activate_idf_&lt;versao&gt;.sh do EIM em
+                 ~/.espressif/tools — a IDE faz o `source` por voce, no
+                 job), `west build -d build -b &lt;placa&gt;` (a placa do build
+                 anterior ou de `west config build.board`; sem ela o west
+                 diz o que falta), e o CMake de sempre com -DPICO_SDK_PATH
+                 no pico-sdk. Framework reconhecido sem a ferramenta: a IDE
+                 recusa ANTES de rodar e diz o passo (eim install, pipx
+                 install west/platformio). Em Gravar, os motores `idf.py`,
+                 `west` e `platformio` aparecem ao lado do esptool; o
+                 monitor num projeto ESP-IDF e' o IDF Monitor e num
+                 PlatformIO o `pio device monitor`
+portas seriais   vistas pelo sysfs, SEM abrir nenhuma: quem faz a ponte
+                 (CP2102, CH340, USB Serial/JTAG...), se voce tem acesso e o
+                 aviso do ModemManager quando ele pode ocupar a porta
+monitor serial   um botao por porta abre tio/picocom/minicom (ou o REPL do
+                 mpremote num projeto MicroPython) NUMA ABA DE TERMINAL —
+                 e' um processo, como qualquer outro
+permissoes       o botao "Permissoes" mede cada canal e diz o que falta: o no'
+                 serial (grupo dono, ou a ACL que o udev deu pela tag uaccess
+                 — e' assim que voce pode ter acesso SEM estar no dialout), o
+                 ModemManager (rodando e sem regra de ignorar, ele segura a
+                 porta por segundos depois do plug) e a regra udev das sondas
+                 (a distro pode ja' ter posto a do OpenOCD/ST-Link). Para o
+                 que falta, o passo OFICIAL com a fonte e a data; "Escrever no
+                 terminal" poe o comando no terminal da IDE e o prompt de
+                 senha do sudo aparece la'. A IDE nunca roda sudo
+identidade       a lupa ao lado de cada porta pergunta ao `esptool` o que ha'
+pelo canal       do outro lado (chip, flash, MAC) — ABRE a porta e a placa
+                 RESETA, por isso e' um clique, nunca automatico. O painel
+                 mostra o que leu e o kit que isso sugere; "Usar chip no kit"
+                 grava so' o chip. Sem esptool, a linha diz `pipx install
+                 esptool`; sem acesso a porta, o passo oficial do grupo
+gravar           e' uma CONFIGURACAO DE EXECUCAO, nao um botao magico: escolha
+                 a porta, (opcional) o motor — solto, o modelo do projeto decide
+                 — e peca a Previa. A IDE monta a linha do esptool a partir da
+                 receita que o build do ESP-IDF escreveu (flasher_args.json),
+                 do probe-rs com o chip do kit e o ELF, do picotool com o UF2,
+                 do dfu-util (so' STM32) — e mostra de onde veio cada pedaco e
+                 o que voce deve saber antes (imagem cifrada, flash menor que
+                 a receita). "Gravar agora" roda a linha na aba de execucao;
+                 "Salvar" a guarda como configuracao ativa: dai' em diante o
+                 botao Executar grava, e a linha e' editavel como qualquer
+                 configuracao (e' assim que um esptool antigo troca
+                 write-flash por write_flash). Sem build, a IDE diz "compile";
+                 sem porta, "escolha a porta"; sem a ferramenta, o passo
+arquivos na      a pasta ao lado de cada porta abre "Arquivos na placa"
+placa            (MicroPython, pelo `mpremote fs`): a lista da raiz, entrar
+                 em pastas, "Baixar" (para `placa/&lt;caminho&gt;` no seu projeto —
+                 o espelho da placa — e o arquivo abre no editor), "Enviar
+                 arquivo aberto" (o `.py` do editor vai para a placa),
+                 "Apagar". Tudo que ESCREVE na placa pede um segundo clique.
+                 Cada gesto interrompe o programa em execucao (raw REPL) e a
+                 placa reinicia ao fim; se a primeira conexao falhar porque o
+                 firmware inunda a serial, a IDE tenta de novo uma vez. Sem
+                 mpremote, o passo de instalacao.
+firmware         no catalogo de instalacao (secao "Toolchains instalaveis")
+MicroPython      ha' o firmware oficial do micropython.org v1.29.0 para
+                 ESP32, ESP32-C3, ESP32-S3, Pico e Pico W, marcado "firmware":
+                 "Baixar" o traz para a pasta da IDE com o SHA-256 conferido
+                 (a fonte nao publica checksum: o pinado foi medido em
+                 2026-09-17 e a tela o diz). Depois, em Gravar, escolha o
+                 firmware baixado no lugar do build: a linha e' a da pagina
+                 da placa (`write-flash 0x1000` no ESP32 classico, `0x0` em
+                 C3/S3; `picotool load -f -x` no Pico), com o aviso de
+                 apagar a flash na primeira instalacao. Nada grava sem o seu
+                 clique — gravar o firmware APAGA o que esta' na placa.
+porta do         o chip "Executar" ao lado de cada porta a ESCOLHE para o
+Executar         Executar de um projeto MicroPython (`mpremote connect
+                 &lt;porta&gt; run`); clicar de novo desfaz. Sem escolha, o
+                 mpremote usa a primeira porta que achar. A escolha vale
+                 para o botao Executar (main.py) e para "Executar" num .py,
+                 nao para um comando digitado nem para uma configuracao de
+                 execucao salva — esses rodam como foram escritos. Uma porta
+                 que some da lista (placa desplugada, painel reaberto) deixa
+                 de ser a escolhida; trocar de projeto tambem limpa
+sonda e kit      a sonda pelo `probe-rs list`; o chip, o alvo (triple), o
+                 sysroot e o depurador ficam no KIT do projeto
+tamanho          "Medir" le o ELF e mostra uma barra por regiao do linker
+                 script (flash, RAM) depois do build
+toolchains       o catalogo do que a IDE sabe instalar NA PASTA DELA
+instalaveis      (~/.local/share/kinein-vectis/toolchains): URL, tamanho e
+                 SHA-256 visiveis ANTES do clique; o download e' um job e o
+                 checksum e' conferido antes de desempacotar. Nada no sistema
+sysroot e SDK    "Ler sysroot" diz o que uma pasta contem (headers,
+                 bibliotecas, libc, .pc do pkg-config) e se ela serve;
+                 "Importar kit" le um SDK Yocto, uma arvore Buildroot ou uma
+                 pasta de toolchain e PROPOE o kit — voce aplica
+</code></pre>
+<p><strong>O GDB certo para o ELF</strong> (desde 2026-09-18): o <code>gdb</code> do Ubuntu não fala
+ARM, Xtensa nem RISC-V — com ele escolhido e um ELF de placa, o attach
+ficava mudo. Agora a IDE lê a arquitetura do ELF antes de subir o
+depurador: se é de outra máquina, entra o GDB de alvo instalado
+(<code>arm-none-eabi-gdb</code>, <code>gdb-multiarch</code>, <code>xtensa-esp-elf-gdb</code>,
+<code>riscv32-esp-elf-gdb</code>) e o console de debug diz qual; sem nenhum, a
+recusa diz o pacote (<code>apt install gdb-multiarch</code>).</p>
+<p>Depurar um alvo embarcado é o mesmo <code>[Debug]</code> de sempre: o kit diz o
+servidor (OpenOCD, QEMU ou <code>probe-rs</code>) e a IDE o sobe e conecta o <code>gdb -i dap</code>.
+Nada aqui roda como root; permissão de porta e de sonda é mostrada, com o
+passo oficial da distro, nunca executada.</p>
+<p><strong>O que o depurador de embarcado mostra</strong> (na aba Debug, a coluna entre as
+variáveis e os watches, com a sessão parada): <strong>Escopos</strong> → <em>Listar</em> traz os
+escopos do frame como o adaptador os nomeia — <code>Locals</code>, <code>Registers</code> e, com o
+<strong>SVD</strong> do chip no kit (campo no painel de Embarcados) e o <code>probe-rs</code> como
+adaptador, <code>Peripherals</code> (os registradores de periférico; o chip ⏱ marca o
+escopo caro) — e o clique num escopo mostra as variáveis dele. <strong>Memória</strong>
+→ digite um endereço (<code>0x3ff00000</code>) e leia 64 bytes em hexadecimal + ASCII;
+<strong>Desmontar</strong> → as instruções a partir do endereço, com bytes e símbolo. Os
+dois são o <code>readMemory</code>/<code>disassemble</code> do próprio DAP, que o <code>probe-rs</code> e o
+GDB respondem. <strong>RTT/defmt</strong>: com o <code>probe-rs</code>, o console da placa pelos
+canais RTT aparece na saída de debug (<code>canal RTT 0 \</code>Terminal` aberto`, e as
+linhas do canal) — o defmt já chega decodificado.</p>
+<h3 id="containers-ctrlaltw">Containers (<code>Ctrl+Alt+W</code>)</h3>
+<p>Docker <strong>ou</strong> Podman — o que responder nesta máquina (no Fedora, <code>docker</code>
+costuma ser o <code>podman-docker</code>, e o painel diz isso). A primeira linha é o
+<strong>motor</strong>: versão, rootless ou com daemon, o socket, se responde e qual
+<code>compose</code> existe. Se algo falta, o painel imprime o passo oficial (grupo
+<code>docker</code>, <code>systemctl</code>, <code>podman.socket</code>) — <strong>e não o executa</strong>.</p>
+<p>Abaixo, os containers numa <strong>grade</strong> (estado · nome · imagem · portas ·
+status; os parados também, pelo chip <strong>parados também</strong>), com um <strong>filtro</strong>
+por nome, imagem ou id. Clique numa linha para escolhê-la: a <strong>barra de
+ações</strong> logo abaixo oferece o que o estado dela permite — <strong>Iniciar</strong> o que
+parou, <strong>Parar/Reiniciar</strong> o que roda, <strong>Remover</strong> só o parado (remover o
+que roda é dois gestos, de propósito). <strong>Logs</strong> e <strong>Shell</strong> abrem numa aba
+de terminal — por isso pedem um projeto aberto: a aba é do projeto (o
+botão desligado diz isso ao pairar). As imagens locais fecham a lista.</p>
+<p><strong>compose up / compose down</strong> são do <strong>projeto</strong>: só acendem quando há motor
+respondendo, uma ferramenta de compose <strong>e um arquivo de compose na raiz do
+workspace</strong> (<code>compose.yaml</code>, <code>docker-compose.yml</code>…). Sem um deles, a linha do
+motor diz o que falta. <code>up</code> é <code>-d</code>; a saída viva mora nos logs de cada
+container. Toda ação é um job cancelável, e o que falhou vira motivo no topo
+do painel.</p>
+<hr>
+<h2 id="10-python">10. Python</h2>
+<p>Python é vertical <strong>nativa</strong> da IDE, não um plugin — e a tela só diz “Python”
+porque a cadeia inteira funciona: ambiente, linguagem, executar, testar,
+depurar, e a placa.</p>
+<p><strong>O interpretador é o <code>compile_commands.json</code> do Python.</strong> Ao abrir um projeto
+com <code>pyproject.toml</code>, <code>requirements.txt</code> ou <code>setup.py</code>, a IDE resolve <strong>qual
+Python</strong> o projeto usa — o <code>VIRTUAL_ENV</code> ativo, o <code>.venv/</code> (ou <code>venv/</code>,
+<code>env/</code>) do projeto, o ambiente do Poetry, o <code>python3</code> do sistema em último
+caso, com aviso — e mostra na <strong>barra de status</strong>
+(<code>python: .venv · 3.14.7</code>). Sem ambiente, o banner de Project Health oferece
+<strong>Criar .venv com uv</strong> (ou <code>python3 -m venv</code>, se o <code>uv</code> não estiver na
+máquina), com o comando visível; nada é criado sem clique.</p>
+<pre><code class="language-text">linguagem     realce e outline pelo Tree-sitter; completar, navegar, renomear,
+              diagnosticos pelo basedpyright — que SOBE COM O INTERPRETADOR DO
+              PROJETO e reinicia sozinho quando o .venv nasce
+correcoes     Alt+Enter = acoes do basedpyright e do `ruff server`, quando Ruff
+              e' encontrado pelo detector. Diagnosticos dos dois convivem na
+              aba Problemas; remover import inutilizado, organizar imports e
+              corrigir pelo Ruff usam o mesmo preview confirmavel do editor
+formatar      Ctrl+Alt+L = `ruff format`
+analise       Ctrl+Shift+L = `ruff check`, com o mesmo perfil de rigor dos
+              outros (os problemas caem na aba Problemas)
+executar      o botao Executar (Shift+F10) roda o PONTO DE ENTRADA do projeto —
+              main.py, app.py, __main__.py, um pacote com __main__.py (como
+              `-m pacote`) ou o script de [project.scripts] instalado —, com o
+              interpretador do projeto (`uv run` quando ha' uv.lock). Qualquer
+              .py da arvore tambem roda pelo botao ou pelo clique direito
+testar        Ctrl+Shift+F9 = `python -m pytest -v`; a arvore de casos antes de
+              rodar e "rodar so' este" (§4). Sem pytest no ambiente, a aba diz
+              o passo para instalar NELE, nao no sistema
+depurar       o mesmo [Debug]: o `debugpy` e' modulo do interpretador do
+              projeto (`-m debugpy.adapter`); sem ele, a IDE diz `pip install
+              debugpy` no ambiente certo. Breakpoints, frames e variaveis como
+              em C/C++/Rust
+modulo nativo um projeto com pybind11, nanobind ou PyO3 (maturin, scikit-build)
+              e' reconhecido, e a barra diz qual e como se constroi — o C/C++
+              ou Rust dentro dele e' lido pelo mesmo indice
+novo projeto  Arquivo -&gt; Novo projeto -&gt; template "Python": layout plano,
+              pyproject PEP 621, pytest em [dev], ruff configurado
+</code></pre>
+<p><strong>MicroPython.</strong> Num projeto MicroPython, o <strong>monitor serial</strong> do painel de
+Embarcados abre o <strong>REPL do <code>mpremote</code></strong> na porta do botão, e <strong>Executar</strong> num
+<code>.py</code> (ou o botão Executar, com o <code>main.py</code>) roda o arquivo <strong>na placa</strong>
+(<code>mpremote run</code>). Com mais de uma placa plugada, escolha a porta pelo chip
+<strong>Executar</strong> ao lado dela no painel de Embarcados: o comando vira <code>mpremote connect &lt;porta&gt; run</code>, e a linha abaixo da lista diz qual porta está valendo.
+Sem escolha, o <code>mpremote</code> usa a primeira porta que achar. Se o <code>mpremote</code> não
+está na máquina, a aba de execução diz o que instalar em vez de rodar um
+<code>import machine</code> no Python do desktop. O <strong>firmware oficial</strong> se baixa e se
+grava pelo painel de Embarcados (catálogo de instalação → Gravar), e os
+<strong>arquivos da placa</strong> se leem, enviam e apagam pela pasta ao lado da porta
+(veja a seção Embarcados). <strong>Stubs da placa:</strong> num projeto MicroPython com o
+chip conhecido (kit ou identidade pelo canal), a faixa de saúde oferece
+<strong>Instalar stubs</strong> — <code>micropython-&lt;port&gt;-&lt;placa&gt;-stubs</code> em <code>typings/</code> na raiz
+do projeto, pelo <code>uv</code> (ou o <code>pip</code> do interpretador); o basedpyright passa a
+receber a pasta e o <code>import machine</code> completa e deixa de ser marcado como
+módulo inexistente. Apague <code>typings/</code> para remover.</p>
+<p><strong>O que a IDE não faz:</strong> instalar o <code>uv</code>, o <code>basedpyright</code>, o <code>ruff</code> ou o
+<code>debugpy</code> por conta própria. O painel <strong>Instalar ferramentas</strong> (<code>Ctrl+Alt+H</code>)
+mostra o passo oficial de cada um; o botão escreve o comando no terminal da
+IDE, e quem aperta Enter é você.</p>
+<hr>
+<h2 id="11-quando-algo-der-errado">11. Quando algo der errado</h2>
+<ol>
+<li><strong>Aba “IDE”</strong> (painel inferior): fluxo interno da IDE ao vivo — o que
+foi pedido e o que respondeu, e o que os servidores de linguagem escrevem
+no stderr deles (<code>lsp cpp · …</code>): a versão do clangd, onde ele procurou o
+<code>compile_commands.json</code>, o traceback de um basedpyright que não subiu.
+Um servidor que sai deixa o motivo na mesma aba.</li>
+<li><strong>Log de erros persistente</strong>:
+<code>~/.cache/kinein-vectis/logs/kinein-ui-erros.txt</code> — anexe este arquivo ao
+reportar um bug.</li>
+<li><strong>LSP demorou?</strong> A primeira indexação de um projeto grande leva tempo
+(especialmente rust-analyzer). O completion sintático local aparece antes;
+navegação, tipos e resultados semânticos completos chegam quando o servidor
+termina a primeira preparação.</li>
+<li><strong>Ferramenta faltando?</strong> Veja a aba Ferramentas e siga a sugestão exibida
+para o seu sistema.</li>
+<li><strong>“O adapter não respondeu”?</strong> A aba Debug mostra, em vermelho, o que o
+próprio adaptador (debugpy, lldb-dap, probe-rs, gdb) escreveu antes de
+morrer, e a mensagem de erro traz as últimas linhas dele. Num projeto com
+<code>debugServer</code> no kit, o que o QEMU/OpenOCD disse antes de sair também
+vem na mensagem.</li>
+<li><strong>O motor (core) caiu?</strong> A IDE se recupera sozinha: a barra de status
+mostra “recuperando…” por um instante e reconecta ao mesmo projeto,
+mantendo suas abas abertas — sem reiniciar a janela. Se ele cair várias
+vezes seguidas, a recuperação pausa e a status bar avisa; aí veja o log
+de erros.</li>
+</ol>
+<h3 id="o-que-reportar-num-bug">O que reportar num bug</h3>
+<ul>
+<li>O que você fez, o que esperava, o que aconteceu.</li>
+<li>O arquivo de log acima + a saída do terminal se houver.</li>
+<li>Distro, e se o projeto era Rust, C/C++, Python ou embarcado (qual placa).</li>
+</ul>
+<hr>
+<h2 id="12-tabela-resumo-de-todos-os-atalhos">12. Tabela-resumo de todos os atalhos</h2>
+<table>
+<thead>
+<tr>
+<th>Categoria</th>
+<th>Atalho</th>
+<th>Ação</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Arquivo</td>
+<td><code>Ctrl+S</code></td>
+<td>Salvar</td>
+</tr>
+<tr>
+<td>Arquivo</td>
+<td><code>Ctrl+Shift+S</code></td>
+<td>Salvar tudo</td>
+</tr>
+<tr>
+<td>Workspace</td>
+<td><code>Ctrl+O</code></td>
+<td>Abrir pasta</td>
+</tr>
+<tr>
+<td>Edição</td>
+<td><code>Ctrl+D</code></td>
+<td>Duplicar linha/seleção</td>
+</tr>
+<tr>
+<td>Edição</td>
+<td><code>Alt+Shift+↑/↓</code></td>
+<td>Mover linha(s)</td>
+</tr>
+<tr>
+<td>Edição</td>
+<td><code>Ctrl+/</code></td>
+<td>Comentar/descomentar</td>
+</tr>
+<tr>
+<td>Edição</td>
+<td><code>Ctrl+Y</code></td>
+<td>Deletar linha</td>
+</tr>
+<tr>
+<td>Edição</td>
+<td><code>Ctrl+G</code></td>
+<td>Ir para linha</td>
+</tr>
+<tr>
+<td>Edição</td>
+<td><code>Ctrl+F</code> / <code>Ctrl+H</code></td>
+<td>Localizar / substituir no arquivo</td>
+</tr>
+<tr>
+<td>Edição</td>
+<td><code>F3</code> ou <code>Ctrl+Alt+G</code></td>
+<td>Próxima ocorrência (<code>Shift+</code> = anterior)</td>
+</tr>
+<tr>
+<td>Edição</td>
+<td><code>Ctrl+W</code> / <code>Ctrl+Shift+W</code></td>
+<td>Expandir / encolher seleção</td>
+</tr>
+<tr>
+<td>Edição</td>
+<td><code>Home</code> / <code>Shift+Home</code></td>
+<td>Início do texto ↔ coluna 0</td>
+</tr>
+<tr>
+<td>Edição</td>
+<td><code>Ctrl+Alt+L</code></td>
+<td>Formatar arquivo</td>
+</tr>
+<tr>
+<td>Código</td>
+<td><code>Ctrl+B</code></td>
+<td>Ir para definição</td>
+</tr>
+<tr>
+<td>Código</td>
+<td><code>Ctrl+Q</code></td>
+<td>Hover/documentação</td>
+</tr>
+<tr>
+<td>Código</td>
+<td><code>Ctrl+Space</code></td>
+<td>Completar</td>
+</tr>
+<tr>
+<td>Código</td>
+<td><code>Alt+F7</code> ou <code>Ctrl+Shift+U</code></td>
+<td>Encontrar usos</td>
+</tr>
+<tr>
+<td>Código</td>
+<td><code>Shift+F6</code> ou <code>Ctrl+Shift+R</code></td>
+<td>Renomear símbolo</td>
+</tr>
+<tr>
+<td>Código</td>
+<td><code>Alt+Enter</code></td>
+<td>Quick fixes / ações</td>
+</tr>
+<tr>
+<td>Código</td>
+<td><code>Alt+O</code></td>
+<td>C/C++: alternar header/source</td>
+</tr>
+<tr>
+<td>Código</td>
+<td><code>F2</code> / <code>Shift+F2</code> (ou <code>Ctrl+Alt+E</code> / <code>Ctrl+Alt+Shift+E</code>)</td>
+<td>Próximo / anterior problema</td>
+</tr>
+<tr>
+<td>IDE</td>
+<td><code>Ctrl+Alt+S</code></td>
+<td>Abrir configurações</td>
+</tr>
+<tr>
+<td>Busca</td>
+<td><code>Ctrl+Shift+N</code> / <code>Ctrl+Shift+A</code></td>
+<td>Search Everywhere (<code>@</code> símbolos do arquivo, <code>#</code> do workspace)</td>
+</tr>
+<tr>
+<td>Busca</td>
+<td><code>Ctrl+E</code></td>
+<td>Arquivos recentes</td>
+</tr>
+<tr>
+<td>Busca</td>
+<td><code>Alt+7</code></td>
+<td>Aba Símbolos (estrutura do arquivo; declarações do projeto por nome)</td>
+</tr>
+<tr>
+<td>Busca</td>
+<td><code>Ctrl+Shift+F</code></td>
+<td>Buscar nos arquivos</td>
+</tr>
+<tr>
+<td>Busca</td>
+<td><code>Ctrl+Shift+H</code></td>
+<td>Substituir no projeto</td>
+</tr>
+<tr>
+<td>Build</td>
+<td><code>Ctrl+F9</code> ou <code>Ctrl+Alt+B</code></td>
+<td>Build</td>
+</tr>
+<tr>
+<td>Build</td>
+<td><code>Ctrl+Shift+F9</code> ou <code>Ctrl+Alt+T</code></td>
+<td>Testes</td>
+</tr>
+<tr>
+<td>Build</td>
+<td><code>Ctrl+Shift+L</code></td>
+<td>Análise (clippy)</td>
+</tr>
+<tr>
+<td>Debug</td>
+<td><code>Shift+F9</code> ou <code>Ctrl+Alt+D</code></td>
+<td>Iniciar debug</td>
+</tr>
+<tr>
+<td>Debug</td>
+<td><code>F9</code> ou <code>Ctrl+Alt+C</code></td>
+<td>Continuar</td>
+</tr>
+<tr>
+<td>Debug</td>
+<td><code>F8</code> ou <code>Ctrl+Alt+N</code></td>
+<td>Step over</td>
+</tr>
+<tr>
+<td>Debug</td>
+<td><code>F7</code> ou <code>Ctrl+Alt+I</code></td>
+<td>Step into</td>
+</tr>
+<tr>
+<td>Debug</td>
+<td><code>Shift+F8</code> ou <code>Ctrl+Alt+U</code></td>
+<td>Step out</td>
+</tr>
+<tr>
+<td>Terminal</td>
+<td><code>Shift+F10</code> ou <code>Ctrl+Alt+R</code></td>
+<td>Executar projeto (aba ▶ no Terminal)</td>
+</tr>
+<tr>
+<td>Terminal</td>
+<td><code>Ctrl+F2</code> ou <code>Ctrl+Alt+X</code></td>
+<td>Parar execução</td>
+</tr>
+<tr>
+<td>Terminal</td>
+<td><code>Alt+F12</code> ou <code>Ctrl+` </code></td>
+<td>Terminal integrado (sessão Shell)</td>
+</tr>
+<tr>
+<td>Ambiente</td>
+<td><code>Ctrl+Alt+K</code></td>
+<td>Bibliotecas</td>
+</tr>
+<tr>
+<td>Ambiente</td>
+<td><code>Ctrl+Alt+P</code></td>
+<td>Ações de configuração</td>
+</tr>
+<tr>
+<td>Ambiente</td>
+<td><code>Ctrl+Alt+J</code></td>
+<td>Banco de dados</td>
+</tr>
+<tr>
+<td>Ambiente</td>
+<td><code>Ctrl+Alt+O</code></td>
+<td>Observabilidade (Grafana)</td>
+</tr>
+<tr>
+<td>Ambiente</td>
+<td><code>Ctrl+Alt+M</code></td>
+<td>Embarcados</td>
+</tr>
+<tr>
+<td>Ambiente</td>
+<td><code>Ctrl+Alt+W</code></td>
+<td>Containers</td>
+</tr>
+<tr>
+<td>Ambiente</td>
+<td><code>Ctrl+Alt+H</code></td>
+<td>Instalar ferramentas</td>
+</tr>
+</tbody>
+</table>
+</article></div></div></main><footer class="site-footer"><nav class="shell footer-grid" aria-label="Rodapé"><div class="footer-intro"><strong>Kinein <span>Vectis</span></strong><p>IDE open source para C, C++, Rust e Python, feita para firmware, sistemas, Linux embarcado e IoT.</p></div><div class="footer-group"><p class="label">Produto</p><a class="footer-link" href="/KineinSite/atualizacoes/">Atualizações</a><a class="footer-link" href="https://github.com/ViktorWalde/KineinVectis/releases/tag/v0.3.5" target="_blank" rel="noopener noreferrer">Baixar a 0.3.5 <span aria-hidden="true">↗</span></a><a class="footer-link" href="https://github.com/ViktorWalde/KineinVectis" target="_blank" rel="noopener noreferrer">Código da IDE <span aria-hidden="true">↗</span></a></div><div class="footer-group"><p class="label">Aprender</p><a class="footer-link" href="/KineinSite/aprender/">Guia da IDE</a><a class="footer-link" href="/KineinSite/documentacao/">Documentação</a><a class="footer-link" href="/KineinSite/manual/">Manual da IDE</a></div><div class="footer-group"><p class="label">Comunidade</p><a class="footer-link" href="https://discord.gg/cWRkUGUmQU" target="_blank" rel="noopener noreferrer">Discord <span aria-hidden="true">↗</span></a><a class="footer-link" href="/KineinSite/documentacao/site/">Sobre este site</a><a class="footer-link" href="https://github.com/ViktorWalde/KineinSite" target="_blank" rel="noopener noreferrer">Código do site <span aria-hidden="true">↗</span></a></div></nav><div class="shell footer-bottom"><p>Beta público 0.3.5 para Linux x86_64. A IDE não tem telemetria.</p></div></footer><script type="module">var e=[`system`,`light`,`dark`,`warm`],t=[`amber`,`blue`,`teal`],n=`system`,r=`amber`,i=`kinein-theme`,a=`kinein-accent`;e.filter(e=>e!==n),t.filter(e=>e!==r);var o=document.documentElement,s=document.querySelector(`.appearance`),c=Array.from(document.querySelectorAll(`input[name="theme"]`)),l=Array.from(document.querySelectorAll(`input[name="accent"]`)),u=window.matchMedia(`(prefers-reduced-motion: reduce)`);function d(e){try{return localStorage.getItem(e)}catch{return null}}function f(e,t){try{localStorage.setItem(e,t)}catch{}}function p(t){return t!==null&&e.includes(t)}function m(e){return e!==null&&t.includes(e)}function h(e){e===`system`?o.removeAttribute(`data-theme`):o.dataset.theme=e}function g(e){e===`amber`?o.removeAttribute(`data-accent`):o.dataset.accent=e}function _(e){if(!(`startViewTransition`in document)||u.matches){e();return}o.dataset.switching=`theme`,document.startViewTransition(e).finished.finally(()=>{delete o.dataset.switching})}var v=d(i),y=d(a),b=p(v)?v:n,x=m(y)?y:r;if(h(b),g(x),c.length>0&&l.length>0){for(let e of c)e.checked=e.value===b;for(let e of l)e.checked=e.value===x;o.dataset.enhanced=`true`;for(let e of c)e.addEventListener(`change`,()=>{let t=e.value;e.checked&&p(t)&&(_(()=>{h(t)}),f(i,t))});for(let e of l)e.addEventListener(`change`,()=>{let t=e.value;e.checked&&m(t)&&(_(()=>{g(t)}),f(a,t))})}s&&(s.addEventListener(`keydown`,e=>{e.key===`Escape`&&s.open&&(s.open=!1,s.querySelector(`summary`)?.focus())}),document.addEventListener(`pointerdown`,e=>{if(!s.open)return;let t=e.target;t instanceof Node&&!s.contains(t)&&(s.open=!1)}));</script></body></html><script type="module" src="/KineinSite/_astro/index.astro_astro_type_script_index_0_lang.BXi_B3Q_.js"></script>
