@@ -14,7 +14,10 @@ esperar 1
 digitar projetos
 tecla Return           # Criar
 esperar 1.5
-duplo 520 435          # entra em projetos
+clicar 800 292         # campo do caminho (a lista de pastas muda com o que há na HOME)
+tecla End
+digitar /projetos
+tecla Return           # Ir: entra em projetos, como os dois cliques do texto
 esperar 1.5
 clicar 744 332         # + projeto
 esperar 1
