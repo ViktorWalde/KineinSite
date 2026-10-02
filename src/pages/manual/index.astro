@@ -1,0 +1,78 @@
+---
+import { getEntry, render } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import DocsSidebar from "../../features/documentacao/DocsSidebar.astro";
+import "../../features/codigo/codigo.css";
+import "../../features/documentacao/documentacao.css";
+import "../../features/manual/manual.css";
+import { formatDate, publicVersion, repositoryUrl, sitePath } from "../../site";
+
+// O manual é a cópia fiel do repositório da IDE na tag da versão pública
+// (scripts/sincronizar-manual.mjs); o site só dá a moldura e o índice.
+const manual = await getEntry("manual", "manual");
+if (!manual) {
+  throw new Error(
+    "Falta src/content/manual/manual.md: rode scripts/sincronizar-manual.mjs.",
+  );
+}
+const { Content, headings } = await render(manual);
+const sections = headings
+  .filter((heading) => heading.depth === 2)
+  .map((heading) => ({ href: `#${heading.slug}`, text: heading.text }));
+const { version, tag, commit, source, syncedAt } = manual.data;
+const sourceUrl = `${repositoryUrl}/blob/${tag}/${source}`;
+const outdated = version !== publicVersion;
+---
+
+<BaseLayout
+  current="manual"
+  title="Manual da IDE"
+  description={`Manual de uso da Kinein Vectis ${version}: layout, editor, build, testes, depuração, Git, terminal, Python, embarcados e atalhos.`}
+>
+  <div class="docs-shell shell">
+    <DocsSidebar
+      title={`Manual · ${version}`}
+      label="Seções do manual"
+      links={sections}
+      note="O texto é o do repositório da IDE, sem alterações."
+    />
+
+    <div class="docs-main">
+      <header class="manual-header enter">
+        <p class="kicker">MANUAL DA IDE · VERSÃO {version}</p>
+        <p class="manual-source">
+          Este é o texto oficial do repositório da Kinein Vectis, reproduzido
+          sem alterações a partir da tag{" "}
+          <a
+            class="inline-link"
+            href={sourceUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {tag} <span aria-hidden="true">↗</span>
+          </a>{" "}
+          (commit <code>{commit.slice(0, 7)}</code>, copiado em{" "}
+          {formatDate(syncedAt)}). Para aprender passo a passo, o{" "}
+          <a class="inline-link" href={sitePath("/aprender/")}>
+            Guia da IDE
+          </a>{" "}
+          mostra cada tarefa reproduzida na IDE.
+        </p>
+        {outdated && (
+          <p class="manual-outdated">
+            Este manual é da versão {version}. A versão pública atual é a{" "}
+            {publicVersion}; algumas telas e atalhos podem ter mudado.
+          </p>
+        )}
+      </header>
+
+      <article class="manual-article prose">
+        <Content />
+      </article>
+    </div>
+  </div>
+</BaseLayout>
+
+<script>
+  import "../../features/codigo/code-copy";
+</script>

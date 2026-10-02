@@ -5,7 +5,7 @@ import { discordUrl, publicVersion, releaseUrl, sitePath } from "../site";
 import ThemeControls from "./ThemeControls.astro";
 
 interface Props {
-  current?: "home" | "docs" | "updates" | undefined;
+  current?: "home" | "guide" | "manual" | "docs" | "updates" | undefined;
 }
 
 const { current } = Astro.props;
@@ -33,22 +33,28 @@ const optimizedIcon = await getImage({ src: icon, width: 84, format: "webp" });
 
     <nav class="primary-nav" aria-label="Navegação principal">
       <a
-        href={sitePath("/")}
-        aria-current={current === "home" ? "page" : undefined}
+        href={sitePath("/aprender/")}
+        aria-current={current === "guide" ? "page" : undefined}
       >
-        Início
+        Guia
       </a>
       <a
-        href={sitePath("/atualizacoes/")}
-        aria-current={current === "updates" ? "page" : undefined}
+        href={sitePath("/manual/")}
+        aria-current={current === "manual" ? "page" : undefined}
       >
-        Atualizações
+        Manual
       </a>
       <a
         href={sitePath("/documentacao/")}
         aria-current={current === "docs" ? "page" : undefined}
       >
         Documentação
+      </a>
+      <a
+        href={sitePath("/atualizacoes/")}
+        aria-current={current === "updates" ? "page" : undefined}
+      >
+        Atualizações
       </a>
       <a
         class="nav-external"

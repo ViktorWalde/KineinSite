@@ -1,5 +1,5 @@
 ---
-import { manualUrl, repositoryUrl, sitePath } from "../../site";
+import { repositoryUrl, sitePath } from "../../site";
 
 const tracks = [
   {
@@ -31,8 +31,8 @@ const tracks = [
     status: "EM PREPARAÇÃO",
     path: "Ambiente virtual, relatório CSV e testes locais com unittest. API e banco vêm depois.",
     destination: "Python no manual",
-    href: `${manualUrl}#10-python`,
-    external: true,
+    href: sitePath("/manual/#10-python"),
+    external: false,
   },
 ] as const;
 ---

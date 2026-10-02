@@ -176,16 +176,13 @@
     }
   }
 
-  /* Abaixo de 54rem (864 px com a fonte padrão) a navegação vai para uma segunda linha, que rola na
-   horizontal em vez de quebrar; o cabeçalho deixa de ser fixo para não
-   ocupar a tela do celular. */
-  @media (width <= 54rem) {
+  /* Abaixo de 66rem (1056 px com a fonte padrão) o menu não cabe ao lado da
+     marca e das ferramentas: vai para uma segunda linha, que rola na
+     horizontal em vez de quebrar. O cabeçalho continua fixo, mais alto, e as
+     âncoras ganham mais recuo para o título não ficar embaixo dele. */
+  @media (width <= 66rem) {
     html {
-      scroll-padding-top: 1.5rem;
-    }
-
-    .site-header {
-      position: relative;
+      scroll-padding-top: calc(var(--header-height) + 3rem);
     }
 
     .header-inner {
@@ -202,6 +199,18 @@
       overflow-x: auto;
       mask-image: linear-gradient(90deg, #000 calc(100% - 2rem), transparent);
       scrollbar-width: none;
+    }
+  }
+
+  /* Abaixo de 54rem (864 px) o cabeçalho deixa de ser fixo, para não ocupar a
+     tela do celular. */
+  @media (width <= 54rem) {
+    html {
+      scroll-padding-top: 1.5rem;
+    }
+
+    .site-header {
+      position: relative;
     }
   }
 

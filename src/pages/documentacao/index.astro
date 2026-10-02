@@ -11,7 +11,6 @@ import { developmentSnapshot } from "../../data/development";
 import { references } from "../../data/references";
 import {
   discordUrl,
-  manualUrl,
   publicVersion,
   releaseUrl,
   repositoryUrl,
@@ -99,13 +98,9 @@ const firstGuide = ideGuides[0];
           </a>
           <a
             class="docs-card card card-interactive"
-            href={manualUrl}
-            target="_blank"
-            rel="noopener noreferrer"
+            href={sitePath("/manual/")}
           >
-            <span class="label">
-              REFERÊNCIA DE USO <span aria-hidden="true">↗</span>
-            </span>
+            <span class="label">REFERÊNCIA DE USO · {publicVersion}</span>
             <h3>Manual da IDE</h3>
             <p>
               Fluxos, recursos, atalhos e o que fazer quando algo dá errado.

@@ -54,4 +54,19 @@ const atualizacoes = defineCollection({
   }),
 });
 
-export const collections = { aprender, estudos, atualizacoes };
+// Cópia fiel do manual da IDE na tag da versão pública. O corpo não se
+// edita aqui: vem de scripts/sincronizar-manual.mjs, e
+// scripts/check-manual.mjs confere o sha256 no build.
+const manual = defineCollection({
+  loader: glob({ pattern: "*.md", base: "./src/content/manual" }),
+  schema: z.object({
+    version: z.string().regex(/^\d+\.\d+\.\d+$/),
+    tag: z.string().regex(/^v\d+\.\d+\.\d+$/),
+    commit: z.string().regex(/^[0-9a-f]{40}$/),
+    source: z.string().min(1),
+    sha256: z.string().regex(/^[0-9a-f]{64}$/),
+    syncedAt: z.coerce.date(),
+  }),
+});
+
+export const collections = { aprender, estudos, atualizacoes, manual };
