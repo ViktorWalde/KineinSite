@@ -32,12 +32,13 @@ npm run build:pages
 npm run preview
 ```
 
-No preview do build para Pages, abra <http://127.0.0.1:4321/KineinSite/>. O build valida tipos, lint, CSS, arquitetura, formatação, HTML e links internos, incluindo âncoras. Os arquivos gerados ficam em `dist/`.
+No preview do build para Pages, abra <http://127.0.0.1:4321/KineinSite/>. O build valida tipos, lint, CSS, arquitetura, formatação, HTML, links internos (incluindo âncoras) e a política de segurança de cada página. Os arquivos gerados ficam em `dist/`.
 
 ## Organização e colaboração
 
 - [CONTRIBUTING.md](CONTRIBUTING.md): fluxo de contribuição e critérios para conteúdo.
-- [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md): rotas, coleções, temas, build e publicação.
+- [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md): rotas, coleções, temas, build, segurança e publicação.
+- [SECURITY.md](SECURITY.md): como relatar uma vulnerabilidade do site.
 - [docs/ROADMAP.md](docs/ROADMAP.md): trabalho do site com pré-requisitos e critérios de conclusão.
 - `src/content/estudos/`: estudos de linguagem independentes da IDE, publicados somente com `status: verified`.
 - `src/content/aprender/`: estrutura reservada para o Guia da IDE e projetos guiados; ainda não há rota pública para essa coleção.

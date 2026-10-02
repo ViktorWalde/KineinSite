@@ -16,12 +16,14 @@ import {
 } from "../site";
 
 // O hero é o maior elemento da primeira tela: largura certa por tela
-// (srcset) e prioridade de rede alta.
+// (srcset) e prioridade de rede alta. As dimensões vêm do resultado, nunca
+// de wallpaperSource.width: ler uma propriedade da imagem importada faz o
+// Astro publicar o PNG original (2 MB) junto, sem nenhuma página usá-lo.
 const wallpaper = await getImage({
   src: wallpaperSource,
   format: "webp",
   quality: 76,
-  widths: [768, 1280, wallpaperSource.width],
+  widths: [768, 1280, 1672],
   sizes: "100vw",
 });
 ---
@@ -37,8 +39,8 @@ const wallpaper = await getImage({
       src={wallpaper.src}
       srcset={wallpaper.srcSet.attribute}
       sizes="100vw"
-      width={wallpaperSource.width}
-      height={wallpaperSource.height}
+      width={wallpaper.attributes["width"]}
+      height={wallpaper.attributes["height"]}
       alt=""
       fetchpriority="high"
     />

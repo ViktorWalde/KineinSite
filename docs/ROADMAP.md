@@ -1,6 +1,6 @@
 # Roadmap do KineinSite
 
-Este documento descreve **o site**, não o cronograma de recursos da Kinein Vectis. Estado conferido em 2026-09-26. A ordem abaixo indica dependências editoriais e técnicas, sem prometer datas ou funcionalidades da IDE que ainda não foram validadas.
+Este documento descreve **o site**, não o cronograma de recursos da Kinein Vectis. Estado conferido em 2026-10-02. A ordem abaixo indica dependências editoriais e técnicas, sem prometer datas ou funcionalidades da IDE que ainda não foram validadas.
 
 ## Entregue
 
@@ -10,6 +10,8 @@ Este documento descreve **o site**, não o cronograma de recursos da Kinein Vect
 - Temas claro, escuro e quente com três cores de destaque, sem exigir conta.
 - Validação de tipos, estilos, formatação, HTML e links internos no build; publicação por `gh-pages`.
 - Documentação técnica para colaboração e build local obrigatório antes da publicação.
+- Revisão visual (2026-10-02): tokens de raio, movimento e elevação; cartões e rótulos unificados; cabeçalho fixo no desktop e compacto no celular; índice da documentação com a seção em leitura; transição nativa entre páginas; tema aplicado antes da primeira pintura; sem rolagem horizontal a 320 px.
+- Segurança (2026-10-02): política de conteúdo (CSP) em todas as páginas, verificada no build e provada por mutação; dependências sem scripts de instalação; actions fixadas por SHA; deploy sem o PNG original de 2 MB. Detalhes e limites em [ARCHITECTURE.md](ARCHITECTURE.md#segurança).
 
 ## Próximas entregas do site
 

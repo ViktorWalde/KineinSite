@@ -1,5 +1,8 @@
 name: Publicar KineinSite no GitHub Pages
 
+# Actions fixadas por SHA de commit (comentário = a tag de origem): uma tag
+# pode ser movida para outro código, um SHA não. Para atualizar, resolva a
+# tag nova com `git ls-remote https://github.com/<dono>/<action> refs/tags/<tag>`.
 on:
   workflow_dispatch:
 
@@ -17,9 +20,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Obter o código
-        uses: actions/checkout@v6
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
       - name: Validar e gerar o site
-        uses: withastro/action@v6
+        uses: withastro/action@3eafd002e65cc31b4f0eae0bb05450d521562247 # v6
         with:
           node-version: "24"
           build-cmd: npm run build:pages
@@ -33,4 +38,4 @@ jobs:
     steps:
       - name: Publicar no GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v5
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5
