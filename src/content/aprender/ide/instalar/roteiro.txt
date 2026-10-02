@@ -1,0 +1,18 @@
+# Reprodução do capítulo "Instalar e abrir" (scripts/capturar-tutorial.sh).
+# Os blocos são os ```bash do index.md, na ordem.
+pasta .
+bloco 1                # uname e glibc
+conferir x86_64
+bloco 2                # baixa e extrai o KV0.3.zip da release
+conferir KV0.3/Kinein-Vectis-0.3.5-x86_64.AppImage
+bloco 3                # sha256sum -c
+conferir Kinein-Vectis-0.3.5-x86_64.AppImage: OK
+bloco 4                # instalador
+conferir ==> atalho instalado/atualizado
+conferir ==> comando curto:
+bloco 5                # kinein --version
+conferir kinein-vectis 0.3.5
+abrir
+esperar 12
+foto tela-inicial 430 320 800 430   # o painel central, sem o vazio em volta
+fechar

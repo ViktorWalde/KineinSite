@@ -1,0 +1,68 @@
+/* Índice de /aprender/: capítulos numerados em lista. Os capítulos usam
+   guia.css. */
+.learn {
+  max-width: 60rem;
+  padding-block: var(--space-xl) var(--space-3xl);
+}
+
+.learn-intro h1 {
+  margin-block: 0.5rem 1rem;
+  font-size: var(--text-4xl);
+}
+
+.learn-intro-copy {
+  max-width: 60ch;
+  color: var(--muted);
+  font-size: var(--text-lg);
+}
+
+.learn-list {
+  display: grid;
+  gap: var(--space-s);
+  margin: var(--space-xl) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.learn-card {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: var(--space-m);
+  padding: var(--space-m) var(--space-l);
+}
+
+.learn-number {
+  color: var(--accent);
+  font: 700 var(--text-lg) / 1 var(--font-mono);
+}
+
+.learn-text {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.learn-text span {
+  color: var(--muted);
+  font-size: var(--text-sm);
+}
+
+.learn-meta {
+  color: var(--muted);
+  font: 600 var(--text-xs) / 1.4 var(--font-mono);
+  white-space: nowrap;
+}
+
+.learn-empty {
+  color: var(--muted);
+}
+
+@media (width <= 35rem) {
+  .learn-card {
+    grid-template-columns: auto 1fr;
+  }
+
+  .learn-meta {
+    grid-column: 2;
+  }
+}

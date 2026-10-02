@@ -1,0 +1,37 @@
+---
+import { sitePath } from "../../site";
+import { sectionNames, sectionOf, type Guide } from "./guides";
+
+// Índice lateral do guia: todos os capítulos publicados da mesma seção, com
+// o atual marcado (aria-current="page").
+interface Props {
+  guides: readonly Guide[];
+  currentId: string;
+}
+
+const { guides, currentId } = Astro.props;
+const current = guides.find((guide) => guide.id === currentId);
+const section = current ? sectionOf(current) : "ide";
+const siblings = guides.filter((guide) => sectionOf(guide) === section);
+---
+
+<aside class="docs-sidebar guide-nav" aria-label="Capítulos do guia">
+  <p class="label">{sectionNames[section]}</p>
+  <nav aria-label={sectionNames[section]}>
+    <ol>
+      {siblings.map((guide) => (
+        <li>
+          <a
+            href={sitePath(`/aprender/${guide.id}/`)}
+            aria-current={guide.id === currentId ? "page" : undefined}
+          >
+            <span class="guide-nav-number">
+              {String(guide.data.order).padStart(2, "0")}
+            </span>
+            {guide.data.title}
+          </a>
+        </li>
+      ))}
+    </ol>
+  </nav>
+</aside>

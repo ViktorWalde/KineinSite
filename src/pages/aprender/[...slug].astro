@@ -1,0 +1,154 @@
+---
+import { render } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import GuideNav from "../../features/aprender/GuideNav.astro";
+import {
+  getPublishedGuides,
+  sectionNames,
+  sectionOf,
+  type Guide,
+} from "../../features/aprender/guides";
+import { formatDate, publicVersion, sitePath } from "../../site";
+import "../../features/codigo/codigo.css";
+import "../../features/documentacao/documentacao.css";
+import "../../features/aprender/guia.css";
+
+export async function getStaticPaths() {
+  const guides = await getPublishedGuides();
+  return guides.map((guide) => ({
+    params: { slug: guide.id },
+    props: { guide, guides },
+  }));
+}
+
+interface Props {
+  guide: Guide;
+  guides: Guide[];
+}
+
+const { guide, guides } = Astro.props;
+const { Content } = await render(guide);
+const section = sectionOf(guide);
+const siblings = guides.filter((item) => sectionOf(item) === section);
+const index = siblings.findIndex((item) => item.id === guide.id);
+const previous = index > 0 ? siblings[index - 1] : undefined;
+const next = index < siblings.length - 1 ? siblings[index + 1] : undefined;
+// O guia foi reproduzido numa versão; se a pública mudou e ele não foi
+// refeito, a página avisa em vez de fingir que continua igual.
+const outdated = guide.data.ideVersion !== publicVersion;
+---
+
+<BaseLayout
+  current="docs"
+  title={guide.data.title}
+  description={guide.data.summary}
+>
+  <div class="docs-shell shell">
+    <GuideNav guides={guides} currentId={guide.id} />
+
+    <div class="docs-main guide">
+      <nav class="guide-breadcrumb" aria-label="Caminho">
+        <a href={sitePath("/aprender/")}>Aprender</a>
+        <span aria-hidden="true">/</span>
+        <span>{sectionNames[section]}</span>
+      </nav>
+
+      <header class="guide-header enter">
+        <p class="kicker">
+          {sectionNames[section]} · capítulo {index + 1} de {siblings.length}
+        </p>
+        <h1>{guide.data.title}</h1>
+        <p class="guide-summary">{guide.data.summary}</p>
+        <dl class="guide-meta">
+          <div>
+            <dt>Versão testada</dt>
+            <dd>{guide.data.ideVersion}</dd>
+          </div>
+          <div>
+            <dt>Ambiente</dt>
+            <dd>{guide.data.platform}</dd>
+          </div>
+          <div>
+            <dt>Último teste</dt>
+            <dd>{formatDate(guide.data.lastTested)}</dd>
+          </div>
+          <div>
+            <dt>Tempo</dt>
+            <dd>cerca de {guide.data.minutes} min</dd>
+          </div>
+        </dl>
+      </header>
+
+      {outdated && (
+        <p class="guide-outdated" role="note">
+          Este capítulo foi reproduzido na {guide.data.ideVersion}; a versão
+          pública agora é a {publicVersion}. Telas e nomes podem estar
+          diferentes até ele ser refeito.
+        </p>
+      )}
+
+      {guide.data.prerequisites.length > 0 && (
+        <section class="guide-prereq card" aria-labelledby="antes-title">
+          <h2 id="antes-title">Antes de começar</h2>
+          <ul>
+            {guide.data.prerequisites.map((item) => (
+              <li>{item}</li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      <article class="guide-article prose">
+        <Content />
+      </article>
+
+      {guide.data.references.length > 0 && (
+        <section class="guide-refs" aria-labelledby="fontes-title">
+          <h2 id="fontes-title">Fontes</h2>
+          <ul>
+            {guide.data.references.map((url) => (
+              <li>
+                <a
+                  class="inline-link"
+                  href={url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {url.replace(/^https?:\/\//, "")}{" "}
+                  <span aria-hidden="true">↗</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      <nav class="guide-pager" aria-label="Capítulo anterior e próximo">
+        {previous && (
+          <a
+            class="guide-pager-link card card-interactive"
+            href={sitePath(`/aprender/${previous.id}/`)}
+            rel="prev"
+          >
+            <span class="label">← Anterior</span>
+            <strong>{previous.data.title}</strong>
+          </a>
+        )}
+        {next && (
+          <a
+            class="guide-pager-link guide-pager-next card card-interactive"
+            href={sitePath(`/aprender/${next.id}/`)}
+            rel="next"
+          >
+            <span class="label">Próximo →</span>
+            <strong>{next.data.title}</strong>
+          </a>
+        )}
+      </nav>
+    </div>
+  </div>
+</BaseLayout>
+
+<script>
+  import "../../features/codigo/code-copy";
+</script>

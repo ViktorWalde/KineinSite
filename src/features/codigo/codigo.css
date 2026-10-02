@@ -95,3 +95,17 @@
     min-height: 2.5rem;
   }
 }
+
+/* Teclas de atalho nos artigos: <kbd>Ctrl</kbd>+<kbd>O</kbd>. */
+.prose kbd {
+  display: inline-block;
+  min-width: 1.6em;
+  padding: 0.05em 0.45em;
+  border: 1px solid var(--border);
+  border-bottom-width: 2px;
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  font: 600 0.82em / 1.5 var(--font-mono);
+  text-align: center;
+  white-space: nowrap;
+}

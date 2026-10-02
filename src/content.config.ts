@@ -2,12 +2,17 @@ import { defineCollection } from "astro:content";
 import { glob } from "astro/loaders";
 import { z } from "astro/zod";
 
+// Guia da IDE (ide/) e projetos guiados (projetos/). Uma pasta por capítulo,
+// com o index.md e as capturas ao lado. Só "verified" vira página pública, e
+// só depois de cada passo ser reproduzido na versão ideVersion.
 const aprender = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/content/aprender" }),
   schema: z.object({
     title: z.string().min(1),
     summary: z.string().min(1),
-    ideVersion: z.string().min(1),
+    order: z.number().int().positive(),
+    minutes: z.number().int().positive(),
+    ideVersion: z.string().regex(/^\d+\.\d+\.\d+$/),
     platform: z.string().min(1),
     lastTested: z.coerce.date(),
     status: z.enum(["draft", "verified"]),
