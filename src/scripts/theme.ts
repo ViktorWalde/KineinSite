@@ -1,8 +1,14 @@
-type Theme = "system" | "light" | "dark" | "warm";
-type Accent = "amber" | "blue" | "teal";
+import {
+  accentChoices,
+  accentStorageKey,
+  defaultAccent,
+  defaultTheme,
+  themeChoices,
+  themeStorageKey,
+  type Accent,
+  type Theme,
+} from "./theme-preferences";
 
-const themeChoices: readonly Theme[] = ["system", "light", "dark", "warm"];
-const accentChoices: readonly Accent[] = ["amber", "blue", "teal"];
 const root = document.documentElement;
 const themeSelect = document.querySelector<HTMLSelectElement>("#theme-choice");
 const accentSelect =
@@ -26,27 +32,27 @@ function saveValue(key: string, value: string): void {
 }
 
 function isTheme(value: string | null): value is Theme {
-  return value !== null && themeChoices.includes(value as Theme);
+  return value !== null && (themeChoices as readonly string[]).includes(value);
 }
 
 function isAccent(value: string | null): value is Accent {
-  return value !== null && accentChoices.includes(value as Accent);
+  return value !== null && (accentChoices as readonly string[]).includes(value);
 }
 
 function applyTheme(theme: Theme): void {
-  if (theme === "system") root.removeAttribute("data-theme");
+  if (theme === defaultTheme) root.removeAttribute("data-theme");
   else root.dataset["theme"] = theme;
 }
 
 function applyAccent(accent: Accent): void {
-  if (accent === "amber") root.removeAttribute("data-accent");
+  if (accent === defaultAccent) root.removeAttribute("data-accent");
   else root.dataset["accent"] = accent;
 }
 
-const savedTheme = storedValue("kinein-theme");
-const savedAccent = storedValue("kinein-accent");
-const initialTheme = isTheme(savedTheme) ? savedTheme : "system";
-const initialAccent = isAccent(savedAccent) ? savedAccent : "amber";
+const savedTheme = storedValue(themeStorageKey);
+const savedAccent = storedValue(accentStorageKey);
+const initialTheme = isTheme(savedTheme) ? savedTheme : defaultTheme;
+const initialAccent = isAccent(savedAccent) ? savedAccent : defaultAccent;
 
 applyTheme(initialTheme);
 applyAccent(initialAccent);
@@ -59,13 +65,13 @@ if (themeSelect && accentSelect) {
   themeSelect.addEventListener("change", () => {
     if (!isTheme(themeSelect.value)) return;
     applyTheme(themeSelect.value);
-    saveValue("kinein-theme", themeSelect.value);
+    saveValue(themeStorageKey, themeSelect.value);
   });
 
   accentSelect.addEventListener("change", () => {
     if (!isAccent(accentSelect.value)) return;
     applyAccent(accentSelect.value);
-    saveValue("kinein-accent", accentSelect.value);
+    saveValue(accentStorageKey, accentSelect.value);
   });
 }
 

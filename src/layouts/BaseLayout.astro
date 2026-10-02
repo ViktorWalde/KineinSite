@@ -3,6 +3,7 @@ import { getImage } from "astro:assets";
 import shareSource from "../../assets/backgrounds/wallpaper-site.png";
 import SiteFooter from "../components/SiteFooter.astro";
 import SiteHeader from "../components/SiteHeader.astro";
+import { themeBootValues } from "../scripts/theme-preferences";
 import "../styles/tokens.css";
 import "../styles/base.css";
 import "../styles/layout.css";
@@ -38,6 +39,22 @@ const imageUrl = Astro.site ? new URL(shareImage.src, Astro.site) : undefined;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!--
+      Clássico e síncrono: aplica o tema salvo antes da primeira pintura. Como
+      módulo no fim do <body>, ele rodava depois dela, e cada navegação
+      mostrava o tema padrão seguido da transição de cor para o salvo.
+    -->
+    <script define:vars={themeBootValues}>
+      try {
+        const root = document.documentElement;
+        const theme = localStorage.getItem(themeKey);
+        const accent = localStorage.getItem(accentKey);
+        if (themes.includes(theme)) root.dataset.theme = theme;
+        if (accents.includes(accent)) root.dataset.accent = accent;
+      } catch {
+        // Sem armazenamento local, vale o padrão do CSS.
+      }
+    </script>
     <meta name="color-scheme" content="light dark" />
     <meta name="referrer" content="no-referrer" />
     <meta name="description" content={description} />

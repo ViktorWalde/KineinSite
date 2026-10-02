@@ -79,7 +79,7 @@
 .docs-intro h1 {
   max-width: 15ch;
   margin-block-end: 1.2rem;
-  font-size: clamp(2.6rem, 4vw, 4rem);
+  font-size: clamp(2rem, 1.2rem + 4vw, 4rem);
 }
 
 .docs-intro-copy {
