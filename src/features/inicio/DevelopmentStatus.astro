@@ -52,7 +52,9 @@ const updatedAt = new Date(`${developmentSnapshot.updatedAt}T00:00:00Z`);
     ))}
   </div>
   <p class="development-note">
-    O escopo e a ordem podem mudar até o fechamento e a distribuição da{" "}
-    {developmentSnapshot.version}.
+    O escopo e a ordem podem mudar até o lançamento da{" "}
+    {developmentSnapshot.version}. Depois dela vem a{" "}
+    <strong>{developmentSnapshot.next.version}</strong>,{" "}
+    {developmentSnapshot.next.summary}.
   </p>
 </section>

@@ -3,7 +3,7 @@ import editor from "../../assets/ide/editor.png";
 
 // Capturas reais da IDE exibidas na página inicial, geradas por
 // scripts/capturar-ide.sh a partir do AppImage publicado. Quando a interface
-// mudar (a série 0.3.6-0.3.9 reorganiza a casca), rode o script com o
+// mudar (a 0.3.6 reorganiza a interface), rode o script com o
 // AppImage novo e troque version e capturedAt aqui.
 export const ideScreens = {
   version: "0.3.5",
