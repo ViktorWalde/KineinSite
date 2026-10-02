@@ -108,7 +108,7 @@ A barra de status, no pé da janela, resume o estado do projeto. À esquerda:
 _Tipo e caminho do projeto, o compilador escolhido e o índice._
 
 - O tipo e o caminho do projeto.
-- **toolchain**: o compilador e o gerador que a IDE escolheu. Nesta reprodução, o computador tinha o Clang instalado, por isso aparece Clang++.
+- **toolchain**: o compilador que a IDE detectou e o gerador do build. Atenção: na 0.3.5 esse rótulo não é necessariamente o compilador que o CMake usa. Nesta reprodução aparece Clang++, porque o Clang estava instalado, mas o build usou o GCC, o compilador padrão do sistema (`c++`).
 - **índice**: o tamanho do índice que a IDE monta do projeto, usado pela busca e pelos Símbolos.
 
 À direita:

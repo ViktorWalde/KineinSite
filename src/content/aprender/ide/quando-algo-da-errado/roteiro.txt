@@ -1,0 +1,48 @@
+# Reprodução do capítulo "Quando algo dá errado" (scripts/capturar-tutorial.sh).
+# Recria o ola-kinein do capítulo 2 pela tela inicial.
+abrir
+esperar 10
+clicar 552 460         # Novo C++ / CMake
+esperar 2
+clicar 660 332         # + pasta
+esperar 1
+digitar projetos
+tecla Return
+esperar 1.5
+clicar 800 292         # campo do caminho
+tecla End
+digitar /projetos
+tecla Return
+esperar 1.5
+clicar 744 332         # + projeto
+esperar 1
+digitar ola-kinein
+clicar 1075 380        # Criar
+esperar 10
+clicar 133 165         # src
+esperar 1
+clicar 160 189         # main.cpp
+esperar 4
+clicar 900 500
+clicar 700 229         # linha 4, a chave
+tecla End Return
+digitar int nao_usada = 42;
+tecla Escape
+tecla ctrl+s
+esperar 6
+foto diagnostico 376 160 820 160
+tecla ctrl+alt+b       # o build falha e a aba Problemas abre sozinha
+esperar 8
+foto problemas 376 686 1216 100
+clicar 500 757         # o erro do compilador: o cursor vai para a linha
+esperar 2
+tecla ctrl+y           # apaga a linha do cursor
+esperar 1
+tecla ctrl+s
+esperar 3
+tecla ctrl+alt+b
+esperar 8
+foto corrigido 376 686 820 140
+clicar 1025 704        # aba IDE
+esperar 2
+foto ide 376 686 1216 280
