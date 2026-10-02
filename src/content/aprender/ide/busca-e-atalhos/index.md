@@ -75,7 +75,7 @@ O Search Everywhere também acha os comandos da IDE, cada um com o atalho ao lad
 
 _Enter roda o comando escolhido._
 
-> **Na 0.3.5, os comandos têm nomes em inglês.** Procure por `build`, `run` ou `terminal`; `compilar` e `executar` não acham nada.
+> **Na 0.3.5, parte dos comandos tem nome em inglês.** Os de compilar, testar e executar se chamam `Build Project`, `Run Tests` e `Run`: procure por `build` ou `run`, porque `compilar` e `executar` não acham nada. Os do Git estão em português, como `Git: Commit...`.
 
 É um bom jeito de descobrir atalhos: procure o comando e veja a tecla ao lado.
 
