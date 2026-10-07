@@ -91,25 +91,22 @@ const wallpaper = await getImage({
 
   <LatestUpdate />
 
-  <nav
-    class="journey shell card auto-grid reveal"
-    aria-label="Caminhos rápidos"
-  >
-    <a href="#estado">
+  <nav class="journey shell auto-grid reveal" aria-label="Caminhos rápidos">
+    <a class="card card-interactive" href="#estado">
       <span class="journey-label label">01 / PRESENTE</span>
       <strong>Veja o que já funciona</strong>
       <span class="journey-arrow" aria-hidden="true">
         ↓
       </span>
     </a>
-    <a href="#desenvolvimento">
+    <a class="card card-interactive" href="#desenvolvimento">
       <span class="journey-label label">02 / EM DESENVOLVIMENTO</span>
       <strong>Acompanhe a {developmentSnapshot.version}</strong>
       <span class="journey-arrow" aria-hidden="true">
         ↓
       </span>
     </a>
-    <a href="#foco">
+    <a class="card card-interactive" href="#foco">
       <span class="journey-label label">03 / DIREÇÃO</span>
       <strong>Veja para onde a Vectis vai</strong>
       <span class="journey-arrow" aria-hidden="true">
@@ -128,7 +125,7 @@ const wallpaper = await getImage({
 
   <section
     id="experiencia"
-    class="section shell"
+    class="section shell section-surface"
     aria-labelledby="experiencia-title"
   >
     <div class="section-intro reveal">

@@ -1,5 +1,31 @@
 /* overflow: clip, e não hidden: hidden cria um contêiner de rolagem, e o
    view() da paralaxe passaria a medir em relação a ele, que nunca rola. */
+
+/* Degradê vertical do body na página inicial: as cores mudam suavemente em
+   oklch conforme o conteúdo rola, quebrando a monotonia de um fundo único.
+   A textura de ruído por cima desfaz o banding de 8 bits. Navegador sem
+   suporte a oklch descarta o degradê e fica o fallback de base.css. */
+body {
+  background-image:
+    url("../../../assets/textures/noise.png"),
+    radial-gradient(
+      72rem 38rem at 88% -14% in oklab,
+      var(--glow),
+      transparent 72%
+    ),
+    linear-gradient(
+      180deg in oklch,
+      var(--grad-top) 0%,
+      var(--grad-mid1) 22%,
+      var(--grad-mid2) 44%,
+      var(--grad-mid3) 68%,
+      var(--grad-end) 100%
+    );
+  background-repeat: repeat, no-repeat, no-repeat;
+  background-size: auto, auto, 100% 100%;
+  background-attachment: scroll, scroll, fixed;
+}
+
 .hero {
   position: relative;
   isolation: isolate;
@@ -248,16 +274,9 @@
   color: var(--hero-accent);
 }
 
-/* Três atalhos para as seções da página, numa faixa só. */
-
-/* As linhas entre os atalhos são o fundo aparecendo no espaço de 1 px da
-   grade: ficam certas em qualquer número de colunas. */
+/* Três atalhos em cartões separados; a grade vira uma coluna no celular. */
 .journey {
   --grid-min: 15rem;
-  --grid-gap: 1px;
-
-  overflow: hidden;
-  background: var(--border);
 }
 
 .journey a {
@@ -267,19 +286,6 @@
   align-content: center;
   gap: 0.45rem;
   padding: var(--space-m) var(--space-l);
-  background: var(--card);
-  text-decoration: none;
-  transition: background-color var(--duration-fast) ease;
-}
-
-.journey a:hover,
-.journey a:focus-visible {
-  background-color: var(--card-hover);
-  color: inherit;
-}
-
-.journey a:focus-visible {
-  outline-offset: -3px;
 }
 
 .journey-label {
@@ -291,12 +297,13 @@
   transition: transform var(--duration-base) var(--ease-out);
 }
 
-.journey a:hover .journey-arrow {
-  transform: translate(var(--nudge), calc(var(--nudge) * -1));
+.journey a:hover .journey-arrow,
+.journey a:focus-visible .journey-arrow {
+  transform: translateY(var(--nudge));
 }
 
 .section {
-  padding-block: var(--space-3xl);
+  margin-block: var(--space-xl);
 }
 
 .section-intro {
@@ -360,9 +367,16 @@
   margin-block-start: 2rem;
 }
 
+.area-card {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
 .area-card .inline-link {
   display: inline-block;
-  margin-block-start: 1.4rem;
+  margin-block-start: auto;
+  padding-block-start: 1.4rem;
   font-size: var(--text-sm);
 }
 

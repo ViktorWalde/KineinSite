@@ -19,3 +19,8 @@
 .learn-empty {
   color: var(--muted);
 }
+
+.learn-heading {
+  margin-block-end: var(--space-m);
+  font-size: var(--text-2xl);
+}

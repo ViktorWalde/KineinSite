@@ -41,7 +41,11 @@ const areas = [
 ] as const;
 ---
 
-<section id="foco" class="section shell" aria-labelledby="foco-title">
+<section
+  id="foco"
+  class="section shell section-surface"
+  aria-labelledby="foco-title"
+>
   <div class="section-intro reveal">
     <p class="kicker">PARA ONDE A VECTIS CAMINHA</p>
     <h2 id="foco-title">Da placa ao backend, camada por camada.</h2>
@@ -52,16 +56,22 @@ const areas = [
   </div>
   <div class="area-grid auto-grid reveal-children">
     {areas.map((area) => (
-      <article class="area-card card">
+      <a
+        class="area-card card card-interactive"
+        href={sitePath(`/documentacao/#${area.id}`)}
+      >
         <span class="label">
           {area.number} / {area.status}
         </span>
         <h3>{area.title}</h3>
         <p>{area.description}</p>
-        <a class="inline-link" href={sitePath(`/documentacao/#${area.id}`)}>
-          {area.linkText}
-        </a>
-      </article>
+        <span class="inline-link">
+          {area.linkText}{" "}
+          <span class="arrow" aria-hidden="true">
+            →
+          </span>
+        </span>
+      </a>
     ))}
   </div>
 </section>

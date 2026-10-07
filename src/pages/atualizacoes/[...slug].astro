@@ -70,7 +70,10 @@ const releaseUrl = releaseUrlFor(entry.data.tag);
       </div>
     </header>
 
-    <section class="update-highlights" aria-labelledby="destaques-title">
+    <section
+      class="update-highlights section-surface"
+      aria-labelledby="destaques-title"
+    >
       <h2 id="destaques-title">Destaques</h2>
       <ul class="auto-grid">
         {entry.data.highlights.map((item) => (
@@ -87,7 +90,10 @@ const releaseUrl = releaseUrlFor(entry.data.tag);
     </article>
 
     {entry.data.limits.length > 0 && (
-      <section class="update-limits" aria-labelledby="limites-title">
+      <section
+        class="update-limits section-surface"
+        aria-labelledby="limites-title"
+      >
         <h2 id="limites-title">Limites conhecidos</h2>
         <ul>
           {entry.data.limits.map((limit) => (

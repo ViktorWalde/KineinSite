@@ -120,9 +120,7 @@
 }
 
 .docs-section {
-  padding-block: var(--space-2xl);
-  border-top: 1px solid;
-  border-image: linear-gradient(90deg in oklab, var(--border), transparent) 1;
+  font-size: var(--text-base);
 }
 
 .docs-section > p {
@@ -143,7 +141,7 @@
 }
 
 .docs-card-grid-3 {
-  --grid-min: 13rem;
+  --grid-min: 12rem;
   --grid-max: 3;
 }
 
@@ -247,7 +245,8 @@
   transition: background-color var(--duration-fast) ease;
 }
 
-.reference-link:hover {
+.reference-link:hover,
+.reference-link:focus-visible {
   background: var(--card);
   color: inherit;
 }
@@ -331,6 +330,15 @@
 
   .docs-sidebar a[aria-current="true"] {
     background: color-mix(in srgb, var(--accent) 15%, transparent);
+  }
+}
+
+@media (pointer: coarse) {
+  .docs-sidebar a,
+  .path-card a {
+    display: inline-flex;
+    min-height: 2.75rem;
+    align-items: center;
   }
 }
 

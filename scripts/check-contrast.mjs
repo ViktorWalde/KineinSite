@@ -17,18 +17,31 @@ const textPairs = [
   ["text", "page"],
   ["text", "surface"],
   ["text", "card"],
+  ["text", "card-hover"],
+  ["text", "section-surface"],
+  ["text", "section-tint"],
   ["muted", "page"],
   ["muted", "surface"],
   ["muted", "card"],
+  ["muted", "card-hover"],
+  ["muted", "section-surface"],
+  ["muted", "section-tint"],
   ["accent", "page"],
   ["accent", "surface"],
   ["accent", "card"],
+  ["accent", "card-hover"],
+  ["accent", "section-surface"],
+  ["accent", "section-tint"],
   ["accent-on", "accent"],
   ["hero-accent-on", "hero-accent"],
 ];
 const focusPairs = [
   ["focus", "page"],
   ["focus", "surface"],
+  ["focus", "card"],
+  ["focus", "card-hover"],
+  ["focus", "section-surface"],
+  ["focus", "section-tint"],
 ];
 
 const mediaStart = css.indexOf("@media (prefers-color-scheme: light)");

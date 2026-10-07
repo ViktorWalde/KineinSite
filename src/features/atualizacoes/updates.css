@@ -9,7 +9,7 @@
      degradê em OKLab no border-box, visível só no 1 px da borda. */
   border-color: transparent;
   background:
-    linear-gradient(var(--card), var(--card)) padding-box,
+    linear-gradient(var(--card-fill), var(--card-fill)) padding-box,
     linear-gradient(
         135deg in oklab,
         var(--accent),
@@ -106,7 +106,7 @@
 }
 
 .updates-history h2 {
-  margin-block: 1rem 1.25rem;
+  margin-block: 0 1.25rem;
   font-size: var(--text-2xl);
 }
 
@@ -191,7 +191,7 @@
 
 .update-highlights,
 .update-limits {
-  padding-block: 2.5rem 0;
+  margin-block: var(--space-xl);
 }
 
 .update-highlights h2,
@@ -224,4 +224,11 @@
 
 .update-end-nav {
   padding-block-start: 3rem;
+}
+
+@media (width <= 35rem) {
+  .latest-update {
+    gap: var(--space-l);
+    padding: var(--space-l);
+  }
 }

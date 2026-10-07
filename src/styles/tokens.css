@@ -47,7 +47,18 @@
   --content-width: clamp(73.75rem, 46.6667rem + 27.083vw, 90rem);
   --card: color-mix(in srgb, var(--surface) 96%, var(--accent));
   --card-hover: color-mix(in srgb, var(--surface) 90%, var(--accent));
+  --section-surface: color-mix(in srgb, var(--page) 45%, var(--surface));
+  --section-tint: color-mix(in srgb, var(--section-surface) 96%, var(--accent));
+  --shadow-card: 0 4px 12px light-dark(rgb(22 31 41 / 8%), rgb(0 0 0 / 18%));
   --glow: color-mix(in oklab, var(--accent) 13%, transparent);
+
+  /* Degradê vertical da página inicial: paradas sutis em oklch, do topo até
+     a seção de fechamento. Cada tema/destaque redefine as cores. */
+  --grad-top: var(--page);
+  --grad-mid1: color-mix(in oklch, var(--page) 93%, var(--accent));
+  --grad-mid2: color-mix(in oklch, var(--page) 88%, var(--surface));
+  --grad-mid3: color-mix(in oklch, var(--page) 90%, var(--accent));
+  --grad-end: var(--closing-bg);
 
   /* Tema escuro com destaque âmbar: a paleta base. */
   color-scheme: dark;

@@ -122,3 +122,7 @@ if (appearance) {
     }
   });
 }
+
+// Escuta passiva de touchstart no documento permite que regras CSS com
+// :active sejam aplicadas em dispositivos de toque (WebKit/Blink mobile).
+document.addEventListener("touchstart", () => {}, { passive: true });
