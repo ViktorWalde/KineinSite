@@ -18,13 +18,15 @@ Cartões usam uma mistura suave entre `--card-tint`, `--card` e `--card-edge`. O
 
 A superfície de leitura de artigos permanece estável. Reserve bordas coloridas, caixas de resultado e pequenos marcadores para orientar o olhar. Textos, ícones e nomes devem explicar a informação mesmo sem distinguir as cores.
 
-No tema claro, use fundos suaves: papel com âmbar, cinza levemente azulado com azul e cinza levemente esverdeado com verde. As superfícies de leitura ficam um pouco mais claras que a página, sem branco puro. Texto em cinza escuro, bordas discretas e sombras suaves distinguem as camadas. Azul e verde usam destaques menos vivos; o mesmo tratamento vale para a escolha explícita e para a preferência clara do sistema. Preserve contraste e legibilidade ao suavizar as cores, sem reduzir a opacidade dos textos ou filtrar as capturas.
+No tema claro, use fundos suaves e de brilho contido: papel com âmbar, cinza levemente azulado com azul e cinza levemente esverdeado com verde. As superfícies de leitura ficam um pouco mais claras que a página, sem branco puro. Texto em cinza escuro, bordas discretas e sombras suaves distinguem as camadas. Azul e verde usam destaques menos vivos; o mesmo tratamento vale para a escolha explícita e para a preferência clara do sistema. Preserve contraste e legibilidade ao suavizar as cores, sem reduzir a opacidade dos textos ou filtrar as capturas.
+
+No tema Amber, mantenha a base em tons de carvão, marrom e oliva, mesmo ao escolher azul ou verde-azulado. O destaque dourado usa o âmbar da identidade visual da IDE; os demais permanecem claros o bastante para rótulos e foco. As cores de apoio, bordas e sombras acompanham cada escolha sem formar blocos de uma cor só. O seletor indica a opção ativa com aro e marca de seleção. O valor interno `warm` continua sendo salvo para preservar as preferências existentes.
 
 ## Interação e mídia
 
 Use `.button`, `.card` e `.card-interactive` para manter a resposta de foco, mouse e toque. Cartões informativos não ganham comportamento de botão. Os seletores compartilham `src/scripts/tabs.ts`, inclusive teclado e transições. Respeite `prefers-reduced-motion` e não acrescente animações contínuas aos cartões.
 
-As ondas ficam no fundo, atrás do conteúdo. A imagem de abertura mantém seu tratamento existente. Capturas da IDE mostram a interface real: não aplique filtros de cor, recortes que ocultem áreas importantes ou desenhos que substituam a interface. Identifique a versão e preserve a proporção. Ofereça ampliação com o visualizador compartilhado e um link para a imagem quando JavaScript estiver desativado.
+As ondas ficam no fundo, atrás do conteúdo. A imagem de abertura mantém seu tratamento existente. A primeira região de fundo usa um brilho curto na cor de destaque para unir a borda da abertura à cor do tema antes do primeiro texto; esse efeito vale para todas as paletas e não muda a imagem. Capturas da IDE mostram a interface real: não aplique filtros de cor, recortes que ocultem áreas importantes ou desenhos que substituam a interface. Identifique a versão e preserve a proporção. Ofereça ampliação com o visualizador compartilhado e um link para a imagem quando JavaScript estiver desativado.
 
 Imagens do conteúdo usam otimização do Astro, larguras responsivas, dimensões explícitas e carregamento tardio quando ficam abaixo da primeira tela. Compartilhe as mesmas fontes de mídia e os componentes existentes. Evite novas dependências, fontes remotas e scripts para efeitos que o CSS já resolve.
 

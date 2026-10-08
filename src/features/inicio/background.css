@@ -12,8 +12,11 @@
 .home-topic {
   --topic-fill: var(--page);
   --topic-start: var(--wave-transition);
+  --topic-glow: var(--topic-start);
+  --topic-glow-stop: 0%;
   --topic-end: var(--wave-transition);
   --topic-fade: clamp(7rem, 12vw, 12rem);
+  --topic-entry-fade: var(--topic-fade);
   --topic-wave-height: clamp(12rem, 18vw, 18rem);
 
   display: flow-root;
@@ -24,7 +27,8 @@
     linear-gradient(
       180deg in oklab,
       var(--topic-start),
-      var(--topic-fill) var(--topic-fade),
+      var(--topic-glow) var(--topic-glow-stop),
+      var(--topic-fill) var(--topic-entry-fade),
       var(--topic-fill) calc(100% - var(--topic-fade)),
       var(--topic-end)
     );
@@ -37,11 +41,32 @@
 }
 
 .home-topic:first-child {
-  --topic-start: var(--page);
+  /* O brilho vive apenas no fundo abaixo da imagem. Termina antes do texto. */
+  --topic-start: color-mix(in srgb, #0d1015 82%, var(--page));
+  --topic-glow: color-mix(in srgb, var(--page) 84%, var(--accent));
+  --topic-glow-stop: clamp(1.5rem, 3vw, 2.5rem);
+  --topic-entry-fade: clamp(5.5rem, 7vw, 6.5rem);
 }
 
 .home-topic:last-child {
   --topic-end: var(--page);
+}
+
+:root[data-theme="light"] .home-topic:first-child {
+  --topic-start: color-mix(in srgb, #0d1015 40%, var(--accent));
+  --topic-glow: color-mix(in srgb, var(--page) 66%, var(--accent));
+}
+
+:root[data-theme="warm"] .home-topic:first-child {
+  --topic-start: color-mix(in srgb, #0d1015 72%, var(--accent));
+  --topic-glow: color-mix(in srgb, var(--page) 65%, var(--accent));
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) .home-topic:first-child {
+    --topic-start: color-mix(in srgb, #0d1015 40%, var(--accent));
+    --topic-glow: color-mix(in srgb, var(--page) 66%, var(--accent));
+  }
 }
 
 /* Todos os tópicos compartilham as camadas de .home-flow: uma onda que
