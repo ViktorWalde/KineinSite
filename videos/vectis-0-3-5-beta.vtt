@@ -1,0 +1,13 @@
+WEBVTT
+
+00:00.000 --> 00:05.000
+Beta público 0.3.5: um programa C++ calcula a média de duas temperaturas.
+
+00:05.000 --> 00:11.000
+Ctrl+Alt+B compila o projeto. O painel Build confirma que o build terminou com sucesso.
+
+00:11.000 --> 00:16.000
+Alt+F12 abre o terminal integrado antes de executar o programa.
+
+00:16.000 --> 00:24.000
+O botão Executar roda o programa: “media: 22.00 C”. O terminal mantém a saída disponível.
