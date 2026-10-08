@@ -27,6 +27,8 @@ O [padrão visual aprovado](VISUAL-SYSTEM.md) reúne as escalas e regras de apre
 
 No build desta etapa, a captura original de 3200 × 2000 px tem 192.130 bytes. A versão WebP completa mantém essas dimensões e tem 78.582 bytes, cerca de 59% menos. As versões de 720, 1200 e 2000 px têm 10.762, 23.506 e 47.376 bytes. `srcset` e `sizes` permitem ao navegador escolher a resolução; o carregamento é tardio, com dimensões explícitas para reservar espaço. Essa medição se refere à captura, não ao peso total de uma visita.
 
+Antes de concluir a publicação, o mantenedor pediu um refinamento do tema claro, preservando o conforto que já havia aprovado. O ajuste usa fundos mais suaves, texto cinza escuro, bordas definidas e sombras discretas para separar camadas. Azul e verde receberam destaques menos vivos. As três paletas claras explícitas e as três usadas pela preferência do sistema compartilham os mesmos valores; as paletas escuras e quentes não foram alteradas. A revisão visual incluiu página inicial, documentação e manual em notebook e celular, sem filtro sobre as mídias. O contraste das 12 combinações passou novamente, com menor razão de 4,65:1.
+
 ## Percursos e revisão editorial
 
 O projeto C++ segue instalação → `ola-kinein` → média de duas temperaturas → lista de leituras. Rust e Python têm seus próprios projetos e continuam nos estudos da mesma linguagem. Os guias de uso da IDE ficam separados desses percursos. A documentação apresenta preparação, projetos básicos, linguagens, referências e áreas mais avançadas nessa ordem.

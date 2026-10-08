@@ -18,6 +18,8 @@ Cartões usam uma mistura suave entre `--card-tint`, `--card` e `--card-edge`. O
 
 A superfície de leitura de artigos permanece estável. Reserve bordas coloridas, caixas de resultado e pequenos marcadores para orientar o olhar. Textos, ícones e nomes devem explicar a informação mesmo sem distinguir as cores.
 
+No tema claro, use fundos suaves: papel com âmbar, cinza levemente azulado com azul e cinza levemente esverdeado com verde. As superfícies de leitura ficam um pouco mais claras que a página, sem branco puro. Texto em cinza escuro, bordas discretas e sombras suaves distinguem as camadas. Azul e verde usam destaques menos vivos; o mesmo tratamento vale para a escolha explícita e para a preferência clara do sistema. Preserve contraste e legibilidade ao suavizar as cores, sem reduzir a opacidade dos textos ou filtrar as capturas.
+
 ## Interação e mídia
 
 Use `.button`, `.card` e `.card-interactive` para manter a resposta de foco, mouse e toque. Cartões informativos não ganham comportamento de botão. Os seletores compartilham `src/scripts/tabs.ts`, inclusive teclado e transições. Respeite `prefers-reduced-motion` e não acrescente animações contínuas aos cartões.
