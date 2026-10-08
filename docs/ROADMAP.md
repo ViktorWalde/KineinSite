@@ -8,6 +8,7 @@ Este documento descreve **o site**, não o cronograma de recursos da Kinein Vect
 - Distinção visual entre beta público, próxima versão em desenvolvimento e direção futura da IDE.
 - Área de Atualizações com uma nota por versão publicada e a mais recente em destaque na página inicial.
 - Temas claro, escuro e quente com três cores de destaque, sem exigir conta.
+- Ondas de fundo discretas (2026-10-08): degradês que acompanham os tópicos da página inicial e campo contínuo nas demais páginas, com movimento lateral lento, cores ligadas ao tema e versão estática para movimento reduzido.
 - Validação de tipos, estilos, formatação, HTML e links internos no build; publicação por `gh-pages`.
 - Documentação técnica para colaboração e build local obrigatório antes da publicação.
 - Revisão visual (2026-10-02): tokens de raio, movimento e elevação; cartões e rótulos unificados; cabeçalho fixo no desktop e compacto no celular; índice da documentação com a seção em leitura; transição nativa entre páginas; tema aplicado antes da primeira pintura; sem rolagem horizontal a 320 px.

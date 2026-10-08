@@ -8,6 +8,7 @@ import FocusAreas from "../features/inicio/FocusAreas.astro";
 import IdePreview from "../features/inicio/IdePreview.astro";
 import LatestUpdate from "../features/atualizacoes/LatestUpdate.astro";
 import "../features/inicio/inicio.css";
+import "../features/inicio/background.css";
 import "../features/inicio/secoes.css";
 import "../features/inicio/desenvolvimento.css";
 import { developmentSnapshot } from "../data/development";
@@ -89,131 +90,147 @@ const wallpaper = await getImage({
     </div>
   </section>
 
-  <LatestUpdate />
+  <div class="home-flow">
+    <div class="home-topic wave-field">
+      <LatestUpdate />
 
-  <nav class="journey shell auto-grid reveal" aria-label="Caminhos rápidos">
-    <a class="card card-interactive" href="#estado">
-      <span class="journey-label label">01 / PRESENTE</span>
-      <strong>Veja o que já funciona</strong>
-      <span class="journey-arrow" aria-hidden="true">
-        ↓
-      </span>
-    </a>
-    <a class="card card-interactive" href="#desenvolvimento">
-      <span class="journey-label label">02 / EM DESENVOLVIMENTO</span>
-      <strong>Acompanhe a {developmentSnapshot.version}</strong>
-      <span class="journey-arrow" aria-hidden="true">
-        ↓
-      </span>
-    </a>
-    <a class="card card-interactive" href="#foco">
-      <span class="journey-label label">03 / DIREÇÃO</span>
-      <strong>Veja para onde a Vectis vai</strong>
-      <span class="journey-arrow" aria-hidden="true">
-        ↓
-      </span>
-    </a>
-  </nav>
-
-  <IdePreview />
-
-  <CurrentStatus />
-
-  <DevelopmentStatus />
-
-  <FocusAreas />
-
-  <section
-    id="experiencia"
-    class="section shell section-surface"
-    aria-labelledby="experiencia-title"
-  >
-    <div class="section-intro reveal">
-      <p class="kicker">COMO A VECTIS LÊ O PROJETO</p>
-      <h2 id="experiencia-title">Do encontrado ao efetivo.</h2>
-      <p class="section-intro-copy">
-        Compilador, toolchain, alvo, sysroot, preset, language server e debugger
-        continuam escolhas suas. A IDE torna essa cadeia visível e explicável,
-        sem que o fluxo comum exija editar JSON da IDE ou pedir a uma IA para
-        fazê-lo.
-      </p>
+      <nav class="journey shell auto-grid reveal" aria-label="Caminhos rápidos">
+        <a class="card card-interactive" href="#estado">
+          <span class="journey-label label">01 / PRESENTE</span>
+          <strong>Veja o que já funciona</strong>
+          <span class="journey-arrow" aria-hidden="true">
+            ↓
+          </span>
+        </a>
+        <a class="card card-interactive" href="#desenvolvimento">
+          <span class="journey-label label">02 / EM DESENVOLVIMENTO</span>
+          <strong>Acompanhe a {developmentSnapshot.version}</strong>
+          <span class="journey-arrow" aria-hidden="true">
+            ↓
+          </span>
+        </a>
+        <a class="card card-interactive" href="#foco">
+          <span class="journey-label label">03 / DIREÇÃO</span>
+          <strong>Veja para onde a Vectis vai</strong>
+          <span class="journey-arrow" aria-hidden="true">
+            ↓
+          </span>
+        </a>
+      </nav>
     </div>
-    <div class="principle-grid auto-grid reveal-children">
-      <article class="principle-card card">
-        <span class="card-glyph" aria-hidden="true">
-          01
-        </span>
-        <h3>Detectado</h3>
-        <p>
-          O que existe na máquina e no projeto: compiladores, SDKs, language
-          servers, debuggers e dispositivos.
-        </p>
-      </article>
-      <article class="principle-card card">
-        <span class="card-glyph" aria-hidden="true">
-          02
-        </span>
-        <h3>Escolhido</h3>
-        <p>
-          O que você seleciona quando há mais de um caminho, com as alternativas
-          explicadas antes de qualquer mudança.
-        </p>
-      </article>
-      <article class="principle-card card">
-        <span class="card-glyph" aria-hidden="true">
-          03
-        </span>
-        <h3>Efetivo</h3>
-        <p>
-          O que build, testes e depuração realmente usam, e de onde veio cada
-          valor.
-        </p>
-      </article>
+
+    <div class="home-topic wave-field">
+      <IdePreview />
     </div>
-    <p class="direction-note">
-      Esta é a direção do produto: a {publicVersion} ainda não oferece esse
-      fluxo completo para todos os projetos e ecossistemas.{" "}
-      <a
-        class="inline-link"
-        href={`${repositoryUrl}#readme`}
-        target="_blank"
-        rel="noopener noreferrer"
+
+    <div class="home-topic wave-field">
+      <CurrentStatus />
+    </div>
+
+    <div class="home-topic wave-field">
+      <DevelopmentStatus />
+    </div>
+
+    <div class="home-topic wave-field">
+      <FocusAreas />
+    </div>
+
+    <div class="home-topic wave-field">
+      <section
+        id="experiencia"
+        class="section shell section-surface"
+        aria-labelledby="experiencia-title"
       >
-        Leia a visão no README <span aria-hidden="true">↗</span>
-      </a>
-    </p>
-  </section>
-
-  <section class="closing-section" aria-labelledby="closing-title">
-    <div class="shell closing-layout reveal">
-      <div>
-        <p class="kicker">BETA PÚBLICO {publicVersion}</p>
-        <h2 id="closing-title">
-          Explore o beta. Ajude a definir os próximos fluxos.
-        </h2>
-        <p>
-          Baixe o AppImage, confira o checksum e conte no Discord o que
-          funcionou e o que faltou no seu projeto.
+        <div class="section-intro reveal">
+          <p class="kicker">COMO A VECTIS LÊ O PROJETO</p>
+          <h2 id="experiencia-title">Do encontrado ao efetivo.</h2>
+          <p class="section-intro-copy">
+            Compilador, toolchain, alvo, sysroot, preset, language server e
+            debugger continuam escolhas suas. A IDE torna essa cadeia visível e
+            explicável, sem que o fluxo comum exija editar JSON da IDE ou pedir
+            a uma IA para fazê-lo.
+          </p>
+        </div>
+        <div class="principle-grid auto-grid reveal-children">
+          <article class="principle-card card">
+            <span class="card-glyph" aria-hidden="true">
+              01
+            </span>
+            <h3>Detectado</h3>
+            <p>
+              O que existe na máquina e no projeto: compiladores, SDKs, language
+              servers, debuggers e dispositivos.
+            </p>
+          </article>
+          <article class="principle-card card">
+            <span class="card-glyph" aria-hidden="true">
+              02
+            </span>
+            <h3>Escolhido</h3>
+            <p>
+              O que você seleciona quando há mais de um caminho, com as
+              alternativas explicadas antes de qualquer mudança.
+            </p>
+          </article>
+          <article class="principle-card card">
+            <span class="card-glyph" aria-hidden="true">
+              03
+            </span>
+            <h3>Efetivo</h3>
+            <p>
+              O que build, testes e depuração realmente usam, e de onde veio
+              cada valor.
+            </p>
+          </article>
+        </div>
+        <p class="direction-note">
+          Esta é a direção do produto: a {publicVersion} ainda não oferece esse
+          fluxo completo para todos os projetos e ecossistemas.{" "}
+          <a
+            class="inline-link"
+            href={`${repositoryUrl}#readme`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Leia a visão no README <span aria-hidden="true">↗</span>
+          </a>
         </p>
-      </div>
-      <div class="closing-actions">
-        <a
-          class="button button-primary"
-          href={releaseUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Baixar a {publicVersion} <span aria-hidden="true">↗</span>
-        </a>
-        <a
-          class="inline-link"
-          href={discordUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Entrar no Discord da Vectis <span aria-hidden="true">↗</span>
-        </a>
-      </div>
+      </section>
     </div>
-  </section>
+
+    <div class="home-topic wave-field">
+      <section class="closing-section" aria-labelledby="closing-title">
+        <div class="shell closing-layout reveal">
+          <div>
+            <p class="kicker">BETA PÚBLICO {publicVersion}</p>
+            <h2 id="closing-title">
+              Explore o beta. Ajude a definir os próximos fluxos.
+            </h2>
+            <p>
+              Baixe o AppImage, confira o checksum e conte no Discord o que
+              funcionou e o que faltou no seu projeto.
+            </p>
+          </div>
+          <div class="closing-actions">
+            <a
+              class="button button-primary"
+              href={releaseUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Baixar a {publicVersion} <span aria-hidden="true">↗</span>
+            </a>
+            <a
+              class="inline-link"
+              href={discordUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Entrar no Discord da Vectis <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
 </BaseLayout>

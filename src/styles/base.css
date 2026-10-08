@@ -17,22 +17,13 @@
     scroll-padding-top: calc(var(--header-height) + 1.5rem);
   }
 
-  /* Fundo: um brilho da cor de destaque no topo, interpolado em OKLab (o
-     sRGB padrão deixaria o meio acinzentado), e por cima o pontilhado de
-     assets/textures/noise.png, que desfaz as faixas que a tela de 8 bits
-     cria num degradê tão suave. Navegador sem "in oklab" descarta a
-     declaração e fica a cor lisa. */
+  /* A página forma o contexto de empilhamento das ondas decorativas,
+     sempre atrás do conteúdo. O ruído suaviza as faixas do degradê. */
   body {
+    isolation: isolate;
     margin: 0;
     background-color: var(--page);
-    background-image:
-      url("../../assets/textures/noise.png"),
-      radial-gradient(
-        72rem 38rem at 88% -14% in oklab,
-        var(--glow),
-        transparent 72%
-      );
-    background-repeat: repeat, no-repeat;
+    background-image: url("../../assets/textures/noise.png");
     color: var(--text);
     font-family: var(--font-sans);
     font-size: var(--text-base);

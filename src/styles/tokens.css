@@ -50,15 +50,16 @@
   --section-surface: color-mix(in srgb, var(--page) 45%, var(--surface));
   --section-tint: color-mix(in srgb, var(--section-surface) 96%, var(--accent));
   --shadow-card: 0 4px 12px light-dark(rgb(22 31 41 / 8%), rgb(0 0 0 / 18%));
-  --glow: color-mix(in oklab, var(--accent) 13%, transparent);
 
-  /* Degradê vertical da página inicial: paradas sutis em oklch, do topo até
-     a seção de fechamento. Cada tema/destaque redefine as cores. */
-  --grad-top: var(--page);
-  --grad-mid1: color-mix(in oklch, var(--page) 93%, var(--accent));
-  --grad-mid2: color-mix(in oklch, var(--page) 88%, var(--surface));
-  --grad-mid3: color-mix(in oklch, var(--page) 90%, var(--accent));
-  --grad-end: var(--closing-bg);
+  /* Regiões alternadas e cristas fluidas, com os mesmos limites de cor
+     para o fundo contínuo e as transições entre assuntos. */
+  --wave-crest: color-mix(in srgb, var(--page) 84%, var(--accent));
+  --wave-region: color-mix(in srgb, var(--page) 88%, var(--accent));
+  --wave-transition: color-mix(in srgb, var(--page) 50%, var(--wave-region));
+  --wave-trough: color-mix(in srgb, var(--page) 64%, var(--surface));
+  --wave-duration: 36s;
+  --wave-duration-secondary: 52s;
+  --wave-travel: 12vw;
 
   /* Tema escuro com destaque âmbar: a paleta base. */
   color-scheme: dark;
@@ -75,7 +76,6 @@
   --hero-accent: #ddbb82;
   --hero-accent-hover: #ebcfa1;
   --hero-accent-on: #21170b;
-  --closing-bg: #20272b;
   --shadow: 0 18px 50px rgb(0 0 0 / 24%);
   --shadow-sm: 0 10px 28px rgb(0 0 0 / 28%);
   --edge: inset 0 1px 0 rgb(255 255 255 / 4%);
@@ -93,7 +93,6 @@
   --hero-accent: #b6cce9;
   --hero-accent-hover: #d0def0;
   --hero-accent-on: #10243b;
-  --closing-bg: #202b38;
 }
 
 [data-accent="teal"],
@@ -108,7 +107,6 @@
   --hero-accent: #acd8ca;
   --hero-accent-hover: #c7e7dc;
   --hero-accent-on: #102b24;
-  --closing-bg: #20312d;
 }
 
 :root[data-theme="light"],
@@ -127,7 +125,6 @@
   --shadow: 0 18px 50px rgb(22 31 41 / 12%);
   --shadow-sm: 0 10px 28px rgb(22 31 41 / 10%);
   --edge: inset 0 1px 0 rgb(255 255 255 / 60%);
-  --closing-bg: #28323a;
 }
 
 :root[data-theme="light"][data-accent="blue"],
@@ -139,7 +136,6 @@
   --accent: #205d9e;
   --accent-on: #e9e0d2;
   --focus: #205d9e;
-  --closing-bg: #263849;
 }
 
 :root[data-theme="light"][data-accent="teal"],
@@ -151,7 +147,6 @@
   --accent: #00675e;
   --accent-on: #e9e0d2;
   --focus: #00675e;
-  --closing-bg: #263b34;
 }
 
 :root[data-theme="warm"],
@@ -168,7 +163,6 @@
   --accent-on: #25170b;
   --focus: #ffd299;
   --shadow: 0 18px 50px rgb(0 0 0 / 25%);
-  --closing-bg: #29231f;
 }
 
 :root[data-theme="warm"][data-accent="blue"],
@@ -180,7 +174,6 @@
   --accent: #a8c8f4;
   --accent-on: #10243b;
   --focus: #c6ddfa;
-  --closing-bg: #292936;
 }
 
 :root[data-theme="warm"][data-accent="teal"],
@@ -192,7 +185,6 @@
   --accent: #9bddc9;
   --accent-on: #102b24;
   --focus: #b8f0dd;
-  --closing-bg: #28362b;
 }
 
 @media (prefers-color-scheme: light) {
@@ -212,7 +204,6 @@
     --shadow: 0 18px 50px rgb(22 31 41 / 12%);
     --shadow-sm: 0 10px 28px rgb(22 31 41 / 10%);
     --edge: inset 0 1px 0 rgb(255 255 255 / 60%);
-    --closing-bg: #28323a;
   }
 
   :root:not([data-theme])[data-accent="blue"],
@@ -224,7 +215,6 @@
     --accent: #205d9e;
     --accent-on: #e9e0d2;
     --focus: #205d9e;
-    --closing-bg: #263849;
   }
 
   :root:not([data-theme])[data-accent="teal"],
@@ -236,7 +226,6 @@
     --accent: #00675e;
     --accent-on: #e9e0d2;
     --focus: #00675e;
-    --closing-bg: #263b34;
   }
 }
 

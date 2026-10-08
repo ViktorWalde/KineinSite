@@ -1,31 +1,6 @@
 /* overflow: clip, e não hidden: hidden cria um contêiner de rolagem, e o
    view() da paralaxe passaria a medir em relação a ele, que nunca rola. */
 
-/* Degradê vertical do body na página inicial: as cores mudam suavemente em
-   oklch conforme o conteúdo rola, quebrando a monotonia de um fundo único.
-   A textura de ruído por cima desfaz o banding de 8 bits. Navegador sem
-   suporte a oklch descarta o degradê e fica o fallback de base.css. */
-body {
-  background-image:
-    url("../../../assets/textures/noise.png"),
-    radial-gradient(
-      72rem 38rem at 88% -14% in oklab,
-      var(--glow),
-      transparent 72%
-    ),
-    linear-gradient(
-      180deg in oklch,
-      var(--grad-top) 0%,
-      var(--grad-mid1) 22%,
-      var(--grad-mid2) 44%,
-      var(--grad-mid3) 68%,
-      var(--grad-end) 100%
-    );
-  background-repeat: repeat, no-repeat, no-repeat;
-  background-size: auto, auto, 100% 100%;
-  background-attachment: scroll, scroll, fixed;
-}
-
 .hero {
   position: relative;
   isolation: isolate;

@@ -53,20 +53,6 @@
 
 .closing-section {
   padding-block: var(--space-3xl);
-  background-color: var(--closing-bg);
-  background-image:
-    url("../../../assets/textures/noise.png"),
-    radial-gradient(
-      64rem 34rem at 108% -24% in oklab,
-      color-mix(in oklab, var(--hero-accent) 13%, transparent),
-      transparent 68%
-    );
-  background-repeat: repeat, no-repeat;
-  color: #d6d0c5;
-}
-
-.closing-section .kicker {
-  color: var(--hero-accent);
 }
 
 .closing-layout {
@@ -84,15 +70,11 @@
 .closing-layout p:not(.kicker) {
   max-width: 55ch;
   margin: 0;
-  color: #c0b9ad;
+  color: var(--muted);
 }
 
 .closing-actions {
   display: grid;
   justify-items: start;
   gap: 1rem;
-}
-
-.closing-actions .inline-link {
-  color: var(--hero-accent);
 }

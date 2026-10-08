@@ -1,0 +1,79 @@
+/* Duas curvas sobrepostas, com bordas difusas, via máscara vetorial.
+   O movimento muda a posição e a altura da curva sem deslocar o conteúdo. */
+@layer base {
+  .wave-field {
+    --wave-start: calc(-1 * var(--wave-travel));
+    --wave-end: var(--wave-travel);
+
+    position: relative;
+    isolation: isolate;
+  }
+
+  .wave-field::before,
+  .wave-field::after {
+    position: absolute;
+    z-index: -1;
+    inset: -15% -25%;
+    background: linear-gradient(
+      100deg in oklab,
+      var(--wave-trough),
+      var(--wave-crest) 30%,
+      var(--wave-crest) 70%,
+      var(--wave-trough)
+    );
+    mask-image: url("../../assets/backgrounds/wave-flow.svg?no-inline");
+    mask-size: 100% 100%;
+    mask-repeat: no-repeat;
+    content: "";
+    pointer-events: none;
+  }
+
+  .wave-field::after {
+    background: linear-gradient(
+      80deg in oklab,
+      var(--wave-crest),
+      var(--wave-trough) 50%,
+      var(--wave-crest)
+    );
+    rotate: 180deg;
+    opacity: 0.7;
+  }
+
+  /* O campo contínuo usa a janela como referência mesmo em artigos longos.
+     O recorte impede que as ondas criem rolagem horizontal. */
+  .page-background {
+    position: fixed;
+    z-index: -1;
+    inset: 0;
+    overflow: clip;
+    pointer-events: none;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .wave-field::before {
+      animation: wave-sway var(--wave-duration) ease-in-out infinite alternate;
+    }
+
+    .wave-field::after {
+      animation: wave-sway var(--wave-duration-secondary) ease-in-out -14s
+        infinite alternate-reverse;
+    }
+  }
+}
+
+@keyframes wave-sway {
+  0% {
+    translate: var(--wave-start) -0.75rem;
+    scale: 1 0.92;
+  }
+
+  50% {
+    translate: 0 0.75rem;
+    scale: 1 1.08;
+  }
+
+  100% {
+    translate: var(--wave-end) -0.75rem;
+    scale: 1 0.92;
+  }
+}

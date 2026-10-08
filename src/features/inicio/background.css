@@ -1,0 +1,74 @@
+/* Cada assunto ocupa uma região de cor na largura inteira da página.
+   O degradê encontra a mesma cor na borda seguinte, e as curvas animadas
+   passam exatamente entre o fim de um assunto e o começo do próximo. */
+.home-flow {
+  display: flow-root;
+  isolation: isolate;
+  overflow: clip;
+  background-color: var(--page);
+  background-image: url("../../../assets/textures/noise.png");
+}
+
+.home-topic {
+  --topic-fill: var(--page);
+  --topic-start: var(--wave-transition);
+  --topic-end: var(--wave-transition);
+  --topic-fade: clamp(7rem, 12vw, 12rem);
+  --topic-wave-height: clamp(12rem, 18vw, 18rem);
+
+  display: flow-root;
+  isolation: auto;
+  background-color: var(--topic-fill);
+  background-image:
+    url("../../../assets/textures/noise.png"),
+    linear-gradient(
+      180deg in oklab,
+      var(--topic-start),
+      var(--topic-fill) var(--topic-fade),
+      var(--topic-fill) calc(100% - var(--topic-fade)),
+      var(--topic-end)
+    );
+}
+
+.home-topic:nth-child(even) {
+  --topic-fill: var(--wave-region);
+  --wave-start: var(--wave-travel);
+  --wave-end: calc(-1 * var(--wave-travel));
+}
+
+.home-topic:first-child {
+  --topic-start: var(--page);
+}
+
+.home-topic:last-child {
+  --topic-end: var(--page);
+}
+
+/* Todos os tópicos compartilham as camadas de .home-flow: uma onda que
+   atravessa a fronteira continua atrás do conteúdo do tópico anterior. */
+.home-topic > * {
+  position: relative;
+  z-index: 1;
+}
+
+.home-topic > .section-surface {
+  margin-block: 0;
+  padding-block: var(--space-3xl);
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+}
+
+.home-topic::before,
+.home-topic::after {
+  z-index: 0;
+  inset-block: calc(-0.5 * var(--topic-wave-height)) auto;
+  inset-inline: -25%;
+  height: var(--topic-wave-height);
+}
+
+.home-topic:first-child::before,
+.home-topic:first-child::after {
+  inset-block-start: 0;
+}

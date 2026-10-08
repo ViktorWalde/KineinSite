@@ -2,11 +2,13 @@
 import { getImage } from "astro:assets";
 import shareSource from "../../assets/backgrounds/wallpaper-site.png";
 import iconSource from "../../assets/icon-amber.png";
+import PageBackground from "../components/PageBackground.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import { themeBootValues } from "../scripts/theme-preferences";
 import "../styles/tokens.css";
 import "../styles/base.css";
+import "../styles/background.css";
 import "../styles/layout.css";
 import "../styles/components.css";
 import "../styles/theme-panel.css";
@@ -93,6 +95,7 @@ const imageUrl = Astro.site ? new URL(shareImage.src, Astro.site) : undefined;
     <title>{title} | Kinein Vectis</title>
   </head>
   <body>
+    {current !== "home" && <PageBackground />}
     <a class="skip-link" href="#conteudo">
       Pular para o conteúdo
     </a>
