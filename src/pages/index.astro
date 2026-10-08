@@ -6,19 +6,14 @@ import CurrentStatus from "../features/inicio/CurrentStatus.astro";
 import DevelopmentStatus from "../features/inicio/DevelopmentStatus.astro";
 import FocusAreas from "../features/inicio/FocusAreas.astro";
 import IdePreview from "../features/inicio/IdePreview.astro";
+import FirstTry from "../features/inicio/FirstTry.astro";
 import LatestUpdate from "../features/atualizacoes/LatestUpdate.astro";
 import "../features/inicio/inicio.css";
 import "../features/inicio/background.css";
 import "../features/inicio/secoes.css";
 import "../features/inicio/desenvolvimento.css";
 import { developmentSnapshot } from "../data/development";
-import {
-  discordUrl,
-  publicVersion,
-  releaseUrl,
-  repositoryUrl,
-  sitePath,
-} from "../site";
+import { discordUrl, publicVersion, releaseUrl } from "../site";
 
 // O hero é o maior elemento da primeira tela: largura certa por tela
 // (srcset) e prioridade de rede alta. As dimensões vêm do resultado, nunca
@@ -60,13 +55,13 @@ const wallpaper = await getImage({
           X86_64
         </p>
         <h1 id="hero-title">
-          O ambiente do seu projeto, <em>à vista.</em>
+          Código, build e depuração. <em>No mesmo lugar.</em>
         </h1>
         <p class="hero-lead">
-          A Kinein Vectis é uma IDE open source para C, C++, Rust e Python,
-          feita para firmware, sistemas, Linux embarcado e IoT. Ela lê o projeto
-          e o ambiente, mostra o que encontrou, explica o que será usado e deixa
-          a decisão com você.
+          Abra seu projeto em C, C++, Rust ou Python e reúna editor, testes, Git
+          e terminal na mesma IDE. A Kinein Vectis usa as ferramentas do seu
+          sistema e mostra o ambiente encontrado para você trabalhar com
+          contexto.
         </p>
         <div class="hero-actions">
           <a
@@ -75,16 +70,17 @@ const wallpaper = await getImage({
             target="_blank"
             rel="noopener noreferrer"
           >
-            Baixar a {publicVersion} para Linux{" "}
+            Testar o beta {publicVersion} no Linux{" "}
             <span aria-hidden="true">↗</span>
           </a>
-          <a class="button button-quiet" href={sitePath("/aprender/")}>
-            Começar pelo Guia da IDE
+          <a class="button button-quiet" href="#desenvolvimento">
+            Conhecer a próxima Vectis
           </a>
         </div>
         <p class="hero-meta">
           Open source, MIT ou Apache-2.0 <span aria-hidden="true">·</span> Sem
-          telemetria <span aria-hidden="true">·</span> Sem IA embutida
+          telemetria <span aria-hidden="true">·</span> Ferramentas do seu
+          sistema
         </p>
       </div>
     </div>
@@ -92,26 +88,26 @@ const wallpaper = await getImage({
 
   <div class="home-flow">
     <div class="home-topic wave-field">
-      <LatestUpdate />
+      <CurrentStatus />
 
       <nav class="journey shell auto-grid reveal" aria-label="Caminhos rápidos">
-        <a class="card card-interactive" href="#estado">
-          <span class="journey-label label">01 / PRESENTE</span>
-          <strong>Veja o que já funciona</strong>
+        <a class="card card-interactive" href="#interface">
+          <span class="journey-label label">01 / CONHEÇA</span>
+          <strong>Veja o beta por dentro</strong>
           <span class="journey-arrow" aria-hidden="true">
             ↓
           </span>
         </a>
         <a class="card card-interactive" href="#desenvolvimento">
-          <span class="journey-label label">02 / EM DESENVOLVIMENTO</span>
-          <strong>Acompanhe a {developmentSnapshot.version}</strong>
+          <span class="journey-label label">02 / A PRÓXIMA VECTIS</span>
+          <strong>Conheça a prévia da {developmentSnapshot.version}</strong>
           <span class="journey-arrow" aria-hidden="true">
             ↓
           </span>
         </a>
-        <a class="card card-interactive" href="#foco">
-          <span class="journey-label label">03 / DIREÇÃO</span>
-          <strong>Veja para onde a Vectis vai</strong>
+        <a class="card card-interactive" href="#experiencia">
+          <span class="journey-label label">03 / EXPERIMENTE</span>
+          <strong>Faça seu primeiro projeto</strong>
           <span class="journey-arrow" aria-hidden="true">
             ↓
           </span>
@@ -120,15 +116,11 @@ const wallpaper = await getImage({
     </div>
 
     <div class="home-topic wave-field">
-      <IdePreview />
-    </div>
-
-    <div class="home-topic wave-field">
-      <CurrentStatus />
-    </div>
-
-    <div class="home-topic wave-field">
       <DevelopmentStatus />
+    </div>
+
+    <div class="home-topic wave-field">
+      <IdePreview />
     </div>
 
     <div class="home-topic wave-field">
@@ -136,66 +128,11 @@ const wallpaper = await getImage({
     </div>
 
     <div class="home-topic wave-field">
-      <section
-        id="experiencia"
-        class="section shell section-surface"
-        aria-labelledby="experiencia-title"
-      >
-        <div class="section-intro reveal">
-          <p class="kicker">COMO A VECTIS LÊ O PROJETO</p>
-          <h2 id="experiencia-title">Do encontrado ao efetivo.</h2>
-          <p class="section-intro-copy">
-            Compilador, toolchain, alvo, sysroot, preset, language server e
-            debugger continuam escolhas suas. A IDE torna essa cadeia visível e
-            explicável, sem que o fluxo comum exija editar JSON da IDE ou pedir
-            a uma IA para fazê-lo.
-          </p>
-        </div>
-        <div class="principle-grid auto-grid reveal-children">
-          <article class="principle-card card">
-            <span class="card-glyph" aria-hidden="true">
-              01
-            </span>
-            <h3>Detectado</h3>
-            <p>
-              O que existe na máquina e no projeto: compiladores, SDKs, language
-              servers, debuggers e dispositivos.
-            </p>
-          </article>
-          <article class="principle-card card">
-            <span class="card-glyph" aria-hidden="true">
-              02
-            </span>
-            <h3>Escolhido</h3>
-            <p>
-              O que você seleciona quando há mais de um caminho, com as
-              alternativas explicadas antes de qualquer mudança.
-            </p>
-          </article>
-          <article class="principle-card card">
-            <span class="card-glyph" aria-hidden="true">
-              03
-            </span>
-            <h3>Efetivo</h3>
-            <p>
-              O que build, testes e depuração realmente usam, e de onde veio
-              cada valor.
-            </p>
-          </article>
-        </div>
-        <p class="direction-note">
-          Esta é a direção do produto: a {publicVersion} ainda não oferece esse
-          fluxo completo para todos os projetos e ecossistemas.{" "}
-          <a
-            class="inline-link"
-            href={`${repositoryUrl}#readme`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Leia a visão no README <span aria-hidden="true">↗</span>
-          </a>
-        </p>
-      </section>
+      <FirstTry />
+    </div>
+
+    <div class="home-topic wave-field">
+      <LatestUpdate />
     </div>
 
     <div class="home-topic wave-field">
@@ -204,11 +141,12 @@ const wallpaper = await getImage({
           <div>
             <p class="kicker">BETA PÚBLICO {publicVersion}</p>
             <h2 id="closing-title">
-              Explore o beta. Ajude a definir os próximos fluxos.
+              Abra um projeto. Veja como a Vectis se encaixa no seu trabalho.
             </h2>
             <p>
-              Baixe o AppImage, confira o checksum e conte no Discord o que
-              funcionou e o que faltou no seu projeto.
+              Comece pelo beta {publicVersion} ou acompanhe a construção da
+              {developmentSnapshot.version}. Seu primeiro teste pode ajudar a
+              definir a IDE que está por vir.
             </p>
           </div>
           <div class="closing-actions">
@@ -218,7 +156,7 @@ const wallpaper = await getImage({
               target="_blank"
               rel="noopener noreferrer"
             >
-              Baixar a {publicVersion} <span aria-hidden="true">↗</span>
+              Testar o beta {publicVersion} <span aria-hidden="true">↗</span>
             </a>
             <a
               class="inline-link"

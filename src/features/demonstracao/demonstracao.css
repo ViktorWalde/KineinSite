@@ -1,0 +1,19 @@
+.demo-video {
+  margin: var(--space-xl) 0 0;
+}
+
+.demo-video video {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  background: #111315;
+}
+
+.demo-video figcaption,
+.demo-transcript {
+  margin-block-start: var(--space-s);
+  color: var(--muted);
+  font-size: var(--text-sm);
+}

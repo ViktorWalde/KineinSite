@@ -11,11 +11,15 @@ prerequisites:
   - "A IDE instalada e a pasta ~/projetos do capítulo 2."
   - "Permissão de administrador (sudo) para instalar pacotes."
 references:
-  - "https://github.com/ViktorWalde/KineinVectis/blob/main/DocsPublic/manual.md"
+  - "https://github.com/ViktorWalde/KineinVectis/blob/v0.3.5/DocsPublic/manual.md"
   - "https://docs.python.org/3/library/venv.html"
   - "https://docs.basedpyright.com/"
   - "https://docs.pytest.org/"
 ---
+
+**Seu objetivo:** Executar um projeto no seu ambiente próprio e conferir um teste passando.
+
+**Pense antes de seguir:** Em qual Python o pytest deve ser instalado?
 
 O Ubuntu 24.04 já vem com o Python 3.12. Neste capítulo você instala o que a Kinein Vectis usa em volta dele, cria um projeto, dá a ele um ambiente próprio e roda o programa e os testes.
 
@@ -37,7 +41,7 @@ python3 --version
 basedpyright --version
 ```
 
-A primeira linha é `Python 3.12.3`, e a segunda mostra a versão do basedpyright. Se o terminal não encontrar o `basedpyright`, rode `pipx ensurepath` e abra um terminal novo.
+Nesta reprodução, a primeira linha foi `Python 3.12.3`; a sua pode mostrar outra atualização do Python 3.12. A segunda mostra a versão do basedpyright. Se o terminal não encontrar o `basedpyright`, rode `pipx ensurepath` e abra um terminal novo.
 
 ## Crie o projeto
 
@@ -114,3 +118,20 @@ cd ~/projetos/ola-python
 ```
 
 O resumo termina com `1 passed`.
+
+## Confira o que aprendeu
+
+Sem reler as etapas, responda:
+
+1. Em qual Python o pytest deve ser instalado?
+2. Como conferir se a IDE reconheceu o .venv?
+3. O que fazer se a aba Testes disser que pytest está ausente?
+
+<details>
+<summary>Conferir seu raciocínio</summary>
+
+Instale pytest no .venv do projeto, usando .venv/bin/python -m pip install pytest. Na 0.3.5, reabra o workspace depois de criar o ambiente e confira a barra de status. Rode os testes de novo e leia o resultado de cada caso.
+
+</details>
+
+Se uma resposta ainda não ficou clara, volte à etapa correspondente e confira na IDE. O resultado que você observa vale mais do que decorar um atalho.

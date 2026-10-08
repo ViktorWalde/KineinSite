@@ -6,18 +6,18 @@ Astro gera HTML, CSS, JavaScript e imagens estáticos em `dist/`. O GitHub Pages
 
 ## Código e conteúdo
 
-| Local | Responsabilidade |
-| --- | --- |
-| `src/pages/` | Rotas. Cada página só compõe: importa o layout, os componentes e o CSS da sua funcionalidade. |
-| `src/layouts/BaseLayout.astro` | Estrutura HTML, metadados, script de tema do `<head>` e os estilos globais. |
-| `src/components/` | Moldura compartilhada: cabeçalho, rodapé, controles de tema e fundo decorativo (`PageBackground.astro`). |
-| `src/features/<funcionalidade>/` | Componentes, estilos e scripts de uma área do site, juntos: `inicio/`, `documentacao/`, `estudos/` e `atualizacoes/` (esta também com a ordenação das notas, `updates.ts`). |
-| `src/styles/` | CSS global. `tokens.css` tem as cores por tema e destaque e a escala de raio, movimento e tipografia; `base.css`, `background.css`, `components.css` e `layout.css` ficam em camadas (`@layer`). |
-| `src/scripts/` | Scripts de navegador comuns: preferências de tema (`theme-preferences.ts`, lido também pelo `<head>`) e o painel de tema (`theme.ts`). |
-| `src/data/development.ts` | Retrato editorial da próxima versão informado pelo mantenedor; não substitui a release. |
-| `src/data/references.ts` | Lista de fontes externas exibida no índice de documentação. |
-| `src/content.config.ts` | Esquemas das coleções Markdown. |
-| `assets/` | Arquivos de origem das imagens, otimizados pelo Astro no build. |
+| Local                            | Responsabilidade                                                                                                                                                                                 |
+| -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `src/pages/`                     | Rotas. Cada página só compõe: importa o layout, os componentes e o CSS da sua funcionalidade.                                                                                                    |
+| `src/layouts/BaseLayout.astro`   | Estrutura HTML, metadados, script de tema do `<head>` e os estilos globais.                                                                                                                      |
+| `src/components/`                | Moldura compartilhada: cabeçalho, rodapé, controles de tema e fundo decorativo (`PageBackground.astro`).                                                                                         |
+| `src/features/<funcionalidade>/` | Componentes, estilos e scripts de uma área do site, juntos: `inicio/`, `documentacao/`, `estudos/` e `atualizacoes/` (esta também com a ordenação das notas, `updates.ts`).                      |
+| `src/styles/`                    | CSS global. `tokens.css` tem as cores por tema e destaque e a escala de raio, movimento e tipografia; `base.css`, `background.css`, `components.css` e `layout.css` ficam em camadas (`@layer`). |
+| `src/scripts/`                   | Scripts de navegador comuns: preferências de tema (`theme-preferences.ts`, lido também pelo `<head>`) e o painel de tema (`theme.ts`).                                                           |
+| `src/data/development.ts`        | Retrato editorial da próxima versão informado pelo mantenedor; não substitui a release.                                                                                                          |
+| `src/data/references.ts`         | Lista de fontes externas exibida no índice de documentação.                                                                                                                                      |
+| `src/content.config.ts`          | Esquemas das coleções Markdown.                                                                                                                                                                  |
+| `assets/`                        | Arquivos de origem das imagens, otimizados pelo Astro no build.                                                                                                                                  |
 
 ### Ordem do CSS
 
@@ -49,7 +49,7 @@ Na página inicial, `.home-flow` começa depois do limite inferior da imagem de 
 
 ## Verificações
 
-`npm run build:pages` executa `astro check`, ESLint, Stylelint, verificação de arquitetura, contraste (`scripts/check-contrast.mjs`: os pares de texto, rótulo e foco de `tokens.css` nas 12 combinações de tema e destaque, com o mínimo da WCAG 2.2 — 4,5:1 para texto, 3:1 para foco), Prettier, build, `html-validate`, `scripts/check-links.mjs` e `scripts/check-html-security.mjs`. O último confere arquivos e âncoras de links **internos** no HTML gerado; links externos exigem revisão editorial. A validação automática de push e pull request está pausada porque os jobs do GitHub Actions não estão iniciando nesta conta. `validate.yml` guarda a configuração para execução manual após a liberação dos jobs. Até lá, o mantenedor executa o build local antes de publicar. Nenhum desses checks substitui a revisão visual e de teclado no navegador.
+`npm run build:pages` executa `astro check`, ESLint, Stylelint, verificação de arquitetura, contraste (`scripts/check-contrast.mjs`: os pares de texto, rótulo e foco de `tokens.css` nas 12 combinações de tema e destaque, com o mínimo da WCAG 2.2 — 4,5:1 para texto, 3:1 para foco), Prettier, build, `html-validate`, `scripts/check-links.mjs` e `scripts/check-html-security.mjs`. O verificador de links confere arquivos e âncoras de links **internos** no HTML gerado; links externos exigem revisão editorial. A validação automática de push e pull request está pausada porque o GitHub não inicia os jobs nesta conta. Em 2026-10-08, a [execução 37711329074](https://github.com/ViktorWalde/KineinSite/actions/runs/37711329074) foi recusada antes de qualquer etapa por bloqueio de cobrança da conta. `validate.yml` guarda a configuração para execução manual após a liberação dos jobs. Até lá, o mantenedor executa o build local antes de publicar. `npm run check:browser` abre Chrome/Chromium com perfil descartável e verifica troca rápida de tema, 12 paletas, cor da barra do navegador, camadas das ondas, teclado, movimento reduzido, larguras de 320/768/1440 px e decodificação do vídeo. As capturas e o relatório ficam em `test-results/browser/`, ignorado pelo Git. `npm run check:examples` executa o código dos cinco estudos e os exercícios com GCC, Rust e Python. A revisão editorial e visual continua obrigatória, conforme [TEACHING.md](TEACHING.md).
 
 ## Segurança
 
@@ -65,7 +65,7 @@ Limites conhecidos, conforme a especificação CSP Level 3 (W3C, seção "The `<
 - Uma política em `<meta>` só vale para o que vem depois dela no documento. O Astro a coloca no fim do `<head>`, depois do script de tema e da folha de estilo. Os dois são gerados pelo build; o conteúdo vindo de Markdown fica no `<body>` e é coberto.
 - A política não funciona em `npm run dev`; confira com `npm run build:pages` e `npm run preview`.
 
-`scripts/check-html-security.mjs` roda no build e reprova uma página sem a política ou com `'unsafe-inline'`/`'unsafe-eval'`, atributo de evento, `<iframe>`/`<object>`/`<embed>`, script de outra origem e `target="_blank"` sem `rel="noopener"`. Ele foi provado por mutação: cada um desses defeitos, inserido de propósito, reprovou; desligar a CSP na configuração reprovou as sete páginas.
+`scripts/check-html-security.mjs` roda no build e reprova uma página sem a política ou com `'unsafe-inline'`/`'unsafe-eval'`, atributo de evento, `<iframe>`/`<object>`/`<embed>`, script de outra origem e `target="_blank"` sem `rel="noopener"`. Ele foi provado por mutação: cada um desses defeitos, inserido de propósito, reprovou; desligar a CSP na configuração reprovou as sete páginas que existiam naquele teste; o check atual cobre todas as páginas do build.
 
 ### Dependências e publicação
 
@@ -76,16 +76,24 @@ Limites conhecidos, conforme a especificação CSP Level 3 (W3C, seção "The `<
 
 ### Disponibilidade e tráfego abusivo
 
-Não há origem nossa para derrubar: as páginas saem da rede de entrega do GitHub Pages, que absorve o tráfego. A documentação do GitHub ("GitHub Pages limits") declara um site publicado de até 1 GB, um limite *flexível* de banda de 100 GB por mês e rate limit com resposta HTTP `429`. O Pages não oferece WAF nem rate limit configurável.
+Não há origem nossa para derrubar: as páginas saem da rede de entrega do GitHub Pages, que absorve o tráfego. A documentação do GitHub ("GitHub Pages limits") declara um site publicado de até 1 GB, um limite _flexível_ de banda de 100 GB por mês e rate limit com resposta HTTP `429`. O Pages não oferece WAF nem rate limit configurável.
 
-O que está ao alcance do site é não oferecer arquivo grande para ser repetido. O build deixou de publicar o PNG original de 2 MB do fundo do hero: `dist/` caiu de cerca de 2,4 MB para 368 KB, e o maior arquivo servido tem 73 KB. Se um dia o tráfego legítimo ou abusivo passar desses limites, o caminho que o próprio GitHub sugere é uma CDN na frente, o que exige domínio próprio e muda quem recebe os acessos.
+O que está ao alcance do site é não oferecer arquivo grande para ser repetido. O build deixou de publicar o PNG original de 2 MB do fundo do hero: aquela medição histórica foi de 368 KB. Com guias, capturas e dois vídeos, a medição em 2026-10-08 é de **2.663.719 bytes, 98 arquivos e 23 páginas** no build completo, antes de `site-version.json`. O maior arquivo é o vídeo de desenvolvimento (292.711 bytes). Isso é o tamanho de todo o site, não o transferido ao abrir a página inicial: imagens usam carregamento tardio e vídeos usam `preload="none"`. Se um dia o tráfego legítimo ou abusivo passar desses limites, o caminho que o próprio GitHub sugere é uma CDN na frente, o que exige domínio próprio e muda quem recebe os acessos.
 
 ### Privacidade
 
-O código do site não coleta dados: a única preferência (tema e cor) fica no `localStorage` do navegador. A hospedagem é outra coisa: segundo a documentação do GitHub ("What is GitHub Pages?", seção *Data collection*), o IP de cada visitante é registrado e guardado por segurança. O site não afirma ao visitante que nada é coletado, porque isso não depende só do código dele.
+O código do site não coleta dados: a única preferência (tema e cor) fica no `localStorage` do navegador. A hospedagem é outra coisa: segundo a documentação do GitHub ("What is GitHub Pages?", seção _Data collection_), o IP de cada visitante é registrado e guardado por segurança. O site não afirma ao visitante que nada é coletado, porque isso não depende só do código dele.
 
 ## Publicação
 
-O Pages está configurado para servir a raiz da branch `gh-pages`. `scripts/publicar-pages.sh` exige árvore Git limpa e identidade local com email `noreply`, recompila, clona a branch em um diretório temporário, sincroniza `dist/` e envia a atualização. `main` guarda o código fonte; `gh-pages` guarda somente os arquivos gerados. O workflow `deploy.yml` pode ser disparado manualmente, mas não participa do fluxo por branch descrito aqui.
+O Pages está configurado para servir a raiz da branch `gh-pages`. `scripts/publicar-pages.sh` exige árvore Git limpa e identidade local com email `noreply`, recompila, clona a branch em um diretório temporário, sincroniza `dist/` com as APIs de arquivo do Node (sem `rsync`) e envia a atualização. Exige também que o commit de origem já esteja em `origin/main`. `site-version.json` registra esse commit, e a mensagem do commit gerado inclui seu identificador. Após o envio, `scripts/verify-publication.mjs` espera a versão pública e compara o HTML inicial, CSS, JavaScript e SVG com o build. Uma falha nessa confirmação não desfaz um push já enviado; confira o estado do Pages antes de anunciar a versão. `main` guarda o código fonte; `gh-pages` guarda somente os arquivos gerados. O workflow `deploy.yml` pode ser disparado manualmente, mas não participa do fluxo por branch descrito aqui.
 
 Rascunhos internos e informações privadas ficam fora do repositório. `DocPrivate/` está em `.gitignore`; essa regra impede novas inclusões normais, mas não substitui a revisão dos arquivos antes do commit.
+
+## Demonstrações e versões
+
+`src/data/ide-screens.ts` e `assets/ide/` representam o beta 0.3.5; `src/data/development-screens.ts` e `assets/ide/desenvolvimento/` representam o executável de desenvolvimento da 0.4. `IdeGallery.astro` é compartilhado; cada moldura tem suas próprias abas, painéis e identificadores, sem interferência entre galerias.
+
+`DemoVideo.astro` usa vídeos locais, controles nativos, legendas WebVTT e carregamento apenas por ação do visitante. A prévia tem roteiro em `/documentacao/previa-0-4/`. `scripts/gravar-demo.sh` reproduz um programa extraído do estudo básico de C++, em perfil e projeto descartáveis. A gravação da prévia usa os comandos temporizados do executável; o modo `--beta` usa os atalhos e o botão de execução da 0.3.5. Não captura a tela da sessão do mantenedor.
+
+`theme.ts` mantém a transição ativa: a finalização de uma escolha anterior não limpa a marca de uma escolha nova. A promessa `ready` também tem tratamento para animações dispensadas por outra escolha. As duas metas `theme-color` recebem o token `--page` do tema selecionado; o fallback do HTML ainda segue a preferência do sistema antes do JavaScript.

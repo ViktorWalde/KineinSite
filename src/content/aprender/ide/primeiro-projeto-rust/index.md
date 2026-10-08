@@ -11,10 +11,14 @@ prerequisites:
   - "A IDE instalada e a pasta ~/projetos do capítulo 2."
   - "Permissão de administrador (sudo) e cerca de 1,6 GB livres na pasta pessoal para o Rust."
 references:
-  - "https://github.com/ViktorWalde/KineinVectis/blob/main/DocsPublic/tutorial.md"
+  - "https://github.com/ViktorWalde/KineinVectis/blob/v0.3.5/DocsPublic/tutorial.md"
   - "https://rust-lang.github.io/rustup/"
   - "https://doc.rust-lang.org/cargo/commands/cargo-new.html"
 ---
+
+**Seu objetivo:** Criar um projeto Cargo e ver a execução refletir uma mudança salva.
+
+**Pense antes de seguir:** Depois de mudar o texto e apertar ▶, o Rust deve recompilar?
 
 Assim como no C++, a Kinein Vectis usa o Rust instalado no sistema. Para Rust, ela recomenda o **rustup**, o instalador oficial das versões do Rust, junto com o **rust-analyzer**, que dá à IDE o autocompletar e os avisos.
 
@@ -41,7 +45,7 @@ rust-analyzer --version
 cargo clippy --version
 ```
 
-Cada linha mostra uma versão. Nesta reprodução, a estável era a `1.99.0`. O **Clippy**, que a IDE usa na análise de código, já vem junto.
+Cada linha mostra uma versão. Nesta reprodução, a estável era a `1.99.0`. No perfil padrão da instalação, o **Clippy**, que a IDE usa na análise de código, vem junto; o comando acima confirma se está disponível.
 
 O site do Rust, em rust-lang.org, tem outro instalador do rustup; os comandos `rustup` acima valem para os dois.
 
@@ -100,3 +104,20 @@ cargo run
 ```
 
 A última linha é `Olá, Rust!`.
+
+## Confira o que aprendeu
+
+Sem reler as etapas, responda:
+
+1. Depois de mudar o texto e apertar ▶, o Rust deve recompilar?
+2. Qual arquivo descreve o projeto?
+3. Onde fica o código inicial?
+
+<details>
+<summary>Conferir seu raciocínio</summary>
+
+A execução usa cargo run, que compila o que mudou antes de executar. Cargo.toml descreve o projeto; src/main.rs contém o programa inicial.
+
+</details>
+
+Se uma resposta ainda não ficou clara, volte à etapa correspondente e confira na IDE. O resultado que você observa vale mais do que decorar um atalho.

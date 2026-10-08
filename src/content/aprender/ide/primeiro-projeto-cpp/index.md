@@ -11,9 +11,13 @@ prerequisites:
   - "A IDE instalada, como no capítulo anterior."
   - "Permissão de administrador (sudo) para instalar o compilador."
 references:
-  - "https://github.com/ViktorWalde/KineinVectis/blob/main/DocsPublic/manual.md"
+  - "https://github.com/ViktorWalde/KineinVectis/blob/v0.3.5/DocsPublic/manual.md"
   - "https://cmake.org/cmake/help/latest/manual/cmake-presets.7.html"
 ---
+
+**Seu objetivo:** Criar, compilar e executar um programa, depois conferir uma mudança na saída.
+
+**Pense antes de seguir:** Se mudar o texto e apertar ▶ sem recompilar, qual saída espera ver na 0.3.5?
 
 A Kinein Vectis não traz compilador: ela usa o que está instalado no sistema. Neste capítulo você instala as ferramentas de C++, cria um projeto pela IDE, compila, executa e faz a primeira mudança.
 
@@ -117,3 +121,20 @@ cd ~/projetos/ola-kinein
 ```
 
 A resposta é `Olá, Kinein!`.
+
+## Confira o que aprendeu
+
+Sem reler as etapas, responda:
+
+1. Se mudar o texto e apertar ▶ sem recompilar, qual saída espera ver na 0.3.5?
+2. Qual painel confirma que a compilação terminou?
+3. Por que a aba da execução precisa continuar aberta?
+
+<details>
+<summary>Conferir seu raciocínio</summary>
+
+Na 0.3.5, o ▶ pode executar o binário anterior: salve e compile antes de rodar. O painel Build informa o resultado da compilação. Abrir antes um terminal mantém a saída de um programa rápido disponível para leitura.
+
+</details>
+
+Se uma resposta ainda não ficou clara, volte à etapa correspondente e confira na IDE. O resultado que você observa vale mais do que decorar um atalho.

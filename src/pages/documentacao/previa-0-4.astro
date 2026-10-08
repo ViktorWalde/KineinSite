@@ -1,0 +1,117 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import DemoVideo from "../../features/demonstracao/DemoVideo.astro";
+import { publicVersion, releaseUrl, sitePath } from "../../site";
+import "../../features/documentacao/documentacao.css";
+import "../../features/codigo/codigo.css";
+---
+
+<BaseLayout
+  current="docs"
+  title="Prévia real da 0.4"
+  description="Veja a nova interface da Kinein Vectis em uso: código C++, build, execução, ferramentas e Git. Saiba o que foi demonstrado e o que está planejado para a 0.4."
+>
+  <div class="shell docs-main">
+    <header class="docs-intro enter">
+      <p class="kicker">0.4 · EM DESENVOLVIMENTO</p>
+      <h1>Veja o trabalho tomando forma.</h1>
+      <p class="docs-intro-copy">
+        A reformulação da interface e o foco em embarcados fazem parte da mesma
+        próxima versão: a 0.4. Esta é uma demonstração do executável de
+        desenvolvimento, com organização inspirada nas IDEs JetBrains.
+      </p>
+      <p>
+        A versão pública para experimentar hoje continua sendo o{" "}
+        <a
+          class="inline-link"
+          href={releaseUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          beta {publicVersion} para Linux ↗
+        </a>
+        . As telas desta prévia ainda podem mudar.
+      </p>
+    </header>
+    <DemoVideo />
+    <article class="prose">
+      <h2 id="roteiro">O que acontece no vídeo</h2>
+      <p>
+        Um programa pequeno calcula a média de 21 e 23 °C. O projeto tem CMake e
+        um repositório Git local. A gravação acompanha a aplicação rodando, em
+        tempo real, sem simular painéis ou resultados.
+      </p>
+      <ol>
+        <li>
+          <strong>0–6 s:</strong> o arquivo <code>src/main.cpp</code> está
+          aberto no editor, junto à árvore do projeto.
+        </li>
+        <li>
+          <strong>6–12 s:</strong> a compilação termina e o painel Build informa
+          sucesso.
+        </li>
+        <li>
+          <strong>12–18 s:</strong> o terminal integrado abre no diretório do
+          projeto.
+        </li>
+        <li>
+          <strong>18–24 s:</strong> a execução imprime{" "}
+          <code>media: 22.00 C</code>, o resultado esperado.
+        </li>
+        <li>
+          <strong>24–30 s:</strong> o painel Ferramentas exibe as ferramentas
+          detectadas, suas versões e itens ausentes.
+        </li>
+        <li>
+          <strong>30–36 s:</strong> o painel Git mostra o primeiro commit do
+          exemplo.
+        </li>
+        <li>
+          <strong>36–42 s:</strong> a interface volta ao terminal.
+        </li>
+      </ol>
+      <h2>O que isso permite testar</h2>
+      <p>
+        O ciclo básico — abrir, ler o código, compilar, executar e conferir a
+        saída — já pode ser experimentado no beta. Os{" "}
+        <a class="inline-link" href={sitePath("/aprender/")}>
+          tutoriais de início
+        </a>{" "}
+        mostram esse fluxo com as telas e os limites da 0.3.5. O vídeo mostra
+        esse trabalho na interface em construção.
+      </p>
+      <h2>O que está vindo com a 0.4</h2>
+      <p>
+        Uma reformulação do frontend, com o editor no centro, e uma base mais
+        consistente para trabalhar com embarcados. Os dispositivos, SDKs e
+        fluxos de gravação e depuração do lançamento serão anunciados após
+        implementação e testes. Esta demonstração confirma o fluxo local de C++;
+        não valida um fluxo completo de firmware ou hardware.
+      </p>
+      <h2>Experimente com um objetivo pequeno</h2>
+      <p>
+        Comece por{" "}
+        <a
+          class="inline-link"
+          href={sitePath("/aprender/ide/primeiro-projeto-cpp/")}
+        >
+          compilar e executar seu primeiro C++
+        </a>
+        . Depois veja como é voltar do código ao resultado na mesma janela. Se
+        encontrar uma dificuldade, o{" "}
+        <a
+          class="inline-link"
+          href={sitePath("/aprender/ide/quando-algo-da-errado/")}
+        >
+          capítulo de diagnóstico
+        </a>{" "}
+        ajuda a separar código, compilador e ambiente.
+      </p>
+      <p>
+        <a class="inline-link" href={sitePath("/documentacao/")}>
+          ← Voltar à documentação
+        </a>
+      </p>
+    </article>
+  </div>
+</BaseLayout>

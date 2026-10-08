@@ -1,0 +1,22 @@
+WEBVTT
+
+00:00.000 --> 00:06.000
+Prévia real da 0.4: um projeto C++ com CMake aberto na nova interface.
+
+00:06.000 --> 00:12.000
+Compilação pela IDE: o painel Build informa que o programa foi gerado com sucesso.
+
+00:12.000 --> 00:18.000
+Terminal integrado: o shell continua disponível dentro do projeto.
+
+00:18.000 --> 00:24.000
+Executar o programa: a aba de execução mostra “media: 22.00 C”.
+
+00:24.000 --> 00:30.000
+Ferramentas: a IDE mostra o que encontrou no sistema e as versões detectadas.
+
+00:30.000 --> 00:36.000
+Histórico Git: o primeiro commit do projeto aparece no painel lateral.
+
+00:36.000 --> 00:42.000
+Volta ao terminal. A interface e os embarcados estão sendo trabalhados para a 0.4.

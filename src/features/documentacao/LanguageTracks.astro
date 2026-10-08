@@ -1,37 +1,37 @@
 ---
-import { repositoryUrl, sitePath } from "../../site";
+import { sitePath } from "../../site";
 
 const tracks = [
   {
     language: "C",
-    status: "EM PREPARAÇÃO",
-    path: "Programa local de amostras: compilar, executar e verificar resultados. Firmware vem depois.",
-    destination: "C e C++ no README",
-    href: `${repositoryUrl}#c-e-c`,
-    external: true,
+    status: "BÁSICO · EXEMPLO VERIFICADO",
+    path: "Dois números, uma média e uma saída. Compile um programa C11 e confira o resultado antes de pensar em firmware.",
+    destination: "Começar em C",
+    href: sitePath("/estudos/c/primeiros-passos/"),
+    external: false,
   },
   {
     language: "C++",
-    status: "ESTUDO DISPONÍVEL",
-    path: "Comece no software de IoT: processe telemetria simulada em C++20. O projeto guiado na IDE virá após a validação do fluxo.",
-    destination: "Estudar telemetria local",
-    href: sitePath("/estudos/cpp/telemetria-local/"),
+    status: "BÁSICO · EXEMPLO VERIFICADO",
+    path: "Escreva um programa pequeno, compile e mude um valor. Depois avance para coleções e telemetria simulada em C++20.",
+    destination: "Começar em C++",
+    href: sitePath("/estudos/cpp/primeiros-passos/"),
     external: false,
   },
   {
     language: "Rust",
-    status: "EM PREPARAÇÃO",
-    path: "Projeto local com Cargo, tratamento de erros e testes. Targets específicos vêm depois.",
-    destination: "Rust no README",
-    href: `${repositoryUrl}#rust`,
-    external: true,
+    status: "BÁSICO · EXEMPLO VERIFICADO",
+    path: "Conheça let, f64 e println! com um cálculo pequeno. O tutorial da IDE mostra também a criação e a execução com Cargo.",
+    destination: "Começar em Rust",
+    href: sitePath("/estudos/rust/primeiros-passos/"),
+    external: false,
   },
   {
     language: "Python",
-    status: "EM PREPARAÇÃO",
-    path: "Ambiente virtual, relatório CSV e testes locais com unittest. API e banco vêm depois.",
-    destination: "Python no manual",
-    href: sitePath("/manual/#10-python"),
+    status: "BÁSICO · EXEMPLO VERIFICADO",
+    path: "Execute um arquivo, entenda os valores e confira uma pequena mudança. Depois use .venv e pytest no tutorial da IDE.",
+    destination: "Começar em Python",
+    href: sitePath("/estudos/python/primeiros-passos/"),
     external: false,
   },
 ] as const;
@@ -48,8 +48,8 @@ const tracks = [
   </div>
   <p>
     Conteúdo próprio em português, baseado nas fontes de cada ecossistema. Os
-    estudos de linguagem mostram conceitos executados e verificados; os projetos
-    na IDE virão após o teste na versão indicada.
+    estudos básicos mostram conceitos executados e verificados. Os tutoriais de
+    C++, Rust e Python ensinam o primeiro projeto na IDE 0.3.5.
   </p>
   <div class="path-grid auto-grid reveal-children">
     {tracks.map((track) => (

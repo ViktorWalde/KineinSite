@@ -12,7 +12,7 @@
     "check:lint": "eslint 'src/**/*.{astro,ts,js,mjs}' 'scripts/**/*.mjs' '*config.mjs' --no-error-on-unmatched-pattern --max-warnings 0",
     "check:css": "stylelint 'src/**/*.css' --allow-empty-input --max-warnings 0",
     "check:architecture": "node scripts/check-architecture.mjs",
-    "check:format": "prettier --check astro.config.mjs eslint.config.mjs stylelint.config.mjs prettier.config.mjs scripts/*.mjs 'src/**/*.{astro,ts,css}' package.json tsconfig.json",
+    "check:format": "prettier --check astro.config.mjs eslint.config.mjs stylelint.config.mjs prettier.config.mjs 'scripts/**/*.mjs' 'src/**/*.{astro,ts,css}' package.json tsconfig.json",
     "check:html": "html-validate 'dist/**/*.html' --max-warnings 0",
     "check:links": "node scripts/check-links.mjs",
     "check": "npm run check:types && npm run check:lint && npm run check:css && npm run check:architecture && npm run check:contrast && npm run check:manual && npm run check:format",
@@ -20,7 +20,9 @@
     "build:pages": "KINEIN_PAGES_BUILD=1 npm run build",
     "check:security": "node scripts/check-html-security.mjs",
     "check:contrast": "node scripts/check-contrast.mjs",
-    "check:manual": "node scripts/check-manual.mjs"
+    "check:manual": "node scripts/check-manual.mjs",
+    "check:examples": "node scripts/check-examples.mjs",
+    "check:browser": "node scripts/check-browser.mjs"
   },
   "devDependencies": {
     "@astrojs/check": "0.9.10",

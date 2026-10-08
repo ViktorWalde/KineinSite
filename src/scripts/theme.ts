@@ -18,6 +18,16 @@ const accentInputs = Array.from(
   document.querySelectorAll<HTMLInputElement>('input[name="accent"]'),
 );
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+const systemScheme = window.matchMedia("(prefers-color-scheme: dark)");
+const browserColors = document.querySelectorAll<HTMLMetaElement>(
+  'meta[name="theme-color"]',
+);
+let activeThemeTransition: ViewTransition | undefined;
+
+function syncBrowserColor(): void {
+  const color = getComputedStyle(root).getPropertyValue("--page").trim();
+  for (const meta of browserColors) meta.content = color;
+}
 
 function storedValue(key: string): string | null {
   try {
@@ -46,11 +56,13 @@ function isAccent(value: string | null): value is Accent {
 function applyTheme(theme: Theme): void {
   if (theme === defaultTheme) root.removeAttribute("data-theme");
   else root.dataset["theme"] = theme;
+  syncBrowserColor();
 }
 
 function applyAccent(accent: Accent): void {
   if (accent === defaultAccent) root.removeAttribute("data-accent");
   else root.dataset["accent"] = accent;
+  syncBrowserColor();
 }
 
 // A troca de tema passa pela transição nativa: a página inteira esmaece de
@@ -59,14 +71,24 @@ function applyAccent(accent: Accent): void {
 // troca é imediata. data-switching escolhe a animação em base.css.
 function withTransition(update: () => void): void {
   if (!("startViewTransition" in document) || reducedMotion.matches) {
+    activeThemeTransition?.skipTransition();
+    activeThemeTransition = undefined;
+    delete root.dataset["switching"];
     update();
     return;
   }
   root.dataset["switching"] = "theme";
   const transition = document.startViewTransition(update);
-  void transition.finished.finally(() => {
+  activeThemeTransition = transition;
+  // Uma nova escolha pode dispensar a animação antes de ela ficar pronta.
+  // ready rejeita nesse caso; a atualização do tema continua normalmente.
+  void transition.ready.catch(() => {});
+  const finish = () => {
+    if (activeThemeTransition !== transition) return;
+    activeThemeTransition = undefined;
     delete root.dataset["switching"];
-  });
+  };
+  void transition.finished.then(finish, finish);
 }
 
 const savedTheme = storedValue(themeStorageKey);
@@ -76,6 +98,10 @@ const initialAccent = isAccent(savedAccent) ? savedAccent : defaultAccent;
 
 applyTheme(initialTheme);
 applyAccent(initialAccent);
+
+systemScheme.addEventListener("change", () => {
+  if (!root.hasAttribute("data-theme")) syncBrowserColor();
+});
 
 if (themeInputs.length > 0 && accentInputs.length > 0) {
   for (const input of themeInputs) input.checked = input.value === initialTheme;

@@ -1,0 +1,10 @@
+diff --git a/.github/workflows/validate.yml b/.github/workflows/validate.yml
+index b9d6b1b..b148a26 100644
+--- a/.github/workflows/validate.yml
++++ b/.github/workflows/validate.yml
+@@ -27,3 +27,5 @@ jobs:
+         run: npm ci
+       - name: Validar a variante do GitHub Pages
+         run: npm run build:pages
++      - name: Conferir os fluxos no navegador
++        run: npm run check:browser

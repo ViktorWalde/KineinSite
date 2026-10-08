@@ -1,24 +1,7 @@
 ---
-import { getImage } from "astro:assets";
 import { ideScreens } from "../../data/ide-screens";
-import { formatDate } from "../../site";
-import "./ide-preview.css";
-
-// As dimensões vêm do getImage: ler image.width faria o Astro publicar o PNG
-// original junto (ver o hero em pages/index.astro).
-const shots = await Promise.all(
-  ideScreens.shots.map(async (shot) => ({
-    ...shot,
-    optimized: await getImage({
-      src: shot.image,
-      format: "webp",
-      quality: 82,
-      widths: [800, 1200, 1600],
-      sizes: "(min-width: 76rem) 74rem, 100vw",
-    }),
-  })),
-);
-const capturedAt = new Date(`${ideScreens.capturedAt}T00:00:00Z`);
+import IdeGallery from "./IdeGallery.astro";
+import DemoVideo from "../demonstracao/DemoVideo.astro";
 ---
 
 <section
@@ -28,61 +11,14 @@ const capturedAt = new Date(`${ideScreens.capturedAt}T00:00:00Z`);
 >
   <div class="section-intro reveal">
     <p class="kicker">A INTERFACE HOJE · CAPTURA REAL</p>
-    <h2 id="interface-title">A {ideScreens.version} por dentro.</h2>
+    <h2 id="interface-title">Veja o beta {ideScreens.version} em uso.</h2>
     <p class="section-intro-copy">
-      Um projeto C++ aberto na versão pública, sem retoque: o mesmo programa do
-      estudo de telemetria do site. Na 0.3.6, a interface é reorganizada em
-      torno do editor.
+      Estas são as telas do beta disponível para baixar: um projeto C++ aberto,
+      o build concluído e as ferramentas detectadas. É o mesmo programa do
+      estudo de telemetria do site, fotografado na IDE.
     </p>
   </div>
 
-  <div class="ide-preview-frame reveal">
-    <div class="ide-tabs" role="tablist" aria-label="Capturas da IDE" hidden>
-      {shots.map((shot, index) => (
-        <button
-          type="button"
-          role="tab"
-          class="ide-tab"
-          id={`ide-tab-${shot.id}`}
-          aria-controls={`ide-shot-${shot.id}`}
-          aria-selected={index === 0 ? "true" : "false"}
-          tabindex={index === 0 ? 0 : -1}
-        >
-          {shot.title}
-        </button>
-      ))}
-    </div>
-    {shots.map((shot) => (
-      <figure
-        class="ide-shot"
-        id={`ide-shot-${shot.id}`}
-        aria-labelledby={`ide-tab-${shot.id}`}
-      >
-        <img
-          src={shot.optimized.src}
-          srcset={shot.optimized.srcSet.attribute}
-          sizes="(min-width: 76rem) 74rem, 100vw"
-          width={shot.optimized.attributes["width"]}
-          height={shot.optimized.attributes["height"]}
-          alt={shot.alt}
-          loading="lazy"
-          decoding="async"
-        />
-        <figcaption>
-          {shot.caption}{" "}
-          <span>
-            Kinein Vectis {ideScreens.version}, {ideScreens.environment},{" "}
-            <time datetime={ideScreens.capturedAt}>
-              {formatDate(capturedAt)}
-            </time>
-            .
-          </span>
-        </figcaption>
-      </figure>
-    ))}
-  </div>
+  <IdeGallery id="beta" label="Capturas do beta 0.3.5" screens={ideScreens} />
+  <DemoVideo beta />
 </section>
-
-<script>
-  import "./ide-preview";
-</script>

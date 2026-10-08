@@ -11,9 +11,13 @@ prerequisites:
   - "O projeto ola-kinein do capítulo 2."
   - "Permissão de administrador (sudo) para instalar o Git."
 references:
-  - "https://github.com/ViktorWalde/KineinVectis/blob/main/DocsPublic/manual.md"
+  - "https://github.com/ViktorWalde/KineinVectis/blob/v0.3.5/DocsPublic/manual.md"
   - "https://git-scm.com/book/pt-br/v2"
 ---
+
+**Seu objetivo:** Guardar duas versões do projeto e explicar a diferença entre elas.
+
+**Pense antes de seguir:** Um commit envia o projeto automaticamente para o GitHub?
 
 O Git guarda versões do projeto: cada **commit** é uma fotografia dos arquivos, com uma mensagem dizendo o que mudou. A Kinein Vectis mostra o estado do Git na árvore, no editor e numa janela própria. Neste capítulo, o `ola-kinein` vira um repositório.
 
@@ -109,3 +113,20 @@ git log --oneline
 ```
 
 As duas linhas são os seus commits, o mais novo em cima.
+
+## Confira o que aprendeu
+
+Sem reler as etapas, responda:
+
+1. Um commit envia o projeto automaticamente para o GitHub?
+2. Por que ignorar .kinein antes do primeiro commit?
+3. O que o diff permite conferir antes de salvar uma versão?
+
+<details>
+<summary>Conferir seu raciocínio</summary>
+
+Um commit guarda uma versão no repositório local; não faz push. Ignorar .kinein evita guardar build e estado local da IDE. O diff mostra as linhas removidas e adicionadas, para conferir o que entrará no commit.
+
+</details>
+
+Se uma resposta ainda não ficou clara, volte à etapa correspondente e confira na IDE. O resultado que você observa vale mais do que decorar um atalho.

@@ -1,0 +1,83 @@
+---
+import { getImage } from "astro:assets";
+import type { ImageMetadata } from "astro";
+import { formatDate } from "../../site";
+import "./ide-preview.css";
+
+interface Props {
+  id: string;
+  label: string;
+  screens: {
+    version: string;
+    capturedAt: string;
+    environment: string;
+    shots: readonly {
+      id: string;
+      title: string;
+      image: ImageMetadata;
+      alt: string;
+      caption: string;
+    }[];
+  };
+}
+const { id, label, screens } = Astro.props;
+const shots = await Promise.all(
+  screens.shots.map(async (shot) => ({
+    ...shot,
+    optimized: await getImage({
+      src: shot.image,
+      format: "webp",
+      quality: 82,
+      widths: [800, 1200, 1600],
+      sizes: "(min-width: 76rem) 74rem, 100vw",
+    }),
+  })),
+);
+const capturedAt = new Date(`${screens.capturedAt}T00:00:00Z`);
+---
+
+<div class="ide-preview-frame reveal">
+  <div class="ide-tabs" role="tablist" aria-label={label} hidden>
+    {shots.map((shot, index) => (
+      <button
+        type="button"
+        role="tab"
+        class="ide-tab"
+        id={`${id}-tab-${shot.id}`}
+        aria-controls={`${id}-shot-${shot.id}`}
+        aria-selected={index === 0 ? "true" : "false"}
+        tabindex={index === 0 ? 0 : -1}
+      >
+        {shot.title}
+      </button>
+    ))}
+  </div>
+  {shots.map((shot) => (
+    <figure
+      class="ide-shot"
+      id={`${id}-shot-${shot.id}`}
+      aria-labelledby={`${id}-tab-${shot.id}`}
+    >
+      <img
+        src={shot.optimized.src}
+        srcset={shot.optimized.srcSet.attribute}
+        sizes="(min-width: 76rem) 74rem, 100vw"
+        width={shot.optimized.attributes["width"]}
+        height={shot.optimized.attributes["height"]}
+        alt={shot.alt}
+        loading="lazy"
+        decoding="async"
+      />
+      <figcaption>
+        {shot.caption}{" "}
+        <span>
+          Kinein Vectis {screens.version}, {screens.environment},{" "}
+          <time datetime={screens.capturedAt}>{formatDate(capturedAt)}</time>.
+        </span>
+      </figcaption>
+    </figure>
+  ))}
+</div>
+<script>
+  import "./ide-preview";
+</script>

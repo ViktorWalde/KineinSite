@@ -10,8 +10,12 @@ status: verified
 prerequisites:
   - "O projeto ola-kinein do capítulo anterior."
 references:
-  - "https://github.com/ViktorWalde/KineinVectis/blob/main/DocsPublic/manual.md"
+  - "https://github.com/ViktorWalde/KineinVectis/blob/v0.3.5/DocsPublic/manual.md"
 ---
+
+**Seu objetivo:** Localizar arquivos, editor e resultados, sem precisar memorizar todos os painéis.
+
+**Pense antes de seguir:** Onde você procuraria a saída de um programa?
 
 Com um projeto aberto, a janela da Kinein Vectis se divide em poucas partes, sempre no mesmo lugar. Este capítulo passa por cada uma, com o `ola-kinein` do capítulo anterior.
 
@@ -122,3 +126,20 @@ _O contexto de compilação do arquivo, a posição do cursor, os servidores de 
 - **LSP**: os servidores de linguagem rodando, que dão o autocompletar e os avisos. Uma bolinha com um número é o normal; um **✗** vermelho quer dizer que um deles parou, e passar o mouse mostra o motivo.
 - **IDE** abre a aba IDE do painel, com o registro técnico do que a interface está fazendo. É útil para relatar um problema.
 - **core**: o processo que faz o trabalho pesado da IDE. A bolinha verde quer dizer conectado.
+
+## Confira o que aprendeu
+
+Sem reler as etapas, responda:
+
+1. Onde você procuraria a saída de um programa?
+2. Onde consultaria o histórico dos trabalhos?
+3. O rótulo toolchain confirma sozinho o compilador usado pelo CMake na 0.3.5?
+
+<details>
+<summary>Conferir seu raciocínio</summary>
+
+A saída fica no Terminal; os trabalhos aparecem em Jobs. Na 0.3.5, o rótulo toolchain pode diferir do compilador efetivo do CMake. Confira o comando e o log do build antes de concluir.
+
+</details>
+
+Se uma resposta ainda não ficou clara, volte à etapa correspondente e confira na IDE. O resultado que você observa vale mais do que decorar um atalho.

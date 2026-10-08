@@ -14,22 +14,20 @@ const notePath = sitePath(
   aria-labelledby="estado-title"
 >
   <div class="section-intro reveal">
-    <p class="kicker">NA VERSÃO PÚBLICA</p>
-    <h2 id="estado-title">O que já funciona hoje.</h2>
+    <p class="kicker">POR QUE EXPERIMENTAR · BETA {publicVersion}</p>
+    <h2 id="estado-title">Edite, execute e investigue no mesmo lugar.</h2>
     <p class="section-intro-copy">
-      A versão pública é a{" "}
-      <strong>{publicVersion}, beta para Linux x86_64</strong>. O pacote traz a
-      interface, o core e o Qt; compiladores, SDKs e ferramentas vêm do seu
-      sistema, então o que funciona em cada projeto depende do que está
-      instalado e do alvo.
+      Acompanhe o código, o resultado do build e as ferramentas do projeto sem
+      sair da IDE. O beta <strong>{publicVersion} para Linux x86_64</strong>
+      reúne esse trabalho em um ambiente open source, sem telemetria.
     </p>
   </div>
   <div class="status-panel card reveal">
     <div>
-      <h3>Beta público</h3>
+      <h3>Um ponto de partida para testar</h3>
       <p>
-        A série 0.x é beta: interfaces, configurações e fluxos podem mudar.
-        Requisitos e instalação estão na{" "}
+        O AppImage traz a IDE e o Qt. Compiladores, SDKs e ferramentas continuam
+        vindo do seu sistema. Requisitos e instalação estão na{" "}
         <a class="inline-link" href={notePath}>
           nota da {publicVersion}
         </a>
@@ -38,30 +36,33 @@ const notePath = sitePath(
     </div>
     <div class="status-actions">
       <a class="button button-secondary" href={sitePath("/manual/")}>
-        Ler o manual da IDE
+        Conhecer as ferramentas
       </a>
     </div>
   </div>
   <div class="current-capabilities auto-grid reveal-children">
     <div class="card">
-      <h3>Projeto e editor</h3>
+      <h3>Escreva com contexto</h3>
       <p>
-        Árvore do projeto, editor com Tree-sitter e inteligência de código por
-        clangd, rust-analyzer e basedpyright.
+        Navegue pelos arquivos e receba completamento e diagnósticos de clangd,
+        rust-analyzer ou basedpyright, conforme o projeto e as ferramentas
+        instaladas.
       </p>
     </div>
     <div class="card">
-      <h3>Executar e investigar</h3>
+      <h3>Do código ao resultado</h3>
       <p>
-        Build, testes, cobertura e depuração como tarefas canceláveis, e um
-        terminal integrado de verdade (PTY).
+        Compile, execute testes e investigue problemas pelos painéis da IDE.
+        Acompanhe tarefas canceláveis e use o terminal integrado quando precisar
+        de um comando.
       </p>
     </div>
     <div class="card">
-      <h3>Além do editor</h3>
+      <h3>Seu projeto à mão</h3>
       <p>
-        Git, Remote SSH, embarcados, containers, bancos e Grafana, cada um com
-        os próprios pré-requisitos.
+        Consulte mudanças no Git, busque símbolos e trabalhe com os arquivos do
+        projeto. O beta também inclui Remote SSH, com seus próprios
+        pré-requisitos.
       </p>
     </div>
   </div>

@@ -10,3 +10,5 @@ screenshot-*.png
 # Estado da Kinein Vectis ao abrir o repositório na IDE: abas, rascunhos não
 # salvos (kinein.db), build e alvos remotos. Nunca vai para o Git.
 /.kinein/
+
+/test-results/

@@ -1,6 +1,6 @@
 # Roadmap do KineinSite
 
-Este documento descreve **o site**, não o cronograma de recursos da Kinein Vectis. Estado conferido em 2026-10-02. A ordem abaixo indica dependências editoriais e técnicas, sem prometer datas ou funcionalidades da IDE que ainda não foram validadas.
+Este documento descreve **o site**, não o cronograma de recursos da Kinein Vectis. Estado conferido em 2026-10-08. A ordem abaixo indica dependências editoriais e técnicas, sem prometer datas ou funcionalidades da IDE que ainda não foram validadas.
 
 ## Entregue
 
@@ -16,15 +16,20 @@ Este documento descreve **o site**, não o cronograma de recursos da Kinein Vect
 - Guia da IDE em `/aprender/` (2026-10-02): oito capítulos, da instalação ao Git e aos erros, cada um reproduzido no AppImage 0.3.5 por um roteiro que roda os comandos do texto e gera as capturas.
 - Segurança (2026-10-02): política de conteúdo (CSP) em todas as páginas, verificada no build e provada por mutação; dependências sem scripts de instalação; actions fixadas por SHA; deploy sem o PNG original de 2 MB. Detalhes e limites em [ARCHITECTURE.md](ARCHITECTURE.md#segurança).
 
+- Apresentação do beta 0.3.5 e prévia real da 0.4 com capturas separadas, vídeo legendado e roteiro verificável.
+- Estudos básicos de C, C++, Rust e Python, com exemplos e exercícios executados; critérios de ensino e revisão em [TEACHING.md](TEACHING.md).
+- Troca rápida de tema corrigida, cor do navegador sincronizada e regressões de navegador reproduzíveis.
+- Publicador sem dependência de rsync, com identificação do commit de origem e conferência dos arquivos públicos.
+
 ## Próximas entregas do site
 
-| Prioridade | Trabalho | Condição para concluir |
-| --- | --- | --- |
-| 1 | Recapturar o Guia da IDE na 0.3.6. | Rodar todos os roteiros no AppImage 0.3.6, ajustar texto e coordenadas onde a interface mudou, tirar os avisos que a 0.3.6 corrigir e conferir num desktop real. |
-| 2 | Continuar os estudos de C++ para software de IoT: entrada validada, módulos e CMake/CTest. | Compilar e executar os exemplos, testar casos de erro e registrar ferramenta, plataforma e data no guia. |
-| 3 | Melhorar a navegação entre estudos e documentação quando houver mais conteúdo verificado. | Cada cartão aponta para uma página distinta e útil; nenhum link leva a um capítulo vazio. |
-| 4 | Reativar a validação automática de pull requests. | Confirmar que a conta pode iniciar jobs do GitHub Actions e que o workflow passa em um push e em um pull request. Até lá, usar `npm run build:pages` localmente. |
-| 5 | Revisar os links externos essenciais. | Conferir os destinos a cada mudança de conteúdo; o build já confere os internos. |
+| Prioridade | Trabalho                                                                                   | Condição para concluir                                                                                                                                           |
+| ---------- | ------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1          | Recapturar o Guia da IDE na 0.4.                                                           | Rodar todos os roteiros no AppImage 0.4, ajustar texto e coordenadas onde a interface mudou, tirar os avisos que a 0.4 corrigir e conferir num desktop real.     |
+| 2          | Continuar os estudos de C++ para software de IoT: entrada validada, módulos e CMake/CTest. | Compilar e executar os exemplos, testar casos de erro e registrar ferramenta, plataforma e data no guia.                                                         |
+| 3          | Melhorar a navegação entre estudos e documentação quando houver mais conteúdo verificado.  | Cada cartão aponta para uma página distinta e útil; nenhum link leva a um capítulo vazio.                                                                        |
+| 4          | Reativar a validação automática de pull requests.                                          | Confirmar que a conta pode iniciar jobs do GitHub Actions e que o workflow passa em um push e em um pull request. Até lá, usar `npm run build:pages` localmente. |
+| 5          | Revisar os links externos essenciais.                                                      | Conferir os destinos a cada mudança de conteúdo; o build já confere os internos.                                                                                 |
 
 Um estudo de MQTT local só será colocado como guia publicado depois de escolher e testar cliente, broker e versões. Guias de ROS 2, emulação ou fluxos novos da Vectis dependem de recursos reais da IDE; não entram no roadmap de entrega do site antes dessa validação.
 

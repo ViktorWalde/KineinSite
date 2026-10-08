@@ -1,5 +1,8 @@
 ---
 import { developmentSnapshot } from "../../data/development";
+import { developmentScreens } from "../../data/development-screens";
+import IdeGallery from "./IdeGallery.astro";
+import DemoVideo from "../demonstracao/DemoVideo.astro";
 import { formatDate, publicVersion, releaseUrl } from "../../site";
 
 const updatedAt = new Date(`${developmentSnapshot.updatedAt}T00:00:00Z`);
@@ -12,15 +15,15 @@ const updatedAt = new Date(`${developmentSnapshot.updatedAt}T00:00:00Z`);
 >
   <div class="section-intro reveal">
     <p class="kicker">PRÓXIMA VERSÃO · EM DESENVOLVIMENTO</p>
-    <h2 id="desenvolvimento-title">
-      A {developmentSnapshot.version} vai {developmentSnapshot.focus}.
-    </h2>
+    <h2 id="desenvolvimento-title">{developmentSnapshot.title}</h2>
     <p class="section-intro-copy">
-      Este é o plano informado pelo mantenedor em{" "}
+      A {developmentSnapshot.version} reúne a reformulação da interface e o foco
+      em embarcados. O executável de desenvolvimento já permite ver a interface
+      em construção. Plano atualizado em{" "}
       <time datetime={developmentSnapshot.updatedAt}>
         {formatDate(updatedAt)}
       </time>
-      . Nada desta lista faz parte do download ainda; a versão pública é a{" "}
+      . Para experimentar a versão pública disponível, baixe o{" "}
       <a
         class="inline-link"
         href={releaseUrl}
@@ -39,7 +42,6 @@ const updatedAt = new Date(`${developmentSnapshot.updatedAt}T00:00:00Z`);
         <ul>
           {group.items.map((item) => (
             <li>
-              <span class="development-code">{item.code}</span>
               <span>
                 <strong>{item.title}</strong>
                 {"detail" in item && <small>{item.detail}</small>}
@@ -50,10 +52,14 @@ const updatedAt = new Date(`${developmentSnapshot.updatedAt}T00:00:00Z`);
       </article>
     ))}
   </div>
+  <IdeGallery
+    id="preview"
+    label="Capturas da prévia 0.4"
+    screens={developmentScreens}
+  />
+  <DemoVideo />
   <p class="development-note">
-    O escopo e a ordem podem mudar até o lançamento da{" "}
-    {developmentSnapshot.version}. Depois dela vem a{" "}
-    <strong>{developmentSnapshot.next.version}</strong>,{" "}
-    {developmentSnapshot.next.summary}.
+    A {developmentSnapshot.version} está em desenvolvimento. As telas e o escopo
+    ainda podem mudar; a prévia apresenta o trabalho em construção.
   </p>
 </section>

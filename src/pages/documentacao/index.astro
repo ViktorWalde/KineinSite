@@ -58,9 +58,9 @@ const firstGuide = ideGuides[0];
           instalar.
         </div>
         <p class="docs-release-note">
-          A {developmentSnapshot.version} está em desenvolvimento. Veja o{" "}
-          <a class="inline-link" href={sitePath("/#desenvolvimento")}>
-            o que ela traz
+          A {developmentSnapshot.version} está em desenvolvimento. Veja{" "}
+          <a class="inline-link" href={sitePath("/documentacao/previa-0-4/")}>
+            o roteiro e a demonstração real
           </a>
           ; os recursos dessa versão ainda não fazem parte do download público.
         </p>
@@ -133,10 +133,13 @@ const firstGuide = ideGuides[0];
         </p>
         <GuideList guides={ideGuides} />
         <p>
-          Depois do Guia vêm os <strong>projetos guiados</strong>: exemplos
-          pequenos e locais que ensinam C++, C, Python e Rust junto com as
-          tarefas feitas na Vectis. Enquanto eles não chegam, os estudos de
-          linguagem funcionam sem a IDE:
+          Para entender a linguagem, comece pelos{" "}
+          <a class="inline-link" href="#linguagens">
+            quatro estudos básicos
+          </a>
+          : o mesmo cálculo pequeno em C, C++, Rust ou Python, com saída
+          esperada e exercícios. Depois de dominar o básico, avance para as
+          amostras de sensores simuladas:
         </p>
         <a
           class="docs-card study-entry-card card card-interactive"
@@ -169,9 +172,9 @@ const firstGuide = ideGuides[0];
           <h2 id="referencias-title">Referências dos ecossistemas.</h2>
         </div>
         <p>
-          Estas referências externas servem para aprofundamento. Os tutoriais de
-          configuração da Vectis serão publicados neste site; o rótulo abaixo
-          indica quem mantém cada referência.
+          Estas referências externas servem para aprofundamento, depois dos
+          tutoriais básicos já disponíveis neste site; o rótulo abaixo indica
+          quem mantém cada referência.
         </p>
         <ul class="reference-list reveal-children">
           {references.map((reference) => (

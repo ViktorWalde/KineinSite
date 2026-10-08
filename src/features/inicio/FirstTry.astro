@@ -1,0 +1,76 @@
+---
+import { publicVersion, releaseUrl, sitePath } from "../../site";
+---
+
+<section
+  id="experiencia"
+  class="section shell section-surface"
+  aria-labelledby="experiencia-title"
+>
+  <div class="section-intro reveal">
+    <p class="kicker">SEU PRIMEIRO TESTE</p>
+    <h2 id="experiencia-title">Experimente com um projeto de verdade.</h2>
+    <p class="section-intro-copy">
+      Escolha um projeto pequeno e percorra o caminho inteiro: abrir, editar,
+      compilar e executar. O Guia da IDE mostra cada passo reproduzido no beta
+      {publicVersion}, com as ferramentas necessárias e capturas reais.
+    </p>
+  </div>
+  <div class="principle-grid auto-grid reveal-children">
+    <article class="principle-card card">
+      <span class="card-glyph" aria-hidden="true">
+        01
+      </span>
+      <h3>Baixe o AppImage</h3>
+      <p>
+        O beta público roda no Linux x86_64. O pacote traz a interface, o core e
+        o Qt; compiladores e ferramentas vêm do seu sistema.
+      </p>
+      <a class="inline-link" href={sitePath("/aprender/ide/instalar/")}>
+        Ver a instalação →
+      </a>
+    </article>
+    <article class="principle-card card">
+      <span class="card-glyph" aria-hidden="true">
+        02
+      </span>
+      <h3>Escolha sua linguagem</h3>
+      <p>
+        Crie um projeto C++ com CMake, Rust com Cargo ou Python seguindo um
+        roteiro que já foi testado na IDE.
+      </p>
+      <a class="inline-link" href={sitePath("/aprender/")}>
+        Escolher um capítulo →
+      </a>
+    </article>
+    <article class="principle-card card">
+      <span class="card-glyph" aria-hidden="true">
+        03
+      </span>
+      <h3>Veja sua mudança rodar</h3>
+      <p>
+        Faça o primeiro build, execute o programa e explore o editor, as
+        ferramentas do projeto e o terminal integrado.
+      </p>
+      <a
+        class="inline-link"
+        href={sitePath("/aprender/ide/primeiro-projeto-cpp/")}
+      >
+        Fazer o primeiro projeto →
+      </a>
+    </article>
+  </div>
+  <div class="try-actions">
+    <a
+      class="button button-primary"
+      href={releaseUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Testar o beta {publicVersion} <span aria-hidden="true">↗</span>
+    </a>
+    <a class="inline-link" href={sitePath("/aprender/")}>
+      Começar pelo Guia da IDE →
+    </a>
+  </div>
+</section>

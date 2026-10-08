@@ -10,8 +10,12 @@ status: verified
 prerequisites:
   - "O projeto ola-kinein do capítulo 2."
 references:
-  - "https://github.com/ViktorWalde/KineinVectis/blob/main/DocsPublic/manual.md"
+  - "https://github.com/ViktorWalde/KineinVectis/blob/v0.3.5/DocsPublic/manual.md"
 ---
+
+**Seu objetivo:** Ler a origem de um erro, corrigir a linha e confirmar que o build voltou a passar.
+
+**Pense antes de seguir:** Por que uma variável não usada impede este build?
 
 Erros fazem parte do trabalho. Este capítulo provoca um de propósito, mostra onde a Kinein Vectis o aponta e termina com o que levar quando o problema é da IDE.
 
@@ -75,3 +79,20 @@ Se a IDE fez algo errado, conte no [Discord da Kinein Vectis](https://discord.gg
 - a versão, que `kinein --version` mostra;
 - a distribuição Linux e o tipo do projeto: C/C++, Rust, Python ou embarcado, e qual placa;
 - o arquivo `kinein-ui-erros.txt`, se existir, e as últimas linhas da aba IDE.
+
+## Confira o que aprendeu
+
+Sem reler as etapas, responda:
+
+1. Por que uma variável não usada impede este build?
+2. Qual é a diferença entre o aviso do clangd e o erro do compilador?
+3. O que levar ao relatar um problema da IDE?
+
+<details>
+<summary>Conferir seu raciocínio</summary>
+
+Este projeto usa -Werror, que trata avisos como erros. O clangd analisa durante a edição; o compilador responde durante o build. Relate versão, sistema, passos, resultado esperado e observado, com logs úteis sem dados pessoais.
+
+</details>
+
+Se uma resposta ainda não ficou clara, volte à etapa correspondente e confira na IDE. O resultado que você observa vale mais do que decorar um atalho.

@@ -11,10 +11,14 @@ prerequisites:
   - "O projeto ola-kinein do capítulo 2."
   - "Permissão de administrador (sudo) para instalar pacotes."
 references:
-  - "https://github.com/ViktorWalde/KineinVectis/blob/main/DocsPublic/manual.md"
+  - "https://github.com/ViktorWalde/KineinVectis/blob/v0.3.5/DocsPublic/manual.md"
   - "https://github.com/sharkdp/fd"
   - "https://github.com/BurntSushi/ripgrep"
 ---
+
+**Seu objetivo:** Escolher a busca certa para encontrar um arquivo, um trecho ou uma ação.
+
+**Pense antes de seguir:** Para encontrar um nome de arquivo, qual busca você escolheria?
 
 A Kinein Vectis tem três buscas: por arquivo, por texto no projeto inteiro e por texto no arquivo aberto. As duas primeiras usam programas do sistema, que você instala primeiro.
 
@@ -83,16 +87,33 @@ _Enter roda o comando escolhido._
 
 Estes são os atalhos usados nos capítulos até aqui:
 
-| Atalho | O que faz |
-| --- | --- |
-| <kbd>Ctrl</kbd>+<kbd>O</kbd> | Abrir uma pasta ou criar um projeto |
-| <kbd>Ctrl</kbd>+<kbd>S</kbd> | Salvar o arquivo |
-| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>B</kbd> | Compilar |
-| <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>F9</kbd> | Rodar os testes |
-| <kbd>Alt</kbd>+<kbd>F12</kbd> | Abrir o terminal |
-| <kbd>Alt</kbd>+<kbd>7</kbd> | Abrir ou fechar os Símbolos |
-| <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>N</kbd> | Search Everywhere: arquivos e comandos |
-| <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>F</kbd> | Procurar texto no projeto |
-| <kbd>Ctrl</kbd>+<kbd>F</kbd> | Procurar no arquivo aberto |
+| Atalho                                         | O que faz                              |
+| ---------------------------------------------- | -------------------------------------- |
+| <kbd>Ctrl</kbd>+<kbd>O</kbd>                   | Abrir uma pasta ou criar um projeto    |
+| <kbd>Ctrl</kbd>+<kbd>S</kbd>                   | Salvar o arquivo                       |
+| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>B</kbd>    | Compilar                               |
+| <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>F9</kbd> | Rodar os testes                        |
+| <kbd>Alt</kbd>+<kbd>F12</kbd>                  | Abrir o terminal                       |
+| <kbd>Alt</kbd>+<kbd>7</kbd>                    | Abrir ou fechar os Símbolos            |
+| <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>N</kbd>  | Search Everywhere: arquivos e comandos |
+| <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>F</kbd>  | Procurar texto no projeto              |
+| <kbd>Ctrl</kbd>+<kbd>F</kbd>                   | Procurar no arquivo aberto             |
 
 A tabela completa está no fim do manual da IDE, em **Ajuda → Manual da IDE**.
+
+## Confira o que aprendeu
+
+Sem reler as etapas, responda:
+
+1. Para encontrar um nome de arquivo, qual busca você escolheria?
+2. E para procurar texto em vários arquivos?
+3. Como procurar somente dentro do arquivo aberto?
+
+<details>
+<summary>Conferir seu raciocínio</summary>
+
+Ctrl+Shift+N encontra arquivos e comandos; Ctrl+Shift+F procura texto no projeto; Ctrl+F procura no arquivo aberto. Na 0.3.5, procure build ou run para os comandos de compilação e execução.
+
+</details>
+
+Se uma resposta ainda não ficou clara, volte à etapa correspondente e confira na IDE. O resultado que você observa vale mais do que decorar um atalho.

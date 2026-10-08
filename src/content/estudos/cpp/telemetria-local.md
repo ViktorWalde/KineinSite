@@ -13,7 +13,7 @@ status: verified
 
 Um programa de linha de comando que recebe leituras simuladas de temperatura de dois sensores e mostra a média de um deles. Esse é um primeiro exercício da **camada de software de um sistema IoT**: organizar amostras, selecionar um dispositivo e lidar com a ausência de dados.
 
-O exemplo roda no Linux com um compilador C++20. Ele não lê sensores físicos, não se conecta a um broker e não depende de recursos da Kinein Vectis. Os guias de projeto na IDE serão escritos após testar o fluxo na versão pública correspondente.
+Este estudo é o próximo passo depois de [C++ básico](../primeiros-passos/): usa coleções, uma função e um resultado opcional. O exemplo roda no Linux com um compilador C++20. Ele não lê sensores físicos, não se conecta a um broker e não depende de recursos da Kinein Vectis. Para começar na IDE, siga o [primeiro projeto em C++](../../../aprender/ide/primeiro-projeto-cpp/). Este estudo aprofunda a linguagem; a demonstração da prévia 0.4 mostra um projeto CMake na nova interface.
 
 Você precisa de um terminal e do `g++` com suporte a C++20. Confira com `g++ --version`.
 

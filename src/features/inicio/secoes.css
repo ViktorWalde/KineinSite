@@ -47,6 +47,27 @@
   font-size: var(--text-sm);
 }
 
+.journey {
+  padding-block-end: var(--space-3xl);
+}
+
+.principle-card .inline-link {
+  display: inline-block;
+  margin-block-start: var(--space-m);
+}
+
+.try-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-m) var(--space-l);
+  margin-block-start: var(--space-xl);
+}
+
+.home-topic > #novidades {
+  padding-block: var(--space-3xl);
+}
+
 .status-source {
   margin-block-start: 1rem;
 }

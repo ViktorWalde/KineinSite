@@ -13,8 +13,12 @@ prerequisites:
   - "curl e unzip para baixar e descompactar pelo terminal. Pelo navegador e pelo gerenciador de arquivos também dá."
 references:
   - "https://github.com/ViktorWalde/KineinVectis/releases/tag/v0.3.5"
-  - "https://github.com/ViktorWalde/KineinVectis/blob/main/DocsPublic/tutorial.md"
+  - "https://github.com/ViktorWalde/KineinVectis/blob/v0.3.5/DocsPublic/tutorial.md"
 ---
+
+**Seu objetivo:** Abrir a IDE e confirmar de onde veio o pacote, sem alterar o sistema.
+
+**Pense antes de seguir:** Qual é a diferença entre baixar um AppImage e torná-lo executável?
 
 A Kinein Vectis é distribuída como um **AppImage**: um único arquivo executável que já traz a interface, o core e o Qt. Não há instalação de pacote nem `sudo`. Compiladores e ferramentas dos seus projetos continuam vindo do sistema.
 
@@ -109,3 +113,20 @@ Ela tem três partes:
 Pelo terminal, `kinein` abre a pasta em que você está, e `kinein ~/projetos/meu-projeto` abre outra.
 
 > **Se algo der errado.** Erro de FUSE ao abrir: rode `APPIMAGE_EXTRACT_AND_RUN=1 ./Kinein-Vectis-0.3.5-x86_64.AppImage`, que dispensa a montagem. `Permission denied`: repita o `chmod +x` e confira se a pasta não está numa partição montada com `noexec`. Ao abrir pelo terminal no Wayland, a 0.3.5 mostra o aviso `Failed to load client buffer integration: "wayland-egl"`; ele é esperado nesta versão e a IDE funciona normalmente.
+
+## Confira o que aprendeu
+
+Sem reler as etapas, responda:
+
+1. Qual é a diferença entre baixar um AppImage e torná-lo executável?
+2. Qual comando confirma a integridade do download?
+3. Por que os compiladores ainda precisam estar no sistema?
+
+<details>
+<summary>Conferir seu raciocínio</summary>
+
+`chmod +x` permite executar o arquivo; não verifica sua integridade. `sha256sum -c Kinein-Vectis-0.3.5-x86_64.AppImage.sha256` confere os bytes contra o manifesto baixado da release. O AppImage inclui a IDE, mas as ferramentas dos seus projetos vêm do sistema.
+
+</details>
+
+Se uma resposta ainda não ficou clara, volte à etapa correspondente e confira na IDE. O resultado que você observa vale mais do que decorar um atalho.

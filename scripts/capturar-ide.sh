@@ -4,6 +4,7 @@
 # HOME, XDG e o projeto de demonstração vivem num diretório temporário.
 #
 #   bash scripts/capturar-ide.sh <caminho/do/AppImage>
+#   bash scripts/capturar-ide.sh <executavel-de-desenvolvimento> --preview
 #
 # Depois, atualize version e capturedAt em src/data/ide-screens.ts.
 # Requer: xvfb-run, cmake, g++, git e clangd (sem ele a captura mostra o
@@ -12,9 +13,15 @@
 # extraído do próprio Markdown para não existir uma segunda cópia do código.
 set -euo pipefail
 
-appimage="$(realpath "${1:?Informe o caminho do AppImage da Kinein Vectis.}")"
+executable="$(realpath "${1:?Informe o caminho do executável da Kinein Vectis.}")"
 repo_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
 out_dir="$repo_dir/assets/ide"
+if [[ "${2:-}" == --preview ]]; then
+  out_dir="$out_dir/desenvolvimento"
+elif [[ -n "${2:-}" ]]; then
+  echo 'O único segundo argumento aceito é --preview.' >&2
+  exit 1
+fi
 study="$repo_dir/src/content/estudos/cpp/telemetria-local.md"
 
 for tool in xvfb-run cmake g++ git clangd; do
@@ -38,7 +45,8 @@ mkdir -p "$work"
 touch "$marker"
 trap 'rm -rf -- "$work"' EXIT
 project="$work/telemetria"
-mkdir -p "$project/src" "$project/.kinein" "$work/home" "$out_dir"
+mkdir -p "$project/src" "$project/.kinein" "$work/home" "$work/runtime" "$out_dir"
+chmod 700 "$work/runtime"
 
 # Primeiro bloco ```cpp do estudo = src/main.cpp do projeto.
 awk '/^```cpp$/ { inside = 1; next } inside && /^```$/ { exit } inside' \
@@ -78,12 +86,15 @@ capture() {
   local log="$work/$1.log"
   HOME="$work/home" XDG_CONFIG_HOME="$work/home/.config" \
     XDG_DATA_HOME="$work/home/.local/share" XDG_CACHE_HOME="$work/home/.cache" \
-    APPIMAGE_EXTRACT_AND_RUN=1 KINEIN_STARTUP_COMMANDS="$commands" \
+    XDG_RUNTIME_DIR="$work/runtime" \
+    RUSTUP_HOME="${RUSTUP_HOME:-$HOME/.rustup}" CARGO_HOME="${CARGO_HOME:-$HOME/.cargo}" \
+    APPIMAGE_EXTRACT_AND_RUN=1 KINEIN_DETACHED=1 QT_QPA_PLATFORM=xcb \
+    KINEIN_STARTUP_COMMANDS="$commands" \
     KINEIN_SCREENSHOT="$target" KINEIN_SCREENSHOT_SIZE=1600x1000 \
     KINEIN_SCREENSHOT_DELAY_MS=9000 KINEIN_PERF_EXIT=1 \
     timeout 180 xvfb-run -a -s "-screen 0 1700x1100x24" \
-    "$appimage" "$project" >"$log" 2>&1 || true
-  if ! grep -q "KINEIN_SCREENSHOT salvo=" "$log"; then
+    "$executable" --wait "$project" >"$log" 2>&1 || true
+  if [[ ! -s "$target" ]]; then
     echo "A captura $name falhou; log:" >&2
     cat "$log" >&2
     exit 1
