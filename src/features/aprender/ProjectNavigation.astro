@@ -1,0 +1,53 @@
+---
+import { projectPathFor } from "./project-paths";
+import { sitePath } from "../../site";
+import "./cpp-path.css";
+interface Props {
+  currentPath: `/${string}`;
+}
+const project = projectPathFor(Astro.props.currentPath);
+const steps = project?.steps ?? [];
+const index = steps.findIndex((step) => step.path === Astro.props.currentPath);
+const previous = steps[index - 1];
+const next = index >= 0 ? steps[index + 1] : undefined;
+---
+
+{index >= 0 && (
+  <nav
+    class="cpp-continuation"
+    aria-label={`Continuação do projeto em ${project?.language}`}
+  >
+    <p class="label">
+      SEU PROJETO EM {project?.language} · ETAPA {index + 1} DE {steps.length}
+    </p>
+    <div class="cpp-pager">
+      {previous && (
+        <a
+          class="card card-interactive"
+          href={sitePath(previous.path)}
+          rel="prev"
+        >
+          <span class="label">← Etapa anterior</span>
+          <strong>{previous.title}</strong>
+        </a>
+      )}
+      {next && (
+        <a
+          class="card card-interactive cpp-pager-next"
+          href={sitePath(next.path)}
+          rel="next"
+        >
+          <span class="label">Continue o mesmo projeto →</span>
+          <strong>{next.title}</strong>
+          <span>{next.description}</span>
+        </a>
+      )}
+      {!next && (
+        <p class="cpp-complete">
+          Percurso concluído. Refaça os exercícios com outros valores e confira
+          os resultados no seu projeto.
+        </p>
+      )}
+    </div>
+  </nav>
+)}

@@ -1,0 +1,47 @@
+---
+import { sitePath } from "../../site";
+import "./cpp-path.css";
+const starts = [
+  {
+    language: "Rust",
+    title: "Seu primeiro projeto com Cargo",
+    detail: "Crie o projeto, execute o programa e rode os testes na IDE.",
+    path: "/aprender/ide/primeiro-projeto-rust/",
+  },
+  {
+    language: "Python",
+    title: "Um script e seus primeiros testes",
+    detail: "Prepare o ambiente virtual, execute o código e use pytest.",
+    path: "/aprender/ide/primeiro-projeto-python/",
+  },
+] as const;
+---
+
+<section class="language-starts" aria-labelledby="other-starts-title">
+  <div class="language-starts-heading">
+    <p class="kicker">OUTROS PONTOS DE PARTIDA</p>
+    <h2 id="other-starts-title">Comece na sua linguagem.</h2>
+    <p>
+      Cada linguagem tem seu projeto e uma continuação. Comece pela criação na
+      IDE e avance para o cálculo de temperaturas sem trocar de linguagem.
+    </p>
+  </div>
+  <div class="language-starts-grid">
+    {starts.map((start) => (
+      <a
+        class="language-start card card-interactive"
+        href={sitePath(start.path)}
+      >
+        <span class="language-start-tag">{start.language}</span>
+        <h3>{start.title}</h3>
+        <p>{start.detail}</p>
+        <span class="inline-link">
+          Começar em {start.language}{" "}
+          <span class="arrow" aria-hidden="true">
+            →
+          </span>
+        </span>
+      </a>
+    ))}
+  </div>
+</section>

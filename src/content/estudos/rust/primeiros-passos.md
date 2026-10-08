@@ -1,6 +1,6 @@
 ---
 title: "Rust básico: do número ao resultado"
-summary: "Calcule uma média de duas temperaturas, confira a saída e faça uma pequena mudança. Um primeiro exercício sem hardware ou bibliotecas externas."
+summary: "Continue no ola-rust: guarde duas temperaturas, calcule a média e execute pelo Cargo."
 language: "Rust"
 standard: "Rust 2024"
 platform: "Arch Linux x86_64"
@@ -11,9 +11,9 @@ status: verified
 
 ## Seu objetivo
 
-Ao terminar, você conseguirá guardar dois números, calcular uma média e mostrar o resultado. As temperaturas são dados inventados para aprender: 21 e 23 °C. Este programa não lê sensores físicos.
+O `ola-rust` já imprime uma mensagem. Agora ele vai calcular a média de 21 e 23 °C. Os valores são inventados para o exercício; você pode fazer tudo no computador, sem um sensor.
 
-Você precisa de um terminal e de um compilador de Rust instalado. Não é necessário instalar bibliotecas. Se estiver começando do zero, leia cada etapa e execute antes de seguir.
+Continue com o projeto aberto na Vectis. Se ainda não o criou, siga o [primeiro projeto em Rust](../../../aprender/ide/primeiro-projeto-rust/). Também é possível acompanhar só com um terminal e o Rust instalado.
 
 ## Pense antes de executar
 
@@ -21,7 +21,9 @@ Quanto deve ser a média de 21 e 23? Faça a conta sem olhar a saída: some os d
 
 ## 1. Escreva um programa pequeno
 
-Crie `main.rs` e copie:
+No mesmo projeto `ola-rust`, abra `src/main.rs`, substitua o conteúdo pelo programa abaixo e salve. Você não precisa mudar o `Cargo.toml`.
+
+Se estiver acompanhando sem a IDE, crie um `main.rs` numa pasta de exercícios.
 
 ```rust
 fn main() {
@@ -35,7 +37,15 @@ fn main() {
 
 ## 2. Execute e confira
 
-No terminal, dentro da pasta do arquivo:
+**Na Vectis 0.3.5:** salve com <kbd>Ctrl</kbd>+<kbd>S</kbd>, mantenha um terminal aberto (<kbd>Alt</kbd>+<kbd>F12</kbd>) e clique em **▶**. O Cargo recompila o que mudou antes de executar.
+
+**No terminal do projeto:**
+
+```sh
+cargo run
+```
+
+**Se criou um arquivo avulso:** entre na pasta de `main.rs` e rode:
 
 ```sh
 rustc --edition=2024 -D warnings main.rs -o media
@@ -48,7 +58,7 @@ A saída deve ser exatamente:
 media: 22.00 C
 ```
 
-A primeira linha compila o código e gera o executável `media`. A segunda roda esse arquivo. Quando mudar o código, compile de novo antes de executar.
+No caminho com `rustc`, a primeira linha gera o executável `media` e a segunda o executa. No projeto `ola-rust`, `cargo run` cuida das duas etapas. Quando mudar o código, salve e execute novamente pelo caminho escolhido.
 
 ## 3. Entenda o que acabou de fazer
 
@@ -71,7 +81,7 @@ Agora troque esse segundo valor por `20.0`. Você deve obter `media: 20.50 C`. M
 <details>
 <summary>Conferir seu raciocínio</summary>
 
-A soma precisa acontecer antes da divisão. Com 21 e 25, a média é 23, exibida como `media: 23.00 C`. Salve, compile novamente sem erros e execute o arquivo `media` gerado na mesma pasta.
+A soma precisa acontecer antes da divisão. Com 21 e 25, a média é 23, exibida como `media: 23.00 C`. Salve e repita `cargo run`, ou recompile com `rustc` antes de executar o arquivo avulso.
 
 </details>
 
@@ -81,10 +91,10 @@ A soma precisa acontecer antes da divisão. Com 21 e 25, a média é 23, exibida
 - **Arquivo não encontrado:** confira o nome e o diretório do arquivo.
 - **Resultado diferente:** confira se salvou e recompilou o código e se alterou somente o valor indicado.
 
-## Leve para a Vectis
+## Continue praticando
 
-O [primeiro projeto em Rust](../../../aprender/ide/primeiro-projeto-rust/) mostra como criar o projeto, abrir o código e executar na **Kinein Vectis 0.3.5**. Use este estudo para entender a linguagem; o tutorial da IDE ensina os botões e os limites daquela versão.
+Antes de rodar, escolha outros dois valores e calcule a média no papel. Depois confira o resultado no `ola-rust`. Se quiser voltar aos comandos da IDE, o [tutorial do projeto](../../../aprender/ide/primeiro-projeto-rust/) explica o Cargo e os painéis da 0.3.5.
 
 ## Para aprofundar
 
-Este é um texto autoral. A referência técnica é o [livro oficial de Rust, capítulo de tipos de dados](https://doc.rust-lang.org/book/ch03-02-data-types.html). O próximo passo é entender decisões e repetições; deixe integração com dispositivos para depois de dominar o ciclo de escrever, executar e conferir.
+O [livro oficial de Rust, no capítulo de tipos de dados](https://doc.rust-lang.org/book/ch03-02-data-types.html), explica os tipos numéricos usados aqui. Depois deste exercício, explore decisões e repetições para fazer o programa trabalhar com mais valores.

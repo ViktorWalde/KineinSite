@@ -1,0 +1,62 @@
+---
+import DemoVideo from "./DemoVideo.astro";
+import { publicVersion, sitePath } from "../../site";
+---
+
+<div class="demo-comparison" data-tabs>
+  <div
+    class="demo-switcher segmented-control"
+    role="tablist"
+    aria-label="Comparar as versões da IDE"
+    hidden
+  >
+    <button
+      type="button"
+      role="tab"
+      data-tab
+      id="compare-preview-tab"
+      aria-controls="compare-preview"
+      aria-selected="true"
+      tabindex="0"
+    >
+      <strong>Prévia 0.4</strong>
+    </button>
+    <button
+      type="button"
+      role="tab"
+      data-tab
+      id="compare-beta-tab"
+      aria-controls="compare-beta"
+      aria-selected="false"
+      tabindex="-1"
+    >
+      <strong>Beta {publicVersion}</strong>
+    </button>
+  </div>
+  <div
+    id="compare-preview"
+    class="demo-panel tab-panel"
+    role="tabpanel"
+    data-tab-panel
+    aria-labelledby="compare-preview-tab"
+  >
+    <DemoVideo />
+  </div>
+  <div
+    id="compare-beta"
+    class="demo-panel tab-panel"
+    role="tabpanel"
+    data-tab-panel
+    aria-labelledby="compare-beta-tab"
+  >
+    <DemoVideo beta />
+  </div>
+  <p class="demo-more">
+    <a class="inline-link" href={sitePath("/documentacao/previa-0-4/")}>
+      Explore o que está chegando na 0.4 <span aria-hidden="true">→</span>
+    </a>
+  </p>
+</div>
+<script>
+  import "../../scripts/tabs";
+</script>

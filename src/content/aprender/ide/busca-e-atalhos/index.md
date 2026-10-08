@@ -8,7 +8,7 @@ platform: "Ubuntu 24.04 x86_64, X11 (Xvfb)"
 lastTested: 2026-10-02
 status: verified
 prerequisites:
-  - "O projeto ola-kinein do capítulo 2."
+  - "O projeto ola-kinein, criado em Primeiro projeto em C++."
   - "Permissão de administrador (sudo) para instalar pacotes."
 references:
   - "https://github.com/ViktorWalde/KineinVectis/blob/v0.3.5/DocsPublic/manual.md"
@@ -16,11 +16,13 @@ references:
   - "https://github.com/BurntSushi/ripgrep"
 ---
 
-**Seu objetivo:** Escolher a busca certa para encontrar um arquivo, um trecho ou uma ação.
-
-**Pense antes de seguir:** Para encontrar um nome de arquivo, qual busca você escolheria?
+> **Seu objetivo:** escolher a busca certa para encontrar um arquivo, um trecho ou uma ação.
+>
+> **Pense antes de seguir:** Para encontrar um nome de arquivo, qual busca você escolheria?
 
 A Kinein Vectis tem três buscas: por arquivo, por texto no projeto inteiro e por texto no arquivo aberto. As duas primeiras usam programas do sistema, que você instala primeiro.
+
+As capturas usam o programa de mensagem do primeiro projeto C++. Você pode manter seu cálculo de temperaturas: nomes, linhas e quantidade de resultados dependem do conteúdo atual do projeto.
 
 ## Instale o fd e o ripgrep
 
@@ -115,5 +117,3 @@ Sem reler as etapas, responda:
 Ctrl+Shift+N encontra arquivos e comandos; Ctrl+Shift+F procura texto no projeto; Ctrl+F procura no arquivo aberto. Na 0.3.5, procure build ou run para os comandos de compilação e execução.
 
 </details>
-
-Se uma resposta ainda não ficou clara, volte à etapa correspondente e confira na IDE. O resultado que você observa vale mais do que decorar um atalho.

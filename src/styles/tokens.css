@@ -24,14 +24,14 @@
   /* Escalas fluidas (método Utopia): cada valor cresce em linha reta entre
      telas de 360 e 1600 px e para nos dois extremos. Em rem, para respeitar o
      tamanho de fonte escolhido no navegador. */
-  --text-xs: clamp(0.7rem, 0.6826rem + 0.077vw, 0.76rem);
-  --text-sm: clamp(0.875rem, 0.8532rem + 0.097vw, 0.95rem);
+  --text-xs: clamp(0.75rem, 0.7319rem + 0.081vw, 0.8125rem);
+  --text-sm: clamp(0.9375rem, 0.9194rem + 0.081vw, 1rem);
   --text-base: clamp(1rem, 0.9637rem + 0.161vw, 1.125rem);
   --text-lg: clamp(1.075rem, 1.0242rem + 0.226vw, 1.25rem);
   --text-xl: clamp(1.2rem, 1.1419rem + 0.258vw, 1.4rem);
   --text-2xl: clamp(1.6rem, 1.3677rem + 1.032vw, 2.4rem);
-  --text-3xl: clamp(2rem, 1.6516rem + 1.548vw, 3.2rem);
-  --text-4xl: clamp(2rem, 1.4194rem + 2.581vw, 4rem);
+  --text-3xl: clamp(1.875rem, 1.621rem + 1.129vw, 2.75rem);
+  --text-4xl: clamp(2rem, 1.6371rem + 1.613vw, 3.25rem);
   --text-5xl: clamp(2.5rem, 1.7742rem + 3.226vw, 5rem);
   --space-2xs: clamp(0.25rem, 0.2355rem + 0.065vw, 0.3rem);
   --space-xs: clamp(0.5rem, 0.471rem + 0.129vw, 0.6rem);
@@ -47,6 +47,14 @@
   --content-width: clamp(73.75rem, 46.6667rem + 27.083vw, 90rem);
   --card: color-mix(in srgb, var(--surface) 96%, var(--accent));
   --card-hover: color-mix(in srgb, var(--surface) 90%, var(--accent));
+  --card-tint: color-mix(in srgb, var(--card) 94%, var(--accent));
+  --card-edge: color-mix(in srgb, var(--card) 92%, var(--companion));
+  --card-tint-hover: color-mix(in srgb, var(--card-hover) 98%, var(--accent));
+  --card-edge-hover: color-mix(
+    in srgb,
+    var(--card-hover) 98%,
+    var(--companion)
+  );
   --section-surface: color-mix(in srgb, var(--page) 45%, var(--surface));
   --section-tint: color-mix(in srgb, var(--section-surface) 96%, var(--accent));
   --shadow-card: 0 4px 12px light-dark(rgb(22 31 41 / 8%), rgb(0 0 0 / 18%));
@@ -71,6 +79,7 @@
   --muted: #b6b1a8;
   --border: #46505a;
   --accent: #ffc768;
+  --companion: #9fcddd;
   --accent-on: #21170b;
   --focus: #ffd88f;
   --hero-accent: #ddbb82;
@@ -88,6 +97,7 @@
   --surface-soft: #2a3542;
   --border: #485b6d;
   --accent: #99c2ff;
+  --companion: #9ad7c6;
   --accent-on: #0b213e;
   --focus: #bad8ff;
   --hero-accent: #b6cce9;
@@ -102,6 +112,7 @@
   --surface-soft: #2a3935;
   --border: #47635d;
   --accent: #91e1d0;
+  --companion: #e1bf96;
   --accent-on: #092c27;
   --focus: #b9f2e5;
   --hero-accent: #acd8ca;
@@ -120,6 +131,7 @@
   --muted: #515b62;
   --border: #c2c9ca;
   --accent: #824800;
+  --companion: #2b6076;
   --accent-on: #e9e0d2;
   --focus: #824800;
   --shadow: 0 18px 50px rgb(22 31 41 / 12%);
@@ -134,6 +146,7 @@
   --surface-soft: #e3eaf0;
   --border: #bac8d5;
   --accent: #205d9e;
+  --companion: #186959;
   --accent-on: #e9e0d2;
   --focus: #205d9e;
 }
@@ -145,6 +158,7 @@
   --surface-soft: #e1ebe5;
   --border: #b6cbc1;
   --accent: #00675e;
+  --companion: #845500;
   --accent-on: #e9e0d2;
   --focus: #00675e;
 }
@@ -160,6 +174,7 @@
   --muted: #baad9b;
   --border: #5b4b3a;
   --accent: #f0bb73;
+  --companion: #9fcddd;
   --accent-on: #25170b;
   --focus: #ffd299;
   --shadow: 0 18px 50px rgb(0 0 0 / 25%);
@@ -172,6 +187,7 @@
   --surface-soft: #353441;
   --border: #58566e;
   --accent: #a8c8f4;
+  --companion: #bfd7a3;
   --accent-on: #10243b;
   --focus: #c6ddfa;
 }
@@ -183,6 +199,7 @@
   --surface-soft: #343b32;
   --border: #526650;
   --accent: #9bddc9;
+  --companion: #e8c79b;
   --accent-on: #102b24;
   --focus: #b8f0dd;
 }
@@ -199,6 +216,7 @@
     --muted: #515b62;
     --border: #c2c9ca;
     --accent: #824800;
+    --companion: #2b6076;
     --accent-on: #e9e0d2;
     --focus: #824800;
     --shadow: 0 18px 50px rgb(22 31 41 / 12%);
@@ -213,6 +231,7 @@
     --surface-soft: #e3eaf0;
     --border: #bac8d5;
     --accent: #205d9e;
+    --companion: #186959;
     --accent-on: #e9e0d2;
     --focus: #205d9e;
   }
@@ -224,6 +243,7 @@
     --surface-soft: #e1ebe5;
     --border: #b6cbc1;
     --accent: #00675e;
+    --companion: #845500;
     --accent-on: #e9e0d2;
     --focus: #00675e;
   }

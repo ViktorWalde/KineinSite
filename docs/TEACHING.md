@@ -17,9 +17,13 @@ As fontes orientam o desenho editorial. Os exemplos e as explicações são auto
 - Confira fatos técnicos em fontes primárias: documentação oficial, release e código da versão indicada. Fixe links do manual da IDE na tag testada.
 - Execute o código que está no Markdown e compare a saída integral. Execute também as mudanças propostas e casos de erro relevantes. `npm run check:examples` faz isso para os estudos atuais, sem executar comandos administrativos.
 - Para fluxos de interface, reproduza os passos no executável indicado. Preserve o ambiente e a data da execução anterior quando a revisão não inclui uma nova reprodução completa.
-- Confira cada captura ou cena de vídeo contra sua legenda. Informe versão, data e plataforma. Roteiro, título, promessa e resultado precisam concordar.
+- Confira cada captura ou cena de vídeo contra o roteiro e as explicações. Informe versão, data e plataforma. Roteiro, título, promessa e resultado precisam concordar.
 - Distinga capacidade demonstrada, capacidade documentada e plano futuro. Uma imagem de um painel não comprova uma integração com hardware.
 - Confira links, acessibilidade, contraste, leitura a 320 px e movimento reduzido com o build e os testes de navegador.
 - Publique apenas após esses checks. Conteúdo sem evidência fica como `draft` ou fora das páginas públicas; a data de teste não representa uma revisão editorial.
 
-O [registro de revisão](REVIEW-2026-10-08.md) documenta a evidência desta entrega. O manual em `src/content/manual/` permanece uma cópia fiel da release, conferida por SHA-256; melhorias didáticas ficam nos guias autorais.
+O [registro de revisão](REVIEW-2026-10-08.md) documenta a evidência da entrega publicada. O [polimento local](LOCAL-PREVIEW-2026-10-08.md) e a [curadoria de conteúdo e tipografia](CONTENT-REVIEW-2026-10-08.md) registram a etapa seguinte, aprovada pelo mantenedor na prévia local antes da autorização de publicação. O manual em `src/content/manual/` permanece uma cópia fiel da release, conferida por SHA-256; melhorias didáticas ficam nos guias autorais.
+
+## Continuidade de projetos
+
+Cada continuação mantém a linguagem, a pasta e os arquivos do projeto anterior. Apresente o resultado de cada etapa e o que precisa ser alterado, preservado e executado. Se também houver um caminho pelo terminal, identifique-o separadamente para não misturar nomes de executáveis ou comandos. Outros projetos e guias de consulta ficam em áreas próprias, sem virar a próxima etapa de outra linguagem.

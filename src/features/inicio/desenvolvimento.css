@@ -7,13 +7,21 @@
 }
 
 .development-card {
+  --development-accent: var(--accent);
+
   min-width: 0;
   padding: var(--space-l);
+  border-block-start: 3px solid var(--development-accent);
+}
+
+.development-card:nth-child(even) {
+  --development-accent: var(--companion);
 }
 
 .development-card h3 {
   margin-block-end: 1.25rem;
   font-size: var(--text-base);
+  color: var(--development-accent);
 }
 
 .development-card ul {
@@ -26,7 +34,8 @@
 
 .development-card li {
   padding-inline-start: var(--space-m);
-  border-inline-start: 2px solid var(--border);
+  border-inline-start: 2px solid
+    color-mix(in srgb, var(--development-accent) 45%, var(--border));
 }
 
 .development-card strong,
@@ -46,9 +55,8 @@
   line-height: 1.5;
 }
 
-.development-note {
-  max-width: 70ch;
-  margin-block: 1.2rem 0;
+.comparison-intro {
+  max-width: 65ch;
+  margin-block: var(--space-l);
   color: var(--muted);
-  font-size: var(--text-sm);
 }

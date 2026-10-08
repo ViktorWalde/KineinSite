@@ -1,11 +1,7 @@
 ---
 import { developmentSnapshot } from "../../data/development";
-import { developmentScreens } from "../../data/development-screens";
-import IdeGallery from "./IdeGallery.astro";
-import DemoVideo from "../demonstracao/DemoVideo.astro";
-import { formatDate, publicVersion, releaseUrl } from "../../site";
-
-const updatedAt = new Date(`${developmentSnapshot.updatedAt}T00:00:00Z`);
+import DemoComparison from "../demonstracao/DemoComparison.astro";
+import PreviewNotice from "../demonstracao/PreviewNotice.astro";
 ---
 
 <section
@@ -14,27 +10,20 @@ const updatedAt = new Date(`${developmentSnapshot.updatedAt}T00:00:00Z`);
   aria-labelledby="desenvolvimento-title"
 >
   <div class="section-intro reveal">
-    <p class="kicker">PRÓXIMA VERSÃO · EM DESENVOLVIMENTO</p>
+    <p class="kicker">A PRÓXIMA VECTIS</p>
     <h2 id="desenvolvimento-title">{developmentSnapshot.title}</h2>
     <p class="section-intro-copy">
-      A {developmentSnapshot.version} reúne a reformulação da interface e o foco
-      em embarcados. O executável de desenvolvimento já permite ver a interface
-      em construção. Plano atualizado em{" "}
-      <time datetime={developmentSnapshot.updatedAt}>
-        {formatDate(updatedAt)}
-      </time>
-      . Para experimentar a versão pública disponível, baixe o{" "}
-      <a
-        class="inline-link"
-        href={releaseUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        {publicVersion} beta <span aria-hidden="true">↗</span>
-      </a>
-      .
+      Nova interface e trabalho com embarcados, juntos na{" "}
+      {developmentSnapshot.version}. Veja como o editor e os painéis estão
+      tomando forma — e compare com o beta que você pode usar hoje.
     </p>
   </div>
+  <PreviewNotice />
+  <p class="comparison-intro">
+    Compare o mesmo projeto C++ nas duas interfaces: código, compilação e
+    resultado. Escolha a versão que deseja ver.
+  </p>
+  <DemoComparison />
   <div class="development-grid auto-grid reveal-children">
     {developmentSnapshot.groups.map((group) => (
       <article class="development-card card">
@@ -52,14 +41,4 @@ const updatedAt = new Date(`${developmentSnapshot.updatedAt}T00:00:00Z`);
       </article>
     ))}
   </div>
-  <IdeGallery
-    id="preview"
-    label="Capturas da prévia 0.4"
-    screens={developmentScreens}
-  />
-  <DemoVideo />
-  <p class="development-note">
-    A {developmentSnapshot.version} está em desenvolvimento. As telas e o escopo
-    ainda podem mudar; a prévia apresenta o trabalho em construção.
-  </p>
 </section>

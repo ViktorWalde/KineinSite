@@ -186,7 +186,9 @@
 
 .update-meta dd {
   margin: 0.15rem 0 0;
+  font-size: var(--text-sm);
   font-weight: 650;
+  line-height: 1.5;
 }
 
 .update-highlights,

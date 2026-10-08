@@ -2,6 +2,7 @@
 import { getImage } from "astro:assets";
 import type { ImageMetadata } from "astro";
 import { formatDate } from "../../site";
+import ImageViewer from "../imagens/ImageViewer.astro";
 import "./ide-preview.css";
 
 interface Props {
@@ -29,19 +30,25 @@ const shots = await Promise.all(
       format: "webp",
       quality: 82,
       widths: [800, 1200, 1600],
-      sizes: "(min-width: 76rem) 74rem, 100vw",
+      sizes: "min(64rem, 104svh, calc(100vw - 2rem))",
     }),
   })),
 );
 const capturedAt = new Date(`${screens.capturedAt}T00:00:00Z`);
 ---
 
-<div class="ide-preview-frame reveal">
-  <div class="ide-tabs" role="tablist" aria-label={label} hidden>
+<div class="ide-preview-frame" data-image-viewer data-tabs>
+  <div
+    class="ide-tabs segmented-control"
+    role="tablist"
+    aria-label={label}
+    hidden
+  >
     {shots.map((shot, index) => (
       <button
         type="button"
         role="tab"
+        data-tab
         class="ide-tab"
         id={`${id}-tab-${shot.id}`}
         aria-controls={`${id}-shot-${shot.id}`}
@@ -54,30 +61,44 @@ const capturedAt = new Date(`${screens.capturedAt}T00:00:00Z`);
   </div>
   {shots.map((shot) => (
     <figure
-      class="ide-shot"
+      class="ide-shot tab-panel"
+      data-tab-panel
       id={`${id}-shot-${shot.id}`}
       aria-labelledby={`${id}-tab-${shot.id}`}
     >
-      <img
-        src={shot.optimized.src}
-        srcset={shot.optimized.srcSet.attribute}
-        sizes="(min-width: 76rem) 74rem, 100vw"
-        width={shot.optimized.attributes["width"]}
-        height={shot.optimized.attributes["height"]}
-        alt={shot.alt}
-        loading="lazy"
-        decoding="async"
-      />
-      <figcaption>
-        {shot.caption}{" "}
-        <span>
-          Kinein Vectis {screens.version}, {screens.environment},{" "}
-          <time datetime={screens.capturedAt}>{formatDate(capturedAt)}</time>.
+      <a
+        class="ide-image-open"
+        href={shot.optimized.src}
+        data-image-open
+        aria-label={`Ampliar captura: ${shot.title}`}
+        aria-haspopup="dialog"
+      >
+        <img
+          src={shot.optimized.src}
+          srcset={shot.optimized.srcSet.attribute}
+          sizes="min(64rem, 104svh, calc(100vw - 2rem))"
+          width={shot.optimized.attributes["width"]}
+          height={shot.optimized.attributes["height"]}
+          alt={shot.alt}
+          loading="lazy"
+          decoding="async"
+        />
+        <span class="ide-image-hint">
+          Ampliar captura <span aria-hidden="true">⤢</span>
         </span>
-      </figcaption>
+      </a>
+      <figcaption>{shot.caption} </figcaption>
     </figure>
   ))}
+  <details class="ide-capture-origin">
+    <summary>Sobre estas capturas</summary>
+    <p>
+      Kinein Vectis {screens.version} · {screens.environment} ·{" "}
+      <time datetime={screens.capturedAt}>{formatDate(capturedAt)}</time>.
+    </p>
+  </details>
+  <ImageViewer id={id} />
 </div>
 <script>
-  import "./ide-preview";
+  import "../../scripts/tabs";
 </script>

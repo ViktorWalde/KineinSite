@@ -8,16 +8,18 @@ platform: "Ubuntu 24.04 x86_64, X11 (Xvfb)"
 lastTested: 2026-10-02
 status: verified
 prerequisites:
-  - "O projeto ola-kinein do capítulo 2."
+  - "O projeto ola-kinein, criado em Primeiro projeto em C++."
 references:
   - "https://github.com/ViktorWalde/KineinVectis/blob/v0.3.5/DocsPublic/manual.md"
 ---
 
-**Seu objetivo:** Ler a origem de um erro, corrigir a linha e confirmar que o build voltou a passar.
-
-**Pense antes de seguir:** Por que uma variável não usada impede este build?
+> **Seu objetivo:** ler a origem de um erro, corrigir a linha e confirmar que o build voltou a passar.
+>
+> **Pense antes de seguir:** Por que uma variável não usada impede este build?
 
 Erros fazem parte do trabalho. Este capítulo provoca um de propósito, mostra onde a Kinein Vectis o aponta e termina com o que levar quando o problema é da IDE.
+
+As capturas usam a mensagem do primeiro projeto C++. Você pode seguir com o cálculo de temperaturas: a linha do erro pode mudar, mas o diagnóstico e a correção são os mesmos.
 
 ## Provoque um erro
 
@@ -43,13 +45,13 @@ Compile com <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>B</kbd>. O build falha, e a IDE 
 
 _Dois itens para a mesma linha: o aviso do clangd e o erro do compilador._
 
-Uma variável que nunca é usada é só um aviso para o compilador. Ela vira erro aqui porque o projeto trata aviso como erro: é o `-Werror` do `CMakeLists.txt`, visto no capítulo 2, e é isso que o `[-Werror=unused-variable]` diz.
+Com os avisos ativados neste projeto, o compilador detecta a variável não usada. O aviso vira erro porque o projeto usa `-Werror` no `CMakeLists.txt`, como vimos no [primeiro projeto em C++](../primeiro-projeto-cpp/). É isso que o `[-Werror=unused-variable]` indica.
 
 O botão **Ações** aparece quando o servidor de linguagem oferece uma correção automática; é o mesmo que <kbd>Alt</kbd>+<kbd>Enter</kbd> na linha.
 
 ## Vá à linha e corrija
 
-Clique no erro: o editor vai para a linha 5, com o cursor na variável. Apague a linha com <kbd>Ctrl</kbd>+<kbd>Y</kbd>, salve e compile de novo:
+Clique no erro: o editor vai para a linha da variável. Apague essa linha com <kbd>Ctrl</kbd>+<kbd>Y</kbd>, salve e compile de novo:
 
 ![A aba Build com cmake --build, as duas etapas do Ninja e build concluido com sucesso](./capturas/corrigido.png)
 
@@ -94,5 +96,3 @@ Sem reler as etapas, responda:
 Este projeto usa -Werror, que trata avisos como erros. O clangd analisa durante a edição; o compilador responde durante o build. Relate versão, sistema, passos, resultado esperado e observado, com logs úteis sem dados pessoais.
 
 </details>
-
-Se uma resposta ainda não ficou clara, volte à etapa correspondente e confira na IDE. O resultado que você observa vale mais do que decorar um atalho.

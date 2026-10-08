@@ -8,16 +8,18 @@ platform: "Ubuntu 24.04 x86_64, X11 (Xvfb)"
 lastTested: 2026-10-02
 status: verified
 prerequisites:
-  - "O projeto ola-kinein do capítulo anterior."
+  - "O projeto ola-kinein, criado em Primeiro projeto em C++."
 references:
   - "https://github.com/ViktorWalde/KineinVectis/blob/v0.3.5/DocsPublic/manual.md"
 ---
 
-**Seu objetivo:** Localizar arquivos, editor e resultados, sem precisar memorizar todos os painéis.
+> **Seu objetivo:** localizar arquivos, editor e resultados, sem precisar memorizar todos os painéis.
+>
+> **Pense antes de seguir:** Onde você procuraria a saída de um programa?
 
-**Pense antes de seguir:** Onde você procuraria a saída de um programa?
+Com um projeto aberto, a janela da Kinein Vectis organiza arquivos, editor e resultados em áreas próprias. Este capítulo passa por cada uma, com o `ola-kinein` do tutorial Primeiro projeto em C++.
 
-Com um projeto aberto, a janela da Kinein Vectis se divide em poucas partes, sempre no mesmo lugar. Este capítulo passa por cada uma, com o `ola-kinein` do capítulo anterior.
+As capturas mostram o programa de mensagem. Se você já avançou para o cálculo de temperaturas, mantenha seu código: a organização das áreas é a mesma.
 
 ## Abra o projeto de novo
 
@@ -33,7 +35,7 @@ Pelo terminal, `kinein ~/projetos/ola-kinein` também abre o projeto. Na 0.3.5, 
 
 ## A tela inteira
 
-Com o `main.cpp` aberto, compilado e executado como no capítulo anterior, a janela fica assim:
+Com o `main.cpp` aberto, compilado e executado como no tutorial [Primeiro projeto em C++](../primeiro-projeto-cpp/), a janela fica assim:
 
 ![A janela inteira com o projeto aberto: menu e cabeçalho no alto, o trilho de ícones e a árvore do projeto à esquerda, o editor no centro com a aba Símbolos recolhida na borda direita, o painel de baixo na aba Terminal e a barra de status no pé](./capturas/visao-geral.png)
 
@@ -141,5 +143,3 @@ Sem reler as etapas, responda:
 A saída fica no Terminal; os trabalhos aparecem em Jobs. Na 0.3.5, o rótulo toolchain pode diferir do compilador efetivo do CMake. Confira o comando e o log do build antes de concluir.
 
 </details>
-
-Se uma resposta ainda não ficou clara, volte à etapa correspondente e confira na IDE. O resultado que você observa vale mais do que decorar um atalho.

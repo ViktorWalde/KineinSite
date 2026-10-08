@@ -1,0 +1,31 @@
+---
+import { cppPath } from "./cpp-path";
+import { sitePath } from "../../site";
+import "./cpp-path.css";
+---
+
+<ol
+  class="cpp-journey reveal-children"
+  aria-label="Etapas do mesmo projeto em C++"
+>
+  {cppPath.map((step, index) => (
+    <li>
+      <a class="cpp-step card card-interactive" href={sitePath(step.path)}>
+        <span class="cpp-step-top">
+          <span class="cpp-step-number" aria-hidden="true">
+            {String(index + 1).padStart(2, "0")}
+          </span>
+          <span class="cpp-step-arrow" aria-hidden="true">
+            →
+          </span>
+        </span>
+        <h3>{step.title}</h3>
+        <p>{step.description}</p>
+        <span class="cpp-step-result">
+          <span class="visually-hidden">Resultado: </span>
+          <code>{step.result}</code>
+        </span>
+      </a>
+    </li>
+  ))}
+</ol>

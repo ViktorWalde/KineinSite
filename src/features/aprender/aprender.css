@@ -1,7 +1,7 @@
 /* Índice de /aprender/: capítulos numerados em lista. Os capítulos usam
    guia.css. */
 .learn {
-  max-width: 60rem;
+  max-width: 74rem;
   padding-block: var(--space-xl) var(--space-3xl);
 }
 
@@ -23,4 +23,8 @@
 .learn-heading {
   margin-block-end: var(--space-m);
   font-size: var(--text-2xl);
+}
+
+.learn-reference {
+  margin-block-start: var(--space-2xl);
 }

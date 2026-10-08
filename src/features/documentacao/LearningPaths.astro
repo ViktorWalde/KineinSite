@@ -1,44 +1,41 @@
 ---
-import { repositoryUrl, sitePath } from "../../site";
+import { sitePath } from "../../site";
 
 const paths = [
   {
     id: "embarcados",
     title: "Bare metal e Linux embarcado",
-    status: "Manual disponível · guia no site planejado",
+    status: "Foco da 0.4",
     description:
-      "Comece por projeto, kit, toolchain e alvo. O roteiro de guias cobrirá build, gravação, depuração e execução em Linux embarcado com exemplos testados.",
-    next: "Depois dos projetos locais: exemplo com alvo e ferramenta verificados.",
+      "Depois de compilar e executar no computador, o próximo desafio é trabalhar com um alvo e suas ferramentas. A 0.4 está sendo preparada para esse uso; dispositivos e integrações serão anunciados após os testes.",
     links: [
       {
-        label: "Ver embarcados no README",
-        href: `${repositoryUrl}#embedded--firmware`,
-        external: true,
+        label: "Acompanhar a 0.4",
+        href: sitePath("/documentacao/previa-0-4/"),
+        external: false,
       },
     ],
   },
   {
     id: "iot",
     title: "IoT e IIoT",
-    status: "Foco editorial · guia no site planejado",
+    status: "Exercício local disponível",
     description:
-      "O caminho proposto liga firmware, gateway, serviço e dados. Cada integração será publicada com plataforma, ferramentas e versão verificadas.",
-    next: "Depois dos guias básicos: fluxo de dispositivo até serviço, quando testado.",
+      "Comece organizando amostras simuladas e calculando a média por sensor. O exercício de C++ prepara essa parte do software antes de acrescentar um dispositivo ou conexão de rede.",
     links: [
       {
-        label: "Entender o escopo de IoT",
-        href: `${repositoryUrl}#iot-edge-e-software-de-apoio`,
-        external: true,
+        label: "Explorar as leituras em C++",
+        href: sitePath("/estudos/cpp/telemetria-local/"),
+        external: false,
       },
     ],
   },
   {
     id: "backend",
     title: "Backend e bancos de dados",
-    status: "Manual disponível · guia no site planejado",
+    status: "Recursos no manual",
     description:
-      "Python, testes, containers e os painéis de PostgreSQL, TimescaleDB, SQLite e MongoDB já fazem parte da documentação da IDE.",
-    next: "Depois do relatório local em Python: API, teste e inspeção de dados.",
+      "Já executou um script e seus testes? Consulte os recursos de Python, containers e bancos de dados no manual antes de conectar um serviço ao projeto.",
     links: [
       {
         label: "Python no manual",
@@ -58,7 +55,6 @@ const paths = [
     status: "Direção futura",
     description:
       "A integração com ROS 2 está no radar do produto. Ainda não há fluxo ROS 2 na IDE para ensinar.",
-    next: "Publicar um guia quando abertura, execução e emulação forem testadas.",
     links: [],
   },
 ] as const;
@@ -70,12 +66,13 @@ const paths = [
   aria-labelledby="trilhas-title"
 >
   <div class="docs-heading">
-    <span class="label">03 / ESCOLHER UM CAMINHO</span>
-    <h2 id="trilhas-title">Aprenda pela tarefa e pelo ambiente.</h2>
+    <span class="label">05 / DEPOIS DO BÁSICO</span>
+    <h2 id="trilhas-title">Do programa pequeno a outros projetos.</h2>
   </div>
   <p>
-    Estas são as áreas que vão organizar os tutoriais do site. O status em cada
-    cartão distingue a documentação disponível dos fluxos ainda planejados.
+    Quando o ciclo de editar, executar e conferir estiver familiar, explore uma
+    tarefa maior. Veja o que já tem material para leitura e o que ainda está
+    sendo preparado.
   </p>
   <div class="path-grid auto-grid reveal-children">
     {paths.map((path) => (
@@ -83,9 +80,6 @@ const paths = [
         <span class="label">{path.status}</span>
         <h3>{path.title}</h3>
         <p>{path.description}</p>
-        <p>
-          <strong>Próximo guia:</strong> {path.next}
-        </p>
         {path.links.length > 0 && (
           <div class="path-card-links">
             {path.links.map((link) => (

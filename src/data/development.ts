@@ -3,36 +3,36 @@
 // público. As capturas de desenvolvimento têm origem e rótulo próprios.
 export const developmentSnapshot = {
   version: "0.4",
-  title: "Uma nova interface. Um caminho para embarcados.",
+  title: "Conheça a Vectis 0.4.",
   updatedAt: "2026-10-08",
   groups: [
     {
-      status: "Interface em reformulação",
+      status: "A interface em construção",
       items: [
         {
-          title: "Organização inspirada nas IDEs JetBrains",
+          title: "Editor no centro",
           detail:
-            "O frontend está sendo refeito por completo, com uma organização familiar para quem já trabalha nesse tipo de IDE.",
+            "A organização inspirada nas IDEs JetBrains aproxima o editor, a árvore do projeto e os painéis. Você já pode comparar essa disposição nas capturas da prévia.",
         },
         {
-          title: "O editor no centro do trabalho",
+          title: "Do código ao resultado",
           detail:
-            "A direção é aproximar código, navegação e ferramentas do projeto em um fluxo mais claro.",
+            "A demonstração compila e executa um projeto C++ e abre o terminal, as ferramentas detectadas e o histórico Git.",
         },
       ],
     },
     {
-      status: "Embarcados como foco da 0.4",
+      status: "Embarcados na 0.4",
       items: [
         {
-          title: "Uma base prática para trabalhar",
+          title: "Interface e embarcados juntos",
           detail:
-            "A próxima versão reúne a nova interface e o trabalho necessário para tornar o uso com projetos embarcados mais consistente.",
+            "O trabalho com embarcados faz parte da mesma versão. A meta é tornar esses fluxos mais consistentes junto à nova interface.",
         },
         {
-          title: "Escopo confirmado no lançamento",
+          title: "Alvos confirmados após os testes",
           detail:
-            "Alvos e integrações serão apresentados conforme os fluxos forem implementados e testados.",
+            "Os dispositivos, SDKs e fluxos suportados serão anunciados conforme forem verificados. A prévia atual demonstra C++ no computador.",
         },
       ],
     },

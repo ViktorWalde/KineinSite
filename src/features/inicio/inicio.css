@@ -155,6 +155,8 @@
 }
 
 .hero-copy {
+  min-width: 0;
+  width: 100%;
   max-width: 38rem;
   justify-self: end;
 }
@@ -186,17 +188,18 @@
 /* Em tela baixa (celular deitado) o título e o respiro também respeitam a
    altura visível, senão o hero passa de uma tela inteira. */
 .hero h1 {
-  max-width: 12ch;
+  max-width: 16ch;
   font-size: min(var(--text-5xl), 12svh);
   margin-block-end: 1.35rem;
 }
 
 .hero h1 em {
+  display: block;
   color: var(--hero-accent);
   font-style: normal;
 }
 
-/* "à vista." em degradê do destaque para o tom mais claro, em OKLCH (mesmo
+/* A frase em destaque passa do acento para o tom mais claro, em OKLCH (mesmo
    matiz, sem passar por cinza). Só onde background-clip: text existe; fora
    disso fica a cor lisa, nunca texto transparente. */
 @supports (background-clip: text) {
@@ -286,7 +289,7 @@
 }
 
 .section-intro h2 {
-  max-width: 20ch;
+  max-width: 26ch;
   margin-block-end: 1.1rem;
 }
 

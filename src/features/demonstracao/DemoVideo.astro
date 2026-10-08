@@ -12,29 +12,25 @@ const name = beta ? "vectis-0-3-5-beta" : "vectis-0-4-desenvolvimento";
 const label = beta ? "beta 0.3.5" : "0.4 em desenvolvimento";
 const poster = await getImage({
   src: beta ? betaPosterSource : posterSource,
-  width: 1200,
+  width: 1600,
   format: "webp",
   quality: 82,
 });
 ---
 
-<figure class="demo-video">
+<figure class="demo-video" data-demo>
   <video
     controls
-    preload="none"
+    muted
+    loop
+    playsinline
+    preload="metadata"
     poster={poster.src}
     width="1600"
     height="1000"
-    aria-label={`Demonstração real da Kinein Vectis ${label}, com legendas em português`}
+    aria-label={`Kinein Vectis ${label}: editor, compilação e execução de C++`}
   >
     <source src={sitePath(`/videos/${name}.mp4`)} type="video/mp4" />
-    <track
-      kind="captions"
-      src={sitePath(`/videos/${name}.vtt`)}
-      srclang="pt-BR"
-      label="Português"
-      default
-    />
     <p>
       <a href={sitePath(`/videos/${name}.mp4`)}>
         Assistir à demonstração em MP4
@@ -42,24 +38,21 @@ const poster = await getImage({
     </p>
   </video>
   <figcaption>
-    <strong>{beta ? "24" : "42"} segundos na IDE real.</strong>
-    {beta
-      ? "Código, compilação e execução no beta 0.3.5 disponível para baixar."
-      : "Código, build, execução, ferramentas e histórico Git na interface em desenvolvimento para a 0.4."}
-    Gravado no Linux em 8 de outubro de 2026, sem áudio, com legendas.
+    <span>
+      {beta
+        ? "Beta 0.3.5 · disponível para Linux"
+        : "Prévia 0.4 · nova interface"}
+    </span>
+    <div class="demo-controls">
+      <button type="button" class="demo-control" data-demo-toggle hidden>
+        Reproduzir
+      </button>
+      <button type="button" class="demo-control" data-demo-fullscreen hidden>
+        Tela cheia <span aria-hidden="true">⤢</span>
+      </button>
+    </div>
   </figcaption>
 </figure>
-<p class="demo-transcript">
-  <a
-    class="inline-link"
-    href={sitePath(
-      beta
-        ? "/aprender/ide/primeiro-projeto-cpp/"
-        : "/documentacao/previa-0-4/#roteiro",
-    )}
-  >
-    {beta
-      ? "Fazer seu primeiro projeto em C++ →"
-      : "Ler o roteiro e os resultados da demonstração →"}
-  </a>
-</p>
+<script>
+  import "./demo-video";
+</script>

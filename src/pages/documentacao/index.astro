@@ -3,7 +3,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import DocsSidebar from "../../features/documentacao/DocsSidebar.astro";
 import LanguageTracks from "../../features/documentacao/LanguageTracks.astro";
 import LearningPaths from "../../features/documentacao/LearningPaths.astro";
-import GuideList from "../../features/aprender/GuideList.astro";
+import CppJourney from "../../features/aprender/CppJourney.astro";
 import { getPublishedGuides, sectionOf } from "../../features/aprender/guides";
 import SiteProjectLink from "../../features/documentacao/SiteProjectLink.astro";
 import "../../features/documentacao/documentacao.css";
@@ -26,7 +26,7 @@ const firstGuide = ideGuides[0];
 <BaseLayout
   current="docs"
   title="Documentação"
-  description="Guia da IDE, manual, estudos e trilhas da Kinein Vectis para embarcados, IoT, backend e, no futuro, ROS 2."
+  description="Aprenda a usar a Kinein Vectis: instale a IDE, continue seus projetos em C++, Rust ou Python e consulte o manual do beta. Veja também a prévia da 0.4."
 >
   <div class="docs-shell shell">
     <DocsSidebar
@@ -35,9 +35,9 @@ const firstGuide = ideGuides[0];
       links={[
         { href: "#comece", text: "Comece por aqui" },
         { href: "#guias", text: "Aprender na Vectis" },
-        { href: "#trilhas", text: "Áreas e trilhas" },
-        { href: "#linguagens", text: "Por linguagem" },
-        { href: "#referencias", text: "Referências externas" },
+        { href: "#linguagens", text: "Escolher a linguagem" },
+        { href: "#referencias", text: "Para aprofundar" },
+        { href: "#trilhas", text: "Depois do básico" },
         { href: "#ajuda", text: "Comunidade e ajuda" },
         { href: "#site", text: "Sobre este site" },
       ]}
@@ -46,23 +46,23 @@ const firstGuide = ideGuides[0];
 
     <div class="docs-main">
       <header class="docs-intro enter">
-        <p class="kicker">LEIA NO SEU RITMO</p>
+        <p class="kicker">GUIAS, EXERCÍCIOS E CONSULTA</p>
         <h1>Documentação da Kinein Vectis</h1>
         <p class="docs-intro-copy">
-          Comece pelo Guia da IDE: da instalação ao primeiro projeto, cada passo
-          reproduzido na versão pública. O manual cobre o resto.
+          Instale a Vectis, escolha sua linguagem e construa um programa
+          pequeno. Os guias mostram os passos; os exercícios ajudam a entender o
+          código. Use o manual quando precisar consultar um recurso ou atalho.
         </p>
         <div class="docs-status">
           <span aria-hidden="true">●</span> Versão pública atual: beta{" "}
-          {publicVersion} para Linux x86_64. Confira a release antes de
-          instalar.
+          {publicVersion} para Linux x86_64.
         </div>
         <p class="docs-release-note">
           A {developmentSnapshot.version} está em desenvolvimento. Veja{" "}
           <a class="inline-link" href={sitePath("/documentacao/previa-0-4/")}>
-            o roteiro e a demonstração real
+            a prévia da nova interface
           </a>
-          ; os recursos dessa versão ainda não fazem parte do download público.
+          . O download disponível continua sendo o beta {publicVersion}.
         </p>
       </header>
 
@@ -73,7 +73,7 @@ const firstGuide = ideGuides[0];
       >
         <div class="docs-heading">
           <span class="label">01 / COMEÇAR</span>
-          <h2 id="comece-title">Do download ao primeiro contato.</h2>
+          <h2 id="comece-title">Prepare a IDE ou consulte o que precisa.</h2>
         </div>
         <div class="docs-card-grid docs-card-grid-3 auto-grid">
           {firstGuide && (
@@ -81,7 +81,7 @@ const firstGuide = ideGuides[0];
               class="docs-card card card-interactive"
               href={sitePath(`/aprender/${firstGuide.id}/`)}
             >
-              <span class="label">GUIA DA IDE · CAPÍTULO 1</span>
+              <span class="label">PRIMEIRA VEZ NA VECTIS</span>
               <h3>{firstGuide.data.title}</h3>
               <p>{firstGuide.data.summary}</p>
             </a>
@@ -95,9 +95,10 @@ const firstGuide = ideGuides[0];
             <span class="label">
               ORIGEM OFICIAL <span aria-hidden="true">↗</span>
             </span>
-            <h3>Release e pacote</h3>
+            <h3>Baixar o beta {publicVersion}</h3>
             <p>
-              Veja plataforma, arquivos, notas e SHA-256 na página da versão.
+              Encontre o AppImage, as notas e o arquivo de verificação do
+              pacote.
             </p>
           </a>
           <a
@@ -120,45 +121,27 @@ const firstGuide = ideGuides[0];
       >
         <div class="docs-heading">
           <span class="label">02 / APRENDER</span>
-          <h2 id="guias-title">Primeiro a IDE, depois os projetos.</h2>
+          <h2 id="guias-title">Continue um projeto em C++.</h2>
         </div>
         <p>
-          O{" "}
-          <a class="inline-link" href={sitePath("/aprender/")}>
-            Guia da IDE
-          </a>{" "}
-          ensina o uso da Vectis em capítulos curtos, na ordem em que você vai
-          precisar deles. Cada passo foi reproduzido na IDE, com as telas que
-          aparecem para você.
+          Crie <code>ola-kinein</code> e siga no mesmo projeto: da primeira
+          mensagem ao cálculo de temperaturas e a uma lista de leituras. Cada
+          etapa tem um resultado para conferir e exercícios para praticar.
         </p>
-        <GuideList guides={ideGuides} />
+        <CppJourney />
         <p>
-          Para entender a linguagem, comece pelos{" "}
-          <a class="inline-link" href="#linguagens">
-            quatro estudos básicos
+          Prefere outra linguagem? Os percursos de Rust e Python estão logo
+          abaixo. Para conhecer os painéis, a busca e o Git, veja os{" "}
+          <a class="inline-link" href={sitePath("/aprender/#guia-title")}>
+            guias de uso da IDE
           </a>
-          : o mesmo cálculo pequeno em C, C++, Rust ou Python, com saída
-          esperada e exercícios. Depois de dominar o básico, avance para as
-          amostras de sensores simuladas:
+          .
         </p>
-        <a
-          class="docs-card study-entry-card card card-interactive"
-          href={sitePath("/estudos/cpp/telemetria-local/")}
-        >
-          <span class="label">ESTUDO DE LINGUAGEM · C++20</span>
-          <h3>Processe telemetria local</h3>
-          <p>
-            Um primeiro programa de software para IoT: amostras simuladas, média
-            por sensor e tratamento de ausência de dados.
-          </p>
-        </a>
         <p>
           Estudos e capítulos indicam o ambiente e a versão em que foram
           testados.
         </p>
       </section>
-
-      <LearningPaths />
 
       <LanguageTracks />
 
@@ -168,13 +151,12 @@ const firstGuide = ideGuides[0];
         aria-labelledby="referencias-title"
       >
         <div class="docs-heading">
-          <span class="label">05 / APROFUNDAR</span>
-          <h2 id="referencias-title">Referências dos ecossistemas.</h2>
+          <span class="label">04 / APROFUNDAR</span>
+          <h2 id="referencias-title">Continue nas fontes da linguagem.</h2>
         </div>
         <p>
-          Estas referências externas servem para aprofundamento, depois dos
-          tutoriais básicos já disponíveis neste site; o rótulo abaixo indica
-          quem mantém cada referência.
+          Já executou os exemplos? Estas referências explicam a linguagem com
+          mais detalhes. Cada link indica o material e quem o mantém.
         </p>
         <ul class="reference-list reveal-children">
           {references.map((reference) => (
@@ -196,6 +178,8 @@ const firstGuide = ideGuides[0];
           ))}
         </ul>
       </section>
+
+      <LearningPaths />
 
       <section
         id="ajuda"

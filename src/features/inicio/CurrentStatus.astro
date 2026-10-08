@@ -1,6 +1,6 @@
 ---
 import { getLatestUpdate } from "../atualizacoes/updates";
-import { changelogUrl, publicVersion, sitePath } from "../../site";
+import { publicVersion, sitePath } from "../../site";
 
 const latest = await getLatestUpdate();
 const notePath = sitePath(
@@ -14,17 +14,17 @@ const notePath = sitePath(
   aria-labelledby="estado-title"
 >
   <div class="section-intro reveal">
-    <p class="kicker">POR QUE EXPERIMENTAR · BETA {publicVersion}</p>
-    <h2 id="estado-title">Edite, execute e investigue no mesmo lugar.</h2>
+    <p class="kicker">BETA {publicVersion} · LINUX</p>
+    <h2 id="estado-title">Abra um projeto e comece a trabalhar.</h2>
     <p class="section-intro-copy">
-      Acompanhe o código, o resultado do build e as ferramentas do projeto sem
-      sair da IDE. O beta <strong>{publicVersion} para Linux x86_64</strong>
-      reúne esse trabalho em um ambiente open source, sem telemetria.
+      Editor, compilação, testes, Git e terminal já estão no beta
+      <strong>{publicVersion} para Linux x86_64</strong>. Use seus compiladores
+      e acompanhe os resultados pelos painéis da Vectis.
     </p>
   </div>
   <div class="status-panel card reveal">
     <div>
-      <h3>Um ponto de partida para testar</h3>
+      <h3>Baixe o AppImage e abra no Linux</h3>
       <p>
         O AppImage traz a IDE e o Qt. Compiladores, SDKs e ferramentas continuam
         vindo do seu sistema. Requisitos e instalação estão na{" "}
@@ -42,7 +42,7 @@ const notePath = sitePath(
   </div>
   <div class="current-capabilities auto-grid reveal-children">
     <div class="card">
-      <h3>Escreva com contexto</h3>
+      <h3>Editor e navegação</h3>
       <p>
         Navegue pelos arquivos e receba completamento e diagnósticos de clangd,
         rust-analyzer ou basedpyright, conforme o projeto e as ferramentas
@@ -50,7 +50,7 @@ const notePath = sitePath(
       </p>
     </div>
     <div class="card">
-      <h3>Do código ao resultado</h3>
+      <h3>Compilação e testes</h3>
       <p>
         Compile, execute testes e investigue problemas pelos painéis da IDE.
         Acompanhe tarefas canceláveis e use o terminal integrado quando precisar
@@ -58,23 +58,18 @@ const notePath = sitePath(
       </p>
     </div>
     <div class="card">
-      <h3>Seu projeto à mão</h3>
+      <h3>Arquivos, busca e Git</h3>
       <p>
-        Consulte mudanças no Git, busque símbolos e trabalhe com os arquivos do
-        projeto. O beta também inclui Remote SSH, com seus próprios
-        pré-requisitos.
+        Encontre arquivos e símbolos, compare alterações e consulte o histórico
+        do projeto. Para arquivos em outro computador, o Remote SSH mantém um
+        espelho local usando SSH e rsync.
       </p>
     </div>
   </div>
   <p class="status-source">
-    O detalhe de cada recurso está no{" "}
-    <a
-      class="inline-link"
-      href={changelogUrl}
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      changelog da IDE <span aria-hidden="true">↗</span>
+    Consulte os fluxos e os requisitos de cada recurso no{" "}
+    <a class="inline-link" href={sitePath("/manual/")}>
+      manual do beta {publicVersion}
     </a>
     .
   </p>

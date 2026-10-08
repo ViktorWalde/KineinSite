@@ -1,0 +1,57 @@
+.ide-image-dialog {
+  overflow: hidden;
+  width: min(96vw, 100rem);
+  max-width: none;
+  max-height: 94svh;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: var(--shadow);
+}
+
+.ide-image-dialog::backdrop {
+  background: rgb(0 0 0 / 75%);
+}
+
+.ide-image-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-s);
+  padding: var(--space-s) var(--space-m);
+}
+
+.ide-image-toolbar p {
+  max-width: 65ch;
+  margin: 0;
+  font-size: var(--text-sm);
+}
+
+.ide-image-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+}
+
+.ide-image-stage {
+  overflow: auto;
+  max-height: 72svh;
+  overscroll-behavior: contain;
+  background: #111315;
+}
+
+.ide-image-stage img {
+  width: 100%;
+  height: auto;
+  max-height: 72svh;
+  object-fit: contain;
+}
+
+.is-zoomed .ide-image-stage img {
+  width: auto;
+  max-width: none;
+  max-height: none;
+}

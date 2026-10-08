@@ -1,0 +1,112 @@
+/* Resposta comum a mouse, toque e teclado; os tokens zeram o movimento
+   quando o visitante prefere reduzir animações. */
+[hidden],
+.segmented-control[hidden] {
+  display: none;
+}
+
+:is(button, .button, summary):not(:disabled) {
+  transition:
+    background-color var(--duration-base) var(--ease-out),
+    border-color var(--duration-base) var(--ease-out),
+    color var(--duration-base) var(--ease-out),
+    box-shadow var(--duration-base) var(--ease-out),
+    transform var(--duration-base) var(--ease-out),
+    scale var(--duration-base) var(--ease-out);
+}
+
+:is(button, .button, summary):not(:disabled):active {
+  scale: 0.985;
+}
+
+.segmented-control {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  width: fit-content;
+  max-width: 100%;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.25rem;
+  margin: 0 auto var(--space-m);
+  padding: 0.3rem;
+  border: 1px solid var(--border);
+  border-radius: 2rem;
+  background: var(--surface);
+}
+
+.segmented-control::before {
+  position: absolute;
+  z-index: -1;
+  inset: 0.3rem auto 0.3rem 0.3rem;
+  width: calc((100% - 0.85rem) / 2);
+  border: 1px solid var(--accent);
+  border-radius: 2rem;
+  background: var(--card);
+  box-shadow: var(--shadow-card);
+  content: "";
+  transition:
+    translate 420ms cubic-bezier(0.22, 1, 0.36, 1),
+    background-color var(--duration-base) var(--ease-out),
+    border-color var(--duration-base) var(--ease-out),
+    box-shadow var(--duration-base) var(--ease-out);
+}
+
+.segmented-control:has([aria-selected="true"]:last-child)::before {
+  translate: calc(100% + 0.25rem) 0;
+}
+
+.segmented-control button {
+  min-width: 0;
+  min-height: 2.75rem;
+  padding: 0.55rem 1.2rem;
+  border: 0;
+  border-radius: 2rem;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  font: inherit;
+  font-size: var(--text-sm);
+  font-weight: 650;
+  line-height: 1.35;
+}
+
+.segmented-control button:hover,
+.segmented-control button[aria-selected="true"] {
+  color: var(--accent);
+}
+
+[data-tabs-ready] > .tab-stage {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  min-width: 0;
+}
+
+[data-tabs-ready] > .tab-stage > .tab-panel {
+  min-width: 0;
+  grid-area: 1 / 1;
+}
+
+[data-tabs-ready] > .tab-stage > .tab-panel.is-leaving[hidden] {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  display: block;
+  pointer-events: none;
+}
+
+@media (width <= 35rem) {
+  .segmented-control button {
+    padding-inline: 0.7rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :is(button, .button, summary):not(:disabled):active {
+    scale: 1;
+  }
+
+  .segmented-control::before {
+    transition-duration: 0ms;
+  }
+}

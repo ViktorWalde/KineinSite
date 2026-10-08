@@ -3,7 +3,9 @@
 .ide-preview-frame {
   position: relative;
   isolation: isolate;
+  width: min(100%, 64rem, 104svh);
   margin-block-start: var(--space-xl);
+  margin-inline: auto;
 }
 
 .ide-preview-frame::before {
@@ -20,61 +22,15 @@
   filter: blur(24px);
 }
 
-.ide-tabs {
-  display: flex;
-  gap: 0.25rem;
-  margin-block-end: var(--space-s);
-}
-
-.ide-tab {
-  min-height: 2.5rem;
-  padding: 0.4rem 0.95rem;
-  border: 1px solid transparent;
-  border-radius: var(--radius-md);
-  background: transparent;
-  color: var(--muted);
-  cursor: pointer;
-  font: inherit;
-  font-size: var(--text-sm);
-  font-weight: 650;
-  transition:
-    background-color var(--duration-fast) ease,
-    border-color var(--duration-fast) ease,
-    color var(--duration-fast) ease;
-}
-
-.ide-tab:hover {
-  background: var(--surface-soft);
-  color: var(--text);
-}
-
-.ide-tab[aria-selected="true"] {
-  border-color: var(--border);
-  background: var(--card);
-  box-shadow: inset 0 -2px 0 var(--accent);
-  color: var(--text);
-}
-
 .ide-shot {
   margin: 0;
-}
-
-.ide-shot:not([hidden]) {
-  animation: shot-in var(--duration-base) var(--ease-out);
-}
-
-@keyframes shot-in {
-  from {
-    opacity: 0;
-    scale: 0.995;
-  }
 }
 
 .ide-shot + .ide-shot {
   margin-block-start: var(--space-xl);
 }
 
-.ide-tabs:not([hidden]) ~ .ide-shot + .ide-shot {
+.ide-preview-frame[data-tabs-ready] > .tab-stage > .ide-shot + .ide-shot {
   margin-block-start: 0;
 }
 
@@ -90,12 +46,57 @@
   background: #0d1015;
 }
 
+.ide-image-open {
+  position: relative;
+  display: block;
+  border-radius: var(--radius-xl);
+  cursor: zoom-in;
+}
+
+.ide-image-hint {
+  position: absolute;
+  inset: auto var(--space-s) var(--space-s) auto;
+  padding: 0.35rem 0.65rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--card);
+  color: var(--text);
+  font-size: var(--text-xs);
+}
+
 .ide-shot figcaption {
   margin-block-start: var(--space-s);
   color: var(--muted);
   font-size: var(--text-sm);
 }
 
-.ide-shot figcaption span {
-  opacity: 0.85;
+.ide-capture-origin {
+  margin-block-start: var(--space-s);
+  color: var(--muted);
+  font-size: var(--text-xs);
+}
+
+.ide-capture-origin summary {
+  width: fit-content;
+  padding-block: 0.4rem;
+  cursor: pointer;
+}
+
+.ide-capture-origin p {
+  margin-block: 0.4rem 0;
+}
+
+@media (width <= 35rem) {
+  .ide-image-hint {
+    inset: auto 0.5rem 0.5rem auto;
+    padding: 0.2rem 0.45rem;
+  }
+}
+
+.gallery-versions {
+  margin-block-start: var(--space-xl);
+}
+
+.gallery-versions .ide-preview-frame {
+  margin-block-start: var(--space-m);
 }

@@ -86,7 +86,7 @@
 }
 
 .docs-intro h1 {
-  max-width: 15ch;
+  max-width: 24ch;
   margin-block-end: 1.2rem;
   font-size: var(--text-4xl);
 }
@@ -110,6 +110,11 @@
 .docs-status span {
   margin-inline-end: 0.5rem;
   color: var(--accent);
+}
+
+.docs-status {
+  border-inline-start: 3px solid var(--companion);
+  background: linear-gradient(110deg, var(--card-tint), var(--card-edge));
 }
 
 .docs-release-note {

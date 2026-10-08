@@ -1,37 +1,37 @@
 ---
-import { sitePath } from "../../site";
+import { publicVersion, sitePath } from "../../site";
 
 const tracks = [
   {
     language: "C",
-    status: "BÁSICO · EXEMPLO VERIFICADO",
-    path: "Dois números, uma média e uma saída. Compile um programa C11 e confira o resultado antes de pensar em firmware.",
+    status: "EXERCÍCIO NO TERMINAL",
+    path: "Guarde dois números, calcule a média e confira a saída de um programa C11. Você só precisa do compilador e de um terminal.",
     destination: "Começar em C",
     href: sitePath("/estudos/c/primeiros-passos/"),
     external: false,
   },
   {
     language: "C++",
-    status: "BÁSICO · EXEMPLO VERIFICADO",
-    path: "Escreva um programa pequeno, compile e mude um valor. Depois avance para coleções e telemetria simulada em C++20.",
+    status: "PROJETO NA IDE · CMAKE",
+    path: "Crie ola-kinein e avance no mesmo main.cpp: mensagem, média de temperaturas e várias leituras.",
     destination: "Começar em C++",
-    href: sitePath("/estudos/cpp/primeiros-passos/"),
+    href: sitePath("/aprender/ide/primeiro-projeto-cpp/"),
     external: false,
   },
   {
     language: "Rust",
-    status: "BÁSICO · EXEMPLO VERIFICADO",
-    path: "Conheça let, f64 e println! com um cálculo pequeno. O tutorial da IDE mostra também a criação e a execução com Cargo.",
+    status: "PROJETO NA IDE · CARGO",
+    path: "Prepare o Rust, crie ola-rust e execute pelo Cargo. Depois transforme a mensagem em um cálculo de temperaturas.",
     destination: "Começar em Rust",
-    href: sitePath("/estudos/rust/primeiros-passos/"),
+    href: sitePath("/aprender/ide/primeiro-projeto-rust/"),
     external: false,
   },
   {
     language: "Python",
-    status: "BÁSICO · EXEMPLO VERIFICADO",
-    path: "Execute um arquivo, entenda os valores e confira uma pequena mudança. Depois use .venv e pytest no tutorial da IDE.",
+    status: "PROJETO NA IDE · .VENV",
+    path: "Crie ola-python com ambiente virtual e testes. Continue no mesmo main.py para calcular e exibir uma média.",
     destination: "Começar em Python",
-    href: sitePath("/estudos/python/primeiros-passos/"),
+    href: sitePath("/aprender/ide/primeiro-projeto-python/"),
     external: false,
   },
 ] as const;
@@ -43,29 +43,25 @@ const tracks = [
   aria-labelledby="linguagens-title"
 >
   <div class="docs-heading">
-    <span class="label">04 / LINGUAGENS</span>
-    <h2 id="linguagens-title">Quatro percursos de linguagem.</h2>
+    <span class="label">03 / SUA LINGUAGEM</span>
+    <h2 id="linguagens-title">Escolha por onde começar.</h2>
   </div>
   <p>
-    Conteúdo próprio em português, baseado nas fontes de cada ecossistema. Os
-    estudos básicos mostram conceitos executados e verificados. Os tutoriais de
-    C++, Rust e Python ensinam o primeiro projeto na IDE 0.3.5.
+    Os percursos de C++, Rust e Python começam na IDE {publicVersion} e
+    continuam na mesma linguagem. O exercício de C começa pelo terminal. Todos
+    têm código completo, saída esperada e pequenas mudanças para você testar.
   </p>
   <div class="path-grid auto-grid reveal-children">
     {tracks.map((track) => (
-      <article class="path-card card">
+      <a class="path-card card card-interactive" href={track.href}>
         <span class="label">{track.status}</span>
         <h3>{track.language}</h3>
         <p>{track.path}</p>
-        <a
-          href={track.href}
-          target={track.external ? "_blank" : undefined}
-          rel={track.external ? "noopener noreferrer" : undefined}
-        >
+        <span class="inline-link">
           {track.destination}{" "}
           <span aria-hidden="true">{track.external ? "↗" : "→"}</span>
-        </a>
-      </article>
+        </span>
+      </a>
     ))}
   </div>
 </section>

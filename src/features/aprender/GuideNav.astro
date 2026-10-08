@@ -1,6 +1,7 @@
 ---
 import { sitePath } from "../../site";
-import { sectionNames, sectionOf, type Guide } from "./guides";
+import { type Guide } from "./guides";
+import { projectPathFor } from "./project-paths";
 
 // Índice lateral do guia: todos os capítulos publicados da mesma seção, com
 // o atual marcado (aria-current="page").
@@ -10,28 +11,54 @@ interface Props {
 }
 
 const { guides, currentId } = Astro.props;
-const current = guides.find((guide) => guide.id === currentId);
-const section = current ? sectionOf(current) : "ide";
-const siblings = guides.filter((guide) => sectionOf(guide) === section);
+const currentPath = `/aprender/${currentId}/` as const;
+const project = projectPathFor(currentPath);
+const references = guides.filter(
+  (guide) =>
+    !guide.id.includes("primeiro-projeto-") &&
+    (!project || guide.id !== "ide/instalar"),
+);
 ---
 
 <aside class="docs-sidebar guide-nav" aria-label="Capítulos do guia">
-  <p class="label">{sectionNames[section]}</p>
-  <nav aria-label={sectionNames[section]}>
+  {project && (
+    <>
+      <p class="label">Projeto em {project.language}</p>
+      <nav aria-label={`Etapas do projeto em ${project.language}`}>
+        <ol>
+          {project.steps.map((step, index) => (
+            <li>
+              <a
+                href={sitePath(step.path)}
+                aria-current={step.path === currentPath ? "page" : undefined}
+              >
+                <span class="guide-nav-number">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                {step.title}
+              </a>
+            </li>
+          ))}
+        </ol>
+      </nav>
+    </>
+  )}
+  <p class="label guide-nav-group">Uso da IDE</p>
+  <nav aria-label="Guias de consulta da IDE">
     <ol>
-      {siblings.map((guide) => (
+      {references.map((guide) => (
         <li>
           <a
             href={sitePath(`/aprender/${guide.id}/`)}
             aria-current={guide.id === currentId ? "page" : undefined}
           >
-            <span class="guide-nav-number">
-              {String(guide.data.order).padStart(2, "0")}
-            </span>
             {guide.data.title}
           </a>
         </li>
       ))}
     </ol>
   </nav>
+  <a class="guide-nav-all" href={sitePath("/aprender/")}>
+    Ver todos os percursos →
+  </a>
 </aside>

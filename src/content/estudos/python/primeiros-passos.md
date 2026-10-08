@@ -1,6 +1,6 @@
 ---
 title: "Python básico: do número ao resultado"
-summary: "Calcule uma média de duas temperaturas, confira a saída e faça uma pequena mudança. Um primeiro exercício sem hardware ou bibliotecas externas."
+summary: "Continue no ola-python: calcule a média de duas temperaturas no main.py e confira o resultado no mesmo ambiente virtual."
 language: "Python"
 standard: "Python 3"
 platform: "Arch Linux x86_64"
@@ -11,9 +11,9 @@ status: verified
 
 ## Seu objetivo
 
-Ao terminar, você conseguirá guardar dois números, calcular uma média e mostrar o resultado. As temperaturas são dados inventados para aprender: 21 e 23 °C. Este programa não lê sensores físicos.
+O `ola-python` já executa um script. Agora ele vai calcular a média de 21 e 23 °C. Os valores são inventados para o exercício; você pode fazer tudo no computador, sem um sensor.
 
-Você precisa de um terminal e de Python 3 instalado. Não é necessário instalar bibliotecas. Se estiver começando do zero, leia cada etapa e execute antes de seguir.
+Continue com o projeto aberto na Vectis. Se ainda não o preparou, siga o [primeiro projeto em Python](../../../aprender/ide/primeiro-projeto-python/). Também é possível acompanhar só com um terminal e Python 3.
 
 ## Pense antes de executar
 
@@ -21,7 +21,9 @@ Quanto deve ser a média de 21 e 23? Faça a conta sem olhar a saída: some os d
 
 ## 1. Escreva um programa pequeno
 
-Crie `main.py` e copie:
+No projeto `ola-python`, substitua somente o conteúdo de `main.py` pelo programa abaixo. Mantenha `ola_python/`, `tests/` e `.venv/`: o teste da função `saudacao` continua separado deste cálculo.
+
+Se estiver acompanhando sem a IDE, crie um `main.py` numa pasta de exercícios.
 
 ```python
 primeira = 21.0
@@ -33,7 +35,15 @@ print(f"media: {media:.2f} C")
 
 ## 2. Execute e confira
 
-No terminal, dentro da pasta do arquivo:
+**Na Vectis 0.3.5:** salve com <kbd>Ctrl</kbd>+<kbd>S</kbd>, mantenha um terminal aberto (<kbd>Alt</kbd>+<kbd>F12</kbd>) e clique em **▶**. O projeto usa o Python do `.venv` preparado no tutorial.
+
+**No terminal do projeto:**
+
+```sh
+.venv/bin/python main.py
+```
+
+**Se criou um arquivo avulso:** na pasta de `main.py`, execute:
 
 ```sh
 python3 main.py
@@ -68,7 +78,7 @@ Agora troque esse segundo valor por `20.0`. Você deve obter `media: 20.50 C`. M
 <details>
 <summary>Conferir seu raciocínio</summary>
 
-A soma precisa acontecer antes da divisão. Com 21 e 25, a média é 23, exibida como `media: 23.00 C`. Salve e execute `python3 main.py` na pasta desse arquivo.
+A soma precisa acontecer antes da divisão. Com 21 e 25, a média é 23, exibida como `media: 23.00 C`. Salve e execute `main.py` de novo, pelo ▶, pelo Python do `.venv` ou pelo comando do arquivo avulso.
 
 </details>
 
@@ -78,10 +88,10 @@ A soma precisa acontecer antes da divisão. Com 21 e 25, a média é 23, exibida
 - **Arquivo não encontrado:** confira o nome e o diretório do arquivo.
 - **Resultado diferente:** confira se salvou o código e se alterou somente o valor indicado.
 
-## Leve para a Vectis
+## Continue praticando
 
-O [primeiro projeto em Python](../../../aprender/ide/primeiro-projeto-python/) mostra como criar o projeto, abrir o código e executar na **Kinein Vectis 0.3.5**. Use este estudo para entender a linguagem; o tutorial da IDE ensina os botões e os limites daquela versão.
+Escolha outros dois valores e confira a conta antes de executar. Você continua no mesmo `main.py`. Os testes criados no primeiro tutorial verificam a função `saudacao`; eles ainda não verificam este cálculo de média.
 
 ## Para aprofundar
 
-Este é um texto autoral. A referência técnica é o [tutorial oficial de Python, números e textos](https://docs.python.org/3/tutorial/introduction.html). O próximo passo é entender decisões e repetições; deixe integração com dispositivos para depois de dominar o ciclo de escrever, executar e conferir.
+O [tutorial oficial de Python, na parte de números e textos](https://docs.python.org/3/tutorial/introduction.html), aprofunda as operações usadas aqui. Depois deste exercício, explore decisões e repetições para trabalhar com mais valores.

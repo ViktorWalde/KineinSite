@@ -23,7 +23,7 @@
 }
 
 .study-header h1 {
-  max-width: 18ch;
+  max-width: 24ch;
   margin-block: 0.5rem 1rem;
   font-size: var(--text-4xl);
 }
@@ -52,13 +52,15 @@
 
 .study-meta dd {
   margin: 0.15rem 0 0;
+  font-size: var(--text-sm);
   font-weight: 650;
+  line-height: 1.5;
 }
 
 .study-article {
   max-width: 72ch;
   padding-block: 2.5rem;
-  font-size: var(--text-lg);
+  font-size: var(--text-base);
   line-height: 1.8;
 }
 

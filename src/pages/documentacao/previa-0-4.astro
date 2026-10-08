@@ -1,24 +1,26 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import DemoVideo from "../../features/demonstracao/DemoVideo.astro";
+import PreviewNotice from "../../features/demonstracao/PreviewNotice.astro";
 import { publicVersion, releaseUrl, sitePath } from "../../site";
 import "../../features/documentacao/documentacao.css";
+import "../../features/documentacao/previa.css";
 import "../../features/codigo/codigo.css";
 ---
 
 <BaseLayout
   current="docs"
-  title="Prévia real da 0.4"
-  description="Veja a nova interface da Kinein Vectis em uso: código C++, build, execução, ferramentas e Git. Saiba o que foi demonstrado e o que está planejado para a 0.4."
+  title="Conheça a prévia da 0.4"
+  description="Veja a nova interface da Kinein Vectis em uso: código C++, compilação, execução, ferramentas e Git. Conheça a prévia e o trabalho com embarcados previsto para a 0.4."
 >
-  <div class="shell docs-main">
+  <div class="shell preview-page">
     <header class="docs-intro enter">
       <p class="kicker">0.4 · EM DESENVOLVIMENTO</p>
-      <h1>Veja o trabalho tomando forma.</h1>
+      <h1>A próxima Vectis, por dentro.</h1>
       <p class="docs-intro-copy">
-        A reformulação da interface e o foco em embarcados fazem parte da mesma
-        próxima versão: a 0.4. Esta é uma demonstração do executável de
-        desenvolvimento, com organização inspirada nas IDEs JetBrains.
+        A 0.4 reúne a nova interface, inspirada nas IDEs JetBrains, e o trabalho
+        com embarcados. Aqui você pode acompanhar um projeto C++ na interface
+        que está sendo preparada para o lançamento.
       </p>
       <p>
         A versão pública para experimentar hoje continua sendo o{" "}
@@ -30,16 +32,17 @@ import "../../features/codigo/codigo.css";
         >
           beta {publicVersion} para Linux ↗
         </a>
-        . As telas desta prévia ainda podem mudar.
+        .
       </p>
     </header>
+    <PreviewNotice />
     <DemoVideo />
-    <article class="prose">
+    <article class="preview-article">
       <h2 id="roteiro">O que acontece no vídeo</h2>
       <p>
         Um programa pequeno calcula a média de 21 e 23 °C. O projeto tem CMake e
-        um repositório Git local. A gravação acompanha a aplicação rodando, em
-        tempo real, sem simular painéis ou resultados.
+        um repositório Git local. A sequência vai do código ao resultado, com
+        uma passagem pelas ferramentas detectadas e pelo histórico do projeto.
       </p>
       <ol>
         <li>
@@ -85,19 +88,28 @@ import "../../features/codigo/codigo.css";
         Uma reformulação do frontend, com o editor no centro, e uma base mais
         consistente para trabalhar com embarcados. Os dispositivos, SDKs e
         fluxos de gravação e depuração do lançamento serão anunciados após
-        implementação e testes. Esta demonstração confirma o fluxo local de C++;
-        não valida um fluxo completo de firmware ou hardware.
+        implementação e testes. O vídeo acompanha C++ no computador; a
+        demonstração com dispositivos virá quando essas integrações estiverem
+        prontas.
       </p>
-      <h2>Experimente com um objetivo pequeno</h2>
+      <details class="demo-origin">
+        <summary>Sobre esta gravação</summary>
+        <p>
+          Executável de desenvolvimento da 0.4, capturado no Linux x86_64 em{" "}
+          <time datetime="2026-10-08">8 de outubro de 2026</time>. O vídeo tem
+          42 segundos e mostra a aplicação em execução.
+        </p>
+      </details>
+      <h2>Comece com seu próprio projeto</h2>
       <p>
-        Comece por{" "}
+        Siga o tutorial para{" "}
         <a
           class="inline-link"
           href={sitePath("/aprender/ide/primeiro-projeto-cpp/")}
         >
           compilar e executar seu primeiro C++
         </a>
-        . Depois veja como é voltar do código ao resultado na mesma janela. Se
+        . Você vai criar o projeto, compilar e conferir a saída na IDE. Se
         encontrar uma dificuldade, o{" "}
         <a
           class="inline-link"

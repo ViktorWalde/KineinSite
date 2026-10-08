@@ -17,9 +17,6 @@ const { guides } = Astro.props;
         class="learn-card card card-interactive"
         href={sitePath(`/aprender/${guide.id}/`)}
       >
-        <span class="learn-number" aria-hidden="true">
-          {String(guide.data.order).padStart(2, "0")}
-        </span>
         <span class="learn-text">
           <strong>{guide.data.title}</strong>
           <span>{guide.data.summary}</span>

@@ -27,7 +27,7 @@ Os capítulos que ensinam tarefas **na Vectis** pertencem à coleção `src/cont
 
 ## Revisão de interface
 
-Para alterações visuais, confira pelo menos uma largura estreita (320 a 390 px), uma intermediária (por volta de 768 px) e uma larga (a partir de 1200 px). Abra o painel de tema, navegue com Tab e teste a preferência de movimento reduzido. Informe no pull request o que foi verificado e anexe capturas se elas ajudarem a avaliar o resultado. Essas verificações manuais complementam o build; o repositório ainda não tem teste automatizado em navegador.
+Para alterações visuais, confira pelo menos uma largura estreita (320 a 390 px), uma intermediária (por volta de 768 px) e uma larga (a partir de 1200 px). Abra o painel de tema, navegue com Tab e teste a preferência de movimento reduzido. Informe no pull request o que foi verificado e anexe capturas se elas ajudarem a avaliar o resultado. Essas verificações manuais complementam o build e `npm run check:browser`, que cobre temas, teclado, mídias, larguras de tela e movimento reduzido.
 
 ## Pull request
 

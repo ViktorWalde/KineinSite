@@ -1,0 +1,56 @@
+.manual-layout {
+  margin-block: var(--space-m) var(--space-xl);
+}
+
+.manual-layout figure {
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--card);
+  box-shadow: var(--edge), var(--shadow-card);
+}
+
+.manual-layout-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-xs);
+  padding: var(--space-s) var(--space-m);
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(110deg, var(--card-tint), var(--card-edge));
+}
+
+.manual-layout-hint {
+  color: var(--muted);
+  font-size: var(--text-xs);
+}
+
+.manual-layout-open {
+  display: block;
+  cursor: zoom-in;
+}
+
+.manual-layout-open img {
+  width: 100%;
+  height: auto;
+}
+
+.manual-layout-open:focus-visible {
+  outline-offset: -4px;
+}
+
+.manual-layout figcaption {
+  padding: var(--space-s) var(--space-m);
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: var(--text-sm);
+  line-height: 1.6;
+}
+
+.manual-layout-origin {
+  margin-block: var(--space-s) 0;
+  color: var(--muted);
+  font-size: var(--text-sm);
+}

@@ -12,11 +12,11 @@ export const ideScreens = {
   shots: [
     {
       id: "editor",
-      title: "Editor e build",
+      title: "Editor e compilação",
       image: editor,
       alt: "Janela da Kinein Vectis 0.3.5 com um projeto CMake aberto: a árvore de arquivos à esquerda, src/main.cpp no editor e, no painel de baixo, o build concluído com sucesso.",
       caption:
-        "Projeto CMake aberto, código C++20 no editor e o build no painel de baixo.",
+        "Projeto CMake aberto, código C++ no editor e a compilação no painel de baixo.",
     },
     {
       id: "ambiente",

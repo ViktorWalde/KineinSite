@@ -1,6 +1,7 @@
 ---
 import { getCollection, render, type CollectionEntry } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import ProjectNavigation from "../../features/aprender/ProjectNavigation.astro";
 import "../../features/codigo/codigo.css";
 import { formatDate, sitePath } from "../../site";
 import "../../features/estudos/estudos.css";
@@ -62,6 +63,7 @@ const tested = formatDate(entry.data.lastTested);
     <article class="study-article prose">
       <Content />
     </article>
+    <ProjectNavigation currentPath={`/estudos/${entry.id}/`} />
 
     <nav class="study-end-nav" aria-label="Voltar à documentação">
       <a href={sitePath("/documentacao/")}>← Ver as outras trilhas de estudo</a>

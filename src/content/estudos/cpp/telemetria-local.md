@@ -1,6 +1,6 @@
 ---
 title: "C++20: processe telemetria local"
-summary: "Comece com dados simulados de sensores e calcule uma média sem depender de hardware, rede ou bibliotecas externas."
+summary: "Evolua o mesmo projeto C++ para uma lista de temperaturas. Calcule a média por sensor e trate a falta de leituras."
 language: "C++"
 standard: "C++20"
 platform: "Linux x86_64"
@@ -13,13 +13,15 @@ status: verified
 
 Um programa de linha de comando que recebe leituras simuladas de temperatura de dois sensores e mostra a média de um deles. Esse é um primeiro exercício da **camada de software de um sistema IoT**: organizar amostras, selecionar um dispositivo e lidar com a ausência de dados.
 
-Este estudo é o próximo passo depois de [C++ básico](../primeiros-passos/): usa coleções, uma função e um resultado opcional. O exemplo roda no Linux com um compilador C++20. Ele não lê sensores físicos, não se conecta a um broker e não depende de recursos da Kinein Vectis. Para começar na IDE, siga o [primeiro projeto em C++](../../../aprender/ide/primeiro-projeto-cpp/). Este estudo aprofunda a linguagem; a demonstração da prévia 0.4 mostra um projeto CMake na nova interface.
+Depois da [média de duas temperaturas](../primeiros-passos/), você vai guardar várias leituras e escolher de qual sensor calcular a média. Há três novidades de C++ para explorar: uma coleção, uma função e um resultado que pode não existir.
 
-Você precisa de um terminal e do `g++` com suporte a C++20. Confira com `g++ --version`.
+Continue no projeto `ola-kinein`, na Vectis, com as ferramentas do primeiro tutorial. Também é possível acompanhar pelo terminal com `g++` e suporte a C++20. As amostras continuam inventadas: esta etapa ainda roda inteiramente no computador.
 
 ## Passo 1: escreva o programa
 
-Crie um arquivo chamado `main.cpp` com o código abaixo:
+Abra o mesmo `src/main.cpp` e substitua o cálculo anterior pelo código abaixo. Salve antes de compilar. Você continua no mesmo projeto e não precisa alterar o `CMakeLists.txt`.
+
+Se estiver usando apenas o terminal, substitua o conteúdo do seu `main.cpp`.
 
 ```cpp
 #include <array>
@@ -81,7 +83,9 @@ Cada temperatura é armazenada como um inteiro em milésimos de grau Celsius: `2
 
 ## Passo 2: compile e confira o resultado
 
-No diretório onde salvou `main.cpp`, execute:
+**Na Vectis 0.3.5:** salve com <kbd>Ctrl</kbd>+<kbd>S</kbd>, compile com <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>B</kbd> e espere o sucesso no painel **Build**. Mantenha um terminal aberto (<kbd>Alt</kbd>+<kbd>F12</kbd>) e execute pelo **▶**, como na etapa anterior.
+
+**Pelo terminal:** no diretório onde salvou `main.cpp`, execute:
 
 ```sh
 g++ -std=c++20 -Wall -Wextra -Wpedantic -Werror main.cpp -o telemetria
@@ -118,6 +122,8 @@ Recompile e execute após cada mudança. Se o resultado for diferente, confira o
 
 ## Próximos estudos
 
-O próximo passo é validar entradas que chegam de fora do programa e separar o cálculo em uma função testada com CTest. Só depois faz sentido acrescentar rede, MQTT e integração com a IDE. Este exemplo ainda não trata leituras inválidas, tempo das amostras, perda de mensagens ou armazenamento contínuo.
+Você chegou ao fim deste percurso: seu `ola-kinein` foi de uma mensagem a um cálculo com várias leituras. Antes de acrescentar um dispositivo ou rede, pratique os exercícios e confira a saída. Este exemplo ainda não trata leituras inválidas nem o instante em que cada amostra foi obtida.
+
+Para avançar por conta própria, uma boa tarefa é escrever testes para `media_celsius` com CTest e estudar como validar uma entrada recebida pelo programa.
 
 Para aprofundar, consulte também a [documentação do GCC sobre padrões de linguagem](https://gcc.gnu.org/onlinedocs/gcc/Standards.html) e o [tutorial oficial de testes com CMake e CTest](https://cmake.org/cmake/help/latest/guide/tutorial/Testing%20and%20CTest.html).

@@ -8,7 +8,7 @@ export const developmentScreens = {
   shots: [
     {
       id: "editor",
-      title: "Nova interface e build",
+      title: "Editor e compilação",
       image: editor,
       alt: "Executável de desenvolvimento da Kinein Vectis: árvore do projeto, editor C++ e painel com build concluído com sucesso, na interface em reformulação.",
       caption:

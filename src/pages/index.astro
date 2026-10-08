@@ -31,7 +31,7 @@ const wallpaper = await getImage({
 <BaseLayout
   current="home"
   title="IDE open source para C, C++, Rust e Python"
-  description={`IDE open source para C, C++, Rust e Python, feita para firmware, sistemas, Linux embarcado e IoT. Beta público ${publicVersion} para Linux x86_64, sem telemetria.`}
+  description={`Edite, compile, execute testes e consulte o Git na Kinein Vectis. Beta ${publicVersion} para Linux x86_64. Conheça a nova interface e o foco em embarcados da 0.4.`}
 >
   <section class="hero" aria-labelledby="hero-title">
     <div class="hero-media" aria-hidden="true">
@@ -55,13 +55,11 @@ const wallpaper = await getImage({
           X86_64
         </p>
         <h1 id="hero-title">
-          Código, build e depuração. <em>No mesmo lugar.</em>
+          Do código à execução. <em>Na mesma IDE.</em>
         </h1>
         <p class="hero-lead">
-          Abra seu projeto em C, C++, Rust ou Python e reúna editor, testes, Git
-          e terminal na mesma IDE. A Kinein Vectis usa as ferramentas do seu
-          sistema e mostra o ambiente encontrado para você trabalhar com
-          contexto.
+          Abra seu projeto em C, C++, Rust ou Python. Edite o código, acompanhe
+          a compilação, rode testes e consulte o Git na mesma janela.
         </p>
         <div class="hero-actions">
           <a
@@ -93,21 +91,23 @@ const wallpaper = await getImage({
       <nav class="journey shell auto-grid reveal" aria-label="Caminhos rápidos">
         <a class="card card-interactive" href="#interface">
           <span class="journey-label label">01 / CONHEÇA</span>
-          <strong>Veja o beta por dentro</strong>
+          <strong>Veja as duas interfaces</strong>
           <span class="journey-arrow" aria-hidden="true">
             ↓
           </span>
         </a>
         <a class="card card-interactive" href="#desenvolvimento">
           <span class="journey-label label">02 / A PRÓXIMA VECTIS</span>
-          <strong>Conheça a prévia da {developmentSnapshot.version}</strong>
+          <strong>
+            Compare o beta com a prévia {developmentSnapshot.version}
+          </strong>
           <span class="journey-arrow" aria-hidden="true">
             ↓
           </span>
         </a>
         <a class="card card-interactive" href="#experiencia">
           <span class="journey-label label">03 / EXPERIMENTE</span>
-          <strong>Faça seu primeiro projeto</strong>
+          <strong>Comece seu projeto em C++</strong>
           <span class="journey-arrow" aria-hidden="true">
             ↓
           </span>
@@ -140,9 +140,7 @@ const wallpaper = await getImage({
         <div class="shell closing-layout reveal">
           <div>
             <p class="kicker">BETA PÚBLICO {publicVersion}</p>
-            <h2 id="closing-title">
-              Abra um projeto. Veja como a Vectis se encaixa no seu trabalho.
-            </h2>
+            <h2 id="closing-title">Comece pelo seu próximo projeto.</h2>
             <p>
               Comece pelo beta {publicVersion} ou acompanhe a construção da
               {developmentSnapshot.version}. Seu primeiro teste pode ajudar a

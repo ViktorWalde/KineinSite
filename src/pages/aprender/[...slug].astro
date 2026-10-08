@@ -2,6 +2,9 @@
 import { render } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import GuideNav from "../../features/aprender/GuideNav.astro";
+import ImageViewer from "../../features/imagens/ImageViewer.astro";
+import ProjectNavigation from "../../features/aprender/ProjectNavigation.astro";
+import { projectPathFor } from "../../features/aprender/project-paths";
 import {
   getPublishedGuides,
   sectionNames,
@@ -29,10 +32,17 @@ interface Props {
 const { guide, guides } = Astro.props;
 const { Content } = await render(guide);
 const section = sectionOf(guide);
-const siblings = guides.filter((item) => sectionOf(item) === section);
+const siblings = guides.filter(
+  (item) =>
+    sectionOf(item) === section && !item.id.includes("primeiro-projeto-"),
+);
 const index = siblings.findIndex((item) => item.id === guide.id);
 const previous = index > 0 ? siblings[index - 1] : undefined;
 const next = index < siblings.length - 1 ? siblings[index + 1] : undefined;
+const currentPath = `/aprender/${guide.id}/` as const;
+const project = projectPathFor(currentPath);
+const projectIndex =
+  project?.steps.findIndex((step) => step.path === currentPath) ?? -1;
 // O guia foi reproduzido numa versão; se a pública mudou e ele não foi
 // refeito, a página avisa em vez de fingir que continua igual.
 const outdated = guide.data.ideVersion !== publicVersion;
@@ -46,7 +56,7 @@ const outdated = guide.data.ideVersion !== publicVersion;
   <div class="docs-shell shell">
     <GuideNav guides={guides} currentId={guide.id} />
 
-    <div class="docs-main guide">
+    <div class="docs-main guide" data-image-viewer>
       <nav class="guide-breadcrumb" aria-label="Caminho">
         <a href={sitePath("/aprender/")}>Aprender</a>
         <span aria-hidden="true">/</span>
@@ -55,7 +65,9 @@ const outdated = guide.data.ideVersion !== publicVersion;
 
       <header class="guide-header enter">
         <p class="kicker">
-          {sectionNames[section]} · capítulo {index + 1} de {siblings.length}
+          {project
+            ? `Projeto em ${project.language} · etapa ${projectIndex + 1} de ${project.steps.length}`
+            : `${sectionNames[section]} · consulta de uso`}
         </p>
         <h1>{guide.data.title}</h1>
         <p class="guide-summary">{guide.data.summary}</p>
@@ -101,6 +113,7 @@ const outdated = guide.data.ideVersion !== publicVersion;
       <article class="guide-article prose">
         <Content />
       </article>
+      <ImageViewer id="guide" />
 
       {guide.data.references.length > 0 && (
         <section class="guide-refs" aria-labelledby="fontes-title">
@@ -123,28 +136,31 @@ const outdated = guide.data.ideVersion !== publicVersion;
         </section>
       )}
 
-      <nav class="guide-pager" aria-label="Capítulo anterior e próximo">
-        {previous && (
-          <a
-            class="guide-pager-link card card-interactive"
-            href={sitePath(`/aprender/${previous.id}/`)}
-            rel="prev"
-          >
-            <span class="label">← Anterior</span>
-            <strong>{previous.data.title}</strong>
-          </a>
-        )}
-        {next && (
-          <a
-            class="guide-pager-link guide-pager-next card card-interactive"
-            href={sitePath(`/aprender/${next.id}/`)}
-            rel="next"
-          >
-            <span class="label">Próximo →</span>
-            <strong>{next.data.title}</strong>
-          </a>
-        )}
-      </nav>
+      <ProjectNavigation currentPath={currentPath} />
+      {!project && (
+        <nav class="guide-pager" aria-label="Capítulo anterior e próximo">
+          {previous && (
+            <a
+              class="guide-pager-link card card-interactive"
+              href={sitePath(`/aprender/${previous.id}/`)}
+              rel="prev"
+            >
+              <span class="label">← Anterior</span>
+              <strong>{previous.data.title}</strong>
+            </a>
+          )}
+          {next && (
+            <a
+              class="guide-pager-link guide-pager-next card card-interactive"
+              href={sitePath(`/aprender/${next.id}/`)}
+              rel="next"
+            >
+              <span class="label">Próximo →</span>
+              <strong>{next.data.title}</strong>
+            </a>
+          )}
+        </nav>
+      )}
     </div>
   </div>
 </BaseLayout>

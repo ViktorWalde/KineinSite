@@ -1,24 +1,74 @@
 ---
 import { getEntry, render } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import DocsSidebar from "../../features/documentacao/DocsSidebar.astro";
+import ManualNavigation from "../../features/manual/ManualNavigation.astro";
+import ManualLayout from "../../features/manual/ManualLayout.astro";
+import { prepareManualPresentation } from "../../features/manual/presentation";
 import "../../features/codigo/codigo.css";
 import "../../features/documentacao/documentacao.css";
 import "../../features/manual/manual.css";
+import "../../features/manual/manual-navigation.css";
 import { formatDate, publicVersion, repositoryUrl, sitePath } from "../../site";
 
 // O manual é a cópia fiel do repositório da IDE na tag da versão pública
-// (scripts/sincronizar-manual.mjs); o site só dá a moldura e o índice.
+// (scripts/sincronizar-manual.mjs); a apresentação usa uma captura real no
+// lugar do esquema de layout, sem editar o Markdown sincronizado.
 const manual = await getEntry("manual", "manual");
 if (!manual) {
   throw new Error(
     "Falta src/content/manual/manual.md: rode scripts/sincronizar-manual.mjs.",
   );
 }
-const { Content, headings } = await render(manual);
-const sections = headings
-  .filter((heading) => heading.depth === 2)
-  .map((heading) => ({ href: `#${heading.slug}`, text: heading.text }));
+const rendered = manual.rendered;
+if (!rendered)
+  throw new Error("O manual precisa ser renderizado pelo loader Markdown.");
+const presentation = prepareManualPresentation(rendered.html);
+const presentationEntry = { ...manual, rendered };
+// O título passa para o cabeçalho e a captura ocupa o lugar do desenho.
+// As duas partes continuam usando o renderizador da coleção.
+const [{ Content: BeforeLayout, headings }, { Content: AfterLayout }] =
+  await Promise.all([
+    renderPart(presentation.beforeLayout),
+    renderPart(presentation.afterLayout),
+  ]);
+function renderPart(html: string) {
+  return render({
+    ...presentationEntry,
+    rendered: {
+      ...presentationEntry.rendered,
+      html,
+    },
+  });
+}
+const titleHeading = headings.find((heading) => heading.depth === 1);
+const topics = [
+  {
+    number: 3,
+    title: "Editor e navegação",
+    description: "Edição, busca e inteligência de código.",
+  },
+  {
+    number: 4,
+    title: "Build, testes e Git",
+    description: "Compile, depure e acompanhe suas alterações.",
+  },
+  {
+    number: 11,
+    title: "Resolver um problema",
+    description: "Confira o ambiente e o que reportar num bug.",
+  },
+  {
+    number: 12,
+    title: "Consultar os atalhos",
+    description: "Encontre a combinação para cada ação.",
+  },
+].map((topic) => ({
+  ...topic,
+  heading: headings.find(
+    (heading) =>
+      heading.depth === 2 && heading.text.startsWith(`${topic.number}. `),
+  ),
+}));
 const { version, tag, commit, source, syncedAt } = manual.data;
 const sourceUrl = `${repositoryUrl}/blob/${tag}/${source}`;
 const outdated = version !== publicVersion;
@@ -29,35 +79,63 @@ const outdated = version !== publicVersion;
   title="Manual da IDE"
   description={`Manual de uso da Kinein Vectis ${version}: layout, editor, build, testes, depuração, Git, terminal, Python, embarcados e atalhos.`}
 >
-  <div class="docs-shell shell">
-    <DocsSidebar
-      title={`Manual · ${version}`}
-      label="Seções do manual"
-      links={sections}
-      note="O texto é o do repositório da IDE, sem alterações."
-    />
+  <div class="docs-shell shell manual-shell">
+    <ManualNavigation headings={headings} />
 
     <div class="docs-main">
-      <header class="manual-header enter">
-        <p class="kicker">MANUAL DA IDE · VERSÃO {version}</p>
-        <p class="manual-source">
-          Este é o texto oficial do repositório da Kinein Vectis, reproduzido
-          sem alterações a partir da tag{" "}
-          <a
-            class="inline-link"
-            href={sourceUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {tag} <span aria-hidden="true">↗</span>
-          </a>{" "}
-          (commit <code>{commit.slice(0, 7)}</code>, copiado em{" "}
-          {formatDate(syncedAt)}). Para aprender passo a passo, o{" "}
-          <a class="inline-link" href={sitePath("/aprender/")}>
-            Guia da IDE
-          </a>{" "}
-          mostra cada tarefa reproduzida na IDE.
+      <header id="manual-title" class="manual-header enter">
+        <div class="manual-eyebrow">
+          <p class="kicker">CONSULTA DA IDE</p>
+          <span class="manual-version">Beta {version}</span>
+        </div>
+        <h1 id={titleHeading?.slug}>
+          {titleHeading?.text ?? "Manual do Kinein Vectis"}
+        </h1>
+        <p class="manual-lead">
+          Consulte o editor, os comandos e as ferramentas do beta. Use o índice
+          para chegar a uma tarefa ou comece por uma destas seções.
         </p>
+        <nav class="manual-shortcuts" aria-label="Consultas frequentes">
+          {topics.map(
+            (topic) =>
+              topic.heading && (
+                <a
+                  class="manual-shortcut card card-interactive"
+                  href={`#${topic.heading.slug}`}
+                >
+                  <strong>
+                    {topic.title}
+                    <span class="arrow" aria-hidden="true">
+                      ↗
+                    </span>
+                  </strong>
+                  <span>{topic.description}</span>
+                </a>
+              ),
+          )}
+        </nav>
+        <p class="manual-guide-link">
+          Está começando?{" "}
+          <a class="inline-link" href={sitePath("/aprender/")}>
+            Siga o guia passo a passo <span aria-hidden="true">→</span>
+          </a>
+        </p>
+        <details class="manual-origin">
+          <summary>Origem e versão deste manual</summary>
+          <p class="manual-source">
+            Texto oficial da Kinein Vectis, reproduzido a partir da tag{" "}
+            <a
+              class="inline-link"
+              href={sourceUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {tag} <span aria-hidden="true">↗</span>
+            </a>{" "}
+            (commit <code>{commit.slice(0, 7)}</code>, copiado em{" "}
+            {formatDate(syncedAt)}).
+          </p>
+        </details>
         {outdated && (
           <p class="manual-outdated">
             Este manual é da versão {version}. A versão pública atual é a{" "}
@@ -66,9 +144,17 @@ const outdated = version !== publicVersion;
         )}
       </header>
 
-      <article class="manual-article prose">
-        <Content />
+      <article class="manual-article prose" aria-label="Texto do manual">
+        <BeforeLayout />
+        <ManualLayout version={version} />
+        <AfterLayout />
       </article>
+      <footer class="manual-footer">
+        <p>Coloque a consulta em prática no seu primeiro projeto.</p>
+        <a class="button button-secondary" href={sitePath("/aprender/")}>
+          Abrir os tutoriais <span aria-hidden="true">→</span>
+        </a>
+      </footer>
     </div>
   </div>
 </BaseLayout>

@@ -1,0 +1,39 @@
+---
+import "./image-viewer.css";
+interface Props {
+  id: string;
+}
+const { id } = Astro.props;
+---
+
+<dialog class="ide-image-dialog" aria-labelledby={`${id}-image-title`}>
+  <div class="ide-image-toolbar">
+    <p id={`${id}-image-title`}>Captura da Kinein Vectis</p>
+    <div class="ide-image-actions">
+      <button
+        class="button button-secondary button-small"
+        type="button"
+        data-image-zoom
+      >
+        Tamanho original
+      </button>
+      <form method="dialog">
+        <button
+          class="button button-secondary button-small"
+          type="submit"
+          autofocus
+        >
+          Fechar <span aria-hidden="true">×</span>
+        </button>
+      </form>
+    </div>
+  </div>
+  <div
+    class="ide-image-stage"
+    tabindex="0"
+    aria-label="Captura ampliada. Role para ver os detalhes."
+  ></div>
+</dialog>
+<script>
+  import "./image-viewer";
+</script>

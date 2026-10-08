@@ -8,7 +8,7 @@ platform: "Ubuntu 24.04 x86_64, X11 (Xvfb)"
 lastTested: 2026-10-02
 status: verified
 prerequisites:
-  - "A IDE instalada e a pasta ~/projetos do capítulo 2."
+  - "A IDE instalada pelo guia Instalar e abrir."
   - "Permissão de administrador (sudo) para instalar pacotes."
 references:
   - "https://github.com/ViktorWalde/KineinVectis/blob/v0.3.5/DocsPublic/manual.md"
@@ -17,9 +17,9 @@ references:
   - "https://docs.pytest.org/"
 ---
 
-**Seu objetivo:** Executar um projeto no seu ambiente próprio e conferir um teste passando.
-
-**Pense antes de seguir:** Em qual Python o pytest deve ser instalado?
+> **Seu objetivo:** executar um projeto no seu ambiente próprio e conferir um teste passando.
+>
+> **Pense antes de seguir:** Em qual Python o pytest deve ser instalado?
 
 O Ubuntu 24.04 já vem com o Python 3.12. Neste capítulo você instala o que a Kinein Vectis usa em volta dele, cria um projeto, dá a ele um ambiente próprio e roda o programa e os testes.
 
@@ -30,7 +30,7 @@ sudo apt install python3-venv pipx
 pipx install basedpyright
 ```
 
-- `python3-venv` cria ambientes isolados para cada projeto, as pastas `.venv`.
+- `python3-venv` instala o suporte para criar ambientes isolados com `python3 -m venv`. Neste guia, o ambiente fica na pasta `.venv` do projeto.
 - `pipx` instala programas escritos em Python sem misturá-los com o Python do sistema.
 - `basedpyright` é o servidor de linguagem do Python: o autocompletar e os avisos da IDE.
 
@@ -44,6 +44,12 @@ basedpyright --version
 Nesta reprodução, a primeira linha foi `Python 3.12.3`; a sua pode mostrar outra atualização do Python 3.12. A segunda mostra a versão do basedpyright. Se o terminal não encontrar o `basedpyright`, rode `pipx ensurepath` e abra um terminal novo.
 
 ## Crie o projeto
+
+Se ainda não tiver uma pasta para os projetos, crie pelo terminal:
+
+```bash
+mkdir -p ~/projetos
+```
 
 A tela inicial não tem um botão de Python. Use **Abrir workspace**, ou <kbd>Ctrl</kbd>+<kbd>O</kbd>. Na caixa, entre em **projetos**, clique em **+ projeto**, digite `ola-python` e marque o tipo **Python**:
 
@@ -83,7 +89,7 @@ _Agora o projeto usa o Python do .venv._
 
 ## Execute
 
-Abra o terminal com <kbd>Alt</kbd>+<kbd>F12</kbd>, como nos capítulos anteriores, e clique no **▶**. A IDE roda o `main.py` com o Python do `.venv`:
+Abra o terminal com <kbd>Alt</kbd>+<kbd>F12</kbd> e clique no **▶**. A IDE roda o `main.py` com o Python do `.venv`:
 
 ![O Terminal com a aba python 'main.py' marcada com ✓ e a saída Ola, mundo!](./capturas/executado.png)
 
@@ -134,4 +140,6 @@ Instale pytest no .venv do projeto, usando .venv/bin/python -m pip install pytes
 
 </details>
 
-Se uma resposta ainda não ficou clara, volte à etapa correspondente e confira na IDE. O resultado que você observa vale mais do que decorar um atalho.
+## Continue em Python
+
+Com o `ola-python` preparado, siga para o [cálculo de temperaturas](../../../estudos/python/primeiros-passos/). Você vai mudar apenas o `main.py`, mantendo o ambiente virtual e os arquivos de teste do projeto.

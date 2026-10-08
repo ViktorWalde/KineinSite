@@ -16,9 +16,9 @@ references:
   - "https://github.com/ViktorWalde/KineinVectis/blob/v0.3.5/DocsPublic/tutorial.md"
 ---
 
-**Seu objetivo:** Abrir a IDE e confirmar de onde veio o pacote, sem alterar o sistema.
-
-**Pense antes de seguir:** Qual é a diferença entre baixar um AppImage e torná-lo executável?
+> **Seu objetivo:** conferir o pacote e abrir a IDE a partir da sua pasta pessoal, sem precisar de sudo.
+>
+> **Pense antes de seguir:** Qual é a diferença entre baixar um AppImage e torná-lo executável?
 
 A Kinein Vectis é distribuída como um **AppImage**: um único arquivo executável que já traz a interface, o core e o Qt. Não há instalação de pacote nem `sudo`. Compiladores e ferramentas dos seus projetos continuam vindo do sistema.
 
@@ -128,5 +128,3 @@ Sem reler as etapas, responda:
 `chmod +x` permite executar o arquivo; não verifica sua integridade. `sha256sum -c Kinein-Vectis-0.3.5-x86_64.AppImage.sha256` confere os bytes contra o manifesto baixado da release. O AppImage inclui a IDE, mas as ferramentas dos seus projetos vêm do sistema.
 
 </details>
-
-Se uma resposta ainda não ficou clara, volte à etapa correspondente e confira na IDE. O resultado que você observa vale mais do que decorar um atalho.

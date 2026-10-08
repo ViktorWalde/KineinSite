@@ -1,7 +1,8 @@
 ---
 import { ideScreens } from "../../data/ide-screens";
+import { developmentScreens } from "../../data/development-screens";
 import IdeGallery from "./IdeGallery.astro";
-import DemoVideo from "../demonstracao/DemoVideo.astro";
+import { releaseUrl, sitePath } from "../../site";
 ---
 
 <section
@@ -10,15 +11,82 @@ import DemoVideo from "../demonstracao/DemoVideo.astro";
   aria-labelledby="interface-title"
 >
   <div class="section-intro reveal">
-    <p class="kicker">A INTERFACE HOJE · CAPTURA REAL</p>
-    <h2 id="interface-title">Veja o beta {ideScreens.version} em uso.</h2>
+    <p class="kicker">OLHE MAIS DE PERTO</p>
+    <h2 id="interface-title">Explore as duas interfaces.</h2>
     <p class="section-intro-copy">
-      Estas são as telas do beta disponível para baixar: um projeto C++ aberto,
-      o build concluído e as ferramentas detectadas. É o mesmo programa do
-      estudo de telemetria do site, fotografado na IDE.
+      Alterne entre a prévia da 0.4 e o beta {ideScreens.version}. Em cada
+      versão, veja o editor e as ferramentas detectadas. Toque em uma captura
+      para ampliar os detalhes.
     </p>
   </div>
 
-  <IdeGallery id="beta" label="Capturas do beta 0.3.5" screens={ideScreens} />
-  <DemoVideo beta />
+  <div class="gallery-versions" data-tabs>
+    <div
+      class="segmented-control"
+      role="tablist"
+      aria-label="Versão nas capturas"
+      hidden
+    >
+      <button
+        type="button"
+        role="tab"
+        data-tab
+        id="gallery-preview-tab"
+        aria-controls="gallery-preview"
+        aria-selected="true"
+        tabindex="0"
+      >
+        Prévia 0.4
+      </button>
+      <button
+        type="button"
+        role="tab"
+        data-tab
+        id="gallery-beta-tab"
+        aria-controls="gallery-beta"
+        aria-selected="false"
+        tabindex="-1"
+      >
+        Beta {ideScreens.version}
+      </button>
+    </div>
+    <div
+      id="gallery-preview"
+      class="tab-panel"
+      role="tabpanel"
+      data-tab-panel
+      aria-labelledby="gallery-preview-tab"
+    >
+      <IdeGallery
+        id="preview"
+        label="Telas da prévia 0.4"
+        screens={developmentScreens}
+      />
+    </div>
+    <div
+      id="gallery-beta"
+      class="tab-panel"
+      role="tabpanel"
+      data-tab-panel
+      aria-labelledby="gallery-beta-tab"
+    >
+      <IdeGallery id="beta" label="Telas do beta 0.3.5" screens={ideScreens} />
+    </div>
+  </div>
+  <div class="try-actions">
+    <a
+      class="button button-primary"
+      href={releaseUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Baixar o beta {ideScreens.version} <span aria-hidden="true">↗</span>
+    </a>
+    <a
+      class="inline-link"
+      href={sitePath("/aprender/ide/primeiro-projeto-cpp/")}
+    >
+      Criar meu primeiro projeto C++ <span aria-hidden="true">→</span>
+    </a>
+  </div>
 </section>

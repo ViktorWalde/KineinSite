@@ -1,6 +1,6 @@
 ---
 title: "Primeiro projeto em Rust"
-summary: "Instale o Rust pelo rustup, crie um projeto Cargo pela IDE e rode, mude e rode de novo: no Rust, o ▶ compila antes de executar."
+summary: "Crie um projeto Cargo, execute pela IDE e confira sua primeira mudança. No Rust, o ▶ compila antes de executar."
 order: 4
 minutes: 15
 ideVersion: "0.3.5"
@@ -8,7 +8,7 @@ platform: "Ubuntu 24.04 x86_64, X11 (Xvfb)"
 lastTested: 2026-10-02
 status: verified
 prerequisites:
-  - "A IDE instalada e a pasta ~/projetos do capítulo 2."
+  - "A IDE instalada pelo guia Instalar e abrir."
   - "Permissão de administrador (sudo) e cerca de 1,6 GB livres na pasta pessoal para o Rust."
 references:
   - "https://github.com/ViktorWalde/KineinVectis/blob/v0.3.5/DocsPublic/tutorial.md"
@@ -16,11 +16,11 @@ references:
   - "https://doc.rust-lang.org/cargo/commands/cargo-new.html"
 ---
 
-**Seu objetivo:** Criar um projeto Cargo e ver a execução refletir uma mudança salva.
+> **Seu objetivo:** criar um projeto Cargo e ver a execução refletir uma mudança salva.
+>
+> **Pense antes de seguir:** Depois de mudar o texto e apertar ▶, o Rust deve recompilar?
 
-**Pense antes de seguir:** Depois de mudar o texto e apertar ▶, o Rust deve recompilar?
-
-Assim como no C++, a Kinein Vectis usa o Rust instalado no sistema. Para Rust, ela recomenda o **rustup**, o instalador oficial das versões do Rust, junto com o **rust-analyzer**, que dá à IDE o autocompletar e os avisos.
+A Kinein Vectis usa o Rust instalado no sistema. Este guia usa o **rustup**, o instalador oficial das versões do Rust, junto com o **rust-analyzer**, que fornece completamento e diagnósticos no editor.
 
 ## Instale o Rust
 
@@ -37,7 +37,7 @@ rustup default stable
 rustup component add rust-analyzer
 ```
 
-Tudo fica em `~/.rustup`, na sua pasta pessoal: cerca de 1,6 GB nesta reprodução. Confira:
+Por padrão, as versões do compilador e suas ferramentas ficam em `~/.rustup`. O Cargo usa `~/.cargo` para seu cache e para programas instalados com `cargo install`. As ferramentas instaladas ocuparam cerca de 1,6 GB nesta reprodução. Confira:
 
 ```bash
 cargo --version
@@ -50,6 +50,12 @@ Cada linha mostra uma versão. Nesta reprodução, a estável era a `1.99.0`. No
 O site do Rust, em rust-lang.org, tem outro instalador do rustup; os comandos `rustup` acima valem para os dois.
 
 ## Crie o projeto
+
+Guarde seus projetos em uma pasta própria. Se ainda não tiver `~/projetos`, crie pelo terminal:
+
+```bash
+mkdir -p ~/projetos
+```
 
 Na tela inicial, clique em **Novo Rust / Cargo**. Na caixa **Abrir ou criar projeto**, dê dois cliques em **projetos**, clique em **+ projeto** e digite `ola-rust`:
 
@@ -65,14 +71,14 @@ Abra `src` e clique em `main.rs`:
 
 _O projeto Cargo recém-criado. No alto à direita, o seletor de execução mostra Cargo: debug._
 
-O projeto tem só dois arquivos:
+Os dois arquivos principais são:
 
 - `Cargo.toml`: o nome, a versão e, mais tarde, as dependências do projeto.
 - `src/main.rs`: o programa, que imprime `Hello, world!`.
 
 ## Execute
 
-Como no capítulo 2, abra antes o terminal com <kbd>Alt</kbd>+<kbd>F12</kbd>, para a aba da execução ficar depois que o programa termina. Depois clique no **▶**.
+Abra antes o terminal com <kbd>Alt</kbd>+<kbd>F12</kbd>, para a aba da execução continuar visível depois que o programa terminar. Depois clique no **▶**.
 
 No Rust, o **▶** roda `cargo run`, que compila o que mudou e executa em seguida. A aba mostra as duas coisas:
 
@@ -80,7 +86,7 @@ No Rust, o **▶** roda `cargo run`, que compila o que mudou e executa em seguid
 
 _Compiling, Finished e Running são do Cargo; a última linha é o programa._
 
-A pasta `target`, onde o Cargo guarda o que compila, aparece logo que o projeto abre. Na primeira execução surge também o `Cargo.lock`, que registra as versões exatas das dependências.
+O Cargo guarda os arquivos de compilação em `target`. O `Cargo.lock` registra as versões exatas das dependências resolvidas; ele é gerado pelo Cargo ao preparar o projeto para compilação.
 
 ## Mude o código e rode de novo
 
@@ -120,4 +126,6 @@ A execução usa cargo run, que compila o que mudou antes de executar. Cargo.tom
 
 </details>
 
-Se uma resposta ainda não ficou clara, volte à etapa correspondente e confira na IDE. O resultado que você observa vale mais do que decorar um atalho.
+## Continue em Rust
+
+O `ola-rust` já executa uma mensagem. Na [próxima etapa](../../../estudos/rust/primeiros-passos/), você continua no mesmo `src/main.rs` e faz o programa calcular temperaturas. O Cargo e o botão ▶ continuam sendo o caminho para executar.

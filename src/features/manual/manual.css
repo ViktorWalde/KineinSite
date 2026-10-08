@@ -1,15 +1,118 @@
-/* Manual da IDE (/manual/): o texto oficial do repositório da IDE numa
-   coluna de leitura. O cabeçalho diz de onde veio; o resto é o Markdown do
-   manual. A moldura e o índice lateral vêm de documentacao.css. */
+/* A apresentação envolve o Markdown da release; o corpo continua sendo
+   conferido pelo hash registrado no repositório. */
+.manual-shell {
+  grid-template-columns: 16rem minmax(0, 1fr);
+  gap: var(--space-xl);
+}
+
 .manual-header {
-  padding-block: var(--space-xl) 0;
+  padding-block: var(--space-s) var(--space-l);
+}
+
+.manual-eyebrow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-s);
+  margin-block-end: var(--space-m);
+}
+
+.manual-eyebrow .kicker {
+  margin: 0;
+}
+
+.manual-version {
+  padding: 0.2rem 0.65rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--muted);
+  font: 600 var(--text-xs) / 1.6 var(--font-mono);
+}
+
+.manual-header h1 {
+  margin-block-end: var(--space-m);
+  font-size: var(--text-4xl);
+}
+
+.manual-lead {
+  max-width: 60ch;
+  margin-block-end: var(--space-l);
+  color: var(--muted);
+  font-size: var(--text-lg);
+}
+
+.manual-shortcuts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-s);
+  margin-block: var(--space-l);
+}
+
+.manual-shortcut {
+  padding: var(--space-m);
+}
+
+.manual-shortcut strong {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-s);
+  margin-block-end: 0.4rem;
+  font-size: var(--text-base);
+  line-height: 1.4;
+}
+
+.manual-shortcut .arrow {
+  display: grid;
+  width: 1.8em;
+  height: 1.8em;
+  flex-shrink: 0;
+  place-items: center;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: var(--surface);
+  color: var(--accent);
+}
+
+.manual-shortcut:nth-child(even) .arrow {
+  color: var(--companion);
+}
+
+.manual-shortcut > span {
+  display: block;
+  color: var(--muted);
+  font-size: var(--text-sm);
+  line-height: 1.6;
+}
+
+.manual-guide-link {
+  margin-block: var(--space-m);
+  color: var(--muted);
+  font-size: var(--text-sm);
+}
+
+.manual-origin {
+  padding-block: var(--space-s);
+  border-block: 1px solid var(--border);
+  font-size: var(--text-sm);
+}
+
+.manual-origin summary {
+  width: fit-content;
+  padding-block: 0.3rem;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.manual-origin summary:hover {
+  color: var(--accent);
 }
 
 .manual-source {
   max-width: 62ch;
-  margin-block: var(--space-xs) 0;
+  margin-block: var(--space-s) 0;
+  padding-block-end: var(--space-s);
   color: var(--muted);
-  font-size: var(--text-sm);
   line-height: 1.7;
 }
 
@@ -18,33 +121,33 @@
   padding: var(--space-s) var(--space-m);
   border: 1px solid var(--accent);
   border-radius: var(--radius-md);
-  background: color-mix(in oklab, var(--accent) 10%, transparent);
+  background: var(--surface);
   font-size: var(--text-sm);
 }
 
 .manual-article {
-  max-width: 72ch;
-  padding-block: var(--space-s) var(--space-2xl);
+  padding: var(--space-l);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  background: var(--surface);
+  box-shadow: var(--edge), var(--shadow-card);
   overflow-wrap: break-word;
   font-size: var(--text-base);
   line-height: 1.8;
 }
 
-.manual-article h1 {
-  margin-block: var(--space-xs) var(--space-m);
-  font-size: var(--text-4xl);
-}
-
 .manual-article h2 {
-  margin-block: var(--space-2xl) var(--space-s);
+  margin-block: var(--space-2xl) var(--space-m);
   padding-block-start: var(--space-l);
-  border-top: 1px solid var(--border);
+  border-top: 2px solid color-mix(in srgb, var(--accent) 40%, var(--border));
   font-size: var(--text-2xl);
+  line-height: 1.3;
 }
 
 .manual-article h3 {
-  margin-block: var(--space-l) var(--space-xs);
+  margin-block: var(--space-xl) var(--space-s);
   font-size: var(--text-xl);
+  line-height: 1.4;
 }
 
 .manual-article p,
@@ -53,8 +156,18 @@
   margin-block: 0 1.2rem;
 }
 
+.manual-article ul,
+.manual-article ol {
+  padding-inline-start: 1.5rem;
+}
+
 .manual-article li + li {
-  margin-block-start: 0.4rem;
+  margin-block-start: 0.55rem;
+}
+
+.manual-article li::marker {
+  color: var(--accent);
+  font-weight: 600;
 }
 
 .manual-article a {
@@ -65,19 +178,111 @@
   display: none;
 }
 
+.manual-footer p {
+  max-width: 36ch;
+  margin: 0;
+  color: var(--muted);
+  font-size: var(--text-base);
+}
+
 .manual-article blockquote {
-  margin: var(--space-m) 0;
-  padding: var(--space-s) var(--space-m);
+  margin: var(--space-l) 0;
+  padding: var(--space-m);
   border-left: 3px solid var(--accent);
   border-radius: 0 var(--radius-md) var(--radius-md) 0;
-  background: var(--surface);
+  background: var(--card);
   color: var(--muted);
+  font-size: var(--text-sm);
+  line-height: 1.8;
 }
 
 .manual-article blockquote p:last-child {
   margin-block-end: 0;
 }
 
+.manual-table-scroll {
+  max-width: 100%;
+  overflow-x: auto;
+  margin-block: var(--space-m) var(--space-l);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--card);
+  scrollbar-color: var(--border) var(--card);
+  scrollbar-width: thin;
+}
+
+.manual-table-scroll table {
+  min-width: 36rem;
+  margin: 0;
+  border: 0;
+  font-size: var(--text-sm);
+}
+
+.manual-table-scroll th,
+.manual-table-scroll td {
+  padding: 0.75rem 0.9rem;
+}
+
+.manual-table-scroll th {
+  background: var(--surface-soft);
+}
+
+.manual-table-scroll tbody tr {
+  transition: background-color var(--duration-fast) var(--ease-out);
+}
+
+.manual-table-scroll tbody tr:nth-child(even) {
+  background: var(--surface);
+}
+
+.manual-table-scroll tbody tr:hover {
+  background: var(--card-hover);
+}
+
+.manual-table-scroll code {
+  display: inline-block;
+  border: 1px solid var(--border);
+  border-bottom-width: 2px;
+  background: var(--surface);
+  line-height: 1.6;
+  white-space: nowrap;
+}
+
+.manual-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-m);
+  padding-block: var(--space-xl);
+}
+
 .manual-article :not(pre) > code {
   overflow-wrap: anywhere;
+}
+
+@media (width <= 54rem) {
+  .manual-shell {
+    display: block;
+  }
+
+  .manual-sidebar {
+    margin-block-end: var(--space-m);
+  }
+
+  .manual-article :is(h2, h3),
+  #manual-title {
+    scroll-margin-block-start: 4rem;
+  }
+}
+
+@media (width <= 35rem) {
+  .manual-shortcuts {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .manual-article {
+    padding: var(--space-m);
+    border-radius: var(--radius-lg);
+  }
 }

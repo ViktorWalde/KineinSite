@@ -2,7 +2,9 @@
 // já passou de 30% da altura da janela. Sem JavaScript, o índice continua
 // sendo uma lista de âncoras comum.
 const links = Array.from(
-  document.querySelectorAll<HTMLAnchorElement>('.docs-sidebar a[href^="#"]'),
+  document.querySelectorAll<HTMLAnchorElement>(
+    '.docs-sidebar a[href^="#"], [data-section-nav] a[href^="#"]',
+  ),
 );
 const sections = links.map((link) =>
   document.getElementById(decodeURIComponent(link.hash.slice(1))),

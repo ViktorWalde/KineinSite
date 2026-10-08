@@ -1,0 +1,41 @@
+.preview-page {
+  max-width: 64rem;
+  padding-block: var(--space-xl) var(--space-3xl);
+}
+
+.preview-page .docs-intro {
+  max-width: 48rem;
+}
+
+.preview-article {
+  max-width: 70ch;
+  margin-inline: auto;
+  padding-block-start: var(--space-xl);
+  font-size: var(--text-base);
+  line-height: 1.8;
+}
+
+.preview-article h2 {
+  margin-block: var(--space-xl) var(--space-m);
+  font-size: var(--text-2xl);
+}
+
+.preview-article p,
+.preview-article ol {
+  margin-block: 0 var(--space-l);
+}
+
+.preview-article ol {
+  display: grid;
+  gap: var(--space-m);
+  padding-inline-start: 1.5rem;
+}
+
+.preview-article li::marker,
+.preview-article li > strong {
+  color: var(--accent);
+}
+
+.preview-article :not(pre) > code {
+  overflow-wrap: anywhere;
+}

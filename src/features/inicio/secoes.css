@@ -12,6 +12,11 @@
   margin-block-end: 0.5rem;
 }
 
+.status-panel > div {
+  min-width: 0;
+  max-width: 100%;
+}
+
 .status-panel p {
   max-width: 60ch;
   margin: 0;
@@ -33,6 +38,11 @@
 
 .current-capabilities > div {
   padding: var(--space-m);
+  border-block-start: 3px solid var(--accent);
+}
+
+.current-capabilities > div:nth-child(even) {
+  border-block-start-color: var(--companion);
 }
 
 .current-capabilities h3 {
@@ -85,7 +95,7 @@
 }
 
 .closing-layout h2 {
-  max-width: 18ch;
+  max-width: 24ch;
 }
 
 .closing-layout p:not(.kicker) {

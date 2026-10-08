@@ -8,18 +8,20 @@ platform: "Ubuntu 24.04 x86_64, X11 (Xvfb)"
 lastTested: 2026-10-02
 status: verified
 prerequisites:
-  - "O projeto ola-kinein do capítulo 2."
+  - "O projeto ola-kinein, criado em Primeiro projeto em C++."
   - "Permissão de administrador (sudo) para instalar o Git."
 references:
   - "https://github.com/ViktorWalde/KineinVectis/blob/v0.3.5/DocsPublic/manual.md"
   - "https://git-scm.com/book/pt-br/v2"
 ---
 
-**Seu objetivo:** Guardar duas versões do projeto e explicar a diferença entre elas.
-
-**Pense antes de seguir:** Um commit envia o projeto automaticamente para o GitHub?
+> **Seu objetivo:** guardar duas versões do projeto e explicar a diferença entre elas.
+>
+> **Pense antes de seguir:** Um commit envia o projeto automaticamente para o GitHub?
 
 O Git guarda versões do projeto: cada **commit** é uma fotografia dos arquivos, com uma mensagem dizendo o que mudou. A Kinein Vectis mostra o estado do Git na árvore, no editor e numa janela própria. Neste capítulo, o `ola-kinein` vira um repositório.
+
+As capturas usam o programa de mensagem do primeiro projeto. Se você já avançou para temperaturas, mantenha seu código: vamos alterar apenas um texto da saída. A quantidade de arquivos e os números de linha podem ser diferentes.
 
 ## Instale o Git e diga quem você é
 
@@ -45,6 +47,8 @@ cd ~/projetos/ola-kinein
 git init
 ```
 
+Se esse projeto já tem um repositório Git, continue nele e pule o `git init`.
+
 A resposta começa com `Initialized empty Git repository`. Na 0.3.5, a IDE ainda não mostra nada: ela percebe o repositório novo na próxima vez que um arquivo do projeto muda, e é o que vai acontecer no passo seguinte. Para atualizar na hora, use **Git: Atualizar status** no <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>N</kbd>.
 
 ## Diga ao Git o que ignorar
@@ -65,7 +69,7 @@ _Verde na árvore: arquivos novos, que o Git ainda não guarda. O 5 conta as mud
 
 ## Faça o primeiro commit
 
-Clique em **main**, no cabeçalho. A janela do Git abre no lugar da árvore, na aba **Commit**, com a lista do que mudou. Marque a caixinha de cada arquivo, escreva a mensagem embaixo e clique em **Commit (5)**:
+Clique no nome da branch, **main** neste exemplo, no cabeçalho. A janela do Git abre no lugar da árvore, na aba **Commit**, com a lista do que mudou. Marque os arquivos que quer guardar, escreva a mensagem embaixo e clique em **Commit**. O número no botão conta os arquivos marcados; nesta captura, são cinco:
 
 ![A janela do Git com os cinco arquivos marcados, a mensagem Primeiro commit e o botão Commit (5); acima da mensagem, em vermelho, git diff falhou: fatal: bad revision 'HEAD'](./capturas/primeiro-commit.png)
 
@@ -77,7 +81,12 @@ Depois do commit, a lista fica vazia e o número some do cabeçalho.
 
 ## Mude, compare e faça outro commit
 
-A janela do Git ocupa o lugar da árvore. Para abrir o `main.cpp`, use <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>N</kbd>, como no capítulo anterior. Troque o texto entre aspas por `Olá, Git!` e salve:
+A janela do Git ocupa o lugar da árvore. Para abrir o `main.cpp`, use <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>N</kbd>, como no guia Busca e atalhos. Escolha a mudança que corresponde ao seu programa:
+
+- **Programa de mensagem:** troque o texto entre aspas por `Olá, Git!`.
+- **Cálculo de temperaturas:** troque apenas o rótulo `media: ` por `Media calculada: `. Preserve o cálculo e o restante da saída.
+
+Salve. A captura mostra a mudança no programa de mensagem:
 
 ![O main.cpp com a linha 5 mudada e uma barra azul na calha ao lado dela; o cabeçalho mostra main com 1 mudança e a janela do Git lista main.cpp em azul](./capturas/modificado.png)
 
@@ -89,7 +98,7 @@ Clique no nome do arquivo na janela do Git para ver exatamente o que mudou:
 
 _Vermelho saiu, verde entrou. Esc volta ao editor._
 
-Aperte <kbd>Esc</kbd>, marque o `main.cpp`, escreva `Muda a mensagem` e clique em **Commit (1)**.
+Aperte <kbd>Esc</kbd>, marque o `main.cpp`, escreva `Muda a mensagem` e clique em **Commit**. Com apenas esse arquivo marcado, o botão mostra **Commit (1)**.
 
 ## Veja o histórico
 
@@ -112,7 +121,7 @@ cd ~/projetos/ola-kinein
 git log --oneline
 ```
 
-As duas linhas são os seus commits, o mais novo em cima.
+Os dois commits novos aparecem no início, o mais recente em cima. Se o repositório já tinha histórico, as versões anteriores continuam abaixo.
 
 ## Confira o que aprendeu
 
@@ -128,5 +137,3 @@ Sem reler as etapas, responda:
 Um commit guarda uma versão no repositório local; não faz push. Ignorar .kinein evita guardar build e estado local da IDE. O diff mostra as linhas removidas e adicionadas, para conferir o que entrará no commit.
 
 </details>
-
-Se uma resposta ainda não ficou clara, volte à etapa correspondente e confira na IDE. O resultado que você observa vale mais do que decorar um atalho.

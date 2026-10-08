@@ -1,0 +1,84 @@
+---
+interface Props {
+  headings: readonly { depth: number; slug: string; text: string }[];
+}
+const { headings } = Astro.props;
+const chapters = headings
+  .filter((heading) => heading.depth === 2)
+  .map((heading, index) => {
+    const start = headings.indexOf(heading);
+    const next = headings.findIndex((item, i) => i > start && item.depth === 2);
+    return {
+      ...heading,
+      number: String(index + 1).padStart(2, "0"),
+      label: heading.text.replace(/^\d+\.\s*/, ""),
+      children: headings
+        .slice(start + 1, next < 0 ? undefined : next)
+        .filter((item) => item.depth === 3),
+    };
+  });
+---
+
+<aside class="manual-sidebar" aria-label="Navegação do manual">
+  <details class="manual-outline" data-manual-outline open>
+    <summary>
+      <span>Neste manual</span>
+      <span class="manual-outline-count">{chapters.length} seções</span>
+      <span class="manual-chevron" aria-hidden="true">
+        ⌄
+      </span>
+    </summary>
+    <div class="manual-outline-body">
+      <div class="manual-search" data-manual-search hidden>
+        <label for="manual-search">Encontrar uma seção</label>
+        <input
+          id="manual-search"
+          type="search"
+          placeholder="Editor, Git, Python…"
+          autocomplete="off"
+          aria-controls="manual-chapters"
+        />
+        <p data-manual-results class="visually-hidden" role="status"></p>
+      </div>
+      <nav aria-label="Seções e subseções do manual" data-section-nav>
+        <ol id="manual-chapters" class="manual-chapters">
+          {chapters.map((chapter) => (
+            <li data-manual-chapter>
+              <a class="manual-section-link" href={`#${chapter.slug}`}>
+                <span class="manual-section-number" aria-hidden="true">
+                  {chapter.number}
+                </span>
+                <span>{chapter.label}</span>
+              </a>
+              {chapter.children.length > 0 && (
+                <details class="manual-subsections">
+                  <summary>
+                    Tópicos <span aria-hidden="true">+</span>
+                  </summary>
+                  <ul>
+                    {chapter.children.map((child) => (
+                      <li data-manual-topic>
+                        <a href={`#${child.slug}`}>{child.text}</a>
+                      </li>
+                    ))}
+                  </ul>
+                </details>
+              )}
+            </li>
+          ))}
+        </ol>
+      </nav>
+      <p class="manual-no-results" data-manual-empty hidden>
+        Nenhuma seção encontrada. Tente outra palavra.
+      </p>
+      <a class="manual-back-top" href="#manual-title">
+        Voltar ao início <span aria-hidden="true">↑</span>
+      </a>
+    </div>
+  </details>
+</aside>
+
+<script>
+  import "./manual-nav";
+  import "../documentacao/section-nav";
+</script>

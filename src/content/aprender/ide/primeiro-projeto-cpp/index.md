@@ -8,16 +8,16 @@ platform: "Ubuntu 24.04 x86_64, X11 (Xvfb)"
 lastTested: 2026-10-02
 status: verified
 prerequisites:
-  - "A IDE instalada, como no capítulo anterior."
+  - "A IDE instalada pelo guia Instalar e abrir."
   - "Permissão de administrador (sudo) para instalar o compilador."
 references:
   - "https://github.com/ViktorWalde/KineinVectis/blob/v0.3.5/DocsPublic/manual.md"
   - "https://cmake.org/cmake/help/latest/manual/cmake-presets.7.html"
 ---
 
-**Seu objetivo:** Criar, compilar e executar um programa, depois conferir uma mudança na saída.
-
-**Pense antes de seguir:** Se mudar o texto e apertar ▶ sem recompilar, qual saída espera ver na 0.3.5?
+> **Seu objetivo:** criar, compilar e executar um programa, depois conferir uma mudança na saída.
+>
+> **Pense antes de seguir:** Se mudar o texto e apertar ▶ sem recompilar, qual saída espera ver na 0.3.5?
 
 A Kinein Vectis não traz compilador: ela usa o que está instalado no sistema. Neste capítulo você instala as ferramentas de C++, cria um projeto pela IDE, compila, executa e faz a primeira mudança.
 
@@ -37,7 +37,7 @@ cmake --version | head -n 1
 ninja --version
 ```
 
-As três linhas mostram versões, como `cmake version 3.28.3`. O projeto que a IDE cria pede o CMake 3.24 ou mais novo; o do Ubuntu 24.04 serve.
+As três linhas mostram versões, como `cmake version 3.28.3`. Os presets incluídos no projeto usam um formato que pede CMake 3.25 ou mais novo; o do Ubuntu 24.04 serve.
 
 Se a IDE já estava aberta, feche e abra de novo para ela encontrar as ferramentas novas.
 
@@ -47,7 +47,7 @@ Na tela inicial, clique em **Novo C++ / CMake**. Abre a caixa **Abrir ou criar p
 
 Guarde os projetos numa pasta só para eles:
 
-1. Clique em **+ pasta**, digite `projetos` e clique em **Criar**.
+1. Se a pasta `projetos` ainda não existir, clique em **+ pasta**, digite `projetos` e clique em **Criar**.
 2. Dê dois cliques em **projetos** para entrar nela.
 3. Clique em **+ projeto** e digite o nome: `ola-kinein`.
 
@@ -70,7 +70,7 @@ _O projeto recém-criado, com o main.cpp aberto._
 O que cada item é:
 
 - `src/main.cpp`: o programa. Ele imprime `Kinein Vectis`.
-- `CMakeLists.txt`: a receita do build. Pede C++23 e liga os avisos do compilador no máximo, tratando aviso como erro (`-Werror`): um aviso impede o build até ser corrigido.
+- `CMakeLists.txt`: a receita da compilação. Pede C++23, ativa avisos rigorosos e trata avisos como erros (`-Werror`): um aviso impede a compilação até ser corrigido.
 - `CMakePresets.json`: as configurações **Debug**, para desenvolver, e **Release**, otimizada.
 - `include/` e `tests/`: vazias, para os seus cabeçalhos e testes.
 - `.kinein/`: a pasta da IDE nesse projeto. O build sai em `.kinein/build`.
@@ -137,4 +137,6 @@ Na 0.3.5, o ▶ pode executar o binário anterior: salve e compile antes de roda
 
 </details>
 
-Se uma resposta ainda não ficou clara, volte à etapa correspondente e confira na IDE. O resultado que você observa vale mais do que decorar um atalho.
+## Continue no mesmo projeto
+
+Seu `ola-kinein` já compila e executa. Agora transforme a mensagem em um programa que [calcula a média de duas temperaturas](../../../estudos/cpp/primeiros-passos/). Você continua em C++, no mesmo `src/main.cpp`, usando os comandos que acabou de aprender.

@@ -1,0 +1,192 @@
+.cpp-journey-wrap {
+  container-type: inline-size;
+}
+
+.cpp-journey {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-m);
+  margin: var(--space-xl) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cpp-journey li {
+  min-width: 0;
+}
+
+.cpp-step {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  padding: var(--space-l);
+  text-decoration: none;
+}
+
+.cpp-step-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-block-end: var(--space-l);
+}
+
+.cpp-step-number {
+  display: grid;
+  min-width: 3.5rem;
+  min-height: 3.5rem;
+  place-items: center;
+  padding: 0.4rem;
+  border: 1px solid color-mix(in srgb, var(--accent) 40%, var(--border));
+  border-radius: var(--radius-md);
+  background: var(--card-tint);
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  line-height: 1;
+}
+
+.cpp-step-arrow {
+  color: var(--muted);
+  transition: translate var(--duration-base);
+}
+
+.cpp-step:hover .cpp-step-arrow,
+.cpp-step:focus-visible .cpp-step-arrow {
+  translate: var(--nudge) 0;
+  color: var(--accent);
+}
+
+.cpp-step h3 {
+  margin-block-end: var(--space-s);
+  font-size: var(--text-xl);
+}
+
+.cpp-step p {
+  margin-block-end: var(--space-l);
+  color: var(--muted);
+  font-size: var(--text-sm);
+}
+
+.cpp-step-result {
+  margin-block-start: auto;
+  padding: var(--space-s);
+  border-inline-start: 2px solid var(--companion);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  background: var(--surface);
+  color: var(--text);
+  font-size: var(--text-sm);
+  line-height: 1.5;
+}
+
+.cpp-step-result code {
+  padding: 0;
+  background: transparent;
+  font-size: inherit;
+}
+
+.cpp-continuation {
+  margin-block-start: var(--space-xl);
+  padding-block-start: var(--space-l);
+  border-top: 1px solid var(--border);
+}
+
+.cpp-pager,
+.language-starts-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-m);
+}
+
+.cpp-pager a {
+  display: grid;
+  align-content: start;
+  gap: var(--space-s);
+  padding: var(--space-l);
+  text-decoration: none;
+}
+
+.cpp-pager a > span:last-child:not(.label),
+.cpp-complete {
+  color: var(--muted);
+  font-size: var(--text-sm);
+}
+
+.cpp-pager-next {
+  border-color: var(--accent);
+}
+
+.language-starts {
+  margin-block-start: var(--space-2xl);
+  padding-block-start: var(--space-xl);
+  border-top: 1px solid var(--border);
+}
+
+.language-starts-heading {
+  max-width: 65ch;
+  margin-block-end: var(--space-l);
+}
+
+.language-starts h2 {
+  margin-block-end: var(--space-s);
+  font-size: var(--text-2xl);
+}
+
+.language-start p {
+  color: var(--muted);
+}
+
+.language-start {
+  display: grid;
+  gap: var(--space-s);
+  padding: var(--space-l);
+  text-decoration: none;
+}
+
+.language-start h3,
+.language-start p {
+  margin: 0;
+}
+
+.language-start p,
+.language-start .inline-link {
+  font-size: var(--text-sm);
+}
+
+.language-start-tag {
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-weight: 700;
+}
+
+.language-starts-heading > p:last-child {
+  color: var(--muted);
+}
+
+@container (width <= 62rem) {
+  .cpp-journey {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (width <= 35rem) {
+  .cpp-journey,
+  .cpp-pager,
+  .language-starts-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cpp-step {
+    padding: var(--space-m);
+  }
+
+  .cpp-step-top {
+    margin-block-end: var(--space-m);
+  }
+}
+
+@container (width <= 34rem) {
+  .cpp-journey {
+    grid-template-columns: 1fr;
+  }
+}

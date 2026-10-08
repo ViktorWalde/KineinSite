@@ -1,0 +1,73 @@
+---
+import { getImage } from "astro:assets";
+import { getEntry } from "astro:content";
+import layoutSource from "../../content/aprender/ide/conhecer-a-tela/capturas/visao-geral.png";
+import ImageViewer from "../imagens/ImageViewer.astro";
+import { formatDate, sitePath } from "../../site";
+import "./manual-layout.css";
+
+interface Props {
+  version: string;
+}
+const { version } = Astro.props;
+const guide = await getEntry("aprender", "ide/conhecer-a-tela");
+if (
+  !guide ||
+  guide.data.status !== "verified" ||
+  guide.data.ideVersion !== version
+)
+  throw new Error(
+    "A captura do layout precisa corresponder à versão do manual.",
+  );
+const screenshot = await getImage({
+  src: layoutSource,
+  format: "webp",
+  quality: 86,
+  widths: [720, 1200, 2000],
+  sizes: "(max-width: 54rem) calc(100vw - 4rem), 52rem",
+});
+---
+
+<div class="manual-layout" data-image-viewer>
+  <figure>
+    <div class="manual-layout-heading">
+      <span class="label">CAPTURA DO BETA {version}</span>
+      <span class="manual-layout-hint" aria-hidden="true">
+        Toque para ampliar ⤢
+      </span>
+    </div>
+    <a
+      class="manual-layout-open"
+      href={screenshot.src}
+      data-image-open
+      aria-label={`Ampliar captura do layout da Kinein Vectis ${version}`}
+      aria-haspopup="dialog"
+    >
+      <img
+        src={screenshot.src}
+        srcset={screenshot.srcSet.attribute}
+        sizes="(max-width: 54rem) calc(100vw - 4rem), 52rem"
+        width={screenshot.attributes["width"]}
+        height={screenshot.attributes["height"]}
+        alt={`Janela real da Kinein Vectis ${version}: menus e execução no topo, trilho e árvore de arquivos à esquerda, main.cpp no editor, Símbolos recolhido à direita, terminal e barra de status embaixo.`}
+        loading="lazy"
+        decoding="async"
+      />
+    </a>
+    <figcaption>
+      Arquivos à esquerda, editor no centro e a saída do programa no terminal.
+    </figcaption>
+  </figure>
+  <p class="manual-layout-origin">
+    Linux · captura de{" "}
+    <time datetime={guide.data.lastTested.toISOString().slice(0, 10)}>
+      {formatDate(guide.data.lastTested)}
+    </time>
+    . Veja cada área no{" "}
+    <a href={sitePath("/aprender/ide/conhecer-a-tela/")}>
+      guia Conhecer a tela
+    </a>
+    .
+  </p>
+  <ImageViewer id="manual-layout" />
+</div>

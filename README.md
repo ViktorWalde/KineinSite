@@ -8,11 +8,12 @@ O site é estático, feito com Astro 7 e publicado no GitHub Pages. Não há ser
 
 | Endereço                                 | Conteúdo                                                                                                                   |
 | ---------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
-| `/`                                      | Benefícios do beta, capturas reais, demonstração da interface 0.4 em desenvolvimento e um caminho curto para experimentar. |
+| `/`                                      | Comparação entre beta e prévia 0.4, galeria por versão e percurso contínuo de C++.                                         |
 | `/atualizacoes/`                         | Lista das notas de atualização, da mais recente para a mais antiga; cada nota tem sua página em `/atualizacoes/<versão>/`. |
 | `/documentacao/`                         | Índice do manual, guias, estudos básicos de quatro linguagens e referências.                                               |
-| `/documentacao/previa-0-4/`              | Vídeo real com legendas, roteiro e distinção entre recursos demonstrados e planos.                                         |
-| `/aprender/`                             | Oito capítulos básicos reproduzidos no beta 0.3.5.                                                                         |
+| `/manual/`                               | Manual oficial do beta, com índice de seções e subseções, busca no índice e tabelas de atalhos.                            |
+| `/documentacao/previa-0-4/`              | Demonstração da interface, roteiro e estado da versão em desenvolvimento.                                                  |
+| `/aprender/`                             | Percurso de C++, projetos de Rust e Python e guias de consulta da IDE.                                                     |
 | `/estudos/<linguagem>/primeiros-passos/` | Primeiro programa em C, C++, Rust ou Python, com resultados e exercícios conferidos.                                       |
 | `/estudos/cpp/telemetria-local/`         | Primeiro estudo autoral de C++20, testado no Linux.                                                                        |
 | `/documentacao/site/`                    | Como o site funciona, como colaborar e próximos passos verificáveis.                                                       |
@@ -41,6 +42,7 @@ No preview do build para Pages, abra <http://127.0.0.1:4321/KineinSite/>. O buil
 
 - [CONTRIBUTING.md](CONTRIBUTING.md): fluxo de contribuição e critérios para conteúdo.
 - [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md): rotas, coleções, temas, build, segurança e publicação.
+- [docs/VISUAL-SYSTEM.md](docs/VISUAL-SYSTEM.md): padrão de tipografia, cores, componentes, interação e mídia.
 - [SECURITY.md](SECURITY.md): como relatar uma vulnerabilidade do site.
 - [docs/ROADMAP.md](docs/ROADMAP.md): trabalho do site com pré-requisitos e critérios de conclusão.
 - `src/content/estudos/`: estudos de linguagem independentes da IDE, publicados somente com `status: verified`.
@@ -87,7 +89,11 @@ bash scripts/gravar-demo.sh /caminho/do/executavel-de-desenvolvimento
 bash scripts/gravar-demo.sh /caminho/do/AppImage-0.3.5 --beta
 ```
 
-Requer Xvfb, xdotool, ffmpeg/ffprobe, CMake, g++, Git e clangd. Não usa sudo. Os exemplos são extraídos do Markdown; o vídeo usa uma HOME descartável e um repositório Git de demonstração. Confira a gravação antes de atualizar suas legendas e datas. Critérios de revisão em [docs/TEACHING.md](docs/TEACHING.md); evidência desta entrega em [docs/REVIEW-2026-10-08.md](docs/REVIEW-2026-10-08.md).
+Requer Xvfb, xdotool, ffmpeg/ffprobe, CMake, g++, Git e clangd. Não usa sudo. Os exemplos são extraídos do Markdown; o vídeo usa uma HOME descartável e um repositório Git de demonstração. Confira cada cena antes de atualizar o roteiro e as datas. Critérios de revisão em [docs/TEACHING.md](docs/TEACHING.md); evidência da entrega anterior em [docs/REVIEW-2026-10-08.md](docs/REVIEW-2026-10-08.md).
+
+Os vídeos repetem automaticamente quando estão visíveis, com som desativado e controles de pausa e tela cheia. `prefers-reduced-motion` mantém a reprodução manual. As capturas têm ampliação, inclusive nos tutoriais. Os seletores de versão e de tela compartilham o comportamento de teclado e as transições.
+
+Os ajustes posteriores foram aprovados pelo mantenedor na prévia local, conforme [docs/LOCAL-PREVIEW-2026-10-08.md](docs/LOCAL-PREVIEW-2026-10-08.md). A publicação foi autorizada após essa revisão; a próxima etapa das mídias será mostrar cursor, cliques e pontos de atenção.
 
 A validação do Actions foi tentada em 2026-10-08: o GitHub recusou iniciar o job por bloqueio de cobrança da conta. A execução automática permanece pausada; os checks locais continuam obrigatórios.
 

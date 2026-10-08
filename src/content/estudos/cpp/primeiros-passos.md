@@ -1,6 +1,6 @@
 ---
 title: "C++ básico: do número ao resultado"
-summary: "Calcule uma média de duas temperaturas, confira a saída e faça uma pequena mudança. Um primeiro exercício sem hardware ou bibliotecas externas."
+summary: "Continue no projeto ola-kinein: troque a mensagem por um cálculo de temperaturas, execute e confira como o resultado muda."
 language: "C++"
 standard: "C++20"
 platform: "Arch Linux x86_64"
@@ -11,9 +11,9 @@ status: verified
 
 ## Seu objetivo
 
-Ao terminar, você conseguirá guardar dois números, calcular uma média e mostrar o resultado. As temperaturas são dados inventados para aprender: 21 e 23 °C. Este programa não lê sensores físicos.
+Seu `ola-kinein` já mostra uma mensagem no terminal. Agora ele vai calcular a média de duas temperaturas: 21 e 23 °C. Os valores são inventados para o exercício; você pode fazer tudo no computador, sem um sensor.
 
-Você precisa de um terminal e de um compilador de C++ instalado. Não é necessário instalar bibliotecas. Se estiver começando do zero, leia cada etapa e execute antes de seguir.
+Continue com o projeto aberto na Vectis. Se ainda não o criou, siga o [primeiro projeto em C++](../../../aprender/ide/primeiro-projeto-cpp/). Também é possível fazer este exercício só com um terminal e um compilador C++.
 
 ## Pense antes de executar
 
@@ -21,7 +21,9 @@ Quanto deve ser a média de 21 e 23? Faça a conta sem olhar a saída: some os d
 
 ## 1. Escreva um programa pequeno
 
-Crie `main.cpp` e copie:
+No mesmo projeto `ola-kinein`, abra `src/main.cpp`. Substitua o conteúdo pelo programa abaixo e salve. O `CMakeLists.txt` do primeiro tutorial continua servindo; você só vai mudar o código C++.
+
+Se estiver acompanhando pelo terminal, crie um `main.cpp` numa pasta de exercícios.
 
 ```cpp
 #include <iomanip>
@@ -39,7 +41,13 @@ int main() {
 
 ## 2. Execute e confira
 
-No terminal, dentro da pasta do arquivo:
+**Na Vectis 0.3.5:**
+
+1. Salve `src/main.cpp` com <kbd>Ctrl</kbd>+<kbd>S</kbd>.
+2. Compile com <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>B</kbd> e espere o painel **Build** informar sucesso.
+3. Mantenha um terminal aberto com <kbd>Alt</kbd>+<kbd>F12</kbd> e clique em **▶**. A saída aparece na aba de execução de `ola-kinein`.
+
+**Pelo terminal:** entre na pasta que contém `main.cpp` (`src/`, se estiver usando o projeto do tutorial) e rode:
 
 ```sh
 g++ -std=c++20 -Wall -Wextra -Wpedantic -Werror main.cpp -o media
@@ -52,7 +60,7 @@ A saída deve ser exatamente:
 media: 22.00 C
 ```
 
-A primeira linha compila o código e gera o executável `media`. A segunda roda esse arquivo. Quando mudar o código, compile de novo antes de executar.
+No comando de terminal, a primeira linha gera um executável chamado `media` e a segunda o executa. Na IDE, o projeto continua se chamando `ola-kinein`. Nos dois caminhos, salve e compile de novo quando mudar o código.
 
 ## 3. Entenda o que acabou de fazer
 
@@ -64,7 +72,7 @@ O resultado acompanha sua previsão? Se não, confira os parênteses e os númer
 
 Troque somente `23.0` por `24.0`. Antes de rodar, calcule o novo resultado. Salve, compile e execute: a saída deve mudar para `media: 22.50 C`.
 
-Agora troque esse segundo valor por `20.0`. Você deve obter `media: 20.50 C`. Mudar uma entrada por vez facilita entender o efeito.
+Agora troque esse segundo valor por `20.0`. Você deve obter `media: 20.50 C`. Mudar uma entrada por vez facilita entender o efeito. Na IDE, continue usando o mesmo ciclo: salvar, compilar e executar.
 
 ## Confira sem copiar
 
@@ -75,7 +83,7 @@ Agora troque esse segundo valor por `20.0`. Você deve obter `media: 20.50 C`. M
 <details>
 <summary>Conferir seu raciocínio</summary>
 
-A soma precisa acontecer antes da divisão. Com 21 e 25, a média é 23, exibida como `media: 23.00 C`. Salve, compile novamente sem erros e execute o arquivo `media` gerado na mesma pasta.
+A soma precisa acontecer antes da divisão. Com 21 e 25, a média é 23, exibida como `media: 23.00 C`. Salve, espere a compilação terminar sem erros e execute de novo. Pelo terminal, rode o arquivo `media` que acabou de gerar; na IDE, use o ▶ do projeto `ola-kinein`.
 
 </details>
 
@@ -85,10 +93,10 @@ A soma precisa acontecer antes da divisão. Com 21 e 25, a média é 23, exibida
 - **Arquivo não encontrado:** confira o nome e o diretório do arquivo.
 - **Resultado diferente:** confira se salvou e recompilou o código e se alterou somente o valor indicado.
 
-## Leve para a Vectis
+## Continue com mais temperaturas
 
-O [primeiro projeto em C++](../../../aprender/ide/primeiro-projeto-cpp/) mostra como criar o projeto, abrir o código e executar na **Kinein Vectis 0.3.5**. Use este estudo para entender a linguagem; o tutorial da IDE ensina os botões e os limites daquela versão.
+Você já fez o programa calcular dois valores. Na [próxima etapa](../telemetria-local/), o mesmo `src/main.cpp` passa a trabalhar com uma lista de leituras e com um sensor que ainda não tem dados. O projeto e os comandos de compilação da IDE continuam os mesmos.
 
 ## Para aprofundar
 
-Este é um texto autoral. A referência técnica é o [rascunho público do C++20 do WG21, em [basic.start.main], [expr.mul] e [std.manip]](https://open-std.org/JTC1/SC22/WG21/docs/papers/2020/n4861.pdf). O próximo passo é entender decisões e repetições; deixe integração com dispositivos para depois de dominar o ciclo de escrever, executar e conferir.
+Os recursos usados aqui estão no [rascunho público do C++20 do WG21, em [basic.start.main], [expr.mul] e [std.manip]](https://open-std.org/JTC1/SC22/WG21/docs/papers/2020/n4861.pdf). O projeto criado pela Vectis usa C++23, que também aceita este exemplo.

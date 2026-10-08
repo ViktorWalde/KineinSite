@@ -1,22 +1,17 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import GuideList from "../../features/aprender/GuideList.astro";
-import {
-  getPublishedGuides,
-  sectionNames,
-  sectionOf,
-} from "../../features/aprender/guides";
+import CppJourney from "../../features/aprender/CppJourney.astro";
+import LanguageStarts from "../../features/aprender/LanguageStarts.astro";
+import { getPublishedGuides, sectionOf } from "../../features/aprender/guides";
 import { publicVersion } from "../../site";
 import "../../features/aprender/aprender.css";
 
 const guides = await getPublishedGuides();
 const ideGuides = guides.filter((guide) => sectionOf(guide) === "ide");
-const totalMinutes = ideGuides.reduce(
-  (sum, guide) => sum + guide.data.minutes,
-  0,
+const dailyGuides = ideGuides.filter(
+  (guide) => !guide.id.includes("primeiro-projeto-"),
 );
-const chapterCount =
-  ideGuides.length === 1 ? "1 capítulo" : `${ideGuides.length} capítulos`;
 ---
 
 <BaseLayout
@@ -27,24 +22,34 @@ const chapterCount =
   <div class="learn shell">
     <header class="learn-intro enter">
       <p class="kicker">APRENDER · GUIA DA IDE</p>
-      <h1>Da instalação ao primeiro projeto.</h1>
+      <h1>Seu primeiro projeto começa aqui.</h1>
       <p class="learn-intro-copy">
-        Capítulos curtos, na ordem em que você vai precisar deles. Cada passo
-        foi reproduzido na IDE de verdade, com as telas que aparecem para você.
-        {ideGuides.length > 0 && (
-          <>
-            {" "}
-            Até agora: {chapterCount}, cerca de {totalMinutes} minutos no total.
-          </>
-        )}
+        Siga o percurso de C++ para construir e melhorar um único programa. Se
+        preferir Rust ou Python, há um tutorial próprio para cada linguagem. Os
+        passos da IDE usam o beta {publicVersion}.
       </p>
     </header>
 
-    <section class="section-surface" aria-labelledby="guia-title">
-      <h2 id="guia-title" class="learn-heading">
-        {sectionNames.ide}
+    <section class="section-surface" aria-labelledby="cpp-title">
+      <p class="kicker">UM PROJETO EM QUATRO ETAPAS</p>
+      <h2 id="cpp-title" class="learn-heading">
+        Do primeiro “olá” às temperaturas.
       </h2>
-      <GuideList guides={ideGuides} />
+      <p class="learn-intro-copy">
+        Instale a IDE, crie <code>ola-kinein</code> e avance no mesmo arquivo
+        C++. Cada etapa termina com um resultado que você consegue conferir.
+      </p>
+      <CppJourney />
+    </section>
+    <LanguageStarts />
+    <section
+      class="section-surface learn-reference"
+      aria-labelledby="guia-title"
+    >
+      <h2 id="guia-title" class="learn-heading">
+        Para usar a IDE no dia a dia
+      </h2>
+      <GuideList guides={dailyGuides} />
       {ideGuides.length === 0 && (
         <p class="learn-empty">
           Os primeiros capítulos estão sendo reproduzidos na {publicVersion}.

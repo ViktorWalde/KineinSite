@@ -60,6 +60,24 @@ const focusPairs = [
   ["focus", "section-tint"],
 ];
 
+// As superfícies de cartões usam três cores. Conferir os extremos também
+// cobre os detalhes que recebem a cor de apoio e os estados de interação.
+const cardBackgrounds = [
+  "card",
+  "card-hover",
+  "card-tint",
+  "card-edge",
+  "card-tint-hover",
+  "card-edge-hover",
+];
+for (const background of cardBackgrounds) {
+  for (const foreground of ["text", "muted", "accent", "companion"]) {
+    textPairs.push([foreground, background]);
+  }
+  focusPairs.push(["focus", background]);
+}
+textPairs.push(["companion", "surface"]);
+
 const mediaStart = css.indexOf("@media (prefers-color-scheme: light)");
 const blocks = new Map();
 for (const match of css.matchAll(/([^{}]+)\{([^{}]*)\}/g)) {
@@ -153,7 +171,7 @@ function color(tokens, value, depth) {
   const reference = value.match(/^var\(--([\w-]+)\)$/);
   if (reference) return resolve(tokens, reference[1], depth + 1);
   const mix = value.match(
-    /^color-mix\(in srgb, (.+?) (\d+(?:\.\d+)?)%, (.+)\)$/,
+    /^color-mix\(\s*in srgb,\s*(.+?) (\d+(?:\.\d+)?)%,\s*(.+?)\s*\)$/,
   );
   if (mix) {
     const a = color(tokens, mix[1], depth + 1);
