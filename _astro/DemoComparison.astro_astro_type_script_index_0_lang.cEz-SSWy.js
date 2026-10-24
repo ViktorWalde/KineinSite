@@ -1,1 +1,0 @@
-import"./tabs.C8bE1gYH.js";

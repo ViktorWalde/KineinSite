@@ -1,0 +1,1 @@
+import"./tabs.C2NUDC9V.js";
