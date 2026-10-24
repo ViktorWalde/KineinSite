@@ -1,0 +1,22 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Introduction from "../../features/colabore/Introduction.astro";
+import TaskBoard from "../../features/colabore/TaskBoard.astro";
+import ContributionWays from "../../features/colabore/ContributionWays.astro";
+import Contributors from "../../features/colabore/Contributors.astro";
+import "../../features/colabore/colabore.css";
+import "../../features/colabore/tasks.css";
+---
+
+<BaseLayout
+  current="collaborate"
+  title="Colabore com uma IDE brasileira open source"
+  description="Encontre tarefas independentes da Kinein Vectis, acompanhe oportunidades abertas, em andamento e realizadas e conheça quem contribui. Regras claras para enviar sua contribuição."
+>
+  <div class="shell collab-page">
+    <Introduction />
+    <TaskBoard />
+    <ContributionWays />
+    <Contributors />
+  </div>
+</BaseLayout>

@@ -17,7 +17,7 @@
     scroll-padding-top: calc(var(--header-height) + 1.5rem);
   }
 
-  /* A página forma o contexto de empilhamento das ondas decorativas,
+  /* A página forma o contexto de empilhamento dos vetores decorativos,
      sempre atrás do conteúdo. O ruído suaviza as faixas do degradê. */
   body {
     isolation: isolate;
@@ -177,13 +177,8 @@
 /* Navegação entre páginas com a transição nativa do navegador, sem
    JavaScript: o cabeçalho fica parado, a página antiga some rápido e a nova
    entra subindo. Navegador sem suporte, ou movimento reduzido, troca de
-   página como sempre. */
-@media (prefers-reduced-motion: no-preference) {
-  @view-transition {
-    navigation: auto;
-  }
-}
-
+   página como sempre. A opção @view-transition fica no head do layout,
+   disponível antes da primeira pintura, sem esperar o CSS externo. */
 .site-header {
   view-transition-name: site-header;
 }

@@ -10,7 +10,7 @@ import process from "node:process";
 import { Buffer } from "node:buffer";
 import { setTimeout as delay } from "node:timers/promises";
 
-export async function openBrowser() {
+export async function openBrowser({ desktopPointer = false } = {}) {
   const executable = [
     process.env.CHROME_BIN,
     "/usr/bin/google-chrome",
@@ -65,6 +65,11 @@ export async function openBrowser() {
       "--no-first-run",
       "--no-default-browser-check",
       "--disable-background-networking",
+      ...(desktopPointer
+        ? [
+            "--blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4",
+          ]
+        : []),
       `--user-data-dir=${profile}`,
       "--remote-debugging-port=0",
       "about:blank",
@@ -130,6 +135,7 @@ export async function openBrowser() {
       if (message.id) {
         const callback = pending.get(message.id);
         pending.delete(message.id);
+        if (!callback) return;
         if (message.error)
           callback.reject(new Error(JSON.stringify(message.error)));
         else callback.resolve(message.result);
@@ -144,7 +150,24 @@ export async function openBrowser() {
     function send(method, params = {}) {
       return new Promise((resolve, reject) => {
         const requestId = ++id;
-        pending.set(requestId, { resolve, reject });
+        const timeout = globalThis.setTimeout(() => {
+          pending.delete(requestId);
+          reject(
+            new Error(
+              `Tempo excedido em ${method}: ${JSON.stringify(params).slice(0, 160)}`,
+            ),
+          );
+        }, 20000);
+        pending.set(requestId, {
+          resolve: (value) => {
+            globalThis.clearTimeout(timeout);
+            resolve(value);
+          },
+          reject: (error) => {
+            globalThis.clearTimeout(timeout);
+            reject(error);
+          },
+        });
         socket.send(JSON.stringify({ id: requestId, method, params }));
       });
     }

@@ -1,0 +1,101 @@
+---
+import { repositories } from "./repositories";
+import { collaboratorAcknowledgements } from "../../data/collaborator-acknowledgements";
+import ActionLink from "../../components/ActionLink.astro";
+---
+
+<section
+  id="colaboradores"
+  class="collab-section"
+  aria-labelledby="contributors-title"
+  data-contributors
+>
+  <div class="collab-heading">
+    <div>
+      <p class="kicker">04 / QUEM FAZ PARTE</p>
+      <h2 id="contributors-title">Quem ajuda deixa sua marca.</h2>
+      <p>
+        Por trás de cada melhoria há alguém que dedicou tempo para ajudar.
+        Obrigado a quem faz parte da Vectis e deste site.
+      </p>
+    </div>
+    <span class="contributor-seal" aria-hidden="true">
+      feito em conjunto / ∭
+    </span>
+  </div>
+  <p class="collab-note" data-contributors-status role="status">
+    Os perfis com commits incorporados são consultados no GitHub. Com JavaScript
+    desativado, consulte os links dos projetos abaixo.
+  </p>
+  <ul
+    class="contributor-grid"
+    data-contributors-list
+    aria-label="Pessoas com contribuições registradas"
+  ></ul>
+  {collaboratorAcknowledgements.length > 0 && (
+    <div>
+      <h3>Testes, revisões e outras ajudas que fizeram diferença.</h3>
+      <ul
+        class="contributor-grid"
+        aria-label="Agradecimentos revisados pelo mantenedor"
+      >
+        {collaboratorAcknowledgements.map((person) => (
+          <li class="contributor-card card">
+            <span class="contributor-monogram" aria-hidden="true">
+              {person.login.slice(0, 2).toUpperCase()}
+            </span>
+            <div class="contributor-copy">
+              <a
+                class="contributor-signature"
+                href={`https://github.com/${encodeURIComponent(person.login)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                @{person.login}
+              </a>
+              <p class="collab-note">{person.contribution}</p>
+              <a
+                class="inline-link"
+                href={person.evidenceUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Ver contribuição <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  )}
+  <div class="contributor-invitation">
+    <span class="contributor-monogram" aria-hidden="true">
+      +
+    </span>
+    <p>
+      <strong>Tem espaço para a sua assinatura.</strong>
+      <br />
+      Comece por algo que você sabe fazer. Uma explicação, um teste ou uma
+      correção pequena já são um jeito de construir junto.
+    </p>
+    <a class="button button-secondary" href="#tarefas">
+      Encontrar uma tarefa <span aria-hidden="true">↑</span>
+    </a>
+  </div>
+  <p class="collab-note">
+    Esta lista reúne perfis com commits na branch principal da IDE ou do site;
+    não é uma classificação. Perfis automatizados conhecidos ficam de fora. O
+    GitHub pode levar algum tempo para atualizar os créditos. Testes, relatos e
+    revisões sem commit podem receber um agradecimento no site após a revisão do
+    mantenedor, com link para a contribuição pública.
+  </p>
+  <div class="task-source-links">
+    {repositories.map((repository) => (
+      <ActionLink href={`${repository.url}/graphs/contributors`} external>
+        Créditos no GitHub: {repository.name}
+      </ActionLink>
+    ))}
+  </div>
+</section>
+
+<script src="./contributors.ts"></script>

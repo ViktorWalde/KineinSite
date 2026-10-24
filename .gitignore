@@ -12,3 +12,8 @@ screenshot-*.png
 /.kinein/
 
 /test-results/
+
+# Preferências locais do gerenciador de arquivos e dos editores.
+/.directory
+/.idea/
+/.vscode/

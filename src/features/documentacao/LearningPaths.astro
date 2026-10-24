@@ -1,5 +1,6 @@
 ---
 import { sitePath } from "../../site";
+import ActionLink from "../../components/ActionLink.astro";
 
 const paths = [
   {
@@ -83,14 +84,9 @@ const paths = [
         {path.links.length > 0 && (
           <div class="path-card-links">
             {path.links.map((link) => (
-              <a
-                href={link.href}
-                target={link.external ? "_blank" : undefined}
-                rel={link.external ? "noopener noreferrer" : undefined}
-              >
-                {link.label}{" "}
-                <span aria-hidden="true">{link.external ? "↗" : "→"}</span>
-              </a>
+              <ActionLink href={link.href} external={link.external}>
+                {link.label}
+              </ActionLink>
             ))}
           </div>
         )}

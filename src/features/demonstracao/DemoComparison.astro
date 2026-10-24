@@ -16,10 +16,11 @@ import { publicVersion, sitePath } from "../../site";
       data-tab
       id="compare-preview-tab"
       aria-controls="compare-preview"
-      aria-selected="true"
-      tabindex="0"
+      aria-selected="false"
+      tabindex="-1"
     >
       <strong>Prévia 0.4</strong>
+      <span class="version-state">Em construção</span>
     </button>
     <button
       type="button"
@@ -27,10 +28,11 @@ import { publicVersion, sitePath } from "../../site";
       data-tab
       id="compare-beta-tab"
       aria-controls="compare-beta"
-      aria-selected="false"
-      tabindex="-1"
+      aria-selected="true"
+      tabindex="0"
     >
       <strong>Beta {publicVersion}</strong>
+      <span class="version-state">Para baixar</span>
     </button>
   </div>
   <div

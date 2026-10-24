@@ -1,0 +1,141 @@
+---
+import { columns } from "./model";
+import { repositories } from "./repositories";
+import ActionLink from "../../components/ActionLink.astro";
+---
+
+<section
+  id="tarefas"
+  class="collab-section"
+  aria-labelledby="tasks-title"
+  data-task-board
+>
+  <div class="collab-heading">
+    <div>
+      <p class="kicker">01 / ENCONTRE ONDE SOMAR</p>
+      <h2 id="tasks-title">Encontre uma tarefa para chamar de sua.</h2>
+      <p>
+        Escolha pelo assunto, pelo projeto ou por uma boa primeira contribuição.
+        Cada tarefa leva à conversa original no GitHub.
+      </p>
+    </div>
+    <a class="button button-secondary" href="#regras">
+      Antes de começar: veja as regras <span aria-hidden="true">↓</span>
+    </a>
+  </div>
+  <div class="task-toolbar" data-task-controls hidden>
+    <label class="task-search">
+      <span>Buscar tarefa</span>
+      <input
+        class="field-control"
+        type="search"
+        placeholder="Ex.: Python, documentação ou #42"
+        data-task-search
+      />
+    </label>
+    <label>
+      <span>Projeto</span>
+      <select class="field-control" data-task-project>
+        <option value="all">IDE e site</option>
+        {repositories.map((repository) => (
+          <option value={repository.id}>{repository.name}</option>
+        ))}
+      </select>
+    </label>
+    <label>
+      <span>Por onde começar</span>
+      <select class="field-control" data-task-entry>
+        <option value="all">Todas as oportunidades</option>
+        <option value="first">Boa primeira contribuição</option>
+      </select>
+    </label>
+    <button
+      class="button button-quiet button-small"
+      type="button"
+      data-task-clear
+      hidden
+    >
+      Limpar filtros
+    </button>
+  </div>
+  <div class="task-sync">
+    <p class="collab-note" data-task-sync role="status">
+      Ative o JavaScript para consultar as tarefas aqui ou abra as issues no
+      GitHub pelos links abaixo.
+    </p>
+    <button
+      class="button button-quiet button-small"
+      type="button"
+      data-task-refresh
+      aria-busy="false"
+      hidden
+    >
+      Atualizar tarefas
+    </button>
+  </div>
+  <p class="collab-note" data-task-results role="status" hidden></p>
+  <a
+    class="button button-secondary"
+    href="#como-ajudar"
+    data-task-empty-action
+    hidden
+  >
+    Encontrar outro jeito de ajudar <span aria-hidden="true">↓</span>
+  </a>
+  <div class="task-board" aria-busy="false">
+    {columns.map((column) => (
+      <section
+        class={`task-column task-column-${column.id}`}
+        aria-labelledby={`tasks-${column.id}`}
+      >
+        <div class="task-column-heading">
+          <h3 id={`tasks-${column.id}`}>
+            <span aria-hidden="true">{column.symbol}</span> {column.title}
+          </h3>
+          <span class="task-count" data-task-count={column.id}>
+            —
+          </span>
+        </div>
+        <p class="collab-note">{column.description}</p>
+        <div class="task-list" data-task-list={column.id}>
+          <p class="task-empty">
+            As tarefas deste grupo vêm das issues do GitHub.
+          </p>
+        </div>
+      </section>
+    ))}
+  </div>
+  <div class="task-source-links">
+    {repositories.map((repository) => (
+      <ActionLink href={`${repository.url}/issues`} external>
+        Todas as issues: {repository.name}
+      </ActionLink>
+    ))}
+  </div>
+  <details class="collab-disclosure">
+    <summary>De onde vêm os estados e as atualizações?</summary>
+    <p>
+      Entram apenas issues com <code>help wanted</code>,{" "}
+      <code>good first issue</code> ou <code>colabore</code>. Tarefas com{" "}
+      <code>trilha-principal</code>, <code>maintainer-only</code>,{" "}
+      <code>blocked</code> ou <code>bloqueada</code> ficam de fora.
+    </p>
+    <p>
+      <strong>Abertas:</strong> sem responsável e sem marca de andamento.{" "}
+      <strong>Em andamento:</strong> com responsável atribuído ou marca{" "}
+      <code>in progress</code>/<code>em andamento</code>.{" "}
+      <strong>Realizadas:</strong> encerradas como concluídas. Cancelamentos e
+      duplicidades não contam como entregas. A revisão do mantenedor acontece no
+      GitHub.
+    </p>
+    <p>
+      A consulta é refeita a cada cinco minutos enquanto esta página está
+      visível, respeitando os limites do GitHub. Não depende do CI nem de
+      republicar o site. Se a consulta falhar, mostramos a última leitura
+      disponível nesta aba, com data. A lista de tarefas e seus números seguem
+      os filtros acima.
+    </p>
+  </details>
+</section>
+
+<script src="./board.ts"></script>

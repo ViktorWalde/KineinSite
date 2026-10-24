@@ -1,6 +1,6 @@
 /* Cada assunto ocupa uma região de cor na largura inteira da página.
-   O degradê encontra a mesma cor na borda seguinte, e as curvas animadas
-   passam exatamente entre o fim de um assunto e o começo do próximo. */
+   O degradê encontra a mesma cor na borda seguinte; os fluxos vetoriais
+   ocupam o espaço entre os assuntos, atrás de todo o conteúdo. */
 .home-flow {
   display: flow-root;
   isolation: isolate;
@@ -11,14 +11,14 @@
 
 .home-topic {
   --topic-fill: var(--page);
-  --topic-start: var(--wave-transition);
+  --topic-start: var(--flow-transition);
   --topic-glow: var(--topic-start);
   --topic-glow-stop: 0%;
-  --topic-end: var(--wave-transition);
+  --topic-end: var(--flow-transition);
   --topic-fade: clamp(7rem, 12vw, 12rem);
   --topic-entry-fade: var(--topic-fade);
-  --topic-wave-height: clamp(12rem, 18vw, 18rem);
 
+  position: relative;
   display: flow-root;
   isolation: auto;
   background-color: var(--topic-fill);
@@ -35,9 +35,7 @@
 }
 
 .home-topic:nth-child(even) {
-  --topic-fill: var(--wave-region);
-  --wave-start: var(--wave-travel);
-  --wave-end: calc(-1 * var(--wave-travel));
+  --topic-fill: var(--flow-region);
 }
 
 .home-topic:first-child {
@@ -69,11 +67,37 @@
   }
 }
 
-/* Todos os tópicos compartilham as camadas de .home-flow: uma onda que
-   atravessa a fronteira continua atrás do conteúdo do tópico anterior. */
+/* Os vetores compartilham a camada de fundo de todos os assuntos. */
 .home-topic > * {
   position: relative;
   z-index: 1;
+}
+
+.home-topic > .flow-field {
+  position: absolute;
+  z-index: 0;
+}
+
+.home-topic:nth-child(even) .flow-field {
+  --flow-delay: -19s;
+}
+
+.home-topic:nth-child(3n) .flow-field {
+  --flow-delay: -29s;
+}
+
+.home-topic > .flow-field-intro {
+  --flow-height: clamp(5rem, 7vw, 7rem);
+
+  position: relative;
+  inset: auto;
+  height: 0;
+}
+
+.flow-field-intro > .flow-lines {
+  position: absolute;
+  inset-block-start: calc((var(--space-3xl) - var(--flow-height)) / 2);
+  height: var(--flow-height);
 }
 
 .home-topic > .section-surface {
@@ -83,17 +107,4 @@
   border-radius: 0;
   background: none;
   box-shadow: none;
-}
-
-.home-topic::before,
-.home-topic::after {
-  z-index: 0;
-  inset-block: calc(-0.5 * var(--topic-wave-height)) auto;
-  inset-inline: -25%;
-  height: var(--topic-wave-height);
-}
-
-.home-topic:first-child::before,
-.home-topic:first-child::after {
-  inset-block-start: 0;
 }

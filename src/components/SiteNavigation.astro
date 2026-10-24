@@ -1,0 +1,39 @@
+---
+import { discordUrl, sitePath, type SiteSection } from "../site";
+
+interface Props {
+  current?: SiteSection | undefined;
+  mobile?: boolean;
+}
+const { current, mobile = false } = Astro.props;
+const links = [
+  { section: "collaborate", label: "Colabore", path: "/colabore/" },
+  { section: "guide", label: "Começar", path: "/aprender/" },
+  { section: "manual", label: "Manual", path: "/manual/" },
+  { section: "docs", label: "Documentação", path: "/documentacao/" },
+  { section: "updates", label: "Atualizações", path: "/atualizacoes/" },
+] as const;
+---
+
+<nav
+  class:list={["primary-nav", mobile ? "mobile-links" : "desktop-links"]}
+  aria-label={mobile ? "Navegação móvel" : "Navegação principal"}
+>
+  {links.map((link) => (
+    <a
+      class:list={{ "nav-collaborate": link.section === "collaborate" }}
+      href={sitePath(link.path)}
+      aria-current={current === link.section ? "page" : undefined}
+    >
+      {link.label}
+    </a>
+  ))}
+  <a
+    class="nav-external"
+    href={discordUrl}
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    Discord <span aria-hidden="true">↗</span>
+  </a>
+</nav>

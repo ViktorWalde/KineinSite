@@ -1,0 +1,44 @@
+---
+interface Props {
+  target: string;
+  label?: string;
+  success?: string;
+  failure?: string;
+}
+const {
+  target,
+  label = "Copiar modelo",
+  success = "Modelo copiado. Cole na descrição do seu pull request.",
+  failure = "Não foi possível copiar. Selecione o texto abaixo e copie manualmente.",
+} = Astro.props;
+---
+
+<div class="copy-actions">
+  <button
+    class="button button-secondary button-small"
+    type="button"
+    data-copy-target={target}
+    data-copy-success={success}
+    data-copy-failure={failure}
+    hidden
+  >
+    {label}
+  </button>
+  <span class="copy-feedback" role="status"></span>
+</div>
+
+<script src="../scripts/copy.ts"></script>
+
+<style>
+  .copy-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-s) var(--space-m);
+    margin-block: var(--space-m);
+  }
+  .copy-feedback {
+    color: var(--muted);
+    font-size: var(--text-sm);
+  }
+</style>

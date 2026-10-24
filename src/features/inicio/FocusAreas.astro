@@ -3,40 +3,31 @@ import { sitePath } from "../../site";
 
 const areas = [
   {
-    id: "embarcados",
+    path: "/manual/",
     number: "01",
-    status: "Foco da 0.4",
-    title: "Bare metal e Linux embarcado",
+    status: "SEU AMBIENTE",
+    title: "Suas ferramentas encontram seu projeto",
     description:
-      "Uma base prática para trabalhar com firmware e projetos embarcados. Os alvos e fluxos suportados serão confirmados conforme a 0.4 for testada.",
-    linkText: "Ver o caminho para embarcados",
+      "Use os compiladores e ferramentas do seu sistema. A Vectis ajuda você a reunir o trabalho e acompanhar os resultados.",
+    linkText: "Consultar as ferramentas no manual",
   },
   {
-    id: "iot",
+    path: "/aprender/",
     number: "02",
-    status: "Exercício local disponível",
-    title: "IoT e IIoT",
+    status: "NO SEU RITMO",
+    title: "O começo vem com um guia",
     description:
-      "Comece com leituras simuladas em C++: calcule a média e trate a ausência de dados. É a preparação para trabalhar com sensores, sem precisar de uma placa nesta etapa.",
-    linkText: "Começar pela telemetria local",
+      "Instale, crie um projeto e execute seu primeiro programa. Cada guia mostra os passos e o resultado que você deve encontrar.",
+    linkText: "Escolher um guia",
   },
   {
-    id: "backend",
+    path: "/colabore/",
     number: "03",
-    status: "Recursos no beta",
-    title: "Backend e dados",
+    status: "CÓDIGO ABERTO",
+    title: "Você também pode fazer parte",
     description:
-      "Execute Python e testes com pytest. Consulte containers e acesse PostgreSQL, TimescaleDB, SQLite ou MongoDB pelos painéis da IDE, com os serviços configurados no seu ambiente.",
-    linkText: "Ver Python, backend e dados",
-  },
-  {
-    id: "ros2",
-    number: "04",
-    status: "Direção futura",
-    title: "ROS 2 e robótica",
-    description:
-      "Workspaces e execução de pacotes ROS 2 estão no radar do produto. A integração ainda precisa ser implementada e verificada.",
-    linkText: "Ver o estado de ROS 2",
+      "Teste em outro ambiente, melhore uma explicação ou corrija um detalhe. Há formas de contribuir além de escrever código.",
+    linkText: "Encontrar uma forma de ajudar",
   },
 ] as const;
 ---
@@ -47,19 +38,16 @@ const areas = [
   aria-labelledby="foco-title"
 >
   <div class="section-intro reveal">
-    <p class="kicker">PARA ONDE A VECTIS CAMINHA</p>
-    <h2 id="foco-title">Do código aos próximos projetos.</h2>
+    <p class="kicker">FEITA PARA QUEM QUER CRIAR</p>
+    <h2 id="foco-title">Seu jeito de criar tem espaço aqui.</h2>
     <p class="section-intro-copy">
-      A 0.4 concentra o próximo passo em embarcados. IoT, serviços e dados
-      completam a direção do produto; cada área indica seu estágio atual.
+      Trabalhe com seu ambiente, aprenda no seu ritmo e acompanhe um projeto de
+      código aberto sendo construído.
     </p>
   </div>
   <div class="area-grid auto-grid reveal-children">
     {areas.map((area) => (
-      <a
-        class="area-card card card-interactive"
-        href={sitePath(`/documentacao/#${area.id}`)}
-      >
+      <a class="area-card card card-interactive" href={sitePath(area.path)}>
         <span class="label">
           {area.number} / {area.status}
         </span>

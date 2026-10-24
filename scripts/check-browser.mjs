@@ -5,7 +5,16 @@ import { setTimeout as delay } from "node:timers/promises";
 import { openBrowser } from "./lib/browser.mjs";
 
 const browser = await openBrowser();
-const { send, evaluate, navigate } = browser;
+const { send, evaluate } = browser;
+async function navigate(route = "") {
+  await browser.navigate(route);
+  // Esta suíte exercita a prévia nas galerias e vídeos. O beta é agora o
+  // padrão público, coberto também pelo teste específico da experiência.
+  if (route === "")
+    await evaluate(
+      "document.querySelector('#gallery-preview-tab').click(); document.querySelector('#compare-preview-tab').click()",
+    );
+}
 const output = "test-results/browser";
 await mkdir(output, { recursive: true });
 const report = [];
@@ -139,6 +148,8 @@ try {
     "",
     "documentacao/",
     "documentacao/site/",
+    "colabore/",
+    "colabore/regras/",
     "documentacao/previa-0-4/",
     "manual/",
     "aprender/",
@@ -168,16 +179,24 @@ try {
         `Overflow: ${route} ${width}`,
       );
       const count = await evaluate(
-        "document.getAnimations().filter(a=>a.animationName==='wave-sway').length",
+        "document.querySelectorAll('.flow-lines').length",
       );
-      assert.equal(count, route === "" ? 14 : 2);
+      const expected =
+        route === ""
+          ? await evaluate("document.querySelectorAll('.home-topic').length")
+          : 2;
+      assert.equal(count, expected);
     }
   }
-  report.push("23 páginas, 3 larguras: sem overflow; ondas em funcionamento.");
+  report.push(
+    "25 páginas, 3 larguras: sem overflow; fluxos vetoriais presentes.",
+  );
   await media(true);
   for (const route of [
     "",
     "documentacao/",
+    "colabore/",
+    "colabore/regras/",
     "documentacao/previa-0-4/",
     "manual/",
     "aprender/",
@@ -203,12 +222,12 @@ try {
       }
     }
   }
-  report.push("Texto ampliado a 200%: 8 páginas, 3 larguras sem overflow.");
+  report.push("Texto ampliado a 200%: 10 páginas, 3 larguras sem overflow.");
   await media();
   await navigate();
   assert.ok(
     await evaluate(
-      `(()=>{const hero=document.querySelector('.hero');const flow=document.querySelector('.home-flow'); return !hero.querySelector('.wave-field') && Math.abs(hero.getBoundingClientRect().bottom-flow.getBoundingClientRect().top)<1;})()`,
+      `(()=>{const hero=document.querySelector('.hero');const flow=document.querySelector('.home-flow'); return !hero.querySelector('.flow-field') && Math.abs(hero.getBoundingClientRect().bottom-flow.getBoundingClientRect().top)<1;})()`,
     ),
   );
   // Paint order mede a composição real do navegador, incluindo os pseudos.
@@ -229,12 +248,23 @@ try {
         )
           topics.add(index);
     });
-    const waves = [],
+    const backgrounds = [],
       content = [];
     layout.nodeIndex.forEach((node, index) => {
       let ancestor = node;
       let topic = -1;
+      let isBackground = false;
       while (ancestor >= 0) {
+        const attrs = nodes.attributes[ancestor] ?? [];
+        if (
+          attrs.some(
+            (value, i) =>
+              i % 2 === 0 &&
+              strings[value] === "class" &&
+              strings[attrs[i + 1]].split(/\s+/).includes("flow-field"),
+          )
+        )
+          isBackground = true;
         if (topics.has(ancestor)) {
           topic = ancestor;
           break;
@@ -242,21 +272,17 @@ try {
         ancestor = nodes.parentIndex[ancestor];
       }
       if (topic < 0) return;
-      if (
-        nodes.pseudoType?.index.includes(node) &&
-        nodes.parentIndex[node] === topic
-      )
-        waves.push(layout.paintOrders[index]);
+      if (isBackground) backgrounds.push(layout.paintOrders[index]);
       else if (node !== topic) content.push(layout.paintOrders[index]);
     });
-    assert.ok(waves.length > 0 && content.length > 0);
+    assert.ok(backgrounds.length > 0 && content.length > 0);
     assert.ok(
-      Math.max(...waves) < Math.min(...content),
-      `Ondas sobre o conteúdo: ${width}`,
+      Math.max(...backgrounds) < Math.min(...content),
+      `Vetores sobre o conteúdo: ${width}`,
     );
   }
   report.push(
-    "Ondas abaixo de todo o conteúdo; limite inferior do hero preservado.",
+    "Vetores abaixo de todo o conteúdo; limite inferior do hero preservado.",
   );
   await evaluate("document.querySelector('.appearance summary').focus()");
   await send("Input.dispatchKeyEvent", {
@@ -295,11 +321,17 @@ try {
   );
   await media(true);
   await navigate();
-  assert.equal(
+  await evaluate(
+    "document.querySelector('.home-topic').scrollIntoView({behavior:'instant'})",
+  );
+  await evaluate(
+    "window.__stillFlow=document.querySelector('.flow-lines').getCurrentTime()",
+  );
+  await delay(150);
+  assert.ok(
     await evaluate(
-      "document.getAnimations().filter(a=>a.animationName==='wave-sway').length",
+      "document.querySelector('.flow-lines').getCurrentTime()===window.__stillFlow",
     ),
-    0,
   );
   await evaluate(
     `(()=>{const input=document.querySelector('input[name="theme"][value="dark"]');input.checked=true;input.dispatchEvent(new Event('change'));})()`,
@@ -314,7 +346,9 @@ try {
       "!document.documentElement.dataset.switching && document.documentElement.dataset.theme === 'dark'",
     ),
   );
-  report.push("Movimento reduzido: ondas estáticas e troca de tema imediata.");
+  report.push(
+    "Movimento reduzido: vetores estáticos e troca de tema imediata.",
+  );
   await navigate("documentacao/previa-0-4/");
   const video = await evaluate(
     `(async()=>{const v=document.querySelector('video');v.load();await new Promise((resolve,reject)=>{v.addEventListener('loadeddata',resolve,{once:true});v.addEventListener('error',()=>reject(new Error('Falha no vídeo')),{once:true});});return {duration:v.duration,width:v.videoWidth,height:v.videoHeight,controls:v.controls,autoplay:v.autoplay,paused:v.paused,loop:v.loop,muted:v.muted,inline:v.playsInline,preload:v.preload,track:!!v.querySelector('track')};})()`,
@@ -345,7 +379,7 @@ try {
   await viewport(1440);
   await navigate();
   const mediaFiles = await evaluate(
-    `(async()=>{const result=[];for(const video of document.querySelectorAll('video')){video.load();await new Promise((resolve,reject)=>{video.addEventListener('loadeddata',resolve,{once:true});video.addEventListener('error',()=>reject(new Error('Vídeo não carregou')),{once:true});});result.push(video.duration);}return result;})()`,
+    `(async()=>{const result=[];for(const video of document.querySelectorAll('video')){video.preload='auto';const loaded=new Promise((resolve,reject)=>{video.addEventListener('loadeddata',resolve,{once:true});video.addEventListener('error',()=>reject(new Error('Vídeo não carregou')),{once:true});});video.load();await loaded;result.push(video.duration);}return result;})()`,
   );
   assert.deepEqual(mediaFiles, [42, 24]);
   report.push(
@@ -355,7 +389,7 @@ try {
   await navigate();
   await viewport(1366, 768);
   await evaluate(
-    "document.querySelector('#compare-preview video').scrollIntoView({block:'center'})",
+    "document.querySelector('#compare-preview video').scrollIntoView({block:'center',behavior:'instant'})",
   );
   await waitFor(
     "!document.querySelector('#compare-preview video').paused && document.querySelector('#compare-preview video').currentTime > 0",
@@ -380,10 +414,10 @@ try {
     "document.querySelector('#compare-preview video').paused",
     "Pausar deve interromper a reprodução",
   );
-  await evaluate("scrollTo(0,0)");
+  await evaluate("scrollTo({top:0,left:0,behavior:'instant'})");
   await delay(150);
   await evaluate(
-    "document.querySelector('#compare-preview video').scrollIntoView({block:'center'})",
+    "document.querySelector('#compare-preview video').scrollIntoView({block:'center',behavior:'instant'})",
   );
   await delay(150);
   assert.ok(
@@ -404,7 +438,7 @@ try {
     "document.querySelector('#compare-preview video').paused && !document.querySelector('#compare-beta video').paused",
     "Só a versão visível deve reproduzir",
   );
-  await evaluate("scrollTo(0,0)");
+  await evaluate("scrollTo({top:0,left:0,behavior:'instant'})");
   await waitFor(
     "[...document.querySelectorAll('video')].every(v=>v.paused)",
     "Vídeos fora da tela devem pausar",
@@ -665,6 +699,9 @@ try {
   await viewport(1366, 768);
   await navigate();
   await evaluate("scrollTo({top:0,behavior:'instant'})");
+  await evaluate(
+    "Promise.allSettled(document.querySelector('.hero-copy').getAnimations({subtree:true}).map(animation=>animation.finished))",
+  );
   await writeFile(`${output}/hero.png`, await browser.screenshot());
   await evaluate(
     "document.querySelector('.gallery-versions').scrollIntoView({behavior:'instant'})",

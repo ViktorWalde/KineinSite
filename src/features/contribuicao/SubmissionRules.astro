@@ -1,0 +1,183 @@
+---
+import { sitePath } from "../../site";
+import CopyButton from "../../components/CopyButton.astro";
+---
+
+<section
+  id="envio"
+  class="contribution-section"
+  aria-labelledby="submission-title"
+>
+  <p class="kicker">08 / COMO ENVIAR AO MANTENEDOR</p>
+  <h2 id="submission-title">Abra um pull request no projeto correspondente.</h2>
+  <ol>
+    <li>
+      Revise <code>git diff</code> e <code>git status</code>. Retire arquivos
+      sem relação com a tarefa e confira se a branch contém apenas sua
+      contribuição.
+    </li>
+    <li>
+      Organize commits por mudança verificável, com mensagem que explique o
+      resultado. Na IDE, siga a convenção oficial de tipo e área; não envie
+      commits incompletos como se estivessem prontos.
+    </li>
+    <li>
+      Envie a branch para seu fork e abra um PR direcionado a <code>main</code>{" "}
+      do repositório correto. Use título concreto, por exemplo: “docs: corrigir
+      a reprodução do primeiro projeto Python”.
+    </li>
+    <li>
+      Vincule a issue na descrição. Use <code>Closes #número</code> apenas
+      quando a entrega resolver integralmente a issue do mesmo repositório; para
+      progresso parcial, use <code>Refs #número</code> e explique o restante.
+    </li>
+    <li>
+      Preencha o modelo abaixo e preserve também os campos do template do
+      repositório. Inclua provas, arquivos principais, limitações e instruções
+      de revisão.
+    </li>
+    <li>
+      Se faltar escopo combinado, validação ou documentação, abra como{" "}
+      <strong>rascunho / Draft</strong>. Quando estiver completo, marque pronto
+      para revisão e aguarde o mantenedor.
+    </li>
+    <li>
+      A publicação e o merge no projeto oficial ficam com o mantenedor. Não
+      publique release, tag, AppImage ou atualização do site em nome do projeto
+      por conta própria.
+    </li>
+  </ol>
+</section>
+
+<section
+  id="modelo"
+  class="contribution-section"
+  aria-labelledby="template-title"
+>
+  <p class="kicker">09 / COPIE PARA A DESCRIÇÃO DO PR</p>
+  <h2 id="template-title">Modelo de entrega.</h2>
+  <p>
+    Substitua cada campo pelo que aconteceu de fato. Quando algo não se aplicar,
+    explique brevemente; não marque uma prova que você não executou.
+  </p>
+  <CopyButton target="modelo-entrega" />
+  <pre
+    class="contribution-template"
+    id="modelo-entrega"
+  ><code>{`## Tarefa e alinhamento
+Issue: #...
+Escopo combinado: ...
+Repositório / versão ou commit de base: ...
+
+## Problema e resultado
+Antes: ...
+Depois: ...
+Critérios de aceite atendidos: ...
+
+## Independência da trilha principal
+Por que esta entrega pode ser revisada e integrada separadamente: ...
+Dependências, decisões pendentes e mudanças fora do escopo: ...
+
+## O que mudou
+Arquivos / módulos principais e motivo: ...
+Documentação atualizada: ...
+
+## Como reproduzir
+Sistema / arquitetura / ferramentas / versões: ...
+Pré-requisitos: ...
+Passos e resultado esperado: ...
+
+## Validação executada
+- Comando ou teste: ...
+  Resultado / data: ...
+- Evidências antes/depois: ...
+- CI referente ao commit enviado, se executou: ...
+
+## Não provado e limitações
+Testes não executados e motivo: ...
+Falhas anteriores à mudança, se houver: ...
+Riscos ou trabalho restante: ...
+
+## Revisão e autoria
+Onde o mantenedor deve começar a revisão: ...
+Participantes / coautores e contribuição de cada um: ...
+Ferramentas de IA usadas, se houver, e o que foi revisado e testado: ...
+`}</code></pre>
+</section>
+
+<section
+  id="revisao"
+  class="contribution-section"
+  aria-labelledby="review-title"
+>
+  <p class="kicker">10 / DEPOIS DO ENVIO</p>
+  <h2 id="review-title">Revisão, integração e reconhecimento.</h2>
+  <ul>
+    <li>
+      Responda aos comentários no próprio PR. Explique decisões e atualize as
+      provas se a correção alterar o resultado. Um pedido de mudança não
+      autoriza ampliar o escopo.
+    </li>
+    <li>
+      Se a base avançar ou houver conflito, alinhe a atualização e preserve o
+      trabalho alheio. Não reescreva o histórico de outras pessoas nem use o
+      conflito como oportunidade para refatorar outro domínio.
+    </li>
+    <li>
+      O mantenedor pode pedir ajustes, adiar ou recusar a integração por escopo,
+      qualidade, compatibilidade ou prioridade. Não há prazo garantido de
+      revisão ou promessa de merge.
+    </li>
+    <li>
+      A tarefa só conta como realizada quando for aceita e encerrada como
+      concluída. Se a entrega exigir PR, o mantenedor confirma a integração
+      antes desse encerramento. Cancelamentos e duplicidades não viram créditos
+      de entrega.
+    </li>
+    <li>
+      Mantenha a autoria correta nos commits e cite coautores e participantes no
+      PR. Não atribua a si trabalho de outra pessoa nem inclua nome ou contato
+      privado de terceiros sem consentimento.
+    </li>
+    <li>
+      A seção de agradecimentos do site usa o perfil público do GitHub de quem
+      possui commits na branch principal. A atualização pode demorar e depende
+      da associação da autoria feita pelo GitHub. Relatos, revisões e testes sem
+      commit podem receber um agradecimento revisado pelo mantenedor, com
+      referência pública à ajuda prestada.
+    </li>
+    <li>
+      Contribuições à IDE seguem a licença dupla MIT/Apache-2.0 indicada no
+      repositório. Para o site e seus recursos visuais, confira os termos
+      próprios; publicar uma imagem no GitHub não concede permissão para
+      reutilizar material de terceiros.
+    </li>
+  </ul>
+</section>
+
+<section
+  id="checklist"
+  class="contribution-section"
+  aria-labelledby="checklist-title"
+>
+  <p class="kicker">11 / CONFERÊNCIA ANTES DE PEDIR REVISÃO</p>
+  <h2 id="checklist-title">Sua entrega está pronta para ser avaliada?</h2>
+  <ul class="contribution-checklist">
+    <li>A issue e o escopo foram alinhados com o mantenedor.</li>
+    <li>A contribuição é independente e não bloqueia a trilha principal.</li>
+    <li>O PR aponta para o repositório e a branch corretos.</li>
+    <li>O diff contém apenas mudanças necessárias à tarefa.</li>
+    <li>Problema, resultado e critérios de aceite estão descritos.</li>
+    <li>Ambiente, comandos, resultados e evidências permitem reprodução.</li>
+    <li>Testes não executados, falhas e limitações estão explícitos.</li>
+    <li>A documentação correspondente e a autoria estão corretas.</li>
+    <li>Não há segredos, dados privados ou material sem permissão.</li>
+    <li>
+      Nenhum gate foi contornado e nenhuma publicação foi feita em nome do
+      projeto.
+    </li>
+  </ul>
+  <a class="button button-primary" href={sitePath("/colabore/#tarefas")}>
+    Escolher uma tarefa <span aria-hidden="true">→</span>
+  </a>
+</section>

@@ -49,6 +49,8 @@
     --card-start: var(--card-tint);
     --card-end: var(--card-edge);
 
+    position: relative;
+    isolation: isolate;
     border: 1px solid var(--border);
     border-radius: var(--radius-lg);
     background-color: var(--card-fill);
@@ -66,13 +68,32 @@
       transform var(--duration-base) var(--ease-out);
   }
 
-  .card:focus-within {
-    --card-fill: var(--card-hover);
-    --card-start: var(--card-tint-hover);
-    --card-end: var(--card-edge-hover);
+  /* O degradê de hover esmaece sobre a superfície estável. Só a opacidade
+     muda: não reconstruímos três cores do fundo a cada quadro. */
+  .card::before {
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(
+      135deg,
+      var(--card-tint-hover),
+      var(--card-hover) 55%,
+      var(--card-edge-hover)
+    );
+    content: "";
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--duration-base) var(--ease-out);
+  }
 
+  .card:focus-within {
     border-color: color-mix(in srgb, var(--accent) 55%, var(--border));
     box-shadow: var(--edge), var(--shadow-sm);
+  }
+
+  .card:focus-within::before {
+    opacity: 1;
   }
 
   /* Cartão que é um link inteiro: sobe, ganha sombra e borda de destaque. */
@@ -89,13 +110,18 @@
 
   /* Hover só onde há mouse: evita um estado preso após o toque no celular. */
   @media (hover: hover) and (pointer: fine) {
-    .card:hover {
-      --card-fill: var(--card-hover);
-      --card-start: var(--card-tint-hover);
-      --card-end: var(--card-edge-hover);
+    .button:hover {
+      transform: translateY(var(--lift));
+      box-shadow: var(--shadow-sm);
+    }
 
+    .card:hover {
       border-color: color-mix(in srgb, var(--accent) 55%, var(--border));
       box-shadow: var(--edge), var(--shadow-sm);
+    }
+
+    .card:hover::before {
+      opacity: 1;
     }
 
     .card-interactive:hover {
@@ -106,14 +132,14 @@
   }
 
   .card-interactive:active {
-    --card-fill: var(--card-hover);
-    --card-start: var(--card-tint-hover);
-    --card-end: var(--card-edge-hover);
-
     transform: translateY(0);
     border-color: var(--accent);
     box-shadow: var(--edge), var(--shadow-card);
     color: inherit;
+  }
+
+  .card-interactive:active::before {
+    opacity: 1;
   }
 
   /* Grade intrínseca: o próprio grid decide quantas colunas cabem, cada uma
@@ -181,11 +207,6 @@
       transform var(--duration-base) var(--ease-out);
   }
 
-  .button:hover {
-    transform: translateY(var(--lift));
-    box-shadow: var(--shadow-sm);
-  }
-
   .button:active {
     transform: translateY(0);
     box-shadow: none;
@@ -205,10 +226,12 @@
     transition: transform var(--duration-base) var(--ease-out);
   }
 
-  .button:hover span[aria-hidden="true"],
-  .footer-discord:hover span[aria-hidden="true"],
-  .card-interactive:hover .arrow {
-    transform: translate(var(--nudge), calc(var(--nudge) * -1));
+  @media (hover: hover) and (pointer: fine) {
+    .button:hover span[aria-hidden="true"],
+    .footer-discord:hover span[aria-hidden="true"],
+    .card-interactive:hover .arrow {
+      transform: translate(var(--nudge), calc(var(--nudge) * -1));
+    }
   }
 
   .card-interactive:focus-visible .arrow {
@@ -239,15 +262,15 @@
   }
 
   .button-quiet {
-    border-color: rgb(217 209 197 / 45%);
-    background: rgb(6 9 13 / 50%);
-    color: #d9d1c5;
-    backdrop-filter: blur(6px);
+    border-color: var(--border);
+    background: var(--surface);
+    color: var(--text);
   }
 
   .button-quiet:hover {
-    border-color: #d9d1c5;
-    color: #e6ded1;
+    border-color: var(--accent);
+    background: var(--surface-soft);
+    color: var(--text);
   }
 
   .inline-link {

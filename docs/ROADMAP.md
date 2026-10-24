@@ -1,6 +1,6 @@
 # Roadmap do KineinSite
 
-Este documento descreve **o site**, não o cronograma de recursos da Kinein Vectis. Estado conferido em 2026-10-08. A ordem abaixo indica dependências editoriais e técnicas, sem prometer datas ou funcionalidades da IDE que ainda não foram validadas.
+Este documento descreve **o site**, não o cronograma de recursos da Kinein Vectis. Estado conferido em 2026-10-24. A ordem abaixo indica dependências editoriais e técnicas, sem prometer datas ou funcionalidades da IDE que ainda não foram validadas.
 
 ## Entregue
 
@@ -22,6 +22,10 @@ Este documento descreve **o site**, não o cronograma de recursos da Kinein Vect
 - Publicador sem dependência de rsync, com identificação do commit de origem e conferência dos arquivos públicos.
 
 ## Próximas entregas do site
+
+Direção confirmada em 2026-10-24: após o fechamento da linha 0.4, inglês será o idioma principal do site e da colaboração na IDE, com português como tradução possível. O convite atual acolhe pessoas de qualquer lugar; a edição em inglês e as traduções seguem os critérios de [INTERNATIONALIZATION.md](INTERNATIONALIZATION.md). A tradução é trabalho complementar e não deve bloquear a trilha principal.
+
+Em revisão local (2026-10-24): nova apresentação da página inicial, área Colabore com oportunidades independentes, integração com issues e contributors públicos, regras detalhadas de envio e créditos. O polimento inclui navegação móvel, transições coordenadas, fundo em SVG e vetores de repulsão no clique, com respeito à redução de movimento. O mantenedor pediu visualização local antes de aprovar publicação. Operação e limites em [COLLABORATION.md](COLLABORATION.md).
 
 | Prioridade | Trabalho                                                                                   | Condição para concluir                                                                                                                                           |
 | ---------- | ------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |

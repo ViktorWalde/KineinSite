@@ -18,7 +18,7 @@ export default defineConfig({
       directives: [
         "default-src 'self'",
         "img-src 'self'",
-        "connect-src 'self'",
+        "connect-src 'self' https://api.github.com",
         "object-src 'none'",
         "base-uri 'self'",
         "form-action 'none'",

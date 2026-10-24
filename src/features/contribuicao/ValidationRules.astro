@@ -1,0 +1,150 @@
+---
+import { repositoryUrl } from "../../site";
+const guide = `${repositoryUrl}/blob/main/DocsPublic/contribuindo`;
+---
+
+<section
+  id="validacao"
+  class="contribution-section"
+  aria-labelledby="validation-title"
+>
+  <p class="kicker">05 / O QUE PRECISA SER PROVADO</p>
+  <h2 id="validation-title">
+    Explique como verificar, inclusive o que não funcionou.
+  </h2>
+  <ul>
+    <li>
+      <strong>Correção de defeito:</strong> registre uma reprodução anterior, o
+      resultado esperado e o resultado após a mudança. Quando houver código,
+      inclua o teste de regressão adequado ao comportamento.
+    </li>
+    <li>
+      <strong>IDE:</strong> siga os gates vigentes do repositório e da issue. O
+      fluxo rápido é <code>bash scripts/verificar.sh --rapido</code>; a camada
+      rápida de CI, quando indicada, usa{" "}
+      <code>bash scripts/verificar.sh --ci-rapida --estrito</code>. Mudanças de
+      UI, C++, protocolo ou hardware podem exigir outras camadas; o rápido
+      sozinho não comprova tudo.
+    </li>
+    <li>
+      <strong>Site:</strong> execute <code>npm run build:pages</code>. Para
+      mudanças visuais ou de interação, execute também{" "}
+      <code>npm run check:browser</code> com Chrome/Chromium disponível e
+      confira larguras estreita, intermediária e larga, teclado, temas e
+      movimento reduzido.
+    </li>
+    <li>
+      <strong>Conteúdo executável:</strong> execute todos os comandos e exemplos
+      no ambiente declarado, confira saídas e exercícios e informe as versões.
+      No site, mudanças em estudos exigem <code>npm run check:examples</code>;
+      guias da IDE seguem o roteiro de captura e a curadoria do repositório.
+    </li>
+    <li>
+      <strong>Limites do ambiente:</strong> ferramenta ausente, teste não
+      executado e hardware indisponível devem aparecer como{" "}
+      <strong>não provados</strong>, com motivo. Não apresente omissão,
+      simulação ou falha como aprovação.
+    </li>
+    <li>
+      <strong>Se houver falha anterior:</strong> reproduza na base, identifique
+      o comando e diferencie da regressão da sua alteração. Não corrija outro
+      domínio ou altere a linha de base só para limpar o relatório.
+    </li>
+    <li>
+      <strong>CI:</strong> informe o link e a execução que correspondem ao
+      commit enviado. Um workflow que não iniciou ou foi bloqueado não é prova
+      de teste aprovado. A decisão de revisão continua com o mantenedor.
+    </li>
+  </ul>
+  <p>
+    Consulte os{" "}
+    <a
+      class="inline-link"
+      href={`${guide}/04-os-gates-que-dizem-nao.md`}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      gates e seus requisitos ↗
+    </a>{" "}
+    antes de escolher as verificações. O ambiente e os comandos podem evoluir no
+    repositório.
+  </p>
+</section>
+
+<section
+  id="evidencias"
+  class="contribution-section"
+  aria-labelledby="evidence-title"
+>
+  <p class="kicker">06 / EVIDÊNCIAS PARA A REVISÃO</p>
+  <h2 id="evidence-title">O mantenedor precisa conseguir reproduzir.</h2>
+  <ul>
+    <li>
+      Informe data, sistema, arquitetura, versão ou commit, ferramentas e
+      pré-requisitos. Descreva os passos na ordem em que foram executados.
+    </li>
+    <li>
+      Liste cada comando relevante com resultado e limitações. Para falhas,
+      inclua a mensagem necessária ao diagnóstico; para desempenho, método de
+      medição e números comparáveis antes/depois.
+    </li>
+    <li>
+      Para interface, anexe capturas antes/depois com o mesmo enquadramento e
+      indique largura, tema e gesto testado. Um vídeo curto ajuda quando o
+      problema depende de uma sequência de ações.
+    </li>
+    <li>
+      Para hardware, registre placa, SDK, conexão, procedimento e resultado.
+      Identifique claramente o que foi observado em hardware e o que foi apenas
+      simulado.
+    </li>
+    <li>
+      Anexe evidências à issue ou ao PR, ou use links públicos acessíveis. Um
+      caminho no seu computador ou a frase “testado aqui” não permite revisão.
+    </li>
+    <li>
+      Antes de anexar logs ou capturas, remova tokens, senhas, endereços
+      privados e informações pessoais. Preserve os dados técnicos necessários
+      para a reprodução.
+    </li>
+  </ul>
+</section>
+
+<section
+  id="documentacao"
+  class="contribution-section"
+  aria-labelledby="documentation-title"
+>
+  <p class="kicker">07 / CONTEÚDO E REGISTRO</p>
+  <h2 id="documentation-title">
+    Documente no lugar certo, sem criar outra fonte de verdade.
+  </h2>
+  <ul>
+    <li>
+      Explique o que mudou e por quê. Se a pessoa usuária vê outro
+      comportamento, atualize a documentação correspondente à versão e ao escopo
+      aprovado.
+    </li>
+    <li>
+      Use fontes primárias, texto autoral e links verificáveis. Cite ferramenta,
+      plataforma, padrão de linguagem e data do teste quando relevantes. Não
+      prometa recursos futuros como se já estivessem disponíveis.
+    </li>
+    <li>
+      O manual exibido no site é uma cópia verificada da IDE: a correção nasce
+      no repositório da IDE e chega ao site pela sincronização; não edite a
+      cópia para contornar a origem.
+    </li>
+    <li>
+      Quando a regra da IDE exigir registro de entrega, roadmap ou contrato,
+      combine os trechos compartilhados com o mantenedor. Inclua a atualização
+      ou proposta no PR; não reorganize a fila principal nem atribua números de
+      entregas concorrentes por conta própria.
+    </li>
+    <li>
+      Liste trabalho pendente e decisões necessárias. Uma contribuição parcial
+      deve dizer exatamente o que falta, sem transformar isso em obrigação para
+      a próxima etapa da IDE.
+    </li>
+  </ul>
+</section>

@@ -1,46 +1,6 @@
-/* Duas curvas sobrepostas, com bordas difusas, via máscara vetorial.
-   O movimento muda a posição e a altura da curva sem deslocar o conteúdo. */
+/* Fluxos vetoriais estáticos por padrão. As luzes só percorrem trechos
+   visíveis; o tema vem inteiramente do CSS, sem redesenho em JavaScript. */
 @layer base {
-  .wave-field {
-    --wave-start: calc(-1 * var(--wave-travel));
-    --wave-end: var(--wave-travel);
-
-    position: relative;
-    isolation: isolate;
-  }
-
-  .wave-field::before,
-  .wave-field::after {
-    position: absolute;
-    z-index: -1;
-    inset: -15% -25%;
-    background: linear-gradient(
-      100deg in oklab,
-      var(--wave-trough),
-      var(--wave-crest) 30%,
-      var(--wave-crest) 70%,
-      var(--wave-trough)
-    );
-    mask-image: url("../../assets/backgrounds/wave-flow.svg?no-inline");
-    mask-size: 100% 100%;
-    mask-repeat: no-repeat;
-    content: "";
-    pointer-events: none;
-  }
-
-  .wave-field::after {
-    background: linear-gradient(
-      80deg in oklab,
-      var(--wave-crest),
-      var(--wave-trough) 50%,
-      var(--wave-crest)
-    );
-    rotate: 180deg;
-    opacity: 0.7;
-  }
-
-  /* O campo contínuo usa a janela como referência mesmo em artigos longos.
-     O recorte impede que as ondas criem rolagem horizontal. */
   .page-background {
     position: fixed;
     z-index: -1;
@@ -49,31 +9,72 @@
     pointer-events: none;
   }
 
-  @media (prefers-reduced-motion: no-preference) {
-    .wave-field::before {
-      animation: wave-sway var(--wave-duration) ease-in-out infinite alternate;
+  .flow-field {
+    --flow-height: clamp(7rem, 12vw, 11rem);
+    --flow-delay: -8s;
+
+    position: absolute;
+    z-index: 0;
+    inset-block: calc(-0.5 * var(--flow-height)) auto;
+    inset-inline: 0;
+    height: var(--flow-height);
+    pointer-events: none;
+  }
+
+  .flow-lines {
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    fill: none;
+    mask-image: linear-gradient(
+      90deg,
+      transparent,
+      #000 12%,
+      #000 88%,
+      transparent
+    );
+    pointer-events: none;
+  }
+
+  .flow-lines path {
+    vector-effect: non-scaling-stroke;
+  }
+
+  .flow-track {
+    stroke: var(--flow-line);
+    stroke-width: 1px;
+  }
+
+  .flow-pulse {
+    stroke: var(--flow-pulse);
+    stroke-width: 1.75px;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .flow-pulse-1 {
+    stroke: var(--flow-companion);
+  }
+
+  .flow-lines:not([data-flow-ready]) .flow-pulse {
+    opacity: 0;
+  }
+
+  .flow-field-page {
+    inset-block-start: 34%;
+  }
+
+  .flow-field-page-lower {
+    --flow-delay: -21s;
+
+    inset-block-start: 73%;
+    opacity: 0.75;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .flow-pulse {
+      opacity: 0;
     }
-
-    .wave-field::after {
-      animation: wave-sway var(--wave-duration-secondary) ease-in-out -14s
-        infinite alternate-reverse;
-    }
-  }
-}
-
-@keyframes wave-sway {
-  0% {
-    translate: var(--wave-start) -0.75rem;
-    scale: 1 0.92;
-  }
-
-  50% {
-    translate: 0 0.75rem;
-    scale: 1 1.08;
-  }
-
-  100% {
-    translate: var(--wave-end) -0.75rem;
-    scale: 1 0.92;
   }
 }

@@ -1,0 +1,15 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ContributionRules from "../../features/contribuicao/ContributionRules.astro";
+import "../../features/contribuicao/contribuicao.css";
+---
+
+<BaseLayout
+  current="collaborate"
+  title="Regras para preparar e enviar sua contribuição"
+  description="Escopo independente, alinhamento na issue, validação, evidências e modelo de pull request: as regras para enviar sua contribuição à Kinein Vectis e ao site para revisão do mantenedor."
+>
+  <div class="shell">
+    <ContributionRules />
+  </div>
+</BaseLayout>

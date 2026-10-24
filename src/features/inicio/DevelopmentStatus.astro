@@ -1,7 +1,7 @@
 ---
-import { developmentSnapshot } from "../../data/development";
 import DemoComparison from "../demonstracao/DemoComparison.astro";
-import PreviewNotice from "../demonstracao/PreviewNotice.astro";
+import { publicVersion, sitePath } from "../../site";
+import ActionLink from "../../components/ActionLink.astro";
 ---
 
 <section
@@ -10,35 +10,25 @@ import PreviewNotice from "../demonstracao/PreviewNotice.astro";
   aria-labelledby="desenvolvimento-title"
 >
   <div class="section-intro reveal">
-    <p class="kicker">A PRÓXIMA VECTIS</p>
-    <h2 id="desenvolvimento-title">{developmentSnapshot.title}</h2>
+    <p class="kicker">VEJA A VECTIS EM AÇÃO</p>
+    <h2 id="desenvolvimento-title">Um projeto aberto. O código em ação.</h2>
     <p class="section-intro-copy">
-      Nova interface e trabalho com embarcados, juntos na{" "}
-      {developmentSnapshot.version}. Veja como o editor e os painéis estão
-      tomando forma — e compare com o beta que você pode usar hoje.
+      Acompanhe um programa C++ sendo compilado e executado na Vectis. Comece
+      pelo beta disponível hoje; a prévia mostra a interface em construção.
     </p>
   </div>
-  <PreviewNotice />
   <p class="comparison-intro">
-    Compare o mesmo projeto C++ nas duas interfaces: código, compilação e
-    resultado. Escolha a versão que deseja ver.
+    <strong>A demonstração abre no beta {publicVersion}.</strong> Ao escolher
+    “Prévia 0.4”, você verá uma versão em desenvolvimento, que ainda pode mudar
+    até o lançamento.
   </p>
   <DemoComparison />
-  <div class="development-grid auto-grid reveal-children">
-    {developmentSnapshot.groups.map((group) => (
-      <article class="development-card card">
-        <h3>{group.status}</h3>
-        <ul>
-          {group.items.map((item) => (
-            <li>
-              <span>
-                <strong>{item.title}</strong>
-                {"detail" in item && <small>{item.detail}</small>}
-              </span>
-            </li>
-          ))}
-        </ul>
-      </article>
-    ))}
+  <div class="comparison-intro">
+    <ActionLink
+      href={sitePath("/documentacao/previa-0-4/")}
+      description="Conheça a nova interface e o foco em embarcados. Esta versão ainda está em desenvolvimento."
+    >
+      Explorar a prévia 0.4
+    </ActionLink>
   </div>
 </section>

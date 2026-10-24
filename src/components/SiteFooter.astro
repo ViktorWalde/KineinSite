@@ -13,7 +13,11 @@ const groups = [
     title: "Produto",
     links: [
       { label: "Atualizações", href: sitePath("/atualizacoes/") },
-      { label: `Baixar a ${publicVersion}`, href: releaseUrl, external: true },
+      {
+        label: `Baixar o beta ${publicVersion}`,
+        href: releaseUrl,
+        external: true,
+      },
       { label: "Código da IDE", href: repositoryUrl, external: true },
     ],
   },
@@ -28,6 +32,8 @@ const groups = [
   {
     title: "Comunidade",
     links: [
+      { label: "Colabore", href: sitePath("/colabore/") },
+      { label: "Quem contribui", href: sitePath("/colabore/#colaboradores") },
       { label: "Discord", href: discordUrl, external: true },
       { label: "Sobre este site", href: sitePath("/documentacao/site/") },
       { label: "Código do site", href: siteRepositoryUrl, external: true },
@@ -43,8 +49,8 @@ const groups = [
         Kinein <span>Vectis</span>
       </strong>
       <p>
-        IDE open source para C, C++, Rust e Python. Editor, compilação, testes e
-        Git no beta; nova interface e foco em embarcados na 0.4.
+        Uma IDE de código aberto para criar com C, C++, Rust e Python. Do
+        primeiro programa aos próximos desafios, com ferramentas no mesmo lugar.
       </p>
     </div>
     {groups.map((group) => (

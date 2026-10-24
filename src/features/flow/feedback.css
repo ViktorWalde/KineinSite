@@ -1,0 +1,35 @@
+/* Impulso local: oito vetores se afastam do ponto clicado e desaparecem.
+   A camada não recebe entrada nem altera o layout dos controles. */
+.vector-feedback {
+  position: fixed;
+  z-index: 100;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  pointer-events: none;
+}
+
+.vector-feedback-contained {
+  position: absolute;
+}
+
+.repulsion-outline {
+  stroke: var(--page);
+  stroke-width: 3px;
+  opacity: 0.65;
+}
+
+.repulsion-arrow {
+  stroke: var(--accent);
+  stroke-width: 1.35px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vector-feedback {
+    display: none;
+  }
+}

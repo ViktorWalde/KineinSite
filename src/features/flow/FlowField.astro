@@ -1,0 +1,44 @@
+---
+import { flowRoutes } from "./paths";
+interface Props {
+  placement?: "section" | "intro" | "page" | "page-lower";
+}
+const { placement = "section" } = Astro.props;
+const routes = flowRoutes(1440, 160);
+---
+
+<div class:list={["flow-field", `flow-field-${placement}`]} aria-hidden="true">
+  <svg
+    class="flow-lines"
+    viewBox="0 0 1440 160"
+    preserveAspectRatio="none"
+    focusable="false"
+  >
+    {routes.map((route) => (
+      <path class="flow-track" d={route} />
+    ))}
+    {routes.map((route, index) => (
+      <g class:list={["flow-pulse", `flow-pulse-${String(index)}`]}>
+        <g>
+          <path d="M -24 0 H 0" />
+          <animate
+            attributeName="opacity"
+            values="0;1;1;0"
+            keyTimes="0;0.07;0.92;1"
+            dur={`${String(34 + index * 5)}s`}
+            repeatCount="indefinite"
+            begin="indefinite"
+          />
+        </g>
+        <animateMotion
+          path={route}
+          dur={`${String(34 + index * 5)}s`}
+          repeatCount="indefinite"
+          rotate="auto"
+          calcMode="paced"
+          begin="indefinite"
+        />
+      </g>
+    ))}
+  </svg>
+</div>

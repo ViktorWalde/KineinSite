@@ -14,20 +14,19 @@ const notePath = sitePath(
   aria-labelledby="estado-title"
 >
   <div class="section-intro reveal">
-    <p class="kicker">BETA {publicVersion} · LINUX</p>
-    <h2 id="estado-title">Abra um projeto e comece a trabalhar.</h2>
+    <p class="kicker">UM FLUXO QUE ACOMPANHA VOCÊ</p>
+    <h2 id="estado-title">Encontre. Execute. Continue.</h2>
     <p class="section-intro-copy">
-      Editor, compilação, testes, Git e terminal já estão no beta
-      <strong>{publicVersion} para Linux x86_64</strong>. Use seus compiladores
-      e acompanhe os resultados pelos painéis da Vectis.
+      Do arquivo que você procura à alteração que acabou de fazer, acompanhe o
+      trabalho sem perder o contexto do projeto.
     </p>
   </div>
   <div class="status-panel card reveal">
     <div>
-      <h3>Baixe o AppImage e abra no Linux</h3>
+      <h3>Pronto para um primeiro teste?</h3>
       <p>
-        O AppImage traz a IDE e o Qt. Compiladores, SDKs e ferramentas continuam
-        vindo do seu sistema. Requisitos e instalação estão na{" "}
+        O beta {publicVersion} está disponível para Linux x86_64. Comece pelo
+        guia de instalação ou confira o que está incluído na{" "}
         <a class="inline-link" href={notePath}>
           nota da {publicVersion}
         </a>
@@ -35,34 +34,36 @@ const notePath = sitePath(
       </p>
     </div>
     <div class="status-actions">
-      <a class="button button-secondary" href={sitePath("/manual/")}>
-        Conhecer as ferramentas
+      <a
+        class="button button-secondary"
+        href={sitePath("/aprender/ide/instalar/")}
+      >
+        Ver como instalar
       </a>
     </div>
   </div>
   <div class="current-capabilities auto-grid reveal-children">
     <div class="card">
-      <h3>Editor e navegação</h3>
+      <span class="capability-step label">01 / ENCONTRE</span>
+      <h3>Chegue ao trecho certo</h3>
       <p>
-        Navegue pelos arquivos e receba completamento e diagnósticos de clangd,
-        rust-analyzer ou basedpyright, conforme o projeto e as ferramentas
-        instaladas.
+        Navegue pelos arquivos e encontre o código que precisa da sua atenção.
       </p>
     </div>
     <div class="card">
-      <h3>Compilação e testes</h3>
+      <span class="capability-step label">02 / EXPERIMENTE</span>
+      <h3>Confira o resultado</h3>
       <p>
-        Compile, execute testes e investigue problemas pelos painéis da IDE.
-        Acompanhe tarefas canceláveis e use o terminal integrado quando precisar
-        de um comando.
+        Compile, execute e acompanhe a saída do programa. Se algo falhar, veja o
+        diagnóstico sem sair do projeto.
       </p>
     </div>
     <div class="card">
-      <h3>Arquivos, busca e Git</h3>
+      <span class="capability-step label">03 / EVOLUA</span>
+      <h3>Saiba o que mudou</h3>
       <p>
-        Encontre arquivos e símbolos, compare alterações e consulte o histórico
-        do projeto. Para arquivos em outro computador, o Remote SSH mantém um
-        espelho local usando SSH e rsync.
+        Compare suas alterações e consulte o histórico Git antes de seguir para
+        a próxima etapa.
       </p>
     </div>
   </div>

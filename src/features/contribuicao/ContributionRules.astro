@@ -1,0 +1,49 @@
+---
+import { sitePath } from "../../site";
+import PreparationRules from "./PreparationRules.astro";
+import ValidationRules from "./ValidationRules.astro";
+import SubmissionRules from "./SubmissionRules.astro";
+---
+
+<article class="contribution-guide">
+  <header class="contribution-intro enter">
+    <a class="inline-link" href={sitePath("/colabore/")}>
+      ← Voltar para Colabore
+    </a>
+    <p class="kicker">GUIA DE ENTREGA / PARA REVISÃO DO MANTENEDOR</p>
+    <h1>Como preparar e enviar sua contribuição.</h1>
+    <p>
+      Este roteiro explica o que enviar para que <strong>@ViktorWalde</strong>{" "}
+      consiga entender, reproduzir e revisar sua ajuda. Vale para documentação,
+      testes, exemplos, interface e correções pontuais, com ou sem uso de IA.
+    </p>
+    <p class="contribution-boundary">
+      <strong>A regra central:</strong> sua entrega complementa o trabalho do
+      mantenedor. Ela deve poder ser adiada, recusada ou integrada sem bloquear
+      a trilha principal, mudar o planejamento da IDE ou exigir que o mantenedor
+      implemente uma dependência para você continuar.
+    </p>
+    <p class="collab-note">
+      As regras técnicas vigentes de cada repositório continuam nos respectivos
+      documentos de contribuição. Se encontrar uma divergência, registre na
+      issue e alinhe com o mantenedor antes de implementar.
+    </p>
+  </header>
+  <nav class="contribution-index" aria-label="Regras de contribuição">
+    <a href="#escopo">01 / Escopo independente</a>
+    <a href="#alinhamento">02 / Alinhar na issue</a>
+    <a href="#ambiente">03 / Ambiente e branch</a>
+    <a href="#implementacao">04 / Implementação</a>
+    <a href="#validacao">05 / Validação</a>
+    <a href="#evidencias">06 / Evidências</a>
+    <a href="#documentacao">07 / Documentação</a>
+    <a href="#envio">08 / Enviar o PR</a>
+    <a href="#modelo">09 / Modelo de entrega</a>
+    <a href="#revisao">10 / Revisão e créditos</a>
+    <a href="#checklist">11 / Conferência final</a>
+  </nav>
+
+  <PreparationRules />
+  <ValidationRules />
+  <SubmissionRules />
+</article>

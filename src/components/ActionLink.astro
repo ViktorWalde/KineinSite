@@ -1,0 +1,28 @@
+---
+import "./action-link.css";
+
+interface Props {
+  href: string;
+  description?: string;
+  external?: boolean;
+}
+
+const { href, description, external = false } = Astro.props;
+---
+
+<a
+  class="action-link"
+  href={href}
+  target={external ? "_blank" : undefined}
+  rel={external ? "noopener noreferrer" : undefined}
+>
+  <span class="action-link-copy">
+    <span class="action-link-title">
+      <slot />
+    </span>
+    {description && <span class="action-link-description">{description}</span>}
+  </span>
+  <span class="action-link-arrow" aria-hidden="true">
+    {external ? "↗" : "→"}
+  </span>
+</a>

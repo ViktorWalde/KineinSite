@@ -61,6 +61,8 @@
     min-width: 0;
     align-items: center;
     gap: 0.25rem;
+    overflow-x: auto;
+    scrollbar-width: none;
   }
 
   .primary-nav a {
@@ -95,12 +97,20 @@
     color: var(--accent);
   }
 
+  .primary-nav .nav-collaborate {
+    color: var(--accent);
+  }
+
   .header-tools {
     display: flex;
     flex: none;
     align-items: center;
     gap: 0.6rem;
     margin-inline-start: auto;
+  }
+
+  .mobile-navigation {
+    display: none;
   }
 
   .site-footer {
@@ -178,11 +188,11 @@
     }
   }
 
-  /* Abaixo de 66rem (1056 px com a fonte padrão) o menu não cabe ao lado da
+  /* Abaixo de 75rem (1200 px com a fonte padrão) o menu não cabe ao lado da
      marca e das ferramentas: vai para uma segunda linha, que rola na
      horizontal em vez de quebrar. O cabeçalho continua fixo, mais alto, e as
      âncoras ganham mais recuo para o título não ficar embaixo dele. */
-  @media (width <= 66rem) {
+  @media (width <= 75rem) {
     html {
       scroll-padding-top: calc(var(--header-height) + 3rem);
     }
@@ -214,6 +224,69 @@
     .site-header {
       position: relative;
     }
+
+    .desktop-links {
+      display: none;
+    }
+
+    .mobile-navigation {
+      display: block;
+      order: 4;
+      width: 100%;
+      margin-block: var(--space-xs);
+    }
+
+    .mobile-navigation > summary {
+      display: flex;
+      min-height: 2.75rem;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-s);
+      padding: var(--space-xs) var(--space-s);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface);
+      font-size: var(--text-sm);
+      font-weight: 650;
+      list-style: none;
+      cursor: pointer;
+    }
+
+    .mobile-navigation > summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .mobile-navigation svg {
+      flex: none;
+      fill: none;
+      stroke: var(--accent);
+      stroke-width: 1.75;
+      transition: rotate var(--duration-fast) ease;
+    }
+
+    .mobile-navigation[open] svg {
+      rotate: 180deg;
+    }
+
+    .mobile-links {
+      display: grid;
+      width: 100%;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--space-xs);
+      padding-block: var(--space-s) var(--space-xs);
+      margin: 0;
+      overflow: visible;
+      mask-image: none;
+    }
+
+    .mobile-links a {
+      min-width: 0;
+      min-height: 2.75rem;
+      padding: var(--space-s);
+      border: 1px solid var(--border);
+      background: var(--surface);
+      white-space: normal;
+    }
   }
 
   @media (width <= 35rem) {
@@ -226,9 +299,7 @@
       font-size: var(--text-sm);
     }
 
-    /* No celular o Discord fica no rodapé e no fim da página inicial, e o
-     download fica no topo da página inicial. */
-    .primary-nav .nav-external,
+    /* No celular o download permanece na abertura da página inicial. */
     .header-tools .header-download {
       display: none;
     }

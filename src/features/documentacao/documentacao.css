@@ -6,12 +6,6 @@
   padding-block: var(--space-xl) var(--space-3xl);
 }
 
-.path-card a {
-  color: var(--accent);
-  font-size: var(--text-sm);
-  font-weight: 700;
-}
-
 .path-card-links {
   display: flex;
   flex-wrap: wrap;
@@ -20,7 +14,7 @@
 }
 
 /* Índice da página: fixo abaixo do cabeçalho, com a seção em leitura
-   marcada (aria-current, ver src/scripts/section-nav.ts). */
+   marcada (aria-current, ver section-nav.ts). */
 .docs-sidebar {
   position: sticky;
   top: calc(var(--header-height) + 2rem);

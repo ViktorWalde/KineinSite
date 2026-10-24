@@ -2,6 +2,8 @@
 
 Obrigado por ajudar a tornar o site mais claro e útil. Mudanças pequenas e verificáveis são as mais fáceis de revisar. Para defeitos ou propostas maiores, descreva primeiro o problema e o resultado esperado em uma issue do [repositório do site](https://github.com/ViktorWalde/KineinSite/issues).
 
+O guia público em `/colabore/regras/` explica o fluxo completo e inclui um modelo de entrega. Escolha uma tarefa independente, combine o escopo e a atribuição na issue e trabalhe no seu fork. Uma entrega deve complementar a trilha principal da IDE e poder ser integrada ou adiada sem bloquear o mantenedor. Não assuma pendências centrais do roadmap como oportunidades abertas.
+
 ## Preparar o ambiente
 
 Use Node.js 24 e npm. Execute `npm ci` e `npm run dev`; a página local abre em <http://127.0.0.1:4321/>. Antes de abrir um pull request, execute `npm run build:pages` e informe o resultado. A validação automática de pull requests está pausada; o mantenedor também executa esse build antes da publicação. Consulte [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) para localizar rotas, componentes e estilos.
@@ -32,5 +34,7 @@ Para alterações visuais, confira pelo menos uma largura estreita (320 a 390 px
 ## Pull request
 
 Descreva o comportamento anterior, a mudança, as páginas afetadas e o resultado de `npm run build:pages`. Para conteúdo técnico, inclua fontes e ambiente de teste. O pull request deve alterar apenas arquivos públicos necessários à proposta. A publicação é feita por um mantenedor após revisão.
+
+Vincule a issue e os critérios de aceite; informe ambiente, ferramentas, data, comandos e resultados, evidências antes/depois e tudo o que não foi provado. Explique a independência em relação à trilha principal, o que ficou fora do escopo e onde começar a revisão. Identifique participantes/coautores e uso de IA, se houver. Validação incompleta ou escopo ainda não alinhado deve ser enviado como Draft. Um workflow que não executou não conta como teste aprovado. O mantenedor decide a integração, sem prazo de revisão ou merge presumido.
 
 Os arquivos de `assets/` têm termos próprios de uso descritos nos READMEs da pasta. A publicação no GitHub não concede permissão de reutilizá-los fora do site.

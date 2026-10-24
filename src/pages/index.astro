@@ -2,18 +2,19 @@
 import { getImage } from "astro:assets";
 import wallpaperSource from "../../assets/backgrounds/wallpaper-site.png";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import FlowField from "../features/flow/FlowField.astro";
 import CurrentStatus from "../features/inicio/CurrentStatus.astro";
 import DevelopmentStatus from "../features/inicio/DevelopmentStatus.astro";
 import FocusAreas from "../features/inicio/FocusAreas.astro";
 import IdePreview from "../features/inicio/IdePreview.astro";
 import FirstTry from "../features/inicio/FirstTry.astro";
 import LatestUpdate from "../features/atualizacoes/LatestUpdate.astro";
+import CollaborationInvite from "../features/inicio/CollaborationInvite.astro";
 import "../features/inicio/inicio.css";
 import "../features/inicio/background.css";
 import "../features/inicio/secoes.css";
 import "../features/inicio/desenvolvimento.css";
-import { developmentSnapshot } from "../data/development";
-import { discordUrl, publicVersion, releaseUrl } from "../site";
+import { discordUrl, publicVersion, releaseUrl, sitePath } from "../site";
 
 // O hero é o maior elemento da primeira tela: largura certa por tela
 // (srcset) e prioridade de rede alta. As dimensões vêm do resultado, nunca
@@ -30,8 +31,8 @@ const wallpaper = await getImage({
 
 <BaseLayout
   current="home"
-  title="IDE open source para C, C++, Rust e Python"
-  description={`Edite, compile, execute testes e consulte o Git na Kinein Vectis. Beta ${publicVersion} para Linux x86_64. Conheça a nova interface e o foco em embarcados da 0.4.`}
+  title="IDE brasileira para C, C++, Rust e Python"
+  description={`Conheça a Kinein Vectis: uma IDE brasileira, gratuita e open source para C, C++, Rust e Python. Veja a IDE em ação, experimente o beta ${publicVersion} no Linux e faça parte do projeto.`}
 >
   <section class="hero" aria-labelledby="hero-title">
     <div class="hero-media" aria-hidden="true">
@@ -51,15 +52,15 @@ const wallpaper = await getImage({
       <div class="hero-art" aria-hidden="true"></div>
       <div class="hero-copy enter">
         <p class="hero-overline">
-          <span aria-hidden="true">∭</span> BETA PÚBLICO {publicVersion} · LINUX
-          X86_64
+          <span aria-hidden="true">∭</span> KINEIN VECTIS · IDE BRASILEIRA
         </p>
         <h1 id="hero-title">
-          Do código à execução. <em>Na mesma IDE.</em>
+          Menos janelas. <em>Mais código.</em>
         </h1>
         <p class="hero-lead">
-          Abra seu projeto em C, C++, Rust ou Python. Edite o código, acompanhe
-          a compilação, rode testes e consulte o Git na mesma janela.
+          Escreva, execute e acompanhe seu projeto em C, C++, Rust ou Python. A
+          Vectis reúne o editor, as ferramentas e o Git para você continuar de
+          onde a ideia começou.
         </p>
         <div class="hero-actions">
           <a
@@ -68,83 +69,99 @@ const wallpaper = await getImage({
             target="_blank"
             rel="noopener noreferrer"
           >
-            Testar o beta {publicVersion} no Linux{" "}
-            <span aria-hidden="true">↗</span>
+            Baixar para Linux <span aria-hidden="true">↗</span>
           </a>
           <a class="button button-quiet" href="#desenvolvimento">
-            Conhecer a próxima Vectis
+            Assistir à demonstração
           </a>
         </div>
         <p class="hero-meta">
-          Open source, MIT ou Apache-2.0 <span aria-hidden="true">·</span> Sem
-          telemetria <span aria-hidden="true">·</span> Ferramentas do seu
-          sistema
+          Grátis e open source <span aria-hidden="true">·</span> Sem telemetria
+          <br />
+          Beta {publicVersion} para Linux x86_64
         </p>
+        <a
+          class="inline-link hero-help"
+          href={sitePath("/aprender/ide/instalar/")}
+        >
+          Instalação passo a passo <span aria-hidden="true">→</span>
+        </a>
       </div>
     </div>
   </section>
 
   <div class="home-flow">
-    <div class="home-topic wave-field">
-      <CurrentStatus />
-
+    <div class="home-topic">
       <nav class="journey shell auto-grid reveal" aria-label="Caminhos rápidos">
-        <a class="card card-interactive" href="#interface">
-          <span class="journey-label label">01 / CONHEÇA</span>
-          <strong>Veja as duas interfaces</strong>
-          <span class="journey-arrow" aria-hidden="true">
-            ↓
-          </span>
-        </a>
         <a class="card card-interactive" href="#desenvolvimento">
-          <span class="journey-label label">02 / A PRÓXIMA VECTIS</span>
-          <strong>
-            Compare o beta com a prévia {developmentSnapshot.version}
-          </strong>
+          <span class="journey-label label">QUERO CONHECER</span>
+          <strong>Veja a IDE funcionando</strong>
           <span class="journey-arrow" aria-hidden="true">
             ↓
           </span>
         </a>
         <a class="card card-interactive" href="#experiencia">
-          <span class="journey-label label">03 / EXPERIMENTE</span>
-          <strong>Comece seu projeto em C++</strong>
+          <span class="journey-label label">QUERO COMEÇAR</span>
+          <strong>Encontre seu primeiro projeto</strong>
           <span class="journey-arrow" aria-hidden="true">
             ↓
           </span>
         </a>
+        <a class="card card-interactive" href={sitePath("/colabore/")}>
+          <span class="journey-label label">QUERO COLABORAR</span>
+          <strong>Deixe sua contribuição</strong>
+          <span class="journey-arrow" aria-hidden="true">
+            →
+          </span>
+        </a>
       </nav>
+      <FlowField placement="intro" />
+      <CurrentStatus />
     </div>
 
-    <div class="home-topic wave-field">
+    <div class="home-topic">
+      <FlowField />
       <DevelopmentStatus />
     </div>
 
-    <div class="home-topic wave-field">
+    <div class="home-topic">
+      <FlowField />
       <IdePreview />
     </div>
 
-    <div class="home-topic wave-field">
+    <div class="home-topic">
+      <FlowField />
       <FocusAreas />
     </div>
 
-    <div class="home-topic wave-field">
+    <div class="home-topic">
+      <FlowField />
       <FirstTry />
     </div>
 
-    <div class="home-topic wave-field">
+    <div class="home-topic">
+      <FlowField />
       <LatestUpdate />
     </div>
 
-    <div class="home-topic wave-field">
+    <div class="home-topic">
+      <FlowField />
+      <CollaborationInvite />
+    </div>
+
+    <div class="home-topic">
+      <FlowField />
       <section class="closing-section" aria-labelledby="closing-title">
         <div class="shell closing-layout reveal">
           <div>
-            <p class="kicker">BETA PÚBLICO {publicVersion}</p>
-            <h2 id="closing-title">Comece pelo seu próximo projeto.</h2>
+            <p class="kicker">GRATUITA · OPEN SOURCE · FEITA NO BRASIL</p>
+            <h2 id="closing-title">
+              Seu próximo projeto começa com um primeiro passo.
+            </h2>
             <p>
-              Comece pelo beta {publicVersion} ou acompanhe a construção da
-              {developmentSnapshot.version}. Seu primeiro teste pode ajudar a
-              definir a IDE que está por vir.
+              Baixe o beta, abra um projeto e experimente o seu fluxo na Vectis.
+              Os guias acompanham o começo; a comunidade é um lugar para trocar
+              experiências pelo caminho.
             </p>
           </div>
           <div class="closing-actions">
@@ -154,7 +171,8 @@ const wallpaper = await getImage({
               target="_blank"
               rel="noopener noreferrer"
             >
-              Testar o beta {publicVersion} <span aria-hidden="true">↗</span>
+              Baixar grátis o beta {publicVersion}{" "}
+              <span aria-hidden="true">↗</span>
             </a>
             <a
               class="inline-link"

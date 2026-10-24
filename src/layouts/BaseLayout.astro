@@ -6,6 +6,7 @@ import PageBackground from "../components/PageBackground.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import { themeBootValues } from "../scripts/theme-preferences";
+import type { SiteSection } from "../site";
 import "../styles/tokens.css";
 import "../styles/base.css";
 import "../styles/background.css";
@@ -13,11 +14,12 @@ import "../styles/layout.css";
 import "../styles/components.css";
 import "../styles/interaction.css";
 import "../styles/theme-panel.css";
+import "../features/flow/feedback.css";
 
 interface Props {
   title: string;
   description: string;
-  current?: "home" | "guide" | "manual" | "docs" | "updates";
+  current?: SiteSection;
   // Páginas que não devem ser indexadas nem ter endereço canônico (a 404 é
   // servida em qualquer caminho inexistente).
   noindex?: boolean;
@@ -54,6 +56,15 @@ const imageUrl = Astro.site ? new URL(shareImage.src, Astro.site) : undefined;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {/* A opção deve estar disponível antes da primeira pintura, inclusive
+         quando o CSS externo ainda não chegou na navegação entre páginas. */}
+    <style is:inline>
+      @media (prefers-reduced-motion: no-preference) {
+        @view-transition {
+          navigation: auto;
+        }
+      }
+    </style>
     {/* Clássico e síncrono: aplica o tema salvo antes da primeira pintura.
          Como módulo no fim do body, ele rodava depois dela, e cada navegação
          mostrava o tema padrão seguido da transição de cor para o salvo. */}
@@ -106,5 +117,7 @@ const imageUrl = Astro.site ? new URL(shareImage.src, Astro.site) : undefined;
     </main>
     <SiteFooter />
     <script src="../scripts/theme.ts"></script>
+    <script src="../features/flow/visibility.ts"></script>
+    <script src="../features/flow/feedback.ts"></script>
   </body>
 </html>

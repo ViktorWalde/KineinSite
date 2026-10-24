@@ -1,0 +1,136 @@
+---
+import {
+  discordUrl,
+  repositoryUrl,
+  sitePath,
+  siteRepositoryUrl,
+} from "../../site";
+import { proposalUrl } from "./proposals";
+import ActionLink from "../../components/ActionLink.astro";
+const ways = [
+  {
+    number: "01",
+    title: "Documentação que aproxima",
+    detail:
+      "Encontre um passo confuso, reproduza um guia ou corrija uma explicação. Mostre a versão testada e o resultado.",
+    tags: "Português · Clareza · Reprodução",
+    action: "Quero ajudar com um guia",
+    repository: repositoryUrl,
+  },
+  {
+    number: "02",
+    title: "Testes em outros ambientes",
+    detail:
+      "Teste o beta no seu ambiente ou um fluxo combinado. Registre sistema, ferramentas, passos e comportamento observado.",
+    tags: "Linux · Relatos · Compatibilidade",
+    action: "Posso testar no meu ambiente",
+    repository: repositoryUrl,
+  },
+  {
+    number: "03",
+    title: "Exemplos para quem aprende",
+    detail:
+      "Proponha um exemplo pequeno e independente em C, C++, Rust ou Python, com instruções, saída esperada e fontes.",
+    tags: "Ensino · Exemplos · Exercícios",
+    action: "Quero compartilhar um exemplo",
+    repository: siteRepositoryUrl,
+  },
+  {
+    number: "04",
+    title: "Um site mais acessível",
+    detail:
+      "Ajude com teclado, leitura no celular, contraste, navegação e correções pontuais. Traga evidências de antes e depois.",
+    tags: "Acessibilidade · Interface · Conteúdo",
+    action: "Quero melhorar uma página",
+    repository: siteRepositoryUrl,
+  },
+];
+---
+
+<section id="como-ajudar" class="collab-section" aria-labelledby="ways-title">
+  <div class="collab-heading">
+    <div>
+      <p class="kicker">02 / HÁ MAIS DE UMA FORMA DE CONTRIBUIR</p>
+      <h2 id="ways-title">Tem mais de um jeito de ajudar.</h2>
+      <p>
+        Um olhar de quem está começando, um teste em outro computador ou uma
+        explicação bem escrita também ajudam o projeto a crescer.
+      </p>
+    </div>
+  </div>
+  <div class="collab-ways">
+    {ways.map((way) => (
+      <article class="collab-way card">
+        <span class="label">{way.number} / CONTRIBUIÇÃO INDEPENDENTE</span>
+        <h3>{way.title}</h3>
+        <p>{way.detail}</p>
+        <p class="collab-note">{way.tags}</p>
+        <a
+          class="button button-secondary"
+          href={proposalUrl(way.repository, way.title)}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {way.action} <span aria-hidden="true">↗</span>
+        </a>
+      </article>
+    ))}
+  </div>
+  <div class="collab-contact">
+    <p>
+      <strong>Tem uma ideia ou ainda está descobrindo como ajudar?</strong>
+      Converse com a comunidade no Discord ou abra uma proposta no GitHub.
+      Combine uma melhoria pequena com o mantenedor antes de começar.
+    </p>
+    <p class="collab-note">
+      Os convites acima abrem um rascunho de proposta no GitHub. Você revisa e
+      envia quando quiser; a tarefa começa depois do alinhamento.
+    </p>
+    <div class="task-source-links">
+      <ActionLink href={`${repositoryUrl}/issues/new`} external>
+        Propor ajuda na IDE
+      </ActionLink>
+      <ActionLink href={`${siteRepositoryUrl}/issues/new`} external>
+        Propor ajuda no site
+      </ActionLink>
+      <ActionLink href={discordUrl} external>
+        Conversar no Discord
+      </ActionLink>
+    </div>
+  </div>
+</section>
+
+<section
+  id="regras"
+  class="collab-section collab-rule-summary section-surface"
+  aria-labelledby="rules-title"
+>
+  <p class="kicker">03 / ANTES DE ENVIAR</p>
+  <h2 id="rules-title">Sua contribuição, pronta para uma boa revisão.</h2>
+  <p>
+    Para ajudar a ideia a virar uma entrega, reunimos o caminho completo: como
+    combinar a tarefa, preparar o resultado e enviar para revisão. Você encontra
+    um checklist e um modelo para preencher, sem precisar montar tudo do zero.
+  </p>
+  <ul>
+    <li>
+      <strong>Independente:</strong> não muda a trilha principal nem cria
+      dependência para o projeto continuar.
+    </li>
+    <li>
+      <strong>Delimitada:</strong> uma tarefa por pull request, sem refatorações
+      ou dependências de passagem.
+    </li>
+    <li>
+      <strong>Comprovada:</strong> passos reproduzíveis, ambiente, comandos e
+      evidências do que funcionou.
+    </li>
+    <li>
+      <strong>Completa para revisão:</strong> documentação correspondente e
+      limitações explícitas; nenhuma publicação por conta própria.
+    </li>
+  </ul>
+  <a class="button button-primary" href={sitePath("/colabore/regras/")}>
+    Preparar minha contribuição <span aria-hidden="true">→</span>
+  </a>
+</section>

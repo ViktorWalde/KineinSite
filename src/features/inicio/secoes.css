@@ -50,6 +50,11 @@
   font-size: var(--text-base);
 }
 
+.capability-step {
+  display: block;
+  margin-block-end: var(--space-m);
+}
+
 .current-capabilities p,
 .status-source {
   margin: 0;
@@ -58,7 +63,7 @@
 }
 
 .journey {
-  padding-block-end: var(--space-3xl);
+  padding-block: var(--space-2xl) var(--space-m);
 }
 
 .principle-card .inline-link {
@@ -98,7 +103,7 @@
   max-width: 24ch;
 }
 
-.closing-layout p:not(.kicker) {
+.closing-layout :where(p:not(.kicker)) {
   max-width: 55ch;
   margin: 0;
   color: var(--muted);
@@ -108,4 +113,53 @@
   display: grid;
   justify-items: start;
   gap: 1rem;
+}
+
+.product-starts {
+  margin-block-start: var(--space-xl);
+}
+
+.product-start {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  align-items: start;
+  gap: var(--space-m);
+  padding: var(--space-l);
+}
+
+.product-start h3,
+.product-start p {
+  margin: 0;
+}
+
+.product-start p {
+  color: var(--muted);
+  font-size: var(--text-sm);
+}
+
+.product-start .inline-link {
+  margin-block-start: auto;
+  font-size: var(--text-sm);
+}
+
+.product-questions {
+  max-width: 72ch;
+  margin-block-start: var(--space-2xl);
+}
+
+.product-questions details {
+  padding-block: var(--space-m);
+  border-block-end: 1px solid var(--border);
+}
+
+.product-questions summary {
+  cursor: pointer;
+  font-weight: 650;
+}
+
+.product-questions p {
+  margin-block: var(--space-m) 0;
+  color: var(--muted);
+  font-size: var(--text-sm);
 }

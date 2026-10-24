@@ -1,11 +1,12 @@
 ---
 import { getImage } from "astro:assets";
 import icon from "../../assets/icon-amber.png";
-import { discordUrl, publicVersion, releaseUrl, sitePath } from "../site";
+import { publicVersion, releaseUrl, sitePath, type SiteSection } from "../site";
 import ThemeControls from "./ThemeControls.astro";
+import SiteNavigation from "./SiteNavigation.astro";
 
 interface Props {
-  current?: "home" | "guide" | "manual" | "docs" | "updates" | undefined;
+  current?: SiteSection | undefined;
 }
 
 const { current } = Astro.props;
@@ -31,40 +32,7 @@ const optimizedIcon = await getImage({ src: icon, width: 84, format: "webp" });
       </span>
     </a>
 
-    <nav class="primary-nav" aria-label="Navegação principal">
-      <a
-        href={sitePath("/aprender/")}
-        aria-current={current === "guide" ? "page" : undefined}
-      >
-        Guia
-      </a>
-      <a
-        href={sitePath("/manual/")}
-        aria-current={current === "manual" ? "page" : undefined}
-      >
-        Manual
-      </a>
-      <a
-        href={sitePath("/documentacao/")}
-        aria-current={current === "docs" ? "page" : undefined}
-      >
-        Documentação
-      </a>
-      <a
-        href={sitePath("/atualizacoes/")}
-        aria-current={current === "updates" ? "page" : undefined}
-      >
-        Atualizações
-      </a>
-      <a
-        class="nav-external"
-        href={discordUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Discord <span aria-hidden="true">↗</span>
-      </a>
-    </nav>
+    <SiteNavigation current={current} />
 
     <div class="header-tools">
       <ThemeControls />
@@ -77,5 +45,16 @@ const optimizedIcon = await getImage({ src: icon, width: 84, format: "webp" });
         Baixar {publicVersion} <span aria-hidden="true">↗</span>
       </a>
     </div>
+    <details class="mobile-navigation">
+      <summary>
+        <span>Explorar o site</span>
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+          <path d="m6 9 6 6 6-6" />
+        </svg>
+      </summary>
+      <SiteNavigation current={current} mobile />
+    </details>
   </div>
 </header>
+
+<script src="../scripts/navigation.ts"></script>

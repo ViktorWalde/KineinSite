@@ -1,5 +1,8 @@
 export const repositoryUrl = "https://github.com/ViktorWalde/KineinVectis";
 
+export type SiteSection =
+  "home" | "guide" | "manual" | "docs" | "updates" | "collaborate";
+
 // Versão pública atual. Ao lançar uma versão nova, troque estes dois valores e
 // acrescente a nota em src/content/atualizacoes/ (ver README, "Publicar uma
 // nota de atualização").
@@ -15,6 +18,8 @@ export const changelogUrl =
   "https://github.com/ViktorWalde/KineinVectis/blob/main/CHANGELOG.md";
 export const siteRepositoryUrl = "https://github.com/ViktorWalde/KineinSite";
 export const discordUrl = "https://discord.gg/cWRkUGUmQU";
+export const ideContributionUrl = `${repositoryUrl}/blob/main/CONTRIBUTING.md`;
+export const ideRoadmapUrl = `${repositoryUrl}/blob/main/DocsPublic/roadmaps/40-estado-e-continuidade.md`;
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 

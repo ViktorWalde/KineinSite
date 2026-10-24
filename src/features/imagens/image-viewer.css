@@ -55,3 +55,53 @@
   max-width: none;
   max-height: none;
 }
+
+/* A camada modal permanece nativa: foco, Escape e fundo inerte continuam
+   sob responsabilidade do navegador durante a entrada e a saída. */
+@supports (transition-behavior: allow-discrete) {
+  .ide-image-dialog {
+    opacity: 0;
+    translate: 0 8px;
+    scale: 0.99;
+    transition:
+      opacity var(--duration-base) var(--ease-out),
+      translate var(--duration-panel) var(--ease-soft),
+      scale var(--duration-panel) var(--ease-soft),
+      display var(--duration-panel) allow-discrete,
+      overlay var(--duration-panel) allow-discrete;
+  }
+
+  .ide-image-dialog[open] {
+    opacity: 1;
+    translate: 0 0;
+    scale: 1;
+  }
+
+  .ide-image-dialog:not([open]) {
+    pointer-events: none;
+  }
+
+  .ide-image-dialog::backdrop {
+    opacity: 0;
+    transition:
+      opacity var(--duration-base) var(--ease-out),
+      display var(--duration-panel) allow-discrete,
+      overlay var(--duration-panel) allow-discrete;
+  }
+
+  .ide-image-dialog[open]::backdrop {
+    opacity: 1;
+  }
+
+  @starting-style {
+    .ide-image-dialog[open] {
+      opacity: 0;
+      translate: 0 8px;
+      scale: 0.99;
+    }
+
+    .ide-image-dialog[open]::backdrop {
+      opacity: 0;
+    }
+  }
+}

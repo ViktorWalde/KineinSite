@@ -1,0 +1,90 @@
+.contribution-guide {
+  max-width: 80ch;
+  margin-inline: auto;
+  padding-block: var(--space-2xl);
+}
+
+.contribution-intro h1 {
+  margin-block: var(--space-m) var(--space-l);
+  font-size: var(--text-4xl);
+}
+
+.contribution-intro > .kicker {
+  margin-block-start: var(--space-xl);
+}
+
+.contribution-boundary {
+  padding: var(--space-l);
+  border-inline-start: 3px solid var(--accent);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+}
+
+.contribution-index {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-s) var(--space-l);
+  padding-block: var(--space-l);
+  margin-block: var(--space-xl);
+  border-block: 1px solid var(--border);
+}
+
+.contribution-index a {
+  padding-block: var(--space-xs);
+  color: var(--muted);
+  font-size: var(--text-sm);
+  text-decoration: none;
+}
+
+.contribution-index a:hover {
+  color: var(--accent);
+}
+
+.contribution-section {
+  padding-block: var(--space-xl);
+  border-block-end: 1px solid var(--border);
+}
+
+.contribution-section h2 {
+  font-size: var(--text-2xl);
+}
+
+.contribution-section ul,
+.contribution-section ol {
+  display: grid;
+  gap: var(--space-m);
+  padding-inline-start: var(--space-l);
+}
+
+.contribution-section li::marker {
+  color: var(--accent);
+}
+
+.contribution-template {
+  max-width: 100%;
+  overflow-x: auto;
+  padding: var(--space-l);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  font-size: var(--text-sm);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.contribution-template code {
+  padding: 0;
+  background: transparent;
+  font-size: inherit;
+}
+
+.contribution-checklist {
+  margin-block-end: var(--space-xl);
+  list-style-type: "□  ";
+}
+
+@media (width <= 35rem) {
+  .contribution-index {
+    grid-template-columns: 1fr;
+  }
+}

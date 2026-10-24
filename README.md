@@ -4,11 +4,15 @@ Site público da [Kinein Vectis](https://github.com/ViktorWalde/KineinVectis), d
 
 O site é estático, feito com Astro 7 e publicado no GitHub Pages. Não há servidor, banco de dados nem coleta de dados do visitante no código deste projeto. A preferência de tema fica no armazenamento local do navegador.
 
+A área **Colabore** consulta dados públicos diretamente na API do GitHub e guarda a última leitura no armazenamento de sessão da aba. O GitHub recebe as requisições normais de conexão. Não há token no navegador nem telemetria própria.
+
 ## Estado atual
+
+A área Colabore e a nova apresentação da página inicial estão implementadas localmente e aguardam revisão do mantenedor antes de qualquer publicação. Estado e limites dessa entrega em [docs/LOCAL-PREVIEW-2026-10-24.md](docs/LOCAL-PREVIEW-2026-10-24.md).
 
 | Endereço                                 | Conteúdo                                                                                                                   |
 | ---------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
-| `/`                                      | Comparação entre beta e prévia 0.4, galeria por versão e percurso contínuo de C++.                                         |
+| `/`                                      | Apresentação da IDE, benefícios, demonstração real, galeria, início guiado, perguntas frequentes e convite à colaboração.  |
 | `/atualizacoes/`                         | Lista das notas de atualização, da mais recente para a mais antiga; cada nota tem sua página em `/atualizacoes/<versão>/`. |
 | `/documentacao/`                         | Índice do manual, guias, estudos básicos de quatro linguagens e referências.                                               |
 | `/manual/`                               | Manual oficial do beta, com índice de seções e subseções, busca no índice e tabelas de atalhos.                            |
@@ -17,6 +21,8 @@ O site é estático, feito com Astro 7 e publicado no GitHub Pages. Não há ser
 | `/estudos/<linguagem>/primeiros-passos/` | Primeiro programa em C, C++, Rust ou Python, com resultados e exercícios conferidos.                                       |
 | `/estudos/cpp/telemetria-local/`         | Primeiro estudo autoral de C++20, testado no Linux.                                                                        |
 | `/documentacao/site/`                    | Como o site funciona, como colaborar e próximos passos verificáveis.                                                       |
+| `/colabore/`                             | Tarefas independentes da IDE e do site por estado, busca, filtros e agradecimentos aos colaboradores.                      |
+| `/colabore/regras/`                      | Regras detalhadas, evidências exigidas, checklist e modelo de entrega por pull request.                                    |
 
 O beta público indicado no site é o 0.3.5 para Linux x86_64, definido em `publicVersion`/`publicTag` de [`src/site.ts`](src/site.ts). A situação da próxima versão vem de [`src/data/development.ts`](src/data/development.ts) e deve ser revista com o mantenedor antes de mudar. A próxima versão é a **0.4**, reunindo interface e embarcados; a prévia não representa o AppImage 0.3.5. O roteiro de evolução **deste site** está em [docs/ROADMAP.md](docs/ROADMAP.md).
 
@@ -38,6 +44,8 @@ npm run preview
 
 No preview do build para Pages, abra <http://127.0.0.1:4321/KineinSite/>. O build valida tipos, lint, CSS, arquitetura, formatação, HTML, links internos (incluindo âncoras) e a política de segurança de cada página. Os arquivos gerados ficam em `dist/`.
 
+Depois do build, `npm run check:browser` confere temas, vídeos, galerias, manual e colaboração. `npm run check:experience` confere as 25 páginas com texto a 100% e 200%, menu móvel, navegação entre documentos, controles e efeitos de movimento. As duas rotinas abrem um servidor local e um Chrome/Chromium descartável; informe `CHROME_BIN=/caminho/do/chrome` se ele não estiver no local padrão. Relatórios e capturas ficam em `test-results/browser/`.
+
 ## Organização e colaboração
 
 - [CONTRIBUTING.md](CONTRIBUTING.md): fluxo de contribuição e critérios para conteúdo.
@@ -45,6 +53,8 @@ No preview do build para Pages, abra <http://127.0.0.1:4321/KineinSite/>. O buil
 - [docs/VISUAL-SYSTEM.md](docs/VISUAL-SYSTEM.md): padrão de tipografia, cores, componentes, interação e mídia.
 - [SECURITY.md](SECURITY.md): como relatar uma vulnerabilidade do site.
 - [docs/ROADMAP.md](docs/ROADMAP.md): trabalho do site com pré-requisitos e critérios de conclusão.
+- [docs/COLLABORATION.md](docs/COLLABORATION.md): seleção de tarefas complementares, labels, estados, sincronização e créditos.
+- [docs/INTERNATIONALIZATION.md](docs/INTERNATIONALIZATION.md): inglês como idioma principal após a 0.4 e português como tradução possível, com critérios de migração.
 - `src/content/estudos/`: estudos de linguagem independentes da IDE, publicados somente com `status: verified`.
 - `src/content/manual/`: cópia fiel do manual da IDE na versão pública, publicada em `/manual/`; não se edita à mão.
 - `src/content/aprender/`: o Guia da IDE, publicado em `/aprender/`. Cada capítulo é reproduzido na IDE por `scripts/capturar-tutorial.sh`, que também gera as capturas.

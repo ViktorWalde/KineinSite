@@ -15,30 +15,30 @@ const css = readFileSync("src/styles/tokens.css", "utf8").replace(
 // (1.4.11). Os rótulos em mono são pequenos, então entram como texto comum.
 const textPairs = [
   ["text", "page"],
-  ["text", "wave-crest"],
-  ["text", "wave-trough"],
-  ["text", "wave-region"],
-  ["text", "wave-transition"],
+  ["text", "flow-pulse"],
+  ["text", "flow-line"],
+  ["text", "flow-region"],
+  ["text", "flow-transition"],
   ["text", "surface"],
   ["text", "card"],
   ["text", "card-hover"],
   ["text", "section-surface"],
   ["text", "section-tint"],
   ["muted", "page"],
-  ["muted", "wave-crest"],
-  ["muted", "wave-trough"],
-  ["muted", "wave-region"],
-  ["muted", "wave-transition"],
+  ["muted", "flow-pulse"],
+  ["muted", "flow-line"],
+  ["muted", "flow-region"],
+  ["muted", "flow-transition"],
   ["muted", "surface"],
   ["muted", "card"],
   ["muted", "card-hover"],
   ["muted", "section-surface"],
   ["muted", "section-tint"],
   ["accent", "page"],
-  ["accent", "wave-crest"],
-  ["accent", "wave-trough"],
-  ["accent", "wave-region"],
-  ["accent", "wave-transition"],
+  ["accent", "flow-pulse"],
+  ["accent", "flow-line"],
+  ["accent", "flow-region"],
+  ["accent", "flow-transition"],
   ["accent", "surface"],
   ["accent", "card"],
   ["accent", "card-hover"],
@@ -49,10 +49,10 @@ const textPairs = [
 ];
 const focusPairs = [
   ["focus", "page"],
-  ["focus", "wave-crest"],
-  ["focus", "wave-trough"],
-  ["focus", "wave-region"],
-  ["focus", "wave-transition"],
+  ["focus", "flow-pulse"],
+  ["focus", "flow-line"],
+  ["focus", "flow-region"],
+  ["focus", "flow-transition"],
   ["focus", "surface"],
   ["focus", "card"],
   ["focus", "card-hover"],
@@ -77,6 +77,19 @@ for (const background of cardBackgrounds) {
   focusPairs.push(["focus", background]);
 }
 textPairs.push(["companion", "surface"]);
+for (const foreground of ["text", "muted", "accent", "companion"])
+  textPairs.push([foreground, "flow-companion"]);
+focusPairs.push(["focus", "flow-companion"]);
+for (const foreground of ["text", "muted", "accent", "companion"])
+  textPairs.push([foreground, "flow-pulse"]);
+focusPairs.push(["focus", "flow-pulse"]);
+for (const background of [
+  "flow-line",
+  "flow-pulse",
+  "flow-region",
+  "flow-transition",
+])
+  textPairs.push(["companion", background]);
 
 const mediaStart = css.indexOf("@media (prefers-color-scheme: light)");
 const blocks = new Map();

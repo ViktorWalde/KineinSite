@@ -17,6 +17,64 @@
 
 :is(button, .button, summary):not(:disabled):active {
   scale: 0.985;
+  transition-duration: var(--duration-press);
+}
+
+.button:disabled {
+  transform: none;
+  scale: 1;
+  border-color: var(--border);
+  background: var(--surface-soft);
+  box-shadow: none;
+  color: var(--muted);
+  cursor: not-allowed;
+}
+
+.button[aria-busy]::after {
+  width: 0.75rem;
+  height: 0.75rem;
+  flex: none;
+  border: 1.5px solid currentcolor;
+  border-inline-end-color: transparent;
+  border-radius: var(--radius-pill);
+  content: "";
+  opacity: 0;
+  transition: opacity var(--duration-fast) var(--ease-out);
+}
+
+.button[aria-busy="true"] {
+  cursor: progress;
+}
+
+.button[aria-busy="true"]::after {
+  opacity: 1;
+  animation: loading-turn 800ms linear infinite;
+}
+
+@keyframes loading-turn {
+  to {
+    rotate: 1turn;
+  }
+}
+
+.field-control {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  color: var(--text);
+  transition:
+    border-color var(--duration-fast) var(--ease-out),
+    background-color var(--duration-base) var(--ease-out),
+    box-shadow var(--duration-base) var(--ease-out);
+}
+
+.field-control:hover {
+  border-color: color-mix(in srgb, var(--accent) 45%, var(--border));
+}
+
+.field-control:focus-visible {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 5px color-mix(in srgb, var(--accent) 14%, transparent);
 }
 
 .segmented-control {
@@ -30,7 +88,7 @@
   margin: 0 auto var(--space-m);
   padding: 0.3rem;
   border: 1px solid var(--border);
-  border-radius: 2rem;
+  border-radius: var(--radius-pill);
   background: var(--surface);
 }
 
@@ -45,7 +103,7 @@
   box-shadow: var(--shadow-card);
   content: "";
   transition:
-    translate 420ms cubic-bezier(0.22, 1, 0.36, 1),
+    translate var(--duration-panel) var(--ease-soft),
     background-color var(--duration-base) var(--ease-out),
     border-color var(--duration-base) var(--ease-out),
     box-shadow var(--duration-base) var(--ease-out);
@@ -60,7 +118,7 @@
   min-height: 2.75rem;
   padding: 0.55rem 1.2rem;
   border: 0;
-  border-radius: 2rem;
+  border-radius: var(--radius-pill);
   background: transparent;
   color: var(--muted);
   cursor: pointer;
@@ -68,6 +126,19 @@
   font-size: var(--text-sm);
   font-weight: 650;
   line-height: 1.35;
+}
+
+.segmented-control button:has(.version-state) {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2xs);
+}
+
+.version-state {
+  display: block;
+  font-size: var(--text-xs);
+  font-weight: 450;
 }
 
 .segmented-control button:hover,
@@ -101,7 +172,62 @@
   }
 }
 
+/* Os detalhes continuam nativos. Navegadores compatíveis interpolam apenas
+   o espaço do painel aberto; os demais conservam a abertura imediata. */
+@supports (interpolate-size: allow-keywords) {
+  :is(
+    .mobile-navigation,
+    .product-questions details,
+    .collab-disclosure,
+    .task-details
+  ) {
+    interpolate-size: allow-keywords;
+  }
+
+  :is(
+    .mobile-navigation,
+    .product-questions details,
+    .collab-disclosure,
+    .task-details
+  )::details-content {
+    overflow: clip;
+    block-size: 0;
+    opacity: 0;
+    transition:
+      block-size var(--duration-panel) var(--ease-soft),
+      opacity var(--duration-fast) var(--ease-out),
+      content-visibility var(--duration-panel) allow-discrete;
+  }
+
+  :is(
+      .mobile-navigation,
+      .product-questions details,
+      .collab-disclosure,
+      .task-details
+    )[open]::details-content {
+    block-size: auto;
+    opacity: 1;
+  }
+}
+
+@supports selector(details::details-content) {
+  .appearance::details-content {
+    opacity: 0;
+    transition:
+      opacity var(--duration-fast) var(--ease-out),
+      content-visibility var(--duration-fast) allow-discrete;
+  }
+
+  .appearance[open]::details-content {
+    opacity: 1;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
+  .button[aria-busy="true"]::after {
+    animation: none;
+  }
+
   :is(button, .button, summary):not(:disabled):active {
     scale: 1;
   }
@@ -109,4 +235,19 @@
   .segmented-control::before {
     transition-duration: 0ms;
   }
+}
+
+/* A troca de tema já tem um esmaecimento global. Evita uma segunda
+   transição de cores nos controles por baixo da captura da página. */
+:root[data-switching="theme"]
+  :is(
+    .card,
+    .button,
+    .field-control,
+    .theme-option,
+    .accent-option,
+    .primary-nav a
+  ),
+:root[data-switching="theme"] .card::before {
+  transition: none;
 }

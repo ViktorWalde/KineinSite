@@ -1,7 +1,28 @@
 ---
-import { releaseUrl, sitePath } from "../../site";
-import CppJourney from "../aprender/CppJourney.astro";
-import LanguageStarts from "../aprender/LanguageStarts.astro";
+import { releaseUrl, repositoryUrl, sitePath } from "../../site";
+const starts = [
+  {
+    language: "C++",
+    title: "Compile seu primeiro programa",
+    detail:
+      "Crie um projeto C++ e veja sua primeira mensagem aparecer na execução.",
+    path: "/aprender/ide/primeiro-projeto-cpp/",
+  },
+  {
+    language: "Rust",
+    title: "Crie, execute e teste",
+    detail:
+      "Comece um projeto Rust com um guia que acompanha cada etapa na IDE.",
+    path: "/aprender/ide/primeiro-projeto-rust/",
+  },
+  {
+    language: "Python",
+    title: "Coloque seu primeiro script para rodar",
+    detail:
+      "Prepare seu ambiente e coloque o primeiro programa Python para funcionar.",
+    path: "/aprender/ide/primeiro-projeto-python/",
+  },
+] as const;
 ---
 
 <section
@@ -10,27 +31,87 @@ import LanguageStarts from "../aprender/LanguageStarts.astro";
   aria-labelledby="experiencia-title"
 >
   <div class="section-intro reveal">
-    <p class="kicker">APRENDA FAZENDO · C++</p>
-    <h2 id="experiencia-title">Seu primeiro C++, passo a passo.</h2>
+    <p class="kicker">DO PRIMEIRO CLIQUE AO PRIMEIRO PROJETO</p>
+    <h2 id="experiencia-title">
+      Escolha uma linguagem. Faça seu primeiro projeto.
+    </h2>
     <p class="section-intro-copy">
-      Comece com uma mensagem no terminal. Depois, faça o mesmo programa
-      calcular temperaturas e trabalhar com mais leituras. Você segue em C++, no
-      projeto <code>ola-kinein</code>, de uma etapa para a outra.
+      Cada caminho mostra a preparação, os passos na IDE e o resultado esperado.
+      Comece pela linguagem que você já conhece ou quer aprender.
     </p>
   </div>
-  <CppJourney />
+  <div class="product-starts auto-grid reveal-children">
+    {starts.map((start) => (
+      <a
+        class="product-start card card-interactive"
+        href={sitePath(start.path)}
+      >
+        <span class="label">{start.language}</span>
+        <h3>{start.title}</h3>
+        <p>{start.detail}</p>
+        <span class="inline-link">
+          Seguir o guia de {start.language} <span aria-hidden="true">→</span>
+        </span>
+      </a>
+    ))}
+  </div>
   <div class="try-actions">
     <a class="button button-primary" href={sitePath("/aprender/ide/instalar/")}>
-      Começar pela instalação <span aria-hidden="true">→</span>
+      Preparar minha primeira instalação <span aria-hidden="true">→</span>
     </a>
     <a
-      class="inline-link"
+      class="button button-secondary"
       href={releaseUrl}
       target="_blank"
       rel="noopener noreferrer"
     >
-      Já conhece a Vectis? Baixe o beta <span aria-hidden="true">↗</span>
+      Baixar o beta para Linux <span aria-hidden="true">↗</span>
     </a>
   </div>
-  <LanguageStarts />
+  <p class="status-source">
+    Quer conhecer outros percursos?{" "}
+    <a class="inline-link" href={sitePath("/aprender/")}>
+      Explore todos os guias
+    </a>
+    .
+  </p>
+  <div class="product-questions">
+    <h3>Antes de experimentar.</h3>
+    <details>
+      <summary>A Vectis é gratuita?</summary>
+      <p>
+        Sim. A IDE é gratuita e tem código aberto, sob licença MIT ou
+        Apache-2.0. Você pode{" "}
+        <a
+          class="inline-link"
+          href={repositoryUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          conhecer o projeto no GitHub <span aria-hidden="true">↗</span>
+        </a>
+        .
+      </p>
+    </details>
+    <details>
+      <summary>Em qual sistema posso usar este beta?</summary>
+      <p>
+        O beta disponível aqui é para Linux x86_64. Os requisitos e os passos de
+        instalação estão no{" "}
+        <a class="inline-link" href={sitePath("/aprender/ide/instalar/")}>
+          guia de instalação
+        </a>
+        . As demonstrações da prévia 0.4 mostram uma versão ainda em
+        desenvolvimento.
+      </p>
+    </details>
+    <details>
+      <summary>O que preciso para executar meu código?</summary>
+      <p>
+        Além da IDE, você precisa das ferramentas da linguagem no seu sistema,
+        como compilador ou interpretador. O guia de cada projeto mostra a
+        preparação necessária e como conferir se está tudo pronto.
+      </p>
+    </details>
+  </div>
 </section>

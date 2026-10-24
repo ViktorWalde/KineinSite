@@ -1,0 +1,72 @@
+---
+import { ideContributionUrl, ideRoadmapUrl } from "../../site";
+import ActionLink from "../../components/ActionLink.astro";
+---
+
+<header class="collab-intro enter">
+  <div>
+    <p class="kicker">PROJETO BRASILEIRO / COLABORAÇÃO ABERTA</p>
+    <h1>
+      Um pouco do seu tempo. <em>Um projeto mais forte.</em>
+    </h1>
+    <p class="collab-lead">
+      Teste um guia, melhore uma explicação ou ajude a encontrar um problema. De
+      onde você estiver, você pode contribuir para uma IDE mais clara, acessível
+      e bem testada.
+    </p>
+    <div class="collab-actions">
+      <a class="button button-primary" href="#tarefas">
+        Encontrar uma tarefa <span aria-hidden="true">↓</span>
+      </a>
+      <a class="button button-quiet" href="#como-ajudar">
+        Descobrir como posso ajudar
+      </a>
+    </div>
+    <p class="collab-note">
+      C, C++, Rust e Python · Código, documentação e testes · Participação
+      voluntária
+    </p>
+  </div>
+  <aside class="collab-principle card" aria-labelledby="principle-title">
+    <span class="label">CABE NO SEU TEMPO. SOMA AO PROJETO.</span>
+    <h2 id="principle-title">
+      Pequena no escopo.
+      <br />
+      Importante no resultado.
+    </h2>
+    <p>
+      As tarefas têm começo, fim e um resultado que você consegue conferir. Você
+      cuida de uma contribuição independente; o mantenedor segue conduzindo a
+      trilha principal da IDE.
+    </p>
+    <ol>
+      <li>
+        <strong>Encontre</strong> uma tarefa que combine com você.
+      </li>
+      <li>
+        <strong>Combine</strong> a proposta com o mantenedor.
+      </li>
+      <li>
+        <strong>Envie</strong> o resultado com as evidências.
+      </li>
+    </ol>
+    <ActionLink href={ideContributionUrl} external>
+      Regras da IDE no GitHub
+    </ActionLink>
+  </aside>
+</header>
+<nav class="collab-section-nav" aria-label="Nesta página" data-section-nav>
+  <a href="#tarefas">01 / Tarefas</a>
+  <a href="#como-ajudar">02 / Como ajudar</a>
+  <a href="#regras">03 / Regras de envio</a>
+  <a href="#colaboradores">04 / Colaboradores</a>
+</nav>
+<ActionLink
+  href={ideRoadmapUrl}
+  description="Conheça o estado atual e os próximos passos da trilha principal."
+  external
+>
+  Acompanhar o desenvolvimento da IDE
+</ActionLink>
+
+<script src="../documentacao/section-nav.ts"></script>
