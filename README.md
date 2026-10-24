@@ -54,7 +54,7 @@ Depois do build, `npm run check:browser` confere temas, vídeos, galerias, manua
 - [SECURITY.md](SECURITY.md): como relatar uma vulnerabilidade do site.
 - [docs/ROADMAP.md](docs/ROADMAP.md): trabalho do site com pré-requisitos e critérios de conclusão.
 - [docs/COLLABORATION.md](docs/COLLABORATION.md): seleção de tarefas complementares, labels, estados, sincronização e créditos.
-- [docs/INTERNATIONALIZATION.md](docs/INTERNATIONALIZATION.md): inglês como idioma principal após a 0.4 e português como tradução possível, com critérios de migração.
+- [docs/INTERNATIONALIZATION.md](docs/INTERNATIONALIZATION.md): direção internacional a partir da 0.5, com inglês como idioma principal e português como tradução possível.
 - `src/content/estudos/`: estudos de linguagem independentes da IDE, publicados somente com `status: verified`.
 - `src/content/manual/`: cópia fiel do manual da IDE na versão pública, publicada em `/manual/`; não se edita à mão.
 - `src/content/aprender/`: o Guia da IDE, publicado em `/aprender/`. Cada capítulo é reproduzido na IDE por `scripts/capturar-tutorial.sh`, que também gera as capturas.

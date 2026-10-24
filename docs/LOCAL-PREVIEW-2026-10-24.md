@@ -22,9 +22,11 @@ Capturas e relatórios atuais ficam em `test-results/browser/`, ignorado pelo Gi
 
 ### Revisão da apresentação comercial
 
-Após a revisão local, o mantenedor pediu uma abertura mais comercial, com convite a experimentar e colaborar, e esclareceu que a Vectis evolui para se especializar em sistemas embarcados. A chamada passou a ser “Dê vida à sua próxima ideia.”, acompanhada por uma apresentação curta da IDE brasileira, gratuita e de código aberto. Os botões convidam a experimentar e ver a IDE em ação; o primeiro convite à colaboração também aparece na abertura.
+Após a revisão local, o mantenedor pediu uma abertura mais comercial, com convite a experimentar e colaborar, e esclareceu que a Vectis evolui para se especializar em sistemas embarcados. A chamada passou a ser “Dê vida à sua próxima ideia.”, acompanhada por “Uma IDE open source que evolui para se especializar em sistemas embarcados.” Os botões convidam a experimentar e ver a IDE em ação; o primeiro convite à colaboração também aparece na abertura.
 
 A apresentação inicial usa exemplos acessíveis — dispositivos conectados, automação e robótica. Linguagens, bare metal, Linux embarcado e ROS 2 aparecem nas demonstrações, nos percursos e nas seções mais abaixo. Os cartões ligam cada frente ao material correspondente e preservam a distinção entre o beta disponível, o trabalho da 0.4 e a direção futura de ROS 2.
+
+O polimento final preservou a chamada aprovada e retirou referências ao país de origem da apresentação, dos metadados, do convite à colaboração e do rodapé. Textos de documentação, guias, atualizações e colaboração receberam ajustes pontuais de clareza e coerência. A direção de apoio internacional a partir da 0.5 está alinhada em `INTERNATIONALIZATION.md`; esta revisão permanece em português e não altera os guias técnicos ou o manual da IDE.
 
 A apresentação passou a destacar o uso da IDE: proposta de valor, download gratuito para Linux, demonstração real, espaço de trabalho, início guiado e convite à colaboração. Detalhes de ferramentas, roadmaps e procedimentos completos continuam acessíveis nos guias, manual e documentação.
 

@@ -23,7 +23,7 @@ Este documento descreve **o site**, não o cronograma de recursos da Kinein Vect
 
 ## Próximas entregas do site
 
-Direção confirmada em 2026-10-24: após o fechamento da linha 0.4, inglês será o idioma principal do site e da colaboração na IDE, com português como tradução possível. O convite atual acolhe pessoas de qualquer lugar; a edição em inglês e as traduções seguem os critérios de [INTERNATIONALIZATION.md](INTERNATIONALIZATION.md). A tradução é trabalho complementar e não deve bloquear a trilha principal.
+Direção confirmada em 2026-10-24: a partir da linha 0.5, o projeto buscará ampliar o apoio internacional, com inglês como idioma principal do site e da colaboração na IDE e português como tradução possível. O convite atual acolhe pessoas de qualquer lugar; a edição em inglês e as traduções seguem os critérios de [INTERNATIONALIZATION.md](INTERNATIONALIZATION.md). A tradução é trabalho complementar e não deve bloquear a trilha principal.
 
 Implementado e autorizado para publicação após revisão local (2026-10-24): nova apresentação da página inicial, área Colabore com oportunidades independentes, integração com issues e contributors públicos, regras detalhadas de envio e créditos. O polimento inclui navegação móvel, transições coordenadas, fundo em SVG e vetores de repulsão no clique, com respeito à redução de movimento. A abertura comercial apresenta o foco em sistemas embarcados e convida a experimentar e participar. Operação e limites em [COLLABORATION.md](COLLABORATION.md).
 

@@ -1,11 +1,11 @@
-# Direção internacional após a 0.4
+# Direção internacional a partir da 0.5
 
-Decisão do mantenedor em 2026-10-24: ao fim da linha 0.4, a colaboração será aberta ao público internacional. Inglês será o idioma principal do projeto, do site e da IDE; português permanece como possibilidade de tradução. Esta decisão não traduz automaticamente a prévia atual nem anuncia uma versão bilíngue pronta.
+Decisão do mantenedor em 2026-10-24: a partir da linha 0.5, o projeto buscará ampliar o apoio e a colaboração internacional. Inglês será o idioma principal do projeto, do site e da IDE; português permanece como possibilidade de tradução. Esta decisão não traduz automaticamente a edição atual nem anuncia uma versão bilíngue pronta.
 
 ## Nesta revisão local
 
 - A prévia permanece em português, como solicitado durante a construção do site.
-- Os convites acolhem pessoas de qualquer lugar. A origem brasileira é identidade do projeto, sem restringir a participação ao Brasil.
+- Os convites acolhem pessoas de qualquer lugar. A apresentação destaca a proposta da IDE e as formas de participar, sem enfatizar o país de origem.
 - Regras de independência, escopo e revisão permanecem as mesmas para todas as pessoas.
 - Os identificadores de navegação, estados e integração permanecem estáveis. Labels públicas `help wanted`, `good first issue` e `in progress` já são compatíveis com a colaboração internacional.
 - Rótulos e mensagens do novo componente de cópia são fornecidos pelo HTML/componente, separados do comportamento, para receber traduções sem duplicar a interação.
