@@ -1,6 +1,6 @@
 # Revisão local — 24 de outubro de 2026
 
-Entrega concluída localmente, com polimento e validação automática completos. Nenhum deploy, push, release ou criação de issues foi executado. A aprovação visual do mantenedor para publicação continua pendente. O fechamento abaixo descreve o estado atual; as demais seções preservam o histórico das propostas e verificações anteriores.
+Entrega concluída localmente, com polimento e validação automática completos. O mantenedor autorizou push e deploy após a revisão local e pediu o refinamento comercial descrito abaixo antes do envio. Este registro descreve as alterações e validações que antecedem a publicação; as demais seções preservam o histórico das propostas e verificações anteriores.
 
 ## Fechamento da etapa e polimento
 
@@ -19,6 +19,12 @@ Validação final em Node.js 24.22.1 e Chromium 151:
 Capturas e relatórios atuais ficam em `test-results/browser/`, ignorado pelo Git. A revisão técnica das capturas incluiu abertura, colaboração, seletor de vídeo no celular e resposta radial. Os testes de interação são executados em navegador descartável; isso não substitui a aprovação visual final do mantenedor nem declara concluída a validação manual da repulsão em sua sessão de desktop. Publicação e criação de oportunidades no GitHub permanecem etapas separadas.
 
 ## Página inicial
+
+### Revisão da apresentação comercial
+
+Após a revisão local, o mantenedor pediu uma abertura mais comercial, com convite a experimentar e colaborar, e esclareceu que a Vectis evolui para se especializar em sistemas embarcados. A chamada passou a ser “Dê vida à sua próxima ideia.”, acompanhada por uma apresentação curta da IDE brasileira, gratuita e de código aberto. Os botões convidam a experimentar e ver a IDE em ação; o primeiro convite à colaboração também aparece na abertura.
+
+A apresentação inicial usa exemplos acessíveis — dispositivos conectados, automação e robótica. Linguagens, bare metal, Linux embarcado e ROS 2 aparecem nas demonstrações, nos percursos e nas seções mais abaixo. Os cartões ligam cada frente ao material correspondente e preservam a distinção entre o beta disponível, o trabalho da 0.4 e a direção futura de ROS 2.
 
 A apresentação passou a destacar o uso da IDE: proposta de valor, download gratuito para Linux, demonstração real, espaço de trabalho, início guiado e convite à colaboração. Detalhes de ferramentas, roadmaps e procedimentos completos continuam acessíveis nos guias, manual e documentação.
 

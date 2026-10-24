@@ -31,8 +31,8 @@ const wallpaper = await getImage({
 
 <BaseLayout
   current="home"
-  title="IDE brasileira para C, C++, Rust e Python"
-  description={`Conheça a Kinein Vectis: uma IDE brasileira, gratuita e open source para C, C++, Rust e Python. Veja a IDE em ação, experimente o beta ${publicVersion} no Linux e faça parte do projeto.`}
+  title="IDE gratuita com foco em sistemas embarcados"
+  description="Conheça a Kinein Vectis: uma IDE brasileira, gratuita e de código aberto, em evolução com foco em sistemas embarcados. Experimente e faça parte do projeto."
 >
   <section class="hero" aria-labelledby="hero-title">
     <div class="hero-media" aria-hidden="true">
@@ -52,15 +52,15 @@ const wallpaper = await getImage({
       <div class="hero-art" aria-hidden="true"></div>
       <div class="hero-copy enter">
         <p class="hero-overline">
-          <span aria-hidden="true">∭</span> KINEIN VECTIS · IDE BRASILEIRA
+          <span aria-hidden="true">∭</span> KINEIN VECTIS · FEITA NO BRASIL
         </p>
         <h1 id="hero-title">
-          Menos janelas. <em>Mais código.</em>
+          Dê vida à sua <em>próxima ideia.</em>
         </h1>
         <p class="hero-lead">
-          Escreva, execute e acompanhe seu projeto em C, C++, Rust ou Python. A
-          Vectis reúne o editor, as ferramentas e o Git para você continuar de
-          onde a ideia começou.
+          Uma IDE brasileira, gratuita e de código aberto, em evolução com foco
+          em sistemas embarcados. Conheça a Vectis, experimente no seu ritmo e
+          faça parte dessa construção.
         </p>
         <div class="hero-actions">
           <a
@@ -69,22 +69,19 @@ const wallpaper = await getImage({
             target="_blank"
             rel="noopener noreferrer"
           >
-            Baixar para Linux <span aria-hidden="true">↗</span>
+            Experimentar a Vectis <span aria-hidden="true">↗</span>
           </a>
           <a class="button button-quiet" href="#desenvolvimento">
-            Assistir à demonstração
+            Ver a Vectis em ação
           </a>
         </div>
         <p class="hero-meta">
-          Grátis e open source <span aria-hidden="true">·</span> Sem telemetria
-          <br />
           Beta {publicVersion} para Linux x86_64
+          <br />
+          Grátis para baixar e experimentar
         </p>
-        <a
-          class="inline-link hero-help"
-          href={sitePath("/aprender/ide/instalar/")}
-        >
-          Instalação passo a passo <span aria-hidden="true">→</span>
+        <a class="inline-link hero-help" href={sitePath("/colabore/")}>
+          Ajude a construir a Vectis <span aria-hidden="true">→</span>
         </a>
       </div>
     </div>
@@ -95,21 +92,21 @@ const wallpaper = await getImage({
       <nav class="journey shell auto-grid reveal" aria-label="Caminhos rápidos">
         <a class="card card-interactive" href="#desenvolvimento">
           <span class="journey-label label">QUERO CONHECER</span>
-          <strong>Veja a IDE funcionando</strong>
+          <strong>Descubra a Vectis em ação</strong>
           <span class="journey-arrow" aria-hidden="true">
             ↓
           </span>
         </a>
         <a class="card card-interactive" href="#experiencia">
-          <span class="journey-label label">QUERO COMEÇAR</span>
-          <strong>Encontre seu primeiro projeto</strong>
+          <span class="journey-label label">QUERO EXPERIMENTAR</span>
+          <strong>Dê o primeiro passo</strong>
           <span class="journey-arrow" aria-hidden="true">
             ↓
           </span>
         </a>
         <a class="card card-interactive" href={sitePath("/colabore/")}>
           <span class="journey-label label">QUERO COLABORAR</span>
-          <strong>Deixe sua contribuição</strong>
+          <strong>Encontre seu jeito de participar</strong>
           <span class="journey-arrow" aria-hidden="true">
             →
           </span>
@@ -156,12 +153,12 @@ const wallpaper = await getImage({
           <div>
             <p class="kicker">GRATUITA · OPEN SOURCE · FEITA NO BRASIL</p>
             <h2 id="closing-title">
-              Seu próximo projeto começa com um primeiro passo.
+              Que tal experimentar a sua próxima ideia na Vectis?
             </h2>
             <p>
-              Baixe o beta, abra um projeto e experimente o seu fluxo na Vectis.
-              Os guias acompanham o começo; a comunidade é um lugar para trocar
-              experiências pelo caminho.
+              Baixe gratuitamente, abra um projeto e descubra como é trabalhar
+              com a Vectis. Sua experiência pode ajudar a decidir o que vem
+              depois.
             </p>
           </div>
           <div class="closing-actions">

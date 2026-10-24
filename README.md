@@ -8,7 +8,7 @@ A área **Colabore** consulta dados públicos diretamente na API do GitHub e gua
 
 ## Estado atual
 
-A área Colabore e a nova apresentação da página inicial estão implementadas localmente e aguardam revisão do mantenedor antes de qualquer publicação. Estado e limites dessa entrega em [docs/LOCAL-PREVIEW-2026-10-24.md](docs/LOCAL-PREVIEW-2026-10-24.md).
+A área Colabore, a nova apresentação da página inicial e o polimento das interações estão implementados. A revisão de 24 de outubro dá à abertura um tom mais comercial, com convites para experimentar e participar, e apresenta a evolução da IDE com foco em sistemas embarcados. Estado e validações dessa entrega em [docs/LOCAL-PREVIEW-2026-10-24.md](docs/LOCAL-PREVIEW-2026-10-24.md).
 
 | Endereço                                 | Conteúdo                                                                                                                   |
 | ---------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |

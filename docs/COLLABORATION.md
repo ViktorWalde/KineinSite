@@ -1,6 +1,6 @@
 # Área Colabore
 
-Implementação local de 2026-10-24, aguardando revisão visual do mantenedor. Esta etapa não publica o site, cria issues ou altera a configuração dos repositórios no GitHub.
+Implementação de 2026-10-24, revisada localmente e autorizada para publicação pelo mantenedor. A área consulta dados públicos; criar issues e organizar oportunidades continuam sendo ações editoriais separadas no GitHub.
 
 ## Propósito e limites
 
