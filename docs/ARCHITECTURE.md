@@ -18,6 +18,14 @@ também o teste do HUD, contraste das superfícies compostas, download em dez
 larguras, texto ampliado e alternativas opacas. O resultado da revisão local
 está em [LOCAL-PREVIEW-2026-11-12.md](LOCAL-PREVIEW-2026-11-12.md).
 
+Na fase C local, `src/scripts/outline.ts` compartilha recolhimento, teclado e
+foco entre o manual e `DocsSidebar`. A busca permanece em `manual-nav.ts`;
+`section-nav.ts` mantém a seção ativa. No celular, o índice de documentação
+usa uma lista recolhível em vez de uma faixa horizontal. Sem JavaScript, o
+índice nativo fica aberto e continua utilizável. A galeria inicia a apresentação
+de conteúdo na página inicial, com beta antes da prévia também no HTML.
+Resultados e limites em [LOCAL-PHASE-C-2026-11-12.md](LOCAL-PHASE-C-2026-11-12.md).
+
 | Local                            | Responsabilidade                                                                                                                                                                                 |
 | -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `src/pages/`                     | Rotas. Cada página só compõe: importa o layout, os componentes e o CSS da sua funcionalidade.                                                                                                    |

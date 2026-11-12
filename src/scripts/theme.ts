@@ -10,7 +10,6 @@ import {
 } from "./theme-preferences";
 
 const root = document.documentElement;
-const appearance = document.querySelector<HTMLDetailsElement>(".appearance");
 const themeInputs = Array.from(
   document.querySelectorAll<HTMLInputElement>('input[name="theme"]'),
 );
@@ -131,22 +130,6 @@ if (themeInputs.length > 0 && accentInputs.length > 0) {
       saveValue(accentStorageKey, accent);
     });
   }
-}
-
-if (appearance) {
-  appearance.addEventListener("keydown", (event) => {
-    if (event.key !== "Escape" || !appearance.open) return;
-    appearance.open = false;
-    appearance.querySelector("summary")?.focus();
-  });
-
-  document.addEventListener("pointerdown", (event) => {
-    if (!appearance.open) return;
-    const target = event.target;
-    if (target instanceof Node && !appearance.contains(target)) {
-      appearance.open = false;
-    }
-  });
 }
 
 // Escuta passiva de touchstart no documento permite que regras CSS com

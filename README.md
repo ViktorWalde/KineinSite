@@ -8,6 +8,8 @@ A área **Colabore** consulta dados públicos diretamente na API do GitHub e gua
 
 ## Estado atual
 
+O planejamento vigente da modernização está em [docs/modernizacao/README.md](docs/modernizacao/README.md), com auditoria, decisões de arquitetura, requisitos e critérios de validação. A etapa atual prioriza engenharia antes de novas alterações visuais. HUD 2.0, busca global e conteúdo inglês ainda não estão implementados. As melhorias locais anteriores de página inicial e documentação permanecem em avaliação.
+
 A área Colabore, a nova apresentação da página inicial e o polimento das interações estão implementados. A revisão de 24 de outubro dá à abertura um tom mais comercial, com convites para experimentar e participar, e apresenta a evolução da IDE com foco em sistemas embarcados. Estado e validações dessa entrega em [docs/LOCAL-PREVIEW-2026-10-24.md](docs/LOCAL-PREVIEW-2026-10-24.md).
 
 | Endereço                                 | Conteúdo                                                                                                                   |
@@ -48,13 +50,14 @@ Depois do build, `npm run check:browser` confere temas, vídeos, galerias, manua
 
 ## Organização e colaboração
 
+- [docs/modernizacao/README.md](docs/modernizacao/README.md): plano de engenharia vigente, baseline e sequência incremental da modernização.
 - [CONTRIBUTING.md](CONTRIBUTING.md): fluxo de contribuição e critérios para conteúdo.
 - [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md): rotas, coleções, temas, build, segurança e publicação.
 - [docs/VISUAL-SYSTEM.md](docs/VISUAL-SYSTEM.md): padrão de tipografia, cores, componentes, interação e mídia.
 - [SECURITY.md](SECURITY.md): como relatar uma vulnerabilidade do site.
 - [docs/ROADMAP.md](docs/ROADMAP.md): trabalho do site com pré-requisitos e critérios de conclusão.
 - [docs/COLLABORATION.md](docs/COLLABORATION.md): seleção de tarefas complementares, labels, estados, sincronização e créditos.
-- [docs/INTERNATIONALIZATION.md](docs/INTERNATIONALIZATION.md): direção internacional a partir da 0.5, com inglês como idioma principal e português como tradução possível.
+- [docs/INTERNATIONALIZATION.md](docs/INTERNATIONALIZATION.md): fundação existente e direção internacional; o plano vigente preserva português e prepara a expansão em inglês.
 - `src/content/estudos/`: estudos de linguagem independentes da IDE, publicados somente com `status: verified`.
 - `src/content/manual/`: cópia fiel do manual da IDE na versão pública, publicada em `/manual/`; não se edita à mão.
 - `src/content/aprender/`: o Guia da IDE, publicado em `/aprender/`. Cada capítulo é reproduzido na IDE por `scripts/capturar-tutorial.sh`, que também gera as capturas.
@@ -77,6 +80,8 @@ Cada versão publicada da IDE ganha uma nota em `src/content/atualizacoes/`. A n
 Escreva a nota para quem usa a IDE: o que mudou, como instalar e os limites conhecidos. O detalhe técnico fica no `CHANGELOG.md` do projeto.
 
 ## Publicação
+
+O procedimento abaixo exige autorização explícita para envio ou publicação. Aprovar uma prévia ou pedir para prosseguir autoriza a continuidade local; não equivale a autorizar push ou deploy. Consulte [AGENTS.md](AGENTS.md).
 
 O caminho de publicação usado hoje é a branch `gh-pages`. Após revisão, validação e commit em `main`, um mantenedor com acesso de escrita executa:
 

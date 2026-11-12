@@ -13,6 +13,7 @@ export const publishedRoutes = {
   docs: { "pt-BR": "/documentacao/" },
   updates: { "pt-BR": "/atualizacoes/" },
   collaborate: { "pt-BR": "/colabore/" },
+  rules: { "pt-BR": "/colabore/regras/" },
   site: { "pt-BR": "/documentacao/site/" },
 } satisfies Record<string, RouteTranslations>;
 

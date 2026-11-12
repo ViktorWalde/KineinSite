@@ -1,8 +1,32 @@
 # Roadmap do KineinSite
 
-Este documento descreve **o site**, não o cronograma de recursos da Kinein Vectis. Estado conferido em 2026-10-24. A ordem abaixo indica dependências editoriais e técnicas, sem prometer datas ou funcionalidades da IDE que ainda não foram validadas.
+Este documento descreve **o site**, não o cronograma de recursos da Kinein Vectis. O registro editorial original foi conferido em 2026-10-24. A continuidade da modernização foi reorganizada em 2026-11-12, sem prometer datas ou funcionalidades da IDE que ainda não foram validadas.
+
+## Plano vigente de engenharia — 12 de novembro de 2026
+
+O índice de execução é [modernizacao/README.md](modernizacao/README.md).
+Ele reúne baseline, requisitos rastreáveis, decisões, dependências e critérios
+de teste para HUD, início, documentação, busca, downloads, comunidade e i18n.
+A etapa atual é engenharia e documentação. A próxima unidade é definir o
+modelo de navegação da HUD e seus contratos de foco antes de alterar a interface.
+O backlog editorial abaixo continua como referência, sem substituir essa sequência.
 
 ## Entregue
+
+### Rodada de UI em avaliação local — 12 de novembro de 2026
+
+O mantenedor selecionou página inicial e documentação como próximo escopo.
+A galeria foi antecipada, o beta passou a aparecer antes da prévia inclusive
+sem JavaScript e o índice móvel da documentação tornou-se recolhível. A
+grade do percurso C++ passou a usar o container responsivo já definido no CSS.
+Evidências e testes em [LOCAL-PHASE-C-2026-11-12.md](LOCAL-PHASE-C-2026-11-12.md).
+
+Esta rodada permanece local. A organização e o fluxo da HUD, a busca global
+e a edição inglesa continuam como escopos seguintes; transparência é um recurso
+seletivo, subordinado à usabilidade. Continuar o trabalho não autoriza
+publicação; o fluxo está registrado em [AGENTS.md](../AGENTS.md).
+
+### Entregas anteriores
 
 - Site estático no GitHub Pages com página inicial, índice de documentação e um estudo de C++20.
 - Distinção visual entre beta público, próxima versão em desenvolvimento e direção futura da IDE.
@@ -21,9 +45,9 @@ Este documento descreve **o site**, não o cronograma de recursos da Kinein Vect
 - Troca rápida de tema corrigida, cor do navegador sincronizada e regressões de navegador reproduzíveis.
 - Publicador sem dependência de rsync, com identificação do commit de origem e conferência dos arquivos públicos.
 
-## Próximas entregas do site
+## Backlog editorial e operacional anterior — 24 de outubro de 2026
 
-Direção confirmada em 2026-10-24: a partir da linha 0.5, o projeto buscará ampliar o apoio internacional, com inglês como idioma principal do site e da colaboração na IDE e português como tradução possível. O convite atual acolhe pessoas de qualquer lugar; a edição em inglês e as traduções seguem os critérios de [INTERNATIONALIZATION.md](INTERNATIONALIZATION.md). A tradução é trabalho complementar e não deve bloquear a trilha principal.
+O direcionamento de 2026-10-24 previa expansão internacional a partir da linha 0.5. A especificação atual preserva as URLs e o suporte em português e prepara inglês americano sem duplicar a aplicação. A fundação e o histórico estão em [INTERNATIONALIZATION.md](INTERNATIONALIZATION.md); os critérios vigentes estão no plano de engenharia. Nenhuma tradução incompleta será publicada para demonstrar suporte.
 
 Implementado e autorizado para publicação após revisão local (2026-10-24): nova apresentação da página inicial, área Colabore com oportunidades independentes, integração com issues e contributors públicos, regras detalhadas de envio e créditos. O polimento inclui navegação móvel, transições coordenadas, fundo em SVG e vetores de repulsão no clique, com respeito à redução de movimento. A abertura comercial apresenta o foco em sistemas embarcados e convida a experimentar e participar. Operação e limites em [COLLABORATION.md](COLLABORATION.md).
 

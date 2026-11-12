@@ -1,5 +1,5 @@
-import { pathWithBase } from "./i18n/routing";
-export { formatDate } from "./i18n/utils";
+import { pathWithBase } from "./i18n/routing.ts";
+export { formatDate } from "./i18n/utils.ts";
 
 export const repositoryUrl = "https://github.com/ViktorWalde/KineinVectis";
 

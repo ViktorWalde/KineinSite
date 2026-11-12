@@ -1,0 +1,104 @@
+/* Composição por espaço disponível; controles e grupos compartilham o DOM. */
+@layer layout {
+  @media (width <= 75rem) {
+    .header-tools {
+      width: 100%;
+      justify-content: flex-end;
+      padding-block-start: 0.25rem;
+      border-block-start: 1px solid var(--border);
+    }
+  }
+
+  /* rem considera texto ampliado. O coordenador lê a composição do CSS;
+     sem suporte a container queries, o fallback móvel continua completo. */
+  @container hud (width <= 54rem) {
+    .desktop-links {
+      display: none;
+    }
+
+    .header-tools {
+      width: auto;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      padding: 0;
+      border: 0;
+    }
+
+    .mobile-navigation {
+      display: block;
+      width: 100%;
+    }
+
+    .mobile-navigation > summary {
+      border-color: var(--border-control);
+      background: var(--surface-control);
+      color: var(--text);
+    }
+
+    .mobile-navigation > summary svg {
+      flex: none;
+      fill: none;
+      stroke: var(--accent);
+      stroke-width: 1.75;
+      transition: rotate var(--duration-fast) var(--ease-out);
+    }
+
+    .mobile-navigation[open] > summary svg {
+      rotate: 180deg;
+    }
+
+    .mobile-links {
+      display: grid;
+      gap: 0.3rem;
+      padding-block-start: 0.5rem;
+    }
+
+    .hud-panel {
+      position: static;
+      width: 100%;
+      max-width: none;
+      max-height: none;
+      margin-block: 0.3rem;
+    }
+  }
+
+  @supports not (container-type: inline-size) {
+    .desktop-links {
+      display: none;
+    }
+
+    .mobile-navigation {
+      display: block;
+      width: 100%;
+    }
+
+    .mobile-links {
+      display: grid;
+    }
+
+    .hud-panel {
+      position: static;
+      width: 100%;
+      max-height: none;
+    }
+  }
+
+  @media (width <= 35rem) {
+    .header-tools {
+      width: 100%;
+      gap: 0.35rem;
+    }
+
+    .header-download {
+      padding-inline: 0.65rem;
+    }
+
+    .appearance summary {
+      padding-inline: 0.55rem;
+    }
+
+    .header-tools > * {
+      max-width: 100%;
+    }
+  }
+}

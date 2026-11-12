@@ -1,4 +1,6 @@
 ---
+import "./docs-navigation.css";
+
 // Índice lateral das páginas de documentação. Âncoras (#...) recebem a marca
 // de seção em leitura; links para outras páginas ficam como estão.
 interface Props {
@@ -13,12 +15,20 @@ const { title, label, links, note } = Astro.props;
 
 <aside class="docs-sidebar" aria-label="Navegação desta página">
   <p class="label">{title}</p>
-  <nav aria-label={label}>
-    {links.map((link) => (
-      <a href={link.href}>{link.text}</a>
-    ))}
-  </nav>
-  {note && <div class="docs-sidebar-note">{note}</div>}
+  <details class="docs-outline" data-docs-outline open>
+    <summary>
+      <span>{title}</span>
+      <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+        <path d="m6 9 6 6 6-6" />
+      </svg>
+    </summary>
+    <nav aria-label={label}>
+      {links.map((link) => (
+        <a href={link.href}>{link.text}</a>
+      ))}
+    </nav>
+    {note && <div class="docs-sidebar-note">{note}</div>}
+  </details>
 </aside>
 
 <script>

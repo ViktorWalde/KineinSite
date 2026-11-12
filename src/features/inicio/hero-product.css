@@ -1,0 +1,78 @@
+/* O produto real participa do hero; a arte continua sendo fundo decorativo. */
+.hero.hero-product::before {
+  background: linear-gradient(90deg, rgb(7 10 14 / 88%), rgb(7 10 14 / 65%));
+}
+
+.hero-product .hero-layout {
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  gap: var(--space-xl);
+}
+
+.hero-product .hero-copy {
+  justify-self: start;
+}
+
+.hero-capture {
+  min-width: 0;
+  width: min(100%, 88svh);
+  justify-self: center;
+}
+
+.hero-capture figure {
+  margin: 0;
+}
+
+.hero-capture-open {
+  position: relative;
+  display: block;
+  overflow: clip;
+  border: 1px solid var(--border-control);
+  border-radius: var(--radius-lg);
+  background: #111315;
+  box-shadow: var(--shadow-card);
+}
+
+.hero-capture-open img {
+  width: 100%;
+  height: auto;
+}
+
+.hero-capture-open > span {
+  position: absolute;
+  max-width: calc(100% - 1rem);
+  right: 0.5rem;
+  bottom: 0.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  min-height: 2.75rem;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.75rem;
+  border: 1px solid var(--border-control);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  color: var(--text);
+  font-size: var(--text-sm);
+  font-weight: 650;
+}
+
+.hero-capture figcaption {
+  display: grid;
+  gap: 0.35rem;
+  margin-block-start: 0.85rem;
+  font-size: var(--text-sm);
+}
+
+.hero-capture figcaption strong {
+  color: var(--hero-accent);
+}
+
+.hero-capture figcaption small {
+  font-size: var(--text-xs);
+}
+
+@media (width <= 54rem) {
+  .hero-product .hero-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

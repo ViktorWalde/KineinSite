@@ -1,0 +1,73 @@
+/* Apenas DocsSidebar: o índice de capítulos dos guias mantém sua estrutura. */
+.docs-outline > summary {
+  display: none;
+}
+
+.docs-sidebar .docs-outline nav {
+  display: grid;
+  padding: var(--space-xs);
+  overflow: visible;
+  mask-image: none;
+}
+
+.docs-sidebar .docs-outline a {
+  display: flex;
+  min-width: 0;
+  min-height: 2.75rem;
+  align-items: center;
+  border-radius: var(--radius-sm);
+  white-space: normal;
+}
+
+@media (width <= 54rem) {
+  .docs-outline {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    background: var(--surface);
+  }
+
+  .docs-outline > summary {
+    display: flex;
+    min-height: 2.75rem;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-s);
+    padding: var(--space-xs) var(--space-s);
+    cursor: pointer;
+    font-size: var(--text-sm);
+    font-weight: 650;
+    list-style: none;
+  }
+
+  .docs-outline > summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .docs-outline svg {
+    flex: none;
+    fill: none;
+    stroke: var(--accent);
+    stroke-width: 1.75;
+    transition: rotate var(--duration-fast) var(--ease-out);
+  }
+
+  .docs-outline[open] svg {
+    rotate: 180deg;
+  }
+
+  .docs-sidebar .docs-outline nav {
+    gap: 0.25rem;
+    padding: var(--space-xs);
+    border-block-start: 1px solid var(--border);
+  }
+
+  .docs-sidebar .docs-outline a {
+    border: 1px solid transparent;
+    background: transparent;
+  }
+
+  .docs-sidebar .docs-outline a[aria-current="true"] {
+    border-color: var(--border-control);
+    background: var(--surface-control);
+  }
+}

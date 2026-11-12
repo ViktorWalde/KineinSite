@@ -1,8 +1,9 @@
+import { enhanceOutline } from "../../scripts/outline";
+
 const outline = document.querySelector<HTMLDetailsElement>(
   "[data-manual-outline]",
 );
 const search = document.querySelector<HTMLInputElement>("#manual-search");
-const mobileManual = matchMedia("(max-width: 54rem)");
 
 if (outline && search) {
   const panel = outline;
@@ -53,10 +54,7 @@ if (outline && search) {
         ? `${String(count)} ${count === 1 ? "seção encontrada" : "seções encontradas"}.`
         : "Todas as seções do manual.";
   }
-  panel.open = !mobileManual.matches;
-  mobileManual.addEventListener("change", () => {
-    panel.open = !mobileManual.matches;
-  });
+  enhanceOutline(panel, matchMedia("(width <= 54rem)"));
   const searchArea = panel.querySelector<HTMLElement>("[data-manual-search]");
   if (searchArea) searchArea.hidden = false;
   input.addEventListener("input", filter);
@@ -65,40 +63,5 @@ if (outline && search) {
     event.preventDefault();
     input.value = "";
     filter();
-  });
-  panel.addEventListener("keydown", (event) => {
-    if (
-      event.key !== "Escape" ||
-      event.defaultPrevented ||
-      !mobileManual.matches ||
-      !panel.open
-    )
-      return;
-    event.preventDefault();
-    panel.open = false;
-    panel.querySelector<HTMLElement>("summary")?.focus();
-  });
-  panel.addEventListener("click", (event) => {
-    const link =
-      event.target instanceof Element ? event.target.closest("a") : null;
-    if (
-      !link ||
-      !mobileManual.matches ||
-      event.ctrlKey ||
-      event.metaKey ||
-      event.shiftKey ||
-      event.altKey
-    )
-      return;
-    panel.open = false;
-    // O link deixa de ficar visível quando o índice recolhe. O foco segue
-    // para o título de destino, sem iniciar outra rolagem.
-    const target = document.getElementById(
-      decodeURIComponent(link.hash.slice(1)),
-    );
-    if (target) {
-      target.tabIndex = -1;
-      target.focus({ preventScroll: true });
-    }
   });
 }

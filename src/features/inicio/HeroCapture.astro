@@ -1,0 +1,56 @@
+---
+import { getImage } from "astro:assets";
+import { ideScreens } from "../../data/ide-screens";
+import { publicVersion, formatDate } from "../../site";
+import ImageViewer from "../imagens/ImageViewer.astro";
+
+if (ideScreens.version !== publicVersion) {
+  throw new Error("A captura do hero precisa corresponder ao beta público.");
+}
+const shot = ideScreens.shots[0];
+const image = await getImage({
+  src: shot.image,
+  format: "webp",
+  quality: 82,
+  widths: [800, 1200, 1600],
+  sizes: "(max-width: 54rem) calc(100vw - 2rem), min(44rem, 52vw)",
+});
+---
+
+<div class="hero-capture" data-image-viewer>
+  <figure>
+    <a
+      class="hero-capture-open"
+      href={image.src}
+      data-image-open
+      aria-label={`Ampliar captura real do beta ${ideScreens.version}: ${shot.title}`}
+      aria-haspopup="dialog"
+    >
+      <img
+        src={image.src}
+        srcset={image.srcSet.attribute}
+        sizes="(max-width: 54rem) calc(100vw - 2rem), min(44rem, 52vw)"
+        width={image.attributes["width"]}
+        height={image.attributes["height"]}
+        alt={shot.alt}
+        loading="eager"
+        fetchpriority="high"
+        decoding="async"
+      />
+      <span>
+        Ampliar captura <span aria-hidden="true">⤢</span>
+      </span>
+    </a>
+    <figcaption>
+      <strong>Beta {ideScreens.version} · captura real</strong>
+      <span>{shot.caption}</span>
+      <small>
+        {ideScreens.environment} ·{" "}
+        <time datetime={ideScreens.capturedAt}>
+          {formatDate(new Date(`${ideScreens.capturedAt}T00:00:00Z`))}
+        </time>
+      </small>
+    </figcaption>
+  </figure>
+  <ImageViewer id="hero-beta" />
+</div>

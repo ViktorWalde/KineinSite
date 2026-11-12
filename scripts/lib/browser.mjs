@@ -10,7 +10,11 @@ import process from "node:process";
 import { Buffer } from "node:buffer";
 import { setTimeout as delay } from "node:timers/promises";
 
-export async function openBrowser({ desktopPointer = false } = {}) {
+export async function openBrowser({
+  desktopPointer = false,
+  basePath = process.env.KINEIN_TEST_BASE ?? "/KineinSite/",
+  serveNotFound = false,
+} = {}) {
   const executable = [
     process.env.CHROME_BIN,
     "/usr/bin/google-chrome",
@@ -19,7 +23,7 @@ export async function openBrowser({ desktopPointer = false } = {}) {
   ].find((file) => file && existsSync(file));
   if (!executable)
     throw new Error("Instale Chrome/Chromium ou informe CHROME_BIN.");
-  const directory = path.resolve("dist");
+  const directory = path.resolve(process.env.KINEIN_TEST_DIST ?? "dist");
   const types = {
     ".html": "text/html",
     ".css": "text/css",
@@ -35,8 +39,8 @@ export async function openBrowser({ desktopPointer = false } = {}) {
       const route = decodeURIComponent(
         new URL(request.url, "http://localhost").pathname,
       );
-      if (!route.startsWith("/KineinSite/")) throw new Error("Base inválida");
-      const file = path.resolve(directory, route.slice("/KineinSite/".length));
+      if (!route.startsWith(basePath)) throw new Error("Base inválida");
+      const file = path.resolve(directory, route.slice(basePath.length));
       if (file !== directory && !file.startsWith(`${directory}${path.sep}`))
         throw new Error("Caminho inválido");
       const resolved = route.endsWith("/")
@@ -49,12 +53,16 @@ export async function openBrowser({ desktopPointer = false } = {}) {
       });
       response.end(body);
     } catch {
-      response.writeHead(404);
-      response.end();
+      response.writeHead(404, { "Content-Type": "text/html" });
+      response.end(
+        serveNotFound
+          ? await readFile(path.join(directory, "404.html"))
+          : undefined,
+      );
     }
   });
   await new Promise((resolve) => server.listen(0, "127.0.0.1", resolve));
-  const base = `http://127.0.0.1:${server.address().port}/KineinSite/`;
+  const base = `http://127.0.0.1:${server.address().port}${basePath}`;
   const profile = await mkdtemp(path.join(tmpdir(), "kinein-browser-"));
   const chrome = spawn(
     executable,

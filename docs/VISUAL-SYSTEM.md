@@ -2,8 +2,11 @@
 
 ## Fundação local — 12 de novembro de 2026
 
-O HUD usa uma moldura arredondada com superfície translúcida seletiva. O
-mantenedor aprovou a prévia visual e autorizou sua publicação em 12 de novembro de 2026.
+O HUD usa uma moldura arredondada com superfície translúcida seletiva. A
+reorganização de seu layout e fluxo de navegação está pendente; transparência
+é opcional e subordinada à legibilidade. O [plano de engenharia](modernizacao/README.md)
+organiza essa continuidade antes de novas alterações visuais. A avaliação
+permanece local e a continuidade do trabalho não autoriza publicação.
 O download permanece disponível no celular. Links intermediários quebram em
 linhas; navegação móvel continua usando disclosure nativo. A página ativa
 recebe também uma marca inferior, além da cor.

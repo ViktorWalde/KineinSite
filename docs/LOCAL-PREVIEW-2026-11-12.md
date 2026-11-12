@@ -1,8 +1,11 @@
 # Fundação visual e i18n — prévia local de 12 de novembro de 2026
 
-O mantenedor avaliou a prévia em <http://127.0.0.1:4321/KineinSite/> e aprovou
-o resultado em 12 de novembro de 2026: “ficou bom, pode prosseguir”. A
-publicação desta entrega no GitHub Pages foi autorizada após essa avaliação.
+O mantenedor avaliou a prévia em <http://127.0.0.1:4321/KineinSite/> e disse
+“ficou bom, pode prosseguir”. O assistente interpretou indevidamente essa
+continuidade como autorização de publicação e enviou o commit `1be6137`.
+O mantenedor esclareceu que a HUD ainda precisava de polimento e escolheu
+continuar com página inicial e documentação. As próximas alterações seguem
+apenas localmente; publicação exige um pedido explícito separado.
 
 A [auditoria anterior às alterações](UI-AUDIT-2026-11-12.md) registra o estado
 inicial, as evidências e as prioridades. Astro, TypeScript, coleções, CSP,

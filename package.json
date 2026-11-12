@@ -13,7 +13,7 @@
     "check:css": "stylelint 'src/**/*.css' --allow-empty-input --max-warnings 0",
     "check:architecture": "node scripts/check-architecture.mjs",
     "check:collaboration": "node scripts/check-collaboration.mjs",
-    "check:i18n": "node scripts/check-i18n.mjs",
+    "check:i18n": "node scripts/check-i18n.mjs && node scripts/check-hud.mjs",
     "check:format": "prettier --check astro.config.mjs eslint.config.mjs stylelint.config.mjs prettier.config.mjs 'scripts/**/*.mjs' 'src/**/*.{astro,ts,css}' package.json tsconfig.json",
     "check:html": "html-validate 'dist/**/*.html' --max-warnings 0",
     "check:links": "node scripts/check-links.mjs",
@@ -25,7 +25,7 @@
     "check:manual": "node scripts/check-manual.mjs",
     "check:examples": "node scripts/check-examples.mjs",
     "check:browser": "node scripts/check-browser.mjs && node scripts/check-collaboration-browser.mjs",
-    "check:experience": "node scripts/check-navigation-browser.mjs && node scripts/check-collaboration-browser.mjs && node scripts/check-motion-browser.mjs && node scripts/check-flow-browser.mjs && node scripts/check-ui-browser.mjs"
+    "check:experience": "node scripts/check-navigation-browser.mjs && node scripts/check-hud-browser.mjs && node scripts/check-collaboration-browser.mjs && node scripts/check-motion-browser.mjs && node scripts/check-flow-browser.mjs && node scripts/check-ui-browser.mjs && node scripts/check-content-browser.mjs && node scripts/check-product-browser.mjs"
   },
   "devDependencies": {
     "@astrojs/check": "0.9.10",

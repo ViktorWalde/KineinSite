@@ -97,12 +97,13 @@ try {
   await evaluate("document.documentElement.style.fontSize='200%'");
   assert.ok(
     await evaluate(
-      "document.documentElement.scrollWidth <= innerWidth && [...document.querySelectorAll('.mobile-links a')].every(link=>link.getBoundingClientRect().width>0)",
+      "document.documentElement.scrollWidth <= innerWidth && [...document.querySelectorAll('.mobile-links > details > summary')].every(link=>link.getBoundingClientRect().width>0)",
     ),
   );
   await evaluate(
-    "document.documentElement.style.fontSize=''; document.querySelector('.mobile-links a').focus()",
+    "document.documentElement.style.fontSize=''; document.querySelector('.mobile-links .hud-group > summary').click()",
   );
+  await evaluate("document.querySelector('.mobile-links a').focus()");
   await send("Input.dispatchKeyEvent", {
     type: "keyDown",
     key: "Escape",
@@ -113,6 +114,17 @@ try {
     key: "Escape",
     code: "Escape",
   });
+  assert.ok(
+    await evaluate(
+      "document.querySelector('.mobile-navigation').open && !document.querySelector('.mobile-links .hud-group').open && document.activeElement.matches('.hud-group > summary')",
+    ),
+  );
+  for (const type of ["keyDown", "keyUp"])
+    await send("Input.dispatchKeyEvent", {
+      type,
+      key: "Escape",
+      code: "Escape",
+    });
   assert.ok(
     await evaluate(
       "!document.querySelector('.mobile-navigation').open && document.activeElement === document.querySelector('.mobile-navigation > summary')",
@@ -133,6 +145,9 @@ try {
     features: [{ name: "prefers-reduced-motion", value: "no-preference" }],
   });
   await navigate();
+  await evaluate(
+    "document.querySelector('.desktop-links [data-hud-group=docs] > summary').click()",
+  );
   const manualLink = await evaluate(
     "(()=>{const box=document.querySelector('.desktop-links a[href$=\"/manual/\"]').getBoundingClientRect();return{x:box.left+box.width/2,y:box.top+box.height/2}})()",
   );
@@ -201,7 +216,7 @@ try {
   });
   assert.ok(
     await evaluate(
-      "document.querySelector('.mobile-navigation').open && document.querySelector('.mobile-links a').getBoundingClientRect().width>0",
+      "document.querySelector('.mobile-navigation').open && document.querySelector('.mobile-links .hud-group > summary').getBoundingClientRect().width>0",
     ),
   );
   await send("Emulation.setScriptExecutionDisabled", { value: false });

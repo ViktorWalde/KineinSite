@@ -11,12 +11,13 @@ import { releaseUrl, sitePath } from "../../site";
   aria-labelledby="interface-title"
 >
   <div class="section-intro reveal">
-    <p class="kicker">CONHEÇA SEU ESPAÇO DE CRIAÇÃO</p>
-    <h2 id="interface-title">Imagine seu próximo projeto por aqui.</h2>
+    <p class="kicker">A INTERFACE REAL DA VECTIS</p>
+    <h2 id="interface-title">Seu código, dentro da Vectis.</h2>
     <p class="section-intro-copy">
-      A galeria abre com o beta {ideScreens.version}, disponível para baixar.
-      Explore o editor e as ferramentas, ou escolha a prévia 0.4 para conhecer a
-      próxima interface. Toque na imagem para ampliar.
+      Estas são capturas do beta {ideScreens.version}, disponível para Linux
+      x86_64. Explore o editor e a detecção de ferramentas. A aba “Prévia 0.4”
+      mostra uma interface ainda em desenvolvimento. Selecione uma captura para
+      ampliar.
     </p>
   </div>
 
@@ -31,37 +32,26 @@ import { releaseUrl, sitePath } from "../../site";
         type="button"
         role="tab"
         data-tab
-        id="gallery-preview-tab"
-        aria-controls="gallery-preview"
-        aria-selected="false"
-        tabindex="-1"
-      >
-        Prévia 0.4
-      </button>
-      <button
-        type="button"
-        role="tab"
-        data-tab
         id="gallery-beta-tab"
         aria-controls="gallery-beta"
         aria-selected="true"
         tabindex="0"
       >
         Beta {ideScreens.version}
+        <span class="version-state">Disponível para Linux</span>
       </button>
-    </div>
-    <div
-      id="gallery-preview"
-      class="tab-panel"
-      role="tabpanel"
-      data-tab-panel
-      aria-labelledby="gallery-preview-tab"
-    >
-      <IdeGallery
-        id="preview"
-        label="Telas da prévia 0.4"
-        screens={developmentScreens}
-      />
+      <button
+        type="button"
+        role="tab"
+        data-tab
+        id="gallery-preview-tab"
+        aria-controls="gallery-preview"
+        aria-selected="false"
+        tabindex="-1"
+      >
+        Prévia 0.4
+        <span class="version-state">Em desenvolvimento</span>
+      </button>
     </div>
     <div
       id="gallery-beta"
@@ -70,7 +60,28 @@ import { releaseUrl, sitePath } from "../../site";
       data-tab-panel
       aria-labelledby="gallery-beta-tab"
     >
-      <IdeGallery id="beta" label="Telas do beta 0.3.5" screens={ideScreens} />
+      <h3 class="gallery-version-title">
+        Beta {ideScreens.version} · disponível para Linux
+      </h3>
+      <IdeGallery
+        id="beta"
+        label={`Telas do beta ${ideScreens.version}`}
+        screens={ideScreens}
+      />
+    </div>
+    <div
+      id="gallery-preview"
+      class="tab-panel"
+      role="tabpanel"
+      data-tab-panel
+      aria-labelledby="gallery-preview-tab"
+    >
+      <h3 class="gallery-version-title">Prévia 0.4 · em desenvolvimento</h3>
+      <IdeGallery
+        id="preview"
+        label="Telas da prévia 0.4"
+        screens={developmentScreens}
+      />
     </div>
   </div>
   <div class="try-actions">

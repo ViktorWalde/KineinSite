@@ -1,3 +1,11 @@
+import { enhanceOutline } from "../../scripts/outline";
+
+for (const panel of document.querySelectorAll<HTMLDetailsElement>(
+  "[data-docs-outline]",
+)) {
+  enhanceOutline(panel, matchMedia("(width <= 54rem)"));
+}
+
 // Marca no índice lateral (DocsSidebar) a seção em leitura: a última cujo topo
 // já passou de 30% da altura da janela. Sem JavaScript, o índice continua
 // sendo uma lista de âncoras comum.

@@ -1,38 +1,80 @@
 ---
-import { discordUrl, type SiteSection } from "../site";
+import type { SiteSection } from "../site";
 import { defaultLocale, type Locale } from "../i18n/config";
-import { resolveRoute } from "../i18n/routing";
 import { uiFor } from "../i18n/ui";
+import { groupForSection, type ResolvedNavigation } from "../data/navigation";
 
 interface Props {
   current?: SiteSection | undefined;
   mobile?: boolean;
   locale?: Locale;
+  groups: ResolvedNavigation;
 }
-const { current, mobile = false, locale = defaultLocale } = Astro.props;
+const { current, groups, mobile = false, locale = defaultLocale } = Astro.props;
 const messages = uiFor(locale);
-const links = ["collaborate", "guide", "manual", "docs", "updates"] as const;
+const prefix = mobile ? "mobile" : "desktop";
+const pathname = Astro.url.pathname;
 ---
 
 <nav
   class:list={["primary-nav", mobile ? "mobile-links" : "desktop-links"]}
   aria-label={mobile ? messages.mobileNavigation : messages.navigation}
 >
-  {links.map((section) => (
-    <a
-      class:list={{ "nav-collaborate": section === "collaborate" }}
-      href={resolveRoute(section, locale, import.meta.env.BASE_URL).href}
-      aria-current={current === section ? "page" : undefined}
+  {groups.map((group) => (
+    <details
+      class="hud-group"
+      data-hud-group={group.id}
+      data-current-group={
+        current && groupForSection[current] === group.id ? "true" : undefined
+      }
     >
-      {messages.nav[section]}
-    </a>
+      <summary
+        id={`${prefix}-${group.id}-trigger`}
+        aria-controls={`${prefix}-${group.id}-links`}
+      >
+        <span>{group.label}</span>
+        {current && groupForSection[current] === group.id && (
+          <span class="visually-hidden"> — {messages.hud.currentSection}</span>
+        )}
+        <span class="hud-chevron" aria-hidden="true">
+          ⌄
+        </span>
+      </summary>
+      <ul
+        class="hud-panel"
+        id={`${prefix}-${group.id}-links`}
+        aria-labelledby={`${prefix}-${group.id}-trigger`}
+      >
+        {group.items.map((item) => (
+          <li>
+            <a
+              id={`${prefix}-${item.id}`}
+              data-hud-item={item.id}
+              href={item.href}
+              aria-current={
+                current &&
+                !item.external &&
+                !item.href.includes("#") &&
+                item.href === pathname
+                  ? "page"
+                  : undefined
+              }
+              target={item.external ? "_blank" : undefined}
+              rel={item.external ? "noopener noreferrer" : undefined}
+              hreflang={item.isFallback ? item.locale : undefined}
+            >
+              {item.label}
+              {item.isFallback && <span> ({messages.hud.fallback})</span>}
+              {item.external && (
+                <>
+                  <span aria-hidden="true">↗</span>
+                  <span class="visually-hidden"> — {messages.hud.newTab}</span>
+                </>
+              )}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </details>
   ))}
-  <a
-    class="nav-external"
-    href={discordUrl}
-    target="_blank"
-    rel="noopener noreferrer"
-  >
-    Discord <span aria-hidden="true">↗</span>
-  </a>
 </nav>

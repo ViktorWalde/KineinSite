@@ -337,10 +337,12 @@ try {
       );
       assert.ok(
         await evaluate(
-          "document.querySelector('.mobile-navigation').open && [...document.querySelectorAll('.mobile-links a')].every(link=>link.getBoundingClientRect().width>0)",
+          "document.querySelector('.mobile-navigation').open && [...document.querySelectorAll('.mobile-links .hud-group > summary')].every(link=>link.getBoundingClientRect().width>0)",
         ),
       );
-      await evaluate("document.querySelector('.mobile-links a').focus()");
+      await evaluate(
+        "document.querySelector('.mobile-links .hud-group > summary').focus()",
+      );
       await send("Input.dispatchKeyEvent", {
         type: "keyDown",
         key: "Escape",

@@ -7,6 +7,7 @@ import CurrentStatus from "../features/inicio/CurrentStatus.astro";
 import DevelopmentStatus from "../features/inicio/DevelopmentStatus.astro";
 import FocusAreas from "../features/inicio/FocusAreas.astro";
 import IdePreview from "../features/inicio/IdePreview.astro";
+import HeroCapture from "../features/inicio/HeroCapture.astro";
 import FirstTry from "../features/inicio/FirstTry.astro";
 import LatestUpdate from "../features/atualizacoes/LatestUpdate.astro";
 import CollaborationInvite from "../features/inicio/CollaborationInvite.astro";
@@ -14,10 +15,11 @@ import "../features/inicio/inicio.css";
 import "../features/inicio/background.css";
 import "../features/inicio/secoes.css";
 import "../features/inicio/desenvolvimento.css";
+import "../features/inicio/hero-product.css";
 import { discordUrl, publicVersion, releaseUrl, sitePath } from "../site";
 
-// O hero é o maior elemento da primeira tela: largura certa por tela
-// (srcset) e prioridade de rede alta. As dimensões vêm do resultado, nunca
+// A arte é decorativa; a captura real tem a prioridade de rede do hero.
+// As dimensões vêm do resultado, nunca
 // de wallpaperSource.width: ler uma propriedade da imagem importada faz o
 // Astro publicar o PNG original (2 MB) junto, sem nenhuma página usá-lo.
 const wallpaper = await getImage({
@@ -34,7 +36,7 @@ const wallpaper = await getImage({
   title="IDE open source com foco em sistemas embarcados"
   description="Conheça a Kinein Vectis: uma IDE open source que evolui para se especializar em sistemas embarcados. Experimente e faça parte do projeto."
 >
-  <section class="hero" aria-labelledby="hero-title">
+  <section class="hero hero-product" aria-labelledby="hero-title">
     <div class="hero-media" aria-hidden="true">
       <img
         class="hero-bg"
@@ -44,12 +46,12 @@ const wallpaper = await getImage({
         width={wallpaper.attributes["width"]}
         height={wallpaper.attributes["height"]}
         alt=""
-        fetchpriority="high"
+        fetchpriority="low"
+        decoding="async"
       />
       <div class="hero-shine"></div>
     </div>
     <div class="shell hero-layout">
-      <div class="hero-art" aria-hidden="true"></div>
       <div class="hero-copy enter">
         <p class="hero-overline">
           <span aria-hidden="true">∭</span> KINEIN VECTIS · OPEN SOURCE
@@ -80,6 +82,7 @@ const wallpaper = await getImage({
           Ajude a construir a Vectis <span aria-hidden="true">→</span>
         </a>
       </div>
+      <HeroCapture />
     </div>
   </section>
 
@@ -109,17 +112,17 @@ const wallpaper = await getImage({
         </a>
       </nav>
       <FlowField placement="intro" />
+      <IdePreview />
+    </div>
+
+    <div class="home-topic">
+      <FlowField />
       <CurrentStatus />
     </div>
 
     <div class="home-topic">
       <FlowField />
       <DevelopmentStatus />
-    </div>
-
-    <div class="home-topic">
-      <FlowField />
-      <IdePreview />
     </div>
 
     <div class="home-topic">

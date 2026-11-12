@@ -177,6 +177,7 @@
 @supports (interpolate-size: allow-keywords) {
   :is(
     .mobile-navigation,
+    .docs-outline,
     .product-questions details,
     .collab-disclosure,
     .task-details
@@ -186,6 +187,7 @@
 
   :is(
     .mobile-navigation,
+    .docs-outline,
     .product-questions details,
     .collab-disclosure,
     .task-details
@@ -201,6 +203,7 @@
 
   :is(
       .mobile-navigation,
+      .docs-outline,
       .product-questions details,
       .collab-disclosure,
       .task-details

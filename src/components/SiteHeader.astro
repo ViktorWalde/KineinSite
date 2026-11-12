@@ -7,6 +7,9 @@ import { resolveRoute } from "../i18n/routing";
 import { uiFor } from "../i18n/ui";
 import ThemeControls from "./ThemeControls.astro";
 import SiteNavigation from "./SiteNavigation.astro";
+import { resolveNavigation } from "../data/navigation";
+import { getPublishedGuides } from "../features/aprender/guides";
+import { getUpdates } from "../features/atualizacoes/updates";
 
 interface Props {
   current?: SiteSection | undefined;
@@ -15,6 +18,12 @@ interface Props {
 
 const { current, locale = defaultLocale } = Astro.props;
 const messages = uiFor(locale);
+const groups = resolveNavigation({
+  guides: await getPublishedGuides(),
+  updates: await getUpdates(),
+  locale,
+  base: import.meta.env.BASE_URL,
+});
 const optimizedIcon = await getImage({ src: icon, width: 84, format: "webp" });
 ---
 
@@ -37,7 +46,7 @@ const optimizedIcon = await getImage({ src: icon, width: 84, format: "webp" });
       </span>
     </a>
 
-    <SiteNavigation current={current} locale={locale} />
+    <SiteNavigation current={current} locale={locale} groups={groups} />
 
     <div class="header-tools">
       <ThemeControls locale={locale} />
@@ -48,6 +57,7 @@ const optimizedIcon = await getImage({ src: icon, width: 84, format: "webp" });
         rel="noopener noreferrer"
       >
         {messages.download} {publicVersion} <span aria-hidden="true">↗</span>
+        <span class="visually-hidden"> — {messages.hud.newTab}</span>
       </a>
     </div>
     <details class="mobile-navigation">
@@ -57,7 +67,12 @@ const optimizedIcon = await getImage({ src: icon, width: 84, format: "webp" });
           <path d="m6 9 6 6 6-6" />
         </svg>
       </summary>
-      <SiteNavigation current={current} locale={locale} mobile />
+      <SiteNavigation
+        current={current}
+        locale={locale}
+        groups={groups}
+        mobile
+      />
     </details>
   </div>
 </header>

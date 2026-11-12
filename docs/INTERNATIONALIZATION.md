@@ -1,4 +1,18 @@
-# Direção internacional a partir da 0.5
+# Internacionalização: fundação e direção editorial
+
+## Orientação vigente — 12 de novembro de 2026
+
+O [plano de engenharia](modernizacao/README.md) consolida a especificação atual:
+manter suporte a `pt-BR`, preservar suas URLs e expandir para `en-US` em `/en/`,
+com conteúdo revisado e sem duplicar componentes. Ainda não existem páginas
+inglesas. O catálogo inglês da UI não constitui uma edição bilíngue completa.
+
+O histórico abaixo explica a origem da direção internacional. Onde descreve
+português como tradução apenas possível ou condiciona a expansão à versão 0.5,
+vale a especificação atual de suporte aos dois idiomas e seus critérios de
+aceite. Não se altera o idioma da raiz nem a política da IDE nesta entrega.
+
+## Histórico editorial — 24 de outubro de 2026
 
 Decisão do mantenedor em 2026-10-24: a partir da linha 0.5, o projeto buscará ampliar o apoio e a colaboração internacional. Inglês será o idioma principal do projeto, do site e da IDE; português permanece como possibilidade de tradução. Esta decisão não traduz automaticamente a edição atual nem anuncia uma versão bilíngue pronta.
 

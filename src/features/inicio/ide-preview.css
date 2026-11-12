@@ -97,6 +97,17 @@
   margin-block-start: var(--space-xl);
 }
 
+/* Sem JavaScript, os dois conjuntos continuam identificados e visíveis.
+   Com abas, a versão e seu estado já aparecem no controle selecionado. */
+.gallery-version-title {
+  margin-block: var(--space-xl) var(--space-m);
+  font-size: var(--text-xl);
+}
+
+.gallery-versions[data-tabs-ready] .gallery-version-title {
+  display: none;
+}
+
 .gallery-versions .ide-preview-frame {
   margin-block-start: var(--space-m);
 }

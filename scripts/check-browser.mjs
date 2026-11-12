@@ -48,6 +48,12 @@ async function waitFor(expression, message) {
   assert.fail(message);
 }
 try {
+  // Mídia/tema não dependem da disponibilidade da API pública. Os estados
+  // da integração continuam cobertos em check-collaboration-browser.mjs.
+  await send("Page.addScriptToEvaluateOnNewDocument", {
+    source:
+      "const originalFetch=window.fetch.bind(window);window.fetch=(input,options)=>String(input).startsWith('https://api.github.com/repos/')?Promise.resolve(new Response('[]',{headers:{'Content-Type':'application/json'}})):originalFetch(input,options);",
+  });
   await media();
   await viewport(1440);
   await navigate();
@@ -97,7 +103,7 @@ try {
   );
   await navigate();
   const gallery = await evaluate(
-    `(() => {const frames=[...document.querySelectorAll('.ide-preview-frame')]; const tabs=frames[0].querySelectorAll('.ide-tab');tabs[0].focus();tabs[0].dispatchEvent(new KeyboardEvent('keydown',{key:'End',bubbles:true})); return {count:frames.length,selected:tabs[1].getAttribute('aria-selected'),focus:document.activeElement.id,other:frames[1].querySelector('.ide-tab').getAttribute('aria-selected'),panels:[...frames[0].querySelectorAll('.ide-shot')].map(p=>p.hidden)};})()`,
+    `(() => {const frames=[...document.querySelectorAll('.ide-preview-frame')],preview=document.querySelector('#gallery-preview .ide-preview-frame'),beta=document.querySelector('#gallery-beta .ide-preview-frame'); const tabs=preview.querySelectorAll('.ide-tab');tabs[0].focus();tabs[0].dispatchEvent(new KeyboardEvent('keydown',{key:'End',bubbles:true})); return {count:frames.length,selected:tabs[1].getAttribute('aria-selected'),focus:document.activeElement.id,other:beta.querySelector('.ide-tab').getAttribute('aria-selected'),panels:[...preview.querySelectorAll('.ide-shot')].map(p=>p.hidden)};})()`,
   );
   assert.equal(gallery.count, 2);
   assert.equal(gallery.selected, "true");
@@ -109,7 +115,7 @@ try {
   );
   const versions = await evaluate(`(() => {
     const tab = document.querySelector('#gallery-preview-tab');
-    tab.focus(); tab.dispatchEvent(new KeyboardEvent('keydown',{key:'End',bubbles:true}));
+    tab.focus(); tab.dispatchEvent(new KeyboardEvent('keydown',{key:'Home',bubbles:true}));
     return {selected: document.querySelector('#gallery-beta-tab').getAttribute('aria-selected'),hidden:document.querySelector('#gallery-preview').hidden,inner:document.querySelector('#preview-tab-ambiente').getAttribute('aria-selected'),focus:document.activeElement.id};
   })()`);
   assert.equal(versions.selected, "true");
