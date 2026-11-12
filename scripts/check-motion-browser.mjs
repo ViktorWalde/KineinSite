@@ -54,9 +54,9 @@ try {
       );
       assert.ok(
         await evaluate(
-          "getComputedStyle(document.querySelector('.collab-actions .button-quiet')).backgroundColor===getComputedStyle(document.querySelector('.field-control')).backgroundColor",
+          "(()=>{const button=getComputedStyle(document.querySelector('.collab-actions .button-quiet')),field=getComputedStyle(document.querySelector('.field-control'));return button.backgroundColor==='rgba(0, 0, 0, 0)' && button.color===field.color})()",
         ),
-        `Botão fora do tema: ${theme}/${accent}`,
+        `Botão discreto deve preservar texto do tema e fundo transparente: ${theme}/${accent}`,
       );
     }
   }

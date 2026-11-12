@@ -20,6 +20,47 @@ Decisão do mantenedor em 2026-10-24: a partir da linha 0.5, o projeto buscará 
 
 ## Preparação técnica para a troca
 
+### Fundação local — 12 de novembro de 2026
+
+`src/i18n/config.ts` identifica `pt-BR` e `en-US`. Português mantém as URLs
+existentes; `/en/` é um prefixo reservado, sem páginas publicadas nesta etapa.
+Não há seletor de idioma até existir conteúdo suficiente revisado.
+
+`ui.ts` contém catálogos completos e tipados para a moldura compartilhada:
+skip link, header, navegação, aparência e rodapé. Esses componentes recebem
+`locale`; os comportamentos de tema e navegação continuam independentes do
+texto. As mensagens inglesas são uma fundação de interface, sem afirmar que
+o conteúdo editorial ou a documentação já foram traduzidos.
+
+`routing.ts` mantém `publishedRoutes` somente com destinos reais. `resolveRoute`
+devolve endereço, idioma efetivo e `isFallback`: uma solicitação de manual em
+inglês retorna o manual português, com fallback identificado, sem inventar
+`/en/manual/`. Uma interface futura deve comunicar esse idioma ao apresentar
+o destino. `equivalentRoutes` só oferece correspondências registradas.
+`pathWithBase`, usado também por `sitePath`, funciona na raiz e em `/KineinSite/`.
+
+`BaseLayout` deriva o idioma da URL para o HTML e Open Graph. Título e
+descrição continuam sendo conteúdo explícito da página. Canonical mantém a
+base do Pages. Alternativas `hreflang` só são emitidas para uma página com
+mais de uma equivalência registrada; nesta entrega não há nenhuma em inglês.
+`utils.ts` centraliza datas em UTC nos dois idiomas; `site.ts` conserva a
+exportação anterior para não exigir mudanças nos consumidores portugueses.
+
+`npm run check:i18n` verifica idioma, catálogo, datas, base, fronteira do prefixo,
+destinos equivalentes e fallback. Faz parte do build, sem novas dependências.
+
+Para publicar uma tradução, revisar primeiro o conteúdo completo da rota,
+compor a página com os componentes existentes e registrar sua equivalência.
+Depois habilitar a alternância de idioma, indicando explicitamente quando o
+destino só existe em português. Guias continuam na coleção, não em objetos de UI.
+
+Uma tradução futura do manual deve registrar idioma, tag/commit/hash da fonte,
+revisão da tradução e commit da fonte revisada. Comparar esses commits permite
+identificar revisão pendente sem alterar o manual original protegido. Não foi
+criada uma segunda fonte oficial nem um gerenciador de traduções.
+
+### Continuidade editorial e técnica
+
 - Definir as rotas por idioma e os redirecionamentos, preservando links atuais e a base `/KineinSite/`. Links devem continuar sendo gerados por uma função comum, sem duplicar caminhos manualmente em cada componente.
 - Separar mensagens da interface por contexto. Navegação, formulários de busca, contagens, plurais, estados vazios, erros, botões, legendas e mensagens para leitores de tela também precisam de tradução.
 - Atualizar `lang`, títulos, descrição, Open Graph, canônicos e `hreflang` somente para traduções que realmente existem. O idioma principal passa a inglês quando a edição completa estiver pronta.

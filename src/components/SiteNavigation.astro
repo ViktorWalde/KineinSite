@@ -1,31 +1,30 @@
 ---
-import { discordUrl, sitePath, type SiteSection } from "../site";
+import { discordUrl, type SiteSection } from "../site";
+import { defaultLocale, type Locale } from "../i18n/config";
+import { resolveRoute } from "../i18n/routing";
+import { uiFor } from "../i18n/ui";
 
 interface Props {
   current?: SiteSection | undefined;
   mobile?: boolean;
+  locale?: Locale;
 }
-const { current, mobile = false } = Astro.props;
-const links = [
-  { section: "collaborate", label: "Colabore", path: "/colabore/" },
-  { section: "guide", label: "Começar", path: "/aprender/" },
-  { section: "manual", label: "Manual", path: "/manual/" },
-  { section: "docs", label: "Documentação", path: "/documentacao/" },
-  { section: "updates", label: "Atualizações", path: "/atualizacoes/" },
-] as const;
+const { current, mobile = false, locale = defaultLocale } = Astro.props;
+const messages = uiFor(locale);
+const links = ["collaborate", "guide", "manual", "docs", "updates"] as const;
 ---
 
 <nav
   class:list={["primary-nav", mobile ? "mobile-links" : "desktop-links"]}
-  aria-label={mobile ? "Navegação móvel" : "Navegação principal"}
+  aria-label={mobile ? messages.mobileNavigation : messages.navigation}
 >
-  {links.map((link) => (
+  {links.map((section) => (
     <a
-      class:list={{ "nav-collaborate": link.section === "collaborate" }}
-      href={sitePath(link.path)}
-      aria-current={current === link.section ? "page" : undefined}
+      class:list={{ "nav-collaborate": section === "collaborate" }}
+      href={resolveRoute(section, locale, import.meta.env.BASE_URL).href}
+      aria-current={current === section ? "page" : undefined}
     >
-      {link.label}
+      {messages.nav[section]}
     </a>
   ))}
   <a

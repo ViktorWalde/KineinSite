@@ -4,54 +4,64 @@ import {
   publicVersion,
   releaseUrl,
   repositoryUrl,
-  sitePath,
   siteRepositoryUrl,
 } from "../site";
+import { defaultLocale, type Locale } from "../i18n/config";
+import { resolveRoute, type RouteId } from "../i18n/routing";
+import { uiFor } from "../i18n/ui";
+
+interface Props {
+  locale?: Locale;
+}
+const { locale = defaultLocale } = Astro.props;
+const messages = uiFor(locale).footer;
+const route = (id: RouteId) =>
+  resolveRoute(id, locale, import.meta.env.BASE_URL).href;
 
 const groups = [
   {
-    title: "Produto",
+    title: messages.product,
     links: [
-      { label: "Atualizações", href: sitePath("/atualizacoes/") },
+      { label: messages.updates, href: route("updates") },
       {
-        label: `Baixar o beta ${publicVersion}`,
+        label: `${messages.download} ${publicVersion}`,
         href: releaseUrl,
         external: true,
       },
-      { label: "Código da IDE", href: repositoryUrl, external: true },
+      { label: messages.ideCode, href: repositoryUrl, external: true },
     ],
   },
   {
-    title: "Aprender",
+    title: messages.learn,
     links: [
-      { label: "Guia da IDE", href: sitePath("/aprender/") },
-      { label: "Documentação", href: sitePath("/documentacao/") },
-      { label: "Manual da IDE", href: sitePath("/manual/") },
+      { label: messages.guide, href: route("guide") },
+      { label: messages.docs, href: route("docs") },
+      { label: messages.manual, href: route("manual") },
     ],
   },
   {
-    title: "Comunidade",
+    title: messages.community,
     links: [
-      { label: "Colabore", href: sitePath("/colabore/") },
-      { label: "Quem contribui", href: sitePath("/colabore/#colaboradores") },
+      { label: messages.collaborate, href: route("collaborate") },
+      {
+        label: messages.contributors,
+        href: `${route("collaborate")}#colaboradores`,
+      },
       { label: "Discord", href: discordUrl, external: true },
-      { label: "Sobre este site", href: sitePath("/documentacao/site/") },
-      { label: "Código do site", href: siteRepositoryUrl, external: true },
+      { label: messages.about, href: route("site") },
+      { label: messages.siteCode, href: siteRepositoryUrl, external: true },
     ],
   },
 ];
 ---
 
 <footer class="site-footer">
-  <nav class="shell footer-grid" aria-label="Rodapé">
+  <nav class="shell footer-grid" aria-label={messages.label}>
     <div class="footer-intro">
       <strong>
         Kinein <span>Vectis</span>
       </strong>
-      <p>
-        Uma IDE open source que evolui para se especializar em sistemas
-        embarcados. Experimente e faça parte dessa construção.
-      </p>
+      <p>{messages.intro}</p>
     </div>
     {groups.map((group) => (
       <div class="footer-group">
@@ -77,7 +87,7 @@ const groups = [
   </nav>
   <div class="shell footer-bottom">
     <p>
-      Beta público {publicVersion} para Linux x86_64. A IDE não tem telemetria.
+      {messages.beta} {publicVersion} {messages.platform}
     </p>
   </div>
 </footer>

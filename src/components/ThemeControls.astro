@@ -2,24 +2,20 @@
 import {
   accentChoices,
   themeChoices,
-  type Accent,
   type Theme,
 } from "../scripts/theme-preferences";
+import { defaultLocale, type Locale } from "../i18n/config";
+import { uiFor } from "../i18n/ui";
+
+interface Props {
+  locale?: Locale;
+}
+const { locale = defaultLocale } = Astro.props;
+const messages = uiFor(locale).appearance;
 
 // Rádios nativos: setas trocam a opção e o leitor de tela anuncia o grupo,
 // sem código extra. As amostras de cor herdam o destaque do tema atual pelo
 // data-accent (tokens.css), sem repetir valor de cor aqui.
-const themeLabels: Record<Theme, string> = {
-  system: "Sistema",
-  light: "Claro",
-  dark: "Escuro",
-  warm: "Amber",
-};
-const accentLabels: Record<Accent, string> = {
-  amber: "Âmbar",
-  blue: "Azul",
-  teal: "Verde-azulado",
-};
 const themeIcons: Record<Theme, string> = {
   system:
     "M5 4h14a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zM8 20h8M12 16v4",
@@ -32,11 +28,11 @@ const themeIcons: Record<Theme, string> = {
 
 <details class="appearance">
   <summary>
-    Tema <span aria-hidden="true">⌄</span>
+    {messages.title} <span aria-hidden="true">⌄</span>
   </summary>
   <div class="appearance-panel">
     <fieldset class="appearance-group">
-      <legend class="label">Tema</legend>
+      <legend class="label">{messages.theme}</legend>
       <div class="theme-options">
         {themeChoices.map((theme) => (
           <label class="theme-option">
@@ -44,23 +40,23 @@ const themeIcons: Record<Theme, string> = {
             <svg viewBox="0 0 24 24" aria-hidden="true">
               <path d={themeIcons[theme]} />
             </svg>
-            {themeLabels[theme]}
+            {messages.themes[theme]}
           </label>
         ))}
       </div>
     </fieldset>
     <fieldset class="appearance-group">
-      <legend class="label">Cor de destaque</legend>
+      <legend class="label">{messages.accent}</legend>
       <div class="accent-options">
         {accentChoices.map((accent) => (
           <label class="accent-option">
             <input type="radio" name="accent" value={accent} />
             <span class="swatch" data-accent={accent} aria-hidden="true" />
-            {accentLabels[accent]}
+            {messages.accents[accent]}
           </label>
         ))}
       </div>
     </fieldset>
-    <p>A preferência fica somente neste navegador.</p>
+    <p>{messages.saved}</p>
   </div>
 </details>

@@ -26,6 +26,13 @@
   --stagger: 55ms;
   --header-height: 4rem;
 
+  /* Controles sutis e overlays compartilham a paleta. Sem suporte a blur,
+     a superfície permanece opaca; conteúdo de leitura continua sólido. */
+  --surface-control: var(--surface-soft);
+  --surface-overlay: var(--surface);
+  --border-control: color-mix(in srgb, var(--border) 85%, var(--text));
+  --blur-overlay: 0px;
+
   /* Escalas fluidas (método Utopia): cada valor cresce em linha reta entre
      telas de 360 e 1600 px e para nos dois extremos. Em rem, para respeitar o
      tamanho de fonte escolhido no navegador. */
@@ -255,6 +262,24 @@
     --companion: #754b00;
     --accent-on: #e9e0d2;
     --focus: #08574f;
+  }
+}
+
+@supports (backdrop-filter: blur(1px)) {
+  :root {
+    --surface-control: color-mix(in srgb, var(--surface-soft) 88%, transparent);
+    --surface-overlay: color-mix(in srgb, var(--surface) 94%, transparent);
+    --blur-overlay: 12px;
+  }
+}
+
+@media (prefers-reduced-transparency: reduce),
+  (prefers-contrast: more),
+  (forced-colors: active) {
+  :root {
+    --surface-control: var(--surface-soft);
+    --surface-overlay: var(--surface);
+    --blur-overlay: 0px;
   }
 }
 

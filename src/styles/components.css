@@ -199,12 +199,6 @@
     line-height: 1.25;
     text-align: center;
     text-decoration: none;
-    transition:
-      background-color var(--duration-base) var(--ease-out),
-      border-color var(--duration-base) var(--ease-out),
-      color var(--duration-base) var(--ease-out),
-      box-shadow var(--duration-base) var(--ease-out),
-      transform var(--duration-base) var(--ease-out);
   }
 
   .button:active {
@@ -251,8 +245,8 @@
   }
 
   .button-secondary {
-    border-color: var(--border);
-    background: var(--surface-soft);
+    border-color: var(--border-control);
+    background: var(--surface-control);
     color: var(--text);
   }
 
@@ -262,14 +256,13 @@
   }
 
   .button-quiet {
-    border-color: var(--border);
-    background: var(--surface);
+    background: transparent;
     color: var(--text);
   }
 
   .button-quiet:hover {
-    border-color: var(--accent);
-    background: var(--surface-soft);
+    border-color: var(--border-control);
+    background: var(--surface-control);
     color: var(--text);
   }
 

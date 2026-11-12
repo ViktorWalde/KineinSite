@@ -306,7 +306,7 @@ try {
   await evaluate(
     "document.querySelector('.hero-actions .button-quiet').scrollIntoView({behavior:'instant',block:'center'});document.querySelector('.hero-actions .button-quiet').click()",
   );
-  await waitFor("location.hash==='#desenvolvimento'");
+  await waitFor("location.hash==='#interface'");
   assert.ok(
     await evaluate("Boolean(document.querySelector('.vector-feedback'))"),
     "O efeito não pode impedir a navegação por âncora",

@@ -13,16 +13,18 @@
 
   .appearance summary {
     display: inline-flex;
-    min-height: 2.25rem;
+    max-width: 100%;
+    min-height: 2.75rem;
     align-items: center;
     gap: 0.4rem;
     padding: 0.35rem 0.7rem;
-    border: 1px solid var(--border);
+    border: 1px solid var(--border-control);
     border-radius: var(--radius-md);
+    background: var(--surface-control);
     cursor: pointer;
     font-weight: 600;
     list-style: none;
-    white-space: nowrap;
+    white-space: normal;
     transition:
       border-color var(--duration-fast) ease,
       background-color var(--duration-fast) ease;
@@ -56,10 +58,13 @@
     width: min(19rem, calc(100vw - 2rem));
     gap: var(--space-s);
     padding: 1rem;
-    border: 1px solid var(--border);
+    border: 1px solid var(--border-control);
     border-radius: var(--radius-lg);
+
+    /* Sobre texto e capturas, a leitura do painel pede superfície opaca.
+       Somente a moldura do HUD usa backdrop-filter. */
     background: var(--surface);
-    box-shadow: var(--edge), var(--shadow);
+    box-shadow: var(--edge), var(--shadow-sm);
   }
 
   .appearance[open] .appearance-panel {
@@ -102,6 +107,7 @@
   .accent-option {
     position: relative;
     display: flex;
+    min-height: 2.75rem;
     align-items: center;
     gap: 0.55rem;
     padding: 0.45rem 0.6rem;
@@ -191,7 +197,7 @@
       right: 0;
       left: 0;
       width: auto;
-      max-height: min(70dvh, 24rem);
+      max-height: min(75dvh, 30rem);
       overflow-y: auto;
     }
   }

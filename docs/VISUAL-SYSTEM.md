@@ -1,5 +1,35 @@
 # Padrão visual
 
+## Fundação local — 12 de novembro de 2026
+
+O HUD usa uma moldura arredondada com superfície translúcida seletiva. O
+mantenedor aprovou a prévia visual e autorizou sua publicação em 12 de novembro de 2026.
+O download permanece disponível no celular. Links intermediários quebram em
+linhas; navegação móvel continua usando disclosure nativo. A página ativa
+recebe também uma marca inferior, além da cor.
+
+`--surface-control` representa controles sutis sem blur;
+`--surface-overlay` representa a moldura do header; `--border-control` acompanha
+as cores existentes. `--blur-overlay` vale 12px onde há suporte e zero nas
+alternativas opacas. Sem suporte a backdrop-filter, com transparência reduzida,
+contraste aumentado ou cores forçadas, os tokens conservam superfícies sólidas.
+O painel de aparência permanece opaco: nas capturas, a versão translúcida
+deixava texto do hero perceptível atrás das opções. Não há blur aninhado.
+Documentação, código e cartões continuam sólidos.
+
+As variantes existentes continuam sendo `.button-primary`, `.button-secondary`
+e `.button-quiet`. O secundário usa a superfície sutil e o discreto tem fundo
+transparente em repouso. A transição comum fica em `interaction.css`, com
+160ms para resposta e 100ms para pressionamento. A escala anterior de abas,
+painéis e movimento reduzido foi preservada. Não foram criadas animações novas.
+Os controles do HUD e as opções de aparência têm no mínimo 44px de altura.
+
+`check:experience` inclui `check-ui-browser.mjs`: verifica dez larguras,
+texto a 200%, download, contraste das superfícies compostas sobre preto e branco
+nas 12 paletas, preferências de opacidade e fallback sem o ramo `@supports`.
+Essa última condição é simulada por CSSOM, não uma execução num navegador
+antigo. Não há afirmação de FPS ou ganho de renderização.
+
 O estilo aprovado pelo mantenedor em 8 de outubro de 2026 é a referência para os próximos componentes. A implementação central fica em `src/styles/tokens.css`, `base.css`, `components.css` e `interaction.css`; os estilos de cada área só acrescentam o necessário para seu conteúdo.
 
 ## Texto e espaço

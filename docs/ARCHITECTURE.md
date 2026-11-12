@@ -6,6 +6,18 @@ Astro gera HTML, CSS, JavaScript e imagens estáticos em `dist/`. O GitHub Pages
 
 ## Código e conteúdo
 
+A fundação local de internacionalização fica em `src/i18n/`: configuração de
+idiomas, catálogos tipados de interface, registro de rotas publicadas e datas
+em UTC. `sitePath()` continua sendo a API dos links portugueses e compartilha
+o tratamento de base com o novo resolvedor. Header, navegação, aparência e
+rodapé recebem o idioma do layout. A estratégia e os limites da entrega
+estão em [INTERNATIONALIZATION.md](INTERNATIONALIZATION.md).
+
+`check:i18n` faz parte de `check` e do build. A suíte de experiência inclui
+também o teste do HUD, contraste das superfícies compostas, download em dez
+larguras, texto ampliado e alternativas opacas. O resultado da revisão local
+está em [LOCAL-PREVIEW-2026-11-12.md](LOCAL-PREVIEW-2026-11-12.md).
+
 | Local                            | Responsabilidade                                                                                                                                                                                 |
 | -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `src/pages/`                     | Rotas. Cada página só compõe: importa o layout, os componentes e o CSS da sua funcionalidade.                                                                                                    |

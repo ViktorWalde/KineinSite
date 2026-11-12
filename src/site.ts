@@ -1,3 +1,6 @@
+import { pathWithBase } from "./i18n/routing";
+export { formatDate } from "./i18n/utils";
+
 export const repositoryUrl = "https://github.com/ViktorWalde/KineinVectis";
 
 export type SiteSection =
@@ -21,19 +24,6 @@ export const discordUrl = "https://discord.gg/cWRkUGUmQU";
 export const ideContributionUrl = `${repositoryUrl}/blob/main/CONTRIBUTING.md`;
 export const ideRoadmapUrl = `${repositoryUrl}/blob/main/DocsPublic/roadmaps/40-estado-e-continuidade.md`;
 
-const base = import.meta.env.BASE_URL.replace(/\/$/, "");
-
 export function sitePath(path: `/${string}`): string {
-  return `${base}${path}`;
-}
-
-// Datas exibidas no site, sempre por extenso ("1 de outubro de 2026"). Em UTC
-// porque as datas do conteúdo não têm hora e não podem virar o dia anterior.
-export function formatDate(date: Date): string {
-  return new Intl.DateTimeFormat("pt-BR", {
-    timeZone: "UTC",
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  }).format(date);
+  return pathWithBase(path, import.meta.env.BASE_URL);
 }

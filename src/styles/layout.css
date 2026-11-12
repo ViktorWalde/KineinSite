@@ -1,26 +1,16 @@
-/* Moldura do site: largura, cabeçalho e rodapé. Vem depois de components
-   porque especializa componentes (ex.: o botão de download some no celular). */
+/* Moldura do site: largura, cabeçalho e rodapé. */
 @layer layout {
   .shell {
     width: min(calc(100% - 3rem), var(--content-width));
     margin-inline: auto;
   }
 
-  /* Cabeçalho fixo e translúcido: o conteúdo passa por baixo, desfocado. Sem
-   suporte a backdrop-filter, o fundo fica sólido. */
+  /* Uma única camada de vidro na moldura, com fallback nos tokens. */
   .site-header {
     position: sticky;
     top: 0;
     z-index: 20;
-    border-bottom: 1px solid var(--border);
-    background: color-mix(in srgb, var(--surface) 82%, transparent);
-    backdrop-filter: blur(14px) saturate(150%);
-  }
-
-  @supports not (backdrop-filter: blur(1px)) {
-    .site-header {
-      background: var(--surface);
-    }
+    padding-block: 0.5rem;
   }
 
   .header-inner {
@@ -28,7 +18,14 @@
     display: flex;
     min-height: var(--header-height);
     align-items: center;
-    gap: clamp(0.75rem, 2.5vw, 2rem);
+    flex-wrap: wrap;
+    gap: var(--space-s);
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--border-control);
+    border-radius: var(--radius-xl);
+    background: var(--surface-overlay);
+    box-shadow: var(--edge), var(--shadow-card);
+    backdrop-filter: blur(var(--blur-overlay));
   }
 
   .brand {
@@ -60,36 +57,42 @@
     display: flex;
     min-width: 0;
     align-items: center;
+    flex-wrap: wrap;
     gap: 0.25rem;
-    overflow-x: auto;
-    scrollbar-width: none;
+    padding: 0.25rem;
+  }
+
+  .desktop-links {
+    flex: 1 1 32rem;
   }
 
   .primary-nav a {
     display: inline-flex;
-    min-height: 2.25rem;
+    max-width: 100%;
+    min-height: 2.75rem;
     flex: none;
     align-items: center;
     gap: 0.3rem;
-    padding-inline: 0.75rem;
+    padding-inline: 0.65rem;
     border-radius: var(--radius-md);
     color: var(--muted);
     font-size: var(--text-sm);
     font-weight: 600;
     text-decoration: none;
-    white-space: nowrap;
+    white-space: normal;
     transition:
       background-color var(--duration-fast) ease,
       color var(--duration-fast) ease;
   }
 
   .primary-nav a:hover {
-    background: var(--surface-soft);
+    background: var(--surface-control);
     color: var(--text);
   }
 
   .primary-nav a[aria-current="page"] {
     background: color-mix(in srgb, var(--accent) 15%, transparent);
+    box-shadow: inset 0 -2px 0 var(--accent);
     color: var(--text);
   }
 
@@ -107,6 +110,12 @@
     align-items: center;
     gap: 0.6rem;
     margin-inline-start: auto;
+    padding-inline-start: var(--space-s);
+    border-inline-start: 1px solid var(--border);
+  }
+
+  .header-download {
+    min-height: 2.75rem;
   }
 
   .mobile-navigation {
@@ -182,35 +191,23 @@
     margin: 0;
   }
 
-  @media (pointer: coarse) {
-    .primary-nav a {
-      min-height: 2.75rem;
-    }
-  }
-
-  /* Abaixo de 75rem (1200 px com a fonte padrão) o menu não cabe ao lado da
-     marca e das ferramentas: vai para uma segunda linha, que rola na
-     horizontal em vez de quebrar. O cabeçalho continua fixo, mais alto, e as
-     âncoras ganham mais recuo para o título não ficar embaixo dele. */
+  /* Em resoluções intermediárias, links quebram numa linha própria.
+     Nada fica escondido por rolagem horizontal ou máscara. */
   @media (width <= 75rem) {
     html {
-      scroll-padding-top: calc(var(--header-height) + 3rem);
+      scroll-padding-top: calc(var(--header-height) + 5rem);
     }
 
     .header-inner {
       flex-wrap: wrap;
-      row-gap: 0;
-      padding-block-start: 0.4rem;
+      row-gap: var(--space-xs);
     }
 
     .primary-nav {
       order: 3;
-      width: calc(100% + 0.75rem);
-      margin-inline-start: -0.75rem;
-      padding-block: 0.15rem 0.5rem;
-      overflow-x: auto;
-      mask-image: linear-gradient(90deg, #000 calc(100% - 2rem), transparent);
-      scrollbar-width: none;
+      width: 100%;
+      border-block-start: 1px solid var(--border);
+      padding-block-start: var(--space-xs);
     }
   }
 
@@ -233,7 +230,7 @@
       display: block;
       order: 4;
       width: 100%;
-      margin-block: var(--space-xs);
+      margin: 0;
     }
 
     .mobile-navigation > summary {
@@ -245,7 +242,7 @@
       padding: var(--space-xs) var(--space-s);
       border: 1px solid var(--border);
       border-radius: var(--radius-md);
-      background: var(--surface);
+      background: var(--surface-control);
       font-size: var(--text-sm);
       font-weight: 650;
       list-style: none;
@@ -274,9 +271,8 @@
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: var(--space-xs);
       padding-block: var(--space-s) var(--space-xs);
+      border: 0;
       margin: 0;
-      overflow: visible;
-      mask-image: none;
     }
 
     .mobile-links a {
@@ -299,9 +295,16 @@
       font-size: var(--text-sm);
     }
 
-    /* No celular o download permanece na abertura da página inicial. */
-    .header-tools .header-download {
-      display: none;
+    .header-tools {
+      width: 100%;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      padding-inline-start: 0;
+      border-inline-start: 0;
+    }
+
+    .header-tools > * {
+      max-width: 100%;
     }
   }
 }
