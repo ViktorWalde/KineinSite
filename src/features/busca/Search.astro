@@ -1,0 +1,74 @@
+---
+import type { Locale } from "../../i18n/config";
+import { resolveRoute } from "../../i18n/routing";
+import { uiFor } from "../../i18n/ui";
+import "./search.css";
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const messages = uiFor(locale);
+const text = messages.search;
+---
+
+<dialog
+  id="site-search"
+  class="search-dialog"
+  aria-labelledby="search-title"
+  aria-describedby="search-hint"
+>
+  <div class="search-heading">
+    <h1 id="search-title">{text.title}</h1>
+    <button class="search-close" type="button" aria-label={text.close}>
+      ×
+    </button>
+  </div>
+  <div class="search-content">
+    <label for="search-query">{text.label}</label>
+    <input
+      id="search-query"
+      type="search"
+      placeholder={text.placeholder}
+      maxlength="200"
+      autocomplete="off"
+      spellcheck="false"
+      enterkeyhint="search"
+      aria-controls="search-results"
+      aria-describedby="search-hint"
+    />
+    <p id="search-hint">{text.hint}</p>
+    <p
+      class="search-status"
+      role="status"
+      aria-live="polite"
+      aria-atomic="true"
+    >
+      {text.initial}
+    </p>
+    <button
+      class="button button-secondary button-small search-retry"
+      type="button"
+      hidden
+    >
+      {text.retry}
+    </button>
+    <ol
+      id="search-results"
+      class="search-results"
+      aria-label={text.results}
+    ></ol>
+  </div>
+  <div class="search-footer">
+    <a href={resolveRoute("docs", locale, import.meta.env.BASE_URL).href}>
+      {messages.nav.docs}
+    </a>
+    <a href={resolveRoute("manual", locale, import.meta.env.BASE_URL).href}>
+      {messages.nav.manual}
+    </a>
+    <small>{text.shortcut}</small>
+  </div>
+</dialog>
+
+<script>
+  import "./search";
+</script>

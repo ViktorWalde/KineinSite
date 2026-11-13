@@ -30,6 +30,7 @@ const releaseUrl = releaseUrlFor(entry.data.tag);
   current="updates"
   title={`Versão ${entry.data.version}`}
   description={entry.data.summary}
+  search={{ version: entry.data.version }}
 >
   <div class="update-shell shell">
     <nav class="update-breadcrumb" aria-label="Caminho">

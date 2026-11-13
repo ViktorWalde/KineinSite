@@ -1,4 +1,5 @@
 import { defaultLocale, isLocale, type Locale } from "./config.ts";
+import { searchUi } from "./search.ts";
 
 const ptBR = {
   skip: "Pular para o conteúdo",
@@ -7,6 +8,7 @@ const ptBR = {
   mobileNavigation: "Navegação móvel",
   explore: "Explorar o site",
   download: "Baixar",
+  search: searchUi["pt-BR"],
   article: { outline: "Neste artigo" },
   code: {
     copy: "Copiar",
@@ -88,6 +90,7 @@ const enUS: typeof ptBR = {
   mobileNavigation: "Mobile navigation",
   explore: "Explore the site",
   download: "Download",
+  search: searchUi["en-US"],
   article: { outline: "On this page" },
   code: {
     copy: "Copy",

@@ -70,12 +70,12 @@ aprovação visual continua pendente. Evidências em [A-PRODUTO.md](A-PRODUTO.md
 
 ## B — Documentação
 
-| ID   | Requisito e estado                                                | Evidência/critério de conclusão                                                                                                              |
-| ---- | ----------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| B-01 | Hierarquia, índice móvel e seção atual — **preservado e corrigido em B** | Índices de documentação/manual preservados; marcador considera o scroll padding da HUD com texto ampliado; teclado, foco e fallback sem JS conferidos |
-| B-02 | Percursos, breadcrumbs e índice contextual — **implementado em B** | Índice gerado dos 100 headings reais de 13 artigos; breadcrumbs e percursos preservados; âncoras livres da HUD, sem lista editorial paralela |
-| B-03 | Código legível e cópia confirmada — **implementado em B** | Catálogo tipado pt-BR/en-US; Clipboard real, estados pendente/sucesso/falha, texto íntegro, rolagem por teclado e foco visível; realce adicional não necessário |
-| B-04 | Manual oficial rastreável — **preservado e revalidado em B** | Tag v0.3.5, commit e hash íntegros; nenhuma mudança da fonte, versão, apresentação ou índice oficial |
+| ID   | Requisito e estado                                                       | Evidência/critério de conclusão                                                                                                                                 |
+| ---- | ------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| B-01 | Hierarquia, índice móvel e seção atual — **preservado e corrigido em B** | Índices de documentação/manual preservados; marcador considera o scroll padding da HUD com texto ampliado; teclado, foco e fallback sem JS conferidos           |
+| B-02 | Percursos, breadcrumbs e índice contextual — **implementado em B**       | Índice gerado dos 100 headings reais de 13 artigos; breadcrumbs e percursos preservados; âncoras livres da HUD, sem lista editorial paralela                    |
+| B-03 | Código legível e cópia confirmada — **implementado em B**                | Catálogo tipado pt-BR/en-US; Clipboard real, estados pendente/sucesso/falha, texto íntegro, rolagem por teclado e foco visível; realce adicional não necessário |
+| B-04 | Manual oficial rastreável — **preservado e revalidado em B**             | Tag v0.3.5, commit e hash íntegros; nenhuma mudança da fonte, versão, apresentação ou índice oficial                                                            |
 
 Não adicionar outro filtro ao manual ou outro índice mantido à mão. Uma
 eventual divisão em páginas é uma decisão própria, sustentada por benefício
@@ -92,15 +92,19 @@ prova de repetição pendente estão registradas em C0, preservando o aceite vis
 
 ## C — Busca global
 
-| ID   | Requisito e estado                                    | Evidência/critério de conclusão                                                                                                  |
-| ---- | ----------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| C-01 | Índice do conteúdo efetivamente gerado — **provado isoladamente em C0; integração pendente em C1** | 24 páginas/197 headings do HTML real, 404 excluída, sem navegação duplicada; idioma, tipo, versão e origem identificados |
-| C-02 | UI funcional na HUD — **pendente**                    | Foco inicial, pesquisa imediata, resultados, vazio, erro, teclado/toque, Escape e retorno de foco; consultas não saem do site    |
-| C-03 | Base, CSP, carregamento e idioma — **comprovado em C0 com worker; preservação na adoção exigida em C1** | Duas bases, bytes e rede medidos, CSP intacta, idioma/filtros/falhas conferidos; sem worker, C1 deve apresentar indisponibilidade |
+| ID   | Requisito e estado                                                                            | Evidência/critério de conclusão                                                                                                   |
+| ---- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| C-01 | Índice do conteúdo efetivamente gerado — **implementado em C1; validação técnica registrada** | 24 páginas/197 headings do HTML real, 404 excluída, sem navegação duplicada; idioma, tipo, versão e origem identificados          |
+| C-02 | UI funcional na HUD — **implementada em C1; avaliação visual separada**                       | Foco inicial, pesquisa imediata, resultados, vazio, erro, teclado/toque, Escape e retorno de foco; consultas não saem do site     |
+| C-03 | Base, CSP, carregamento e idioma — **implementado em C1; duas bases e CSP preservadas**       | Duas bases, bytes e rede medidos, CSP intacta, idioma/filtros/falhas conferidos; sem worker, C1 deve apresentar indisponibilidade |
 
 Pagefind 1.6.0 passou na prova real de C0 usando o worker de mesma origem,
-conforme [C0-BUSCA.md](C0-BUSCA.md). Não é dependência adotada nem busca
-publicada. C1 deve preservar o resultado e cobrir seus estados de UI.
+conforme [C0-BUSCA.md](C0-BUSCA.md). C1 adota a versão comprovada e integra 24 páginas do HTML real no build,
+com metadados, exclusões e UI na HUD. [C1-BUSCA.md](C1-BUSCA.md) registra os
+estados, concorrência, falhas/retry, seis larguras, três temas e texto ampliado
+nas duas bases, além do Firefox disponível. Safari, toque físico e leitor de
+tela continuam sem prova. Publicação desta entrega foi explicitamente autorizada;
+isso não equivale a aprovação visual de C1.
 Ctrl/Cmd+K só aparece após C-02 funcionar e deve
 respeitar campos editáveis, composição de texto e atalhos do navegador.
 

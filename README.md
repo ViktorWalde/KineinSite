@@ -8,7 +8,7 @@ A área **Colabore** consulta dados públicos diretamente na API do GitHub e gua
 
 ## Estado atual
 
-O planejamento vigente da modernização está em [docs/modernizacao/README.md](docs/modernizacao/README.md), com auditoria, decisões de arquitetura, requisitos e critérios de validação. A etapa atual prioriza engenharia antes de novas alterações visuais. HUD 2.0, busca global e conteúdo inglês ainda não estão implementados. As melhorias locais anteriores de página inicial e documentação permanecem em avaliação.
+O planejamento vigente da modernização está em [docs/modernizacao/README.md](docs/modernizacao/README.md), com auditoria, decisões de arquitetura, requisitos e critérios de validação. A etapa atual é implementação incremental: HUD 2.0, hero com captura real, documentação e busca global estão implementados. B foi aprovado pelo mantenedor; H2/A e a UI de C1 têm avaliação visual separada. Conteúdo inglês e seletor de idioma permanecem pendentes. Evidências e limites estão nos registros de cada pacote.
 
 A área Colabore, a nova apresentação da página inicial e o polimento das interações estão implementados. A revisão de 24 de outubro dá à abertura um tom mais comercial, com convites para experimentar e participar, e apresenta a evolução da IDE com foco em sistemas embarcados. Estado e validações dessa entrega em [docs/LOCAL-PREVIEW-2026-10-24.md](docs/LOCAL-PREVIEW-2026-10-24.md).
 

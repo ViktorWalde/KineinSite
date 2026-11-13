@@ -7,11 +7,19 @@ Este documento descreve **o site**, não o cronograma de recursos da Kinein Vect
 O índice de execução é [modernizacao/README.md](modernizacao/README.md).
 Ele reúne baseline, requisitos rastreáveis, decisões, dependências e critérios
 de teste para HUD, início, documentação, busca, downloads, comunidade e i18n.
-A etapa atual é engenharia e documentação. A próxima unidade é definir o
-modelo de navegação da HUD e seus contratos de foco antes de alterar a interface.
+H1 foi documental; H2, A, B e C1 estão implementados, com prova de busca em C0.
+A próxima unidade é D, download e instalação, após o gate de C1.
 O backlog editorial abaixo continua como referência, sem substituir essa sequência.
 
 ## Entregue
+
+### Busca global — 13 de novembro de 2026
+
+C1 adota Pagefind 1.6.0 após a prova C0: índice do HTML público, consulta local
+com worker da mesma origem, diálogo na HUD, estados reais e teclado/foco.
+Registros e limites em [C1-BUSCA.md](modernizacao/C1-BUSCA.md). O mantenedor
+autorizou publicar esta entrega ao finalizar o escopo; isso não constitui
+aprovação visual de todos os pacotes nem autorização para os próximos.
 
 ### Rodada de UI em avaliação local — 12 de novembro de 2026
 

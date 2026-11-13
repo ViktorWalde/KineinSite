@@ -10,6 +10,9 @@ function initializeNavigation(header: HTMLElement): void {
   if (!mobile || !appearance) return;
   const groups = [...header.querySelectorAll<HTMLDetailsElement>(".hud-group")];
   const panels = [...groups, mobile, appearance];
+  header.addEventListener("kinein:search-open", () => {
+    for (const panel of panels) close(panel);
+  });
   const trigger = (panel: HTMLDetailsElement) =>
     panel.querySelector<HTMLElement>(":scope > summary");
   function close(panel: HTMLDetailsElement, restore = false): void {

@@ -1,0 +1,212 @@
+.search-trigger {
+  display: inline-flex;
+  min-height: 2.75rem;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.65rem;
+  border: 1px solid var(--border-control);
+  border-radius: var(--radius-md);
+  background: var(--surface-control);
+  color: var(--text);
+  cursor: pointer;
+  font: 600 var(--text-sm) / 1.4 var(--font-sans);
+}
+
+.search-trigger[hidden],
+.search-dialog [hidden] {
+  display: none;
+}
+
+.search-trigger svg {
+  flex: none;
+  fill: none;
+  stroke: currentcolor;
+  stroke-width: 1.8;
+}
+
+.search-dialog {
+  position: fixed;
+  inset-block: 5dvh auto;
+  width: min(48rem, calc(100% - 2rem));
+  max-height: 90dvh;
+  overflow-y: auto;
+  padding: 0;
+  border: 1px solid var(--border-control);
+  border-radius: var(--radius-lg);
+  margin-inline: auto;
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
+  color: var(--text);
+}
+
+.search-dialog::backdrop {
+  background: rgb(0 0 0 / 65%);
+}
+
+.search-heading {
+  position: sticky;
+  z-index: 1;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-s);
+  padding: var(--space-s) var(--space-m);
+  border-block-end: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.search-heading h1 {
+  min-width: 0;
+  margin: 0;
+  font-size: var(--text-xl);
+  overflow-wrap: anywhere;
+}
+
+.search-close {
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  flex: none;
+  border: 1px solid var(--border-control);
+  border-radius: var(--radius-md);
+  background: var(--surface-control);
+  color: var(--text);
+  cursor: pointer;
+  font-size: var(--text-xl);
+}
+
+.search-content {
+  padding: var(--space-m);
+}
+
+.search-content label {
+  display: block;
+  margin-block-end: var(--space-xs);
+  font-size: var(--text-sm);
+  font-weight: 650;
+}
+
+.search-content input {
+  width: 100%;
+  min-width: 0;
+  min-height: 2.75rem;
+  padding: var(--space-s);
+  border: 1px solid var(--border-control);
+  border-radius: var(--radius-md);
+  background: var(--surface-control);
+  color: var(--text);
+  font: inherit;
+}
+
+.search-content input::placeholder {
+  color: var(--muted);
+  opacity: 1;
+}
+
+.search-status,
+#search-hint,
+.search-excerpt,
+.search-result-meta {
+  color: var(--muted);
+  font-size: var(--text-sm);
+}
+
+.search-results {
+  display: grid;
+  gap: var(--space-s);
+  padding: 0;
+  margin: var(--space-m) 0 0;
+  list-style: none;
+}
+
+.search-result {
+  padding: var(--space-m);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+
+.search-result p {
+  margin-block: 0 var(--space-xs);
+}
+
+.search-result-title {
+  display: block;
+  padding-block: var(--space-xs);
+  color: var(--text);
+  font-size: var(--text-lg);
+  font-weight: 650;
+  text-decoration-color: var(--accent);
+}
+
+.search-sections {
+  display: grid;
+  margin-block-start: var(--space-s);
+}
+
+.search-sections a {
+  display: flex;
+  min-height: 2.75rem;
+  align-items: center;
+  color: var(--accent);
+  font-size: var(--text-sm);
+}
+
+.search-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-s) var(--space-m);
+  padding: var(--space-s) var(--space-m);
+  border-block-start: 1px solid var(--border);
+}
+
+.search-footer a {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  color: var(--accent);
+}
+
+.search-footer small {
+  color: var(--muted);
+}
+
+@media (width <= 35rem) {
+  .search-dialog {
+    width: calc(100% - 1rem);
+  }
+
+  .search-heading,
+  .search-content,
+  .search-footer {
+    padding: var(--space-s);
+  }
+
+  .search-close {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .search-trigger-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .search-trigger {
+    min-width: 2.75rem;
+    margin-inline-start: auto;
+  }
+}
+
+@media (height <= 30rem) {
+  .search-heading,
+  .search-content {
+    padding-block: var(--space-xs);
+  }
+}

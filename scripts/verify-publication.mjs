@@ -38,7 +38,24 @@ if (!ready)
 const assets = (await readdir(path.join(directory, "_astro"))).filter((name) =>
   /\.(css|js|svg)$/.test(name),
 );
-for (const file of ["index.html", ...assets.map((name) => `_astro/${name}`)]) {
+const searchAssets = (
+  await readdir(path.join(directory, "pagefind"), {
+    recursive: true,
+    withFileTypes: true,
+  })
+)
+  .filter((entry) => entry.isFile())
+  .map((entry) =>
+    path
+      .relative(directory, path.join(entry.parentPath, entry.name))
+      .split(path.sep)
+      .join("/"),
+  );
+for (const file of [
+  "index.html",
+  ...assets.map((name) => `_astro/${name}`),
+  ...searchAssets,
+]) {
   const local = await readFile(path.join(directory, file));
   const response = await fetch(new URL(`${file}?version=${commit}`, base), {
     signal: AbortSignal.timeout(15000),
@@ -51,5 +68,5 @@ for (const file of ["index.html", ...assets.map((name) => `_astro/${name}`)]) {
   }
 }
 console.info(
-  `Pages confirmado: ${commit}; HTML inicial, CSS, JavaScript e SVG conferidos.`,
+  `Pages confirmado: ${commit}; HTML inicial, CSS, JavaScript, SVG e ${searchAssets.length} arquivos da busca conferidos.`,
 );

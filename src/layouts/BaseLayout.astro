@@ -5,11 +5,16 @@ import iconSource from "../../assets/icon-amber.png";
 import PageBackground from "../components/PageBackground.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import SiteHeader from "../components/SiteHeader.astro";
+import Search from "../features/busca/Search.astro";
 import { themeBootValues } from "../scripts/theme-preferences";
 import type { SiteSection } from "../site";
 import { locales } from "../i18n/config";
 import { equivalentRoutes, localeFromPath } from "../i18n/routing";
 import { uiFor } from "../i18n/ui";
+import {
+  searchMetadata,
+  type SearchMetadata,
+} from "../features/busca/metadata";
 import "../styles/tokens.css";
 import "../styles/base.css";
 import "../styles/background.css";
@@ -28,11 +33,22 @@ interface Props {
   // Páginas que não devem ser indexadas nem ter endereço canônico (a 404 é
   // servida em qualquer caminho inexistente).
   noindex?: boolean;
+  search?: SearchMetadata;
 }
 
-const { title, description, current, noindex = false } = Astro.props;
+const {
+  title,
+  description,
+  current,
+  noindex = false,
+  search = {},
+} = Astro.props;
 const locale = localeFromPath(Astro.url.pathname, import.meta.env.BASE_URL);
 const messages = uiFor(locale);
+const searchMeta = searchMetadata(current, locale, search);
+const searchKeys = Object.keys(searchMeta)
+  .map((key) => `${key}[data-search-${key}]`)
+  .join(", ");
 const equivalents = equivalentRoutes(
   Astro.url.pathname,
   import.meta.env.BASE_URL,
@@ -133,10 +149,26 @@ const imageUrl = Astro.site ? new URL(shareImage.src, Astro.site) : undefined;
       {messages.skip}
     </a>
     <SiteHeader current={current} locale={locale} />
-    <main id="conteudo">
+    <main
+      id="conteudo"
+      data-pagefind-body={!noindex ? true : undefined}
+      data-pagefind-meta={!noindex ? searchKeys : undefined}
+      data-pagefind-filter={
+        !noindex
+          ? "type[data-search-type], language[data-search-language]"
+          : undefined
+      }
+      data-search-type={searchMeta.type}
+      data-search-language={searchMeta.language}
+      data-search-version={searchMeta.version}
+      data-search-status={searchMeta.status}
+      data-search-source={searchMeta.source}
+      data-search-revision={searchMeta.revision}
+    >
       <slot />
     </main>
     <SiteFooter locale={locale} />
+    <Search locale={locale} />
     <script src="../scripts/theme.ts"></script>
     <script src="../features/flow/visibility.ts"></script>
     <script src="../features/flow/feedback.ts"></script>

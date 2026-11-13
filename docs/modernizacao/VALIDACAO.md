@@ -254,3 +254,52 @@ Preservar `check:browser` e `check:experience` e executá-los ao alterar o
 harness compartilhado. A UI de C1 ainda exige teclado/foco, estados,
 concorrência, seis larguras, texto ampliado, temas e alternativa sem JS.
 Resultados e limites reais em [C0-BUSCA.md](C0-BUSCA.md).
+
+## Reprodução de C1
+
+C1 fixa `pagefind@1.6.0` como dependência de desenvolvimento. `npm ci
+--ignore-scripts` restaura o lockfile; o build usa a API nativa, sem browser.
+O comando de busca está incluído no fim de `check:experience`; Firefox é um
+gate complementar opt-in que usa geckodriver/Firefox já disponíveis, sem
+instalar outra suíte. `CHROME_BIN` aponta ao navegador existente.
+
+```bash
+npm run build:pages
+CHROME_BIN=/caminho/do/chrome npm run check:browser
+CHROME_BIN=/caminho/do/chrome npm run check:experience
+CHROME_BIN=/caminho/do/chrome npm run check:search:firefox
+npm run check:examples
+ASTRO_TELEMETRY_DISABLED=1 ./node_modules/.bin/astro build --outDir test-results/c1-2026-11-13/root-dist
+KINEIN_TEST_DIST=test-results/c1-2026-11-13/root-dist npm run build:search
+KINEIN_TEST_DIST=test-results/c1-2026-11-13/root-dist npm run check:search-index
+./node_modules/.bin/html-validate 'test-results/c1-2026-11-13/root-dist/**/*.html' --max-warnings 0
+KINEIN_TEST_BASE=/ KINEIN_TEST_DIST=test-results/c1-2026-11-13/root-dist CHROME_BIN=/caminho/do/chrome npm run check:search
+KINEIN_C0_OUTPUT=test-results/c1-2026-11-13/c0-pages KINEIN_PAGEFIND_DIR="$PWD/node_modules/pagefind" CHROME_BIN=/caminho/do/chrome npm run check:search-proof
+KINEIN_TEST_BASE=/ KINEIN_TEST_DIST=test-results/c1-2026-11-13/root-dist KINEIN_C0_OUTPUT=test-results/c1-2026-11-13/c0-root KINEIN_PAGEFIND_DIR="$PWD/node_modules/pagefind" CHROME_BIN=/caminho/do/chrome npm run check:search-proof
+```
+
+A instalação temporária descrita em C0 é o procedimento histórico anterior à
+adoção. Na reexecução de C1 usa-se o pacote fixado do checkout e outro diretório
+de evidências, preservando C0. Não executar builds que substituam `dist/`
+durante uma suíte que o consome. Os artefatos desta rodada são ignorados e
+não acompanham um clone novo.
+
+`check:search-index` confere corpus, exclusões, idioma, versão, origem do
+manual e estado da prévia. `check:search` usa índice e worker reais: seis
+consultas, URLs/IDs existentes, três temas, seis larguras, texto a 200%,
+janela baixa, ausência de JS, teclado/foco, composição, outra modal, respostas
+antigas e falhas de módulo/WASM com retry. A resposta antiga é retida no
+worker real e liberada após o resultado mais recente. Não trocar por mocks
+de ranking ou de resultados. Requisições do worker e falhas deliberadas
+ficam no relatório; erros normais devem continuar vazios.
+
+Os seletores de anúncio de cópia das suítes anteriores identificam a região
+visualmente oculta de B, pois o diálogo de busca possui outro `aria-live`.
+Preservam as mesmas verificações de conteúdo, sucesso/falha, foco e repetição.
+O fallback de H2 verifica o controle de busca real oculto sem JS.
+
+Antes de publicar, executar o fluxo do repositório com compiladores disponíveis
+(C/C++, Rust edition 2024 e Python). A conferência pública agora compara todos
+os arquivos de `pagefind/` com o build, além do HTML e assets existentes.
+Autorização de publicação é específica; o pedido explícito desta sessão cobre
+a entrega C1. Resultados e limites em [C1-BUSCA.md](C1-BUSCA.md).

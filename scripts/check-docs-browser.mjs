@@ -246,6 +246,7 @@ try {
     assert.ok(await evaluate("document.activeElement.matches('.code-copy')"));
     consumers.push(route);
   }
+  // Conferir o anúncio da cópia, sem confundi-lo com o status da busca global.
   // Sem publicar rota inglesa: fixture troca apenas lang antes dos módulos.
   const fixture = await send("Page.addScriptToEvaluateOnNewDocument", {
     source: `const observer=new MutationObserver(()=>{if(document.documentElement?.lang){document.documentElement.lang='en-US';observer.disconnect();}});observer.observe(document,{childList:true,subtree:true,attributes:true,attributeFilter:['lang']});`,
@@ -271,7 +272,7 @@ try {
     );
     assert.ok(
       await evaluate(
-        "document.querySelector('.code-copy').getAttribute('aria-disabled')==='true' && !document.querySelector('.code-copy').dataset.state && !document.querySelector('[aria-live=polite]').textContent",
+        "document.querySelector('.code-copy').getAttribute('aria-disabled')==='true' && !document.querySelector('.code-copy').dataset.state && !document.querySelector('.visually-hidden[aria-live=polite]').textContent",
       ),
     );
     await evaluate(
@@ -288,7 +289,7 @@ try {
     );
     assert.equal(
       await evaluate(
-        "document.querySelector('[aria-live=polite]').textContent",
+        "document.querySelector('.visually-hidden[aria-live=polite]').textContent",
       ),
       messages.success,
     );
@@ -307,7 +308,7 @@ try {
     );
     assert.equal(
       await evaluate(
-        "document.querySelector('[aria-live=polite]').textContent",
+        "document.querySelector('.visually-hidden[aria-live=polite]').textContent",
       ),
       messages.failure,
     );

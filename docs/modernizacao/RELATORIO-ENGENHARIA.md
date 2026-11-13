@@ -5,11 +5,11 @@
 Especificações consolidadas em um plano incremental, confrontadas com a árvore
 local. O fechamento inicial foi documental. As seções 12–14 registram a continuidade:
 H1 documental, H2 funcional e A implementados/validados localmente. A seção 16
-registra B implementado e validado em 13 de novembro de 2026. C0 e demais
-pacotes continuam pendentes. A seção 17 registra a aprovação de B e a
+registra B implementado e validado em 13 de novembro de 2026. A seção 17 registra a aprovação de B e a
 autorização de seu commit local; a avaliação e o polimento de H2/A permanecem separados.
 C0 foi executado depois desse commit, conforme a seção 18; sua decisão técnica
-não significa que a busca já esteja instalada no produto.
+foi preservada na adoção de C1, descrita na seção 20. D e os pacotes seguintes
+continuam pendentes.
 
 ## 2. Problemas identificados
 
@@ -336,3 +336,67 @@ Relatório técnico: `http://127.0.0.1:4322/`. Site local:
 `http://127.0.0.1:4321/KineinSite/`. Ambos responderam HTTP 200. A busca ainda
 não tem interface no produto; C1 permanece como próxima unidade. Não houve
 push, deploy ou publicação, nem aprovação visual presumida de C1.
+
+## 20. Execução C1 — Busca global funcional
+
+Entrada: `ef1cba8`, branch `main`, árvore limpa. Implementação e evidências em
+[C1-BUSCA.md](C1-BUSCA.md). Pagefind 1.6.0 foi adotado após a prova C0,
+com API nativa no build, metadados dos layouts/dados reais e UI própria na
+HUD. São 24 páginas públicas entre 25 HTMLs; bundle de busca com 35 arquivos
+e 376.518 bytes. O build não depende de browser e a CSP não mudou.
+
+A UI pesquisa por worker de mesma origem, sob demanda, com estados reais,
+resultados e seções locais, vazio/erro/retry, proteção contra respostas
+antigas, APIs seguras e teclado/foco. Sem JS o controle fica oculto; sem
+worker utilizável há indisponibilidade explícita e links nativos. Não há
+seletor de idioma ou tradução nova. H2/A/B, manual, índices e percursos
+foram preservados. O conteúdo do manual, a configuração da CSP e os
+workflows coincidem com a entrada; só o lockfile recebe a adoção comprovada.
+
+O gate encontrou e corrigiu base de módulo sem barra final, fechamento
+nativo tardio após reabertura, retorno de foco que podia interferir com
+edição, ciclo completo de Tab e campo fora da janela baixa com fonte 200%.
+Os testes anteriores de cópia agora identificam seu próprio anúncio, pois
+o novo diálogo também tem `aria-live`; não houve redução de cobertura.
+O fallback da HUD confere o controle real de busca oculto sem JS.
+
+Build Pages, `check:browser`, `check:experience` e exemplos aprovados. A busca
+passou em 36 cenários por base, com seis larguras, três temas e texto 100/200%,
+URLs/âncoras reais, teclado, foco, concorrência e falhas/retry. A resposta
+antiga de CMake é liberada pelo worker real após Python já aparecer; não há
+mocks de ranking. Reexecutada C0 nas duas bases sem sobrescrever seu histórico:
+24 páginas/197 headings e a mesma decisão sobre worker/CSP. Firefox 158
+passou com índice real, digitação, âncoras, texto ampliado, tema e foco.
+
+As suítes integradas preservam 252 cenários da HUD, 36 de A e 72 de B,
+além dos testes anteriores de mídia, tema, movimento e comunidade. Há três
+hints do boot de tema e oito avisos informativos de arquitetura preexistentes,
+sem aumentar tolerâncias. C/C++, Rust, Python e telemetria tiveram exemplos,
+exercícios e casos previstos executados antes da publicação. Rust foi
+provisionado temporariamente fora do checkout, sem configuração global.
+
+Manifesto final: 254 arquivos, 227 preservados, 15 alterados, 12 novos e
+nenhuma exclusão. Hash e algoritmo no registro C1. Artefatos ignorados em
+`test-results/c1-2026-11-13/`. Capturas candidatas foram inspecionadas; isso
+não equivale à aprovação visual do mantenedor. Safari, leitor de tela físico,
+toque físico e zoom real permanecem sem prova.
+
+## 21. Autorização de publicação desta entrega
+
+Durante C1, o mantenedor pediu explicitamente: “quando finalizar o escopo pode
+subir a versao atual do site”. A autorização cobre o commit/push e o fluxo
+existente de publicação desta entrega, incluindo B/C0 locais preservados.
+Não equivale à aprovação visual de H2/A/C1 nem a envio dos próximos pacotes.
+
+O fluxo é `scripts/publicar-pages.sh`: exemplos, build Pages, navegador,
+commit de artefato em `gh-pages` e confirmação pública do commit de origem.
+`verify-publication.mjs` agora compara também todos os arquivos de busca,
+inclusive worker/WASM/fragmentos, com o build local. A evidência operacional
+é registrada em `test-results/c1-2026-11-13/publication.log` e no manifesto
+`site-version.json` público, separada deste fechamento técnico. Prévia local:
+`http://127.0.0.1:4321/KineinSite/`. Destino autorizado:
+`https://viktorwalde.github.io/KineinSite/`.
+
+Próxima unidade: D, download e instalação, com conferência das fontes oficiais.
+E, F0/F1 e G continuam pendentes. Polimento visual de H2/A permanece separado;
+B preserva sua aprovação anterior.

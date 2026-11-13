@@ -18,7 +18,9 @@
     "check:html": "html-validate 'dist/**/*.html' --max-warnings 0",
     "check:links": "node scripts/check-links.mjs",
     "check": "npm run check:types && npm run check:lint && npm run check:css && npm run check:architecture && npm run check:collaboration && npm run check:i18n && npm run check:contrast && npm run check:manual && npm run check:format",
-    "build": "npm run check && ASTRO_TELEMETRY_DISABLED=1 astro build && npm run check:html && npm run check:links && npm run check:security",
+    "build": "npm run check && ASTRO_TELEMETRY_DISABLED=1 astro build && npm run build:search && npm run check:search-index && npm run check:html && npm run check:links && npm run check:security",
+    "build:search": "node scripts/build-search.mjs",
+    "check:search-index": "node scripts/check-search-index.mjs",
     "build:pages": "KINEIN_PAGES_BUILD=1 npm run build",
     "check:security": "node scripts/check-html-security.mjs",
     "check:contrast": "node scripts/check-contrast.mjs",
@@ -26,7 +28,9 @@
     "check:examples": "node scripts/check-examples.mjs",
     "check:search-proof": "node scripts/probe-search.mjs && node scripts/probe-search-browser.mjs",
     "check:browser": "node scripts/check-browser.mjs && node scripts/check-collaboration-browser.mjs",
-    "check:experience": "node scripts/check-navigation-browser.mjs && node scripts/check-hud-browser.mjs && node scripts/check-collaboration-browser.mjs && node scripts/check-motion-browser.mjs && node scripts/check-flow-browser.mjs && node scripts/check-ui-browser.mjs && node scripts/check-content-browser.mjs && node scripts/check-product-browser.mjs && node scripts/check-docs-browser.mjs"
+    "check:experience": "node scripts/check-navigation-browser.mjs && node scripts/check-hud-browser.mjs && node scripts/check-collaboration-browser.mjs && node scripts/check-motion-browser.mjs && node scripts/check-flow-browser.mjs && node scripts/check-ui-browser.mjs && node scripts/check-content-browser.mjs && node scripts/check-product-browser.mjs && node scripts/check-docs-browser.mjs && npm run check:search",
+    "check:search": "node scripts/check-search-browser.mjs",
+    "check:search:firefox": "node scripts/check-search-firefox.mjs"
   },
   "devDependencies": {
     "@astrojs/check": "0.9.10",
@@ -35,6 +39,7 @@
     "eslint": "10.11.0",
     "eslint-plugin-astro": "3.2.1",
     "html-validate": "11.16.0",
+    "pagefind": "1.6.0",
     "prettier": "3.9.9",
     "prettier-plugin-astro": "1.1.0",
     "stylelint": "17.15.0",

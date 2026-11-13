@@ -375,7 +375,7 @@ try {
     permissions: ["clipboardReadWrite", "clipboardSanitizedWrite"],
   });
   const copied = await evaluate(
-    `(async()=>{const code=document.querySelector('.prose pre code').textContent;document.querySelector('.code-copy').click();await new Promise(resolve=>setTimeout(resolve,100));return {expected:code,actual:await navigator.clipboard.readText(),message:document.querySelector('[aria-live="polite"]').textContent};})()`,
+    `(async()=>{const code=document.querySelector('.prose pre code').textContent;document.querySelector('.code-copy').click();await new Promise(resolve=>setTimeout(resolve,100));return {expected:code,actual:await navigator.clipboard.readText(),message:document.querySelector('.visually-hidden[aria-live="polite"]').textContent};})()`,
   );
   assert.equal(copied.actual, copied.expected);
   assert.equal(copied.message, "Código copiado.");

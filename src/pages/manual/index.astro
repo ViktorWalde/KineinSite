@@ -77,6 +77,7 @@ const outdated = version !== publicVersion;
 <BaseLayout
   current="manual"
   title="Manual da IDE"
+  search={{ version, source: sourceUrl, revision: commit }}
   description={`Manual de uso da Kinein Vectis ${version}: layout, editor, build, testes, depuração, Git, terminal, Python, embarcados e atalhos.`}
 >
   <div class="docs-shell shell manual-shell">

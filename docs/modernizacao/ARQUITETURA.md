@@ -5,8 +5,8 @@ foi implementada localmente em [H2-HUD.md](H2-HUD.md), com validação técnica 
 A e B também têm execução local registrada em [A-PRODUTO.md](A-PRODUTO.md) e
 [B-DOCUMENTACAO.md](B-DOCUMENTACAO.md). As frentes seguintes continuam propostas
 até sua própria evidência de execução.
-C0 tem prova técnica em [C0-BUSCA.md](C0-BUSCA.md); a adoção de busca e sua UI
-continuam pendentes em C1.
+C0 tem prova técnica em [C0-BUSCA.md](C0-BUSCA.md); C1 integra índice e UI
+em [C1-BUSCA.md](C1-BUSCA.md), preservando o worker e a CSP.
 
 ## Fluxo atual
 
@@ -16,7 +16,8 @@ flowchart LR
   R[site.ts e i18n/routing.ts] --> A
   T[Tokens e CSS por funcionalidade] --> A
   A --> D[HTML, CSS, JS e assets estáticos]
-  D --> V[Validações de build e navegador]
+  D --> I[Índice Pagefind pela API nativa]
+  I --> V[Validações de build e navegador]
   V --> L[Prévia local para avaliação]
   L --> P[Publicação somente com pedido explícito]
 ```
@@ -27,20 +28,20 @@ links ou disclosures que já funcionam.
 
 ## Registro de decisões
 
-| ADR | Decisão                                                    | Estado e motivo                                                                                 |
-| --- | ---------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
-| 01  | Manter Astro, TypeScript, SSG e GitHub Pages               | Aceita; nenhum requisito atual exige servidor ou outro framework                                |
-| 02  | Reutilizar tokens e Motion System                          | Aceita; há escala, temas, cancelamento e movimento reduzido funcionais                          |
-| 03  | Preservar roteamento e URLs portuguesas                    | Aceita; `sitePath` e o registro i18n já respeitam a base                                        |
-| 04  | Quatro grupos lógicos na HUD                               | Implementada localmente em H2; catálogo único e validação técnica aprovada                      |
-| 05  | Preferir HTML nativo e navegação convencional              | Aceita; `details`/`summary` quando adequados, sem `role=menu` de aplicativo                     |
-| 06  | Preservar lógica de tema                                   | Aceita; a HUD altera composição, não cria outra persistência ou transição                       |
-| 07  | Escolher busca após prova com build real                   | C0 comprovou Pagefind 1.6.0 com worker de mesma origem e CSP atual; adoção no build em C1 |
-| 08  | Manter o manual como fonte oficial versionada              | Aceita; nenhum índice, tradução ou recorte pode contornar o hash                                |
-| 09  | Publicar idioma/controle só com destino funcional          | Aceita; ausência de tradução ou busca não se resolve com UI decorativa                          |
-| 10  | Reutilizar o harness de navegador existente                | Aceita; CDP e WebDriver já cobrem o necessário; Playwright só se demonstrar uma lacuna concreta |
-| 11  | Referência visual aprovada não se atualiza automaticamente | Aceita; candidatos e baselines têm ciclos distintos                                             |
-| 12  | Duas instâncias nativas da composição compartilhada da HUD | Implementada em H2; uma exposta por faixa, aparência/CTA únicos, sem mover nós por JavaScript   |
+| ADR | Decisão                                                    | Estado e motivo                                                                                                |
+| --- | ---------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| 01  | Manter Astro, TypeScript, SSG e GitHub Pages               | Aceita; nenhum requisito atual exige servidor ou outro framework                                               |
+| 02  | Reutilizar tokens e Motion System                          | Aceita; há escala, temas, cancelamento e movimento reduzido funcionais                                         |
+| 03  | Preservar roteamento e URLs portuguesas                    | Aceita; `sitePath` e o registro i18n já respeitam a base                                                       |
+| 04  | Quatro grupos lógicos na HUD                               | Implementada localmente em H2; catálogo único e validação técnica aprovada                                     |
+| 05  | Preferir HTML nativo e navegação convencional              | Aceita; `details`/`summary` quando adequados, sem `role=menu` de aplicativo                                    |
+| 06  | Preservar lógica de tema                                   | Aceita; a HUD altera composição, não cria outra persistência ou transição                                      |
+| 07  | Escolher busca após prova com build real                   | C0 comprovou Pagefind 1.6.0 com worker de mesma origem e CSP atual; adotado no build em C1, com UI sob demanda |
+| 08  | Manter o manual como fonte oficial versionada              | Aceita; nenhum índice, tradução ou recorte pode contornar o hash                                               |
+| 09  | Publicar idioma/controle só com destino funcional          | Aceita; ausência de tradução ou busca não se resolve com UI decorativa                                         |
+| 10  | Reutilizar o harness de navegador existente                | Aceita; CDP e WebDriver já cobrem o necessário; Playwright só se demonstrar uma lacuna concreta                |
+| 11  | Referência visual aprovada não se atualiza automaticamente | Aceita; candidatos e baselines têm ciclos distintos                                                            |
+| 12  | Duas instâncias nativas da composição compartilhada da HUD | Implementada em H2; uma exposta por faixa, aparência/CTA únicos, sem mover nós por JavaScript                  |
 
 ## Contrato da navegação da HUD
 
@@ -130,6 +131,20 @@ APIs seguras; não injetar HTML não sanitizado retornado por um índice.
 Modal, se adotado, precisa de foco inicial, Escape, retorno de foco e
 navegação de resultados. Ctrl/Cmd+K só existe quando a busca funciona e não
 interfere com edição ou composição de texto.
+
+C1 fixa a dependência de desenvolvimento `pagefind@1.6.0` e gera o índice
+pela API nativa depois do Astro, antes dos checks do artefato. O build não
+usa Chrome/DOMParser. Layouts passam atributos do corpus e metadados dos
+dados existentes; 404 não recebe `data-pagefind-body`. UI própria, sem UIs
+opcionais do pacote. `pathWithBase` normaliza tanto módulos quanto resultados.
+
+O módulo é importado somente na primeira consulta não vazia; abrir o diálogo
+não baixa o índice. O worker usa a mesma origem. Ausência/falha do worker ou
+de recursos resulta em erro explícito, retry e links nativos. Nenhuma
+permissão de CSP foi acrescentada. O controlador invalida respostas antigas
+ao editar/fechar e preserva foco em reabertura rápida. Resultados usam
+`textContent`, URLs locais e os IDs reais das seções. Detalhes e evidências
+no registro C1; dados de prova de C0 continuam isolados.
 
 ## Contrato de conteúdo e internacionalização
 

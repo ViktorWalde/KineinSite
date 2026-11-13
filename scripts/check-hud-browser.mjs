@@ -590,7 +590,7 @@ try {
       );
     }
     await is(
-      "getComputedStyle(document.querySelector('.appearance')).visibility==='hidden' && !document.querySelector('[data-search-trigger],[data-locale-switcher]')",
+      "getComputedStyle(document.querySelector('.appearance')).visibility==='hidden' && document.querySelector('.search-trigger').hidden && getComputedStyle(document.querySelector('.search-trigger')).display==='none' && !document.querySelector('[data-locale-switcher]')",
     );
     // O fallback permite peers abertos; fechá-los manualmente antes de
     // selecionar evita sobrepor os painéis nativos no desktop sem JS.

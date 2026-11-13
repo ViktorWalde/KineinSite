@@ -3,6 +3,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import DemoVideo from "../../features/demonstracao/DemoVideo.astro";
 import PreviewNotice from "../../features/demonstracao/PreviewNotice.astro";
 import { publicVersion, releaseUrl, sitePath } from "../../site";
+import { developmentSnapshot } from "../../data/development";
 import "../../features/documentacao/documentacao.css";
 import "../../features/documentacao/previa.css";
 import "../../features/codigo/codigo.css";
@@ -11,11 +12,15 @@ import "../../features/codigo/codigo.css";
 <BaseLayout
   current="docs"
   title="Conheça a prévia da 0.4"
+  search={{
+    version: developmentSnapshot.version,
+    status: "Em desenvolvimento",
+  }}
   description="Veja a nova interface da Kinein Vectis em uso: código C++, compilação, execução, ferramentas e Git. Conheça a prévia e o trabalho com embarcados previsto para a 0.4."
 >
   <div class="shell preview-page">
     <header class="docs-intro enter">
-      <p class="kicker">0.4 · EM DESENVOLVIMENTO</p>
+      <p class="kicker">{developmentSnapshot.version} · EM DESENVOLVIMENTO</p>
       <h1>A próxima Vectis, por dentro.</h1>
       <p class="docs-intro-copy">
         A 0.4 reúne a nova interface, inspirada nas IDEs JetBrains, e o trabalho

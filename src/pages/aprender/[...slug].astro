@@ -53,6 +53,7 @@ const outdated = guide.data.ideVersion !== publicVersion;
   current="guide"
   title={guide.data.title}
   description={guide.data.summary}
+  search={{ version: guide.data.ideVersion }}
 >
   <div class="docs-shell shell">
     <GuideNav guides={guides} currentId={guide.id} />

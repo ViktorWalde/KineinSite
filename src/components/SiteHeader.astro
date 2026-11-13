@@ -6,6 +6,7 @@ import { defaultLocale, type Locale } from "../i18n/config";
 import { resolveRoute } from "../i18n/routing";
 import { uiFor } from "../i18n/ui";
 import ThemeControls from "./ThemeControls.astro";
+import SearchTrigger from "../features/busca/SearchTrigger.astro";
 import SiteNavigation from "./SiteNavigation.astro";
 import { resolveNavigation } from "../data/navigation";
 import { getPublishedGuides } from "../features/aprender/guides";
@@ -47,6 +48,8 @@ const optimizedIcon = await getImage({ src: icon, width: 84, format: "webp" });
     </a>
 
     <SiteNavigation current={current} locale={locale} groups={groups} />
+
+    <SearchTrigger locale={locale} />
 
     <div class="header-tools">
       <ThemeControls locale={locale} />
