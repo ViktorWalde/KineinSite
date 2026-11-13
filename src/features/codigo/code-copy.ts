@@ -42,9 +42,11 @@ function showResult(button: HTMLButtonElement, ok: boolean): void {
 }
 
 async function copy(button: HTMLButtonElement, text: string): Promise<void> {
+  if (button.getAttribute("aria-disabled") === "true") return;
   delete button.dataset["state"];
   button.textContent = messages.copy;
-  button.disabled = true;
+  // Preservar o foco durante o Clipboard: disabled nativo pode focar o body.
+  button.setAttribute("aria-disabled", "true");
   announcer.textContent = "";
   window.clearTimeout(Number(button.dataset["timer"]));
   try {
@@ -53,7 +55,7 @@ async function copy(button: HTMLButtonElement, text: string): Promise<void> {
   } catch {
     showResult(button, false);
   } finally {
-    button.disabled = false;
+    button.removeAttribute("aria-disabled");
   }
 }
 

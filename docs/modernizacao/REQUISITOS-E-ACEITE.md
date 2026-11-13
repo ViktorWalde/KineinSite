@@ -87,17 +87,21 @@ com os headings renderizados e cobre 72 cenários por base, cópia e fallback.
 O pacote mantém o gate do build e todas as suítes anteriores. B recebeu
 aprovação visual e autorização de commit local do mantenedor em 13 de novembro
 de 2026. A avaliação e o polimento de H2/A permanecem separados.
+O gate de C0 encontrou perda de foco durante Clipboard lento; a correção e a
+prova de repetição pendente estão registradas em C0, preservando o aceite visual de B.
 
 ## C — Busca global
 
 | ID   | Requisito e estado                                    | Evidência/critério de conclusão                                                                                                  |
 | ---- | ----------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| C-01 | Índice do conteúdo efetivamente gerado — **pendente** | Páginas/seções reais; sem 404, drafts, duplicatas ou traduções vazias; idioma/tipo/versão identificáveis                         |
+| C-01 | Índice do conteúdo efetivamente gerado — **provado isoladamente em C0; integração pendente em C1** | 24 páginas/197 headings do HTML real, 404 excluída, sem navegação duplicada; idioma, tipo, versão e origem identificados |
 | C-02 | UI funcional na HUD — **pendente**                    | Foco inicial, pesquisa imediata, resultados, vazio, erro, teclado/toque, Escape e retorno de foco; consultas não saem do site    |
-| C-03 | Base, CSP, carregamento e idioma — **avaliar em C0**  | Índice real testado em `/KineinSite/`, bytes medidos, política preservada, requisições sob demanda e resultados com URLs válidas |
+| C-03 | Base, CSP, carregamento e idioma — **comprovado em C0 com worker; preservação na adoção exigida em C1** | Duas bases, bytes e rede medidos, CSP intacta, idioma/filtros/falhas conferidos; sem worker, C1 deve apresentar indisponibilidade |
 
-Pagefind é candidato prioritário. C0 precisa produzir uma decisão documentada,
-não só instalar um pacote. Ctrl/Cmd+K só aparece após C-02 funcionar e deve
+Pagefind 1.6.0 passou na prova real de C0 usando o worker de mesma origem,
+conforme [C0-BUSCA.md](C0-BUSCA.md). Não é dependência adotada nem busca
+publicada. C1 deve preservar o resultado e cobrir seus estados de UI.
+Ctrl/Cmd+K só aparece após C-02 funcionar e deve
 respeitar campos editáveis, composição de texto e atalhos do navegador.
 
 ## D — Download e instalação

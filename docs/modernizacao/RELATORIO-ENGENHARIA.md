@@ -8,6 +8,8 @@ H1 documental, H2 funcional e A implementados/validados localmente. A seção 16
 registra B implementado e validado em 13 de novembro de 2026. C0 e demais
 pacotes continuam pendentes. A seção 17 registra a aprovação de B e a
 autorização de seu commit local; a avaliação e o polimento de H2/A permanecem separados.
+C0 foi executado depois desse commit, conforme a seção 18; sua decisão técnica
+não significa que a busca já esteja instalada no produto.
 
 ## 2. Problemas identificados
 
@@ -264,3 +266,73 @@ manifesto, diff, formatação do registro de B e links documentais.
 
 O commit registra a entrega local. C0 continua como próxima unidade, ainda
 não iniciada; não houve push, deploy ou publicação.
+
+## 18. Execução C0 — Prova técnica de busca
+
+Entrada: `dcf9287`, branch `main`, árvore limpa. C0 produziu scripts de prova,
+índice isolado a partir do HTML real, relatórios e decisão documentada em
+[C0-BUSCA.md](C0-BUSCA.md). Não se iniciou C1, instalou dependência de busca
+no projeto ou expôs controle na HUD.
+
+Pagefind 1.6.0 passou nas duas bases com o worker servido pela mesma origem,
+sem alterar a CSP. O modo sem worker falhou ao compilar WASM sob a política
+existente. A decisão para C1 exige o worker e estado explícito de erro quando
+ele não estiver disponível; não autoriza ampliar permissões. O documento
+registra a diferença de política entre página e worker externo e a condição
+de hosting comprovada, sem estender a prova a outros navegadores/headers.
+
+O corpus tem 24 páginas indexadas, 197 headings reais e 404 excluída. Título,
+idioma, tipo, versões do beta/prévia e origem do manual foram conferidos.
+Consultas CMake/Git/Python/atalhos/depuracao/C++ e consulta sem correspondência
+retornaram contagens iguais nas duas bases. URLs/fragmentos foram auditados.
+Filtros de manual/idioma, fallback para conteúdo português, carregamento sob
+demanda, cache, offline e falha de asset têm prova real. Todas as requisições
+observadas do worker permaneceram na mesma origem.
+
+Dados: 172.062 bytes; controlador/worker/WASM pt-BR: 149.494 bytes. O bundle
+completo tem 810.539 bytes e inclui UIs opcionais não carregadas. Na consulta
+fria CMake foram observadas 14 requisições/189.557 bytes de transferência
+com cabeçalhos, em laboratório local instrumentado, sem equivaler a métrica
+de produção. O relatório legível passou HTML Validate e seis larguras sem
+overflow; está em `http://127.0.0.1:4322/`.
+
+O harness recebeu callback de eventos e sessão CDP opcionais para observar e
+interromper recursos do worker. O primeiro gate integrado também encontrou
+perda de foco no Clipboard lento de B, reproduzida com o harness original do
+checkpoint. A correção usa `aria-disabled` com guarda de repetição; preserva
+a aparência e fortalece o teste pendente. Os registros before/after mostram
+o foco voltando ao body antes da correção e permanecendo no botão depois.
+Essa correção necessária ao gate é distinguida do escopo de busca.
+
+Build Pages, `check:browser`, `check:experience` e a prova C0 nas duas bases
+passaram na árvore final. O gate mantém a matriz existente de 252 cenários
+da HUD, produto, conteúdo, percursos e os 72 cenários de B, com a asserção de
+foco e repetição pendente ampliada. O HTML isolado sem base também passou.
+Continuam três hints do boot de tema e oito avisos informativos de arquitetura,
+sem limites aumentados. Manual, conteúdo, CSP e lockfile foram preservados.
+O manifesto final tem 242 arquivos, 233 preservados, quatro alterados e cinco
+novos, sem exclusões; fingerprint
+`ae187a4d07916796e7f675349a476b70fdd710ed7b0734f4b641c988915d79fe`.
+
+Comandos, arquivos e limites estão no registro de C0 e em VALIDACAO.md.
+Índice, requisitos, arquitetura e retomada foram sincronizados. Artefatos
+em `test-results/c0-2026-11-13/` são locais e ignorados. A prévia do produto
+continua em `http://127.0.0.1:4321/KineinSite/`.
+
+Próxima unidade: C1, adoção no build e busca funcional, com aceite próprio de
+UI/teclado/foco/estados e compatibilidade. Não houve commit, push, deploy ou
+publicação nesta rodada.
+
+## 19. Commit local e prévia de C0
+
+O mantenedor solicitou registrar C0 em commit local e disponibilizar a versão
+local para análise em 13 de novembro de 2026. O manifesto de 242 arquivos
+coincide integralmente com a árvore tecnicamente validada, fingerprint
+`ae187a4d07916796e7f675349a476b70fdd710ed7b0734f4b641c988915d79fe`.
+Somente os registros de autorização/continuidade mudaram nesta operação;
+manifesto, diff, formatação e links foram conferidos sem repetir as suítes.
+
+Relatório técnico: `http://127.0.0.1:4322/`. Site local:
+`http://127.0.0.1:4321/KineinSite/`. Ambos responderam HTTP 200. A busca ainda
+não tem interface no produto; C1 permanece como próxima unidade. Não houve
+push, deploy ou publicação, nem aprovação visual presumida de C1.

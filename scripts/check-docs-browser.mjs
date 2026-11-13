@@ -267,11 +267,19 @@ try {
       ),
     );
     await evaluate(
-      "window.savedWrite=navigator.clipboard.writeText;navigator.clipboard.writeText=()=>new Promise(resolve=>window.finishCopy=resolve);document.querySelector('.code-copy').click()",
+      "window.savedWrite=navigator.clipboard.writeText;window.copyCalls=0;navigator.clipboard.writeText=()=>{window.copyCalls++;return new Promise(resolve=>window.finishCopy=resolve)};document.querySelector('.code-copy').focus();document.querySelector('.code-copy').click()",
     );
     assert.ok(
       await evaluate(
-        "document.querySelector('.code-copy').disabled && !document.querySelector('.code-copy').dataset.state && !document.querySelector('[aria-live=polite]').textContent",
+        "document.querySelector('.code-copy').getAttribute('aria-disabled')==='true' && !document.querySelector('.code-copy').dataset.state && !document.querySelector('[aria-live=polite]').textContent",
+      ),
+    );
+    await evaluate(
+      "document.querySelector('.code-copy').click();new Promise(resolve=>setTimeout(resolve,200))",
+    );
+    assert.ok(
+      await evaluate(
+        "window.copyCalls===1 && document.activeElement.matches('.code-copy')",
       ),
     );
     await evaluate("window.finishCopy()");
@@ -305,7 +313,7 @@ try {
     );
     assert.ok(
       await evaluate(
-        "!document.querySelector('.code-copy').disabled && document.querySelector('.prose pre code').textContent.length>0",
+        "!document.querySelector('.code-copy').hasAttribute('aria-disabled') && document.querySelector('.prose pre code').textContent.length>0",
       ),
     );
     await evaluate("navigator.clipboard.writeText=window.savedWrite");

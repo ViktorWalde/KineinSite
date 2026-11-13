@@ -5,6 +5,8 @@ foi implementada localmente em [H2-HUD.md](H2-HUD.md), com validação técnica 
 A e B também têm execução local registrada em [A-PRODUTO.md](A-PRODUTO.md) e
 [B-DOCUMENTACAO.md](B-DOCUMENTACAO.md). As frentes seguintes continuam propostas
 até sua própria evidência de execução.
+C0 tem prova técnica em [C0-BUSCA.md](C0-BUSCA.md); a adoção de busca e sua UI
+continuam pendentes em C1.
 
 ## Fluxo atual
 
@@ -33,7 +35,7 @@ links ou disclosures que já funcionam.
 | 04  | Quatro grupos lógicos na HUD                               | Implementada localmente em H2; catálogo único e validação técnica aprovada                      |
 | 05  | Preferir HTML nativo e navegação convencional              | Aceita; `details`/`summary` quando adequados, sem `role=menu` de aplicativo                     |
 | 06  | Preservar lógica de tema                                   | Aceita; a HUD altera composição, não cria outra persistência ou transição                       |
-| 07  | Escolher busca após prova com build real                   | Pendente; Pagefind é candidato, não dependência já aprovada ou instalada                        |
+| 07  | Escolher busca após prova com build real                   | C0 comprovou Pagefind 1.6.0 com worker de mesma origem e CSP atual; adoção no build em C1 |
 | 08  | Manter o manual como fonte oficial versionada              | Aceita; nenhum índice, tradução ou recorte pode contornar o hash                                |
 | 09  | Publicar idioma/controle só com destino funcional          | Aceita; ausência de tradução ou busca não se resolve com UI decorativa                          |
 | 10  | Reutilizar o harness de navegador existente                | Aceita; CDP e WebDriver já cobrem o necessário; Playwright só se demonstrar uma lacuna concreta |
@@ -91,6 +93,12 @@ sticky, View Transitions e backdrop antes de alterar transparência. Não
 animar blur ou posição ao rolar.
 
 ## Contrato da busca estática
+
+Execução de C0: Pagefind 1.6.0 passou nas bases `/KineinSite/` e `/` com worker
+servido pela mesma origem, sob a política atual. O modo sem worker falha na
+compilação de WASM. C1 não deve relaxar a CSP para o fallback: precisa informar
+indisponibilidade e preservar links de documentação. Índice, módulos e fixture
+de C0 são isolados de `dist/`; o registro contém condições de hosting e limites.
 
 C0 deve testar um índice construído do `dist/` real. O índice precisa
 identificar título, trecho, URL/âncora, idioma e tipo de conteúdo; versão

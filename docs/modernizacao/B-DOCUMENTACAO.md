@@ -136,3 +136,13 @@ consultas, tamanho, base, idioma e CSP, antes da escolha do indexador e de C1.
 Leitor de tela, toque físico e zoom real do navegador não foram verificados
 nesta rodada; ampliação de fonte e árvore acessível não equivalem a esses testes.
 O mantenedor autorizou o commit local de B. Não houve push, deploy ou publicação.
+
+## Correção pontual encontrada no gate de C0
+
+A execução integrada posterior reproduziu perda de foco com Clipboard mais
+lento, também usando o harness anterior a C0. O bloqueio nativo `disabled`
+foi substituído por `aria-disabled` com guarda de repetição, preservando o foco
+e a aparência aprovada. O teste mantém confirmação/falha e acrescenta pendência
+com foco e segundo clique sem duplicar a cópia. Evidências e validação dessa
+árvore posterior estão em [C0-BUSCA.md](C0-BUSCA.md); o manifesto acima continua
+sendo o registro histórico da entrega B.

@@ -10,6 +10,8 @@ registros. As alterações anteriores permanecem preservadas. Validação técni
 e avaliação visual são estados separados. B foi aprovado pelo mantenedor em
 13 de novembro de 2026, com autorização de commit local; H2/A permanecem
 pendentes de avaliação e polimento próprios.
+C0 agora tem prova executável nas duas bases: Pagefind 1.6.0 viável com worker
+de mesma origem, sem alteração da CSP. Adoção no produto e UI ficam em C1.
 
 ## Como ler
 
@@ -24,6 +26,7 @@ pendentes de avaliação e polimento próprios.
 | [H2-HUD.md](H2-HUD.md)                             | Como a HUD foi implementada e validada localmente?                         |
 | [A-PRODUTO.md](A-PRODUTO.md)                       | Qual foi a entrega do hero com captura real e sua evidência?               |
 | [B-DOCUMENTACAO.md](B-DOCUMENTACAO.md)             | Quais lacunas de documentação foram implementadas e como foram verificadas? |
+| [C0-BUSCA.md](C0-BUSCA.md)                         | Qual candidato passou na prova real de busca, com quais bytes e limites? |
 
 Os registros [da fundação](../LOCAL-PREVIEW-2026-11-12.md) e
 [da fase C local](../LOCAL-PHASE-C-2026-11-12.md) são históricos da execução.
@@ -38,7 +41,7 @@ as suas alterações visualmente aprovadas.
 | HUD 2.0                   | H2 implementada localmente; gate técnico aprovado, aprovação visual pendente                                                               |
 | Página inicial            | Galeria antecipada e beta primeiro, em avaliação local; hero com captura real em A, validação técnica aprovada e aprovação visual pendente |
 | Documentação              | B implementado, validado e aprovado pelo mantenedor; índice contextual, cópia localizada e seção atual com texto ampliado; manual e percursos preservados |
-| Busca global              | Não existe; o filtro do manual procura títulos e não equivale a busca global                                                               |
+| Busca global              | C0 comprovou Pagefind 1.6.0 com worker e CSP atual; índice de prova isolado, adoção e interface do produto pendentes em C1 |
 | Download                  | Links para a release configurada e guia de instalação; sem página própria                                                                  |
 | Comunidade e rodapé       | Integração pública do GitHub funcional e rodapé localizado; refinamento a avaliar                                                          |
 | Internacionalização       | Catálogo tipado de UI e utilitários prontos; sem conteúdo inglês ou seletor publicado                                                      |
@@ -56,7 +59,7 @@ da próxima alteração dependente. Não se muda todo o site de uma vez.
 | H2    | HUD funcional — entregue localmente           | H1 e seu gate de entrada                   | Composição compartilhada desktop/mobile, grupos e aparência; testes e prévia local      |
 | A     | Apresentação do produto — entregue localmente | HUD utilizável e conteúdo verificado       | Hero com captura real validado; galeria e percursos preservados                         |
 | B     | Documentação — entregue localmente             | Inventário e alterações locais preservadas | Índice dos headings reais, cópia localizada, marcação corrigida e manual íntegro        |
-| C0    | Prova técnica de busca                        | H2, B e CSP atual                          | Decisão sobre indexador, tamanho medido, base, idioma e compatibilidade de segurança    |
+| C0    | Prova técnica de busca — entregue localmente | H2, B e CSP atual                          | Pagefind com worker comprovado, corpus/consultas/bytes medidos e limites registrados |
 | C1    | Busca global                                  | C0 aprovado tecnicamente                   | Índice real, interface funcional, teclado, estados e testes estáticos                   |
 | D     | Download e instalação                         | Release oficial conferida                  | Versão/plataforma/requisitos corretos e caminho de primeira execução                    |
 | E     | Comunidade e rodapé                           | Fluxos públicos existentes                 | Navegação complementar e contribuição claras; cache e limites preservados               |
@@ -115,14 +118,18 @@ preservando H2/A e os percursos anteriores. O registro do pacote distingue
 as verificações efetivas da aprovação visual concedida pelo mantenedor em
 13 de novembro de 2026.
 
-A próxima unidade da sequência é C0. C1, D, E, F0, F1 e G continuam pendentes;
-busca e idioma só entram na HUD quando tiverem funcionamento real.
+C0 foi executado em [C0-BUSCA.md](C0-BUSCA.md), sem instalar busca no produto.
+A próxima unidade é C1: adotar a solução comprovada e implementar a interface
+funcional, incluindo erro explícito quando o worker não funcionar. D, E,
+F0, F1 e G continuam pendentes; idioma depende de conteúdo real.
 
 ## Retomada após o checkpoint
 
-O [prompt da próxima sessão](PROXIMA-SESSAO.md) consolida a entrega B,
-a próxima unidade C0 e os limites de continuidade. O mantenedor autorizou um commit
+O [prompt da próxima sessão](PROXIMA-SESSAO.md) consolida as entregas B/C0,
+a próxima unidade C1 e os limites de continuidade. O mantenedor autorizou um commit
 local do estado consolidado; aprovação visual, push e publicação continuam
 separados. B foi executado depois desse checkpoint, em 13 de novembro de 2026,
 e seu commit local foi autorizado pelo mantenedor após a aprovação da entrega.
-O prompt de retomada aponta para C0; push e publicação não foram autorizados.
+Esse commit de B é `dcf9287`. O mantenedor também solicitou o commit local
+de C0 e a prévia para análise em 13 de novembro de 2026. Push e publicação
+não foram autorizados; C1 continua como próxima unidade.

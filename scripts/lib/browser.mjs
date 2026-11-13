@@ -14,6 +14,7 @@ export async function openBrowser({
   desktopPointer = false,
   basePath = process.env.KINEIN_TEST_BASE ?? "/KineinSite/",
   serveNotFound = false,
+  onEvent,
 } = {}) {
   const executable = [
     process.env.CHROME_BIN,
@@ -154,8 +155,9 @@ export async function openBrowser({
         message.params.entry.level === "error"
       )
         errors.push(message.params.entry);
+      if (!message.id) onEvent?.(message);
     });
-    function send(method, params = {}) {
+    function send(method, params = {}, sessionId) {
       return new Promise((resolve, reject) => {
         const requestId = ++id;
         const timeout = globalThis.setTimeout(() => {
@@ -176,7 +178,14 @@ export async function openBrowser({
             reject(error);
           },
         });
-        socket.send(JSON.stringify({ id: requestId, method, params }));
+        socket.send(
+          JSON.stringify({
+            id: requestId,
+            method,
+            params,
+            ...(sessionId ? { sessionId } : {}),
+          }),
+        );
       });
     }
     async function evaluate(expression) {

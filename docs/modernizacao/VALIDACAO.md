@@ -219,3 +219,38 @@ Pages; o HTML e o navegador do build sem base têm resultados próprios.
 Artefatos de B ficam em `test-results/b-2026-11-13/`, com `pages/` e `root/`
 separados. As capturas são candidatas; texto ampliado não equivale a zoom real.
 O registro [B-DOCUMENTACAO.md](B-DOCUMENTACAO.md) contém o fechamento efetivo.
+
+## Reprodução de C0
+
+A prova é opt-in e não faz parte do build publicado. Requer Chrome e o pacote
+Pagefind exato instalado temporariamente fora do checkout. Não adicionar a
+dependência ao projeto para reproduzir a decisão de C0.
+
+```bash
+npm install --prefix /tmp/kinein-c0-pagefind --no-save --package-lock=false --ignore-scripts --no-audit --no-fund pagefind@1.6.0
+npm run build:pages
+KINEIN_PAGEFIND_DIR=/tmp/kinein-c0-pagefind/node_modules/pagefind CHROME_BIN=/caminho/do/chrome npm run check:search-proof
+ASTRO_TELEMETRY_DISABLED=1 ./node_modules/.bin/astro build --outDir test-results/c0-2026-11-13/root-dist
+./node_modules/.bin/html-validate 'test-results/c0-2026-11-13/root-dist/**/*.html' --max-warnings 0
+KINEIN_TEST_BASE=/ KINEIN_TEST_DIST=test-results/c0-2026-11-13/root-dist KINEIN_C0_OUTPUT=test-results/c0-2026-11-13/root KINEIN_PAGEFIND_DIR=/tmp/kinein-c0-pagefind/node_modules/pagefind CHROME_BIN=/caminho/do/chrome npm run check:search-proof
+node scripts/report-search-proof.mjs
+./node_modules/.bin/html-validate test-results/c0-2026-11-13/review/index.html --max-warnings 0
+python3 -m http.server 4322 --bind 127.0.0.1 --directory test-results/c0-2026-11-13/review
+```
+
+O último comando serve apenas o relatório legível. A fixture do mecanismo fica
+na cópia isolada, sem link no produto. Não há campo de busca fictício no relatório.
+`probe-search.mjs` só escreve em `test-results/` e limpa apenas seu bundle gerado
+antes de repetir a indexação. Artefatos de outras etapas são preservados.
+
+`probe-search-browser.mjs` mede consultas e URLs do índice real, CSP nos dois
+modos, filtros, fallback de idioma, cache, offline e erro de asset. O harness
+aceita callback de eventos e sessão CDP opcionais para observar o worker e
+bloquear seu recurso de WASM; os consumidores anteriores não precisam mudar.
+As falhas esperadas ficam registradas. A prova deve falhar se o modo escolhido
+deixar de funcionar ou se os resultados apontarem a página/ID inexistente.
+
+Preservar `check:browser` e `check:experience` e executá-los ao alterar o
+harness compartilhado. A UI de C1 ainda exige teclado/foco, estados,
+concorrência, seis larguras, texto ampliado, temas e alternativa sem JS.
+Resultados e limites reais em [C0-BUSCA.md](C0-BUSCA.md).
