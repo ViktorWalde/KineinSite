@@ -1,0 +1,53 @@
+/* Índice do conteúdo renderizado, em fluxo, sem uma terceira coluna sticky. */
+.article-outline {
+  margin-block-start: var(--space-l);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  font-size: var(--text-sm);
+  line-height: 1.5;
+}
+
+.article-outline > summary {
+  min-height: 2.75rem;
+  padding: var(--space-s) var(--space-m);
+  cursor: pointer;
+  font-weight: 650;
+}
+
+.article-outline ul {
+  display: grid;
+  margin: 0;
+  padding: var(--space-xs) var(--space-s);
+  border-block-start: 1px solid var(--border);
+  list-style: none;
+}
+
+.article-outline a {
+  display: flex;
+  min-height: 2.75rem;
+  align-items: center;
+  padding: var(--space-xs) var(--space-s);
+  border-inline-start: 2px solid transparent;
+  border-radius: var(--radius-sm);
+  color: var(--muted);
+  overflow-wrap: anywhere;
+  text-decoration: none;
+}
+
+.article-outline-subsection {
+  margin-inline-start: var(--space-m);
+}
+
+.article-outline a:hover,
+.article-outline a:focus-visible {
+  background: var(--surface-control);
+  color: var(--text);
+}
+
+.article-outline a[aria-current="true"] {
+  border-color: var(--accent);
+  background: var(--surface-control);
+  color: var(--text);
+  font-weight: 650;
+}

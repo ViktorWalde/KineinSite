@@ -29,8 +29,9 @@ de entrada. `check:examples` requer GCC/G++, Rust e Python e deve ser executado
 quando exemplos/conteúdo técnico mudarem ou quando o publicador exigir.
 Não modificar exemplos para compensar ferramenta ausente.
 
-O ambiente atual usa `CHROME_BIN=/tmp/kinein-browser/chrome-linux64/chrome`.
-É uma localização temporária, não uma dependência a fixar nos scripts.
+Em B, o Chrome temporário do checkpoint estava ausente. A mesma versão
+157.0.8103.78 foi obtida novamente em `/tmp/kinein-browser/chrome-linux64/chrome`.
+Conferir a existência antes de reproduzir; não é dependência fixada nos scripts.
 
 | Mudança                     | Verificação direcionada                                            | Gate mais amplo                                                   |
 | --------------------------- | ------------------------------------------------------------------ | ----------------------------------------------------------------- |
@@ -189,3 +190,32 @@ npm run build:pages
 
 O gate detalhado, geometria, capturas candidatas e limites estão em
 [H2-HUD.md](H2-HUD.md). Nenhum teste atualiza uma referência visual aprovada.
+
+## Reprodução de B
+
+`check:experience` acrescenta `scripts/check-docs-browser.mjs`, sem retirar
+suítes. O novo teste descobre os artigos publicados no build e compara os
+links do índice aos headings reais. Cobre seis larguras, três temas, texto
+100%/200%, âncoras, estado atual, teclado/foco, Clipboard real, confirmação
+pendente, falha, reset e mensagens em português/inglês. O inglês é uma fixture
+de `lang` da UI de cópia, sem criar uma rota pública. Documentação e manual
+também são conferidos a 1920px/texto 200% como consumidores do marcador.
+
+Depois do build Pages e antes das suítes, um build isolado sem base pode ser
+gerado sem substituir `dist/` ou interromper a prévia:
+
+```bash
+npm run build:pages
+ASTRO_TELEMETRY_DISABLED=1 ./node_modules/.bin/astro build --outDir test-results/b-2026-11-13/root-dist
+./node_modules/.bin/html-validate 'test-results/b-2026-11-13/root-dist/**/*.html' --max-warnings 0
+KINEIN_TEST_BASE=/ KINEIN_TEST_DIST=test-results/b-2026-11-13/root-dist CHROME_BIN=/caminho/do/chrome node scripts/check-docs-browser.mjs
+CHROME_BIN=/caminho/do/chrome npm run check:browser
+CHROME_BIN=/caminho/do/chrome npm run check:experience
+```
+
+O comando Astro isolado é build complementar, não outra execução do gate
+completo `npm run build`. Os checks estáticos completos pertencem ao build
+Pages; o HTML e o navegador do build sem base têm resultados próprios.
+Artefatos de B ficam em `test-results/b-2026-11-13/`, com `pages/` e `root/`
+separados. As capturas são candidatas; texto ampliado não equivale a zoom real.
+O registro [B-DOCUMENTACAO.md](B-DOCUMENTACAO.md) contém o fechamento efetivo.

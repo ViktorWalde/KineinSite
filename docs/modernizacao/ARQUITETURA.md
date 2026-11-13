@@ -2,7 +2,9 @@
 
 Os contratos orientam a execução incremental. A baseline é histórica; a HUD
 foi implementada localmente em [H2-HUD.md](H2-HUD.md), com validação técnica aprovada.
-As demais frentes continuam propostas até sua própria evidência de execução.
+A e B também têm execução local registrada em [A-PRODUTO.md](A-PRODUTO.md) e
+[B-DOCUMENTACAO.md](B-DOCUMENTACAO.md). As frentes seguintes continuam propostas
+até sua própria evidência de execução.
 
 ## Fluxo atual
 
@@ -122,6 +124,12 @@ navegação de resultados. Ctrl/Cmd+K só existe quando a busca funciona e não
 interfere com edição ou composição de texto.
 
 ## Contrato de conteúdo e internacionalização
+
+B implementa o índice contextual dos artigos a partir dos headings retornados
+por `render()`, usando os mesmos IDs do Markdown. O componente fica em fluxo
+e reutiliza o helper de outline e o marcador existentes. Não substitui os
+índices de capítulos ou do manual. A UI de cópia lê o catálogo tipado pelo
+`lang` efetivo; localizar essas mensagens não cria páginas inglesas.
 
 Reutilizar `src/i18n/`. O catálogo tipado contém UI; Markdown continua sendo
 conteúdo editorial. Não criar um segundo roteador nem migrar todos os textos

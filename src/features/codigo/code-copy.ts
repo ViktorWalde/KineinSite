@@ -1,6 +1,9 @@
 // Acrescenta a cada bloco de código de um artigo (.prose pre) uma barra com
 // a linguagem e o botão Copiar. Sem JavaScript, o bloco continua um <pre>
 // comum, com o mesmo visual (codigo.css).
+import { uiFor } from "../../i18n/ui";
+
+const messages = uiFor(document.documentElement.lang).code;
 const languageNames: Record<string, string> = {
   bash: "Shell",
   sh: "Shell",
@@ -15,7 +18,7 @@ const languageNames: Record<string, string> = {
   json: "JSON",
   toml: "TOML",
   yaml: "YAML",
-  text: "Saída",
+  text: messages.output,
 };
 const resetAfterMs = 2000;
 
@@ -27,25 +30,30 @@ document.body.append(announcer);
 
 function showResult(button: HTMLButtonElement, ok: boolean): void {
   button.dataset["state"] = ok ? "done" : "error";
-  button.textContent = ok ? "Copiado" : "Não copiou";
-  announcer.textContent = ok
-    ? "Código copiado."
-    : "Não foi possível copiar; selecione o texto do bloco.";
+  button.textContent = ok ? messages.copied : messages.failed;
+  announcer.textContent = ok ? messages.success : messages.failure;
   window.clearTimeout(Number(button.dataset["timer"]));
   button.dataset["timer"] = String(
     window.setTimeout(() => {
       delete button.dataset["state"];
-      button.textContent = "Copiar";
+      button.textContent = messages.copy;
     }, resetAfterMs),
   );
 }
 
 async function copy(button: HTMLButtonElement, text: string): Promise<void> {
+  delete button.dataset["state"];
+  button.textContent = messages.copy;
+  button.disabled = true;
+  announcer.textContent = "";
+  window.clearTimeout(Number(button.dataset["timer"]));
   try {
     await navigator.clipboard.writeText(text);
     showResult(button, true);
   } catch {
     showResult(button, false);
+  } finally {
+    button.disabled = false;
   }
 }
 
@@ -63,7 +71,17 @@ for (const pre of document.querySelectorAll<HTMLPreElement>(".prose pre")) {
   const button = document.createElement("button");
   button.type = "button";
   button.className = "code-copy";
-  button.textContent = "Copiar";
+  button.textContent = messages.copy;
+
+  // O bloco que rola também precisa ser alcançável pelo teclado.
+  pre.tabIndex = 0;
+  pre.setAttribute("role", "region");
+  pre.setAttribute(
+    "aria-label",
+    name.textContent
+      ? `${messages.block}: ${name.textContent}`
+      : messages.block,
+  );
 
   button.addEventListener("click", () => {
     void copy(button, (code ?? pre).textContent);

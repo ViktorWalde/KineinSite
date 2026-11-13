@@ -1,0 +1,35 @@
+---
+import type { MarkdownHeading } from "astro";
+import { localeFromPath } from "../../i18n/routing";
+import { uiFor } from "../../i18n/ui";
+import "./article-outline.css";
+
+interface Props {
+  headings: MarkdownHeading[];
+}
+
+const { headings } = Astro.props;
+const sections = headings.filter(({ depth }) => depth === 2 || depth === 3);
+const messages = uiFor(
+  localeFromPath(Astro.url.pathname, import.meta.env.BASE_URL),
+).article;
+---
+
+{sections.length > 0 && (
+  <details class="article-outline" data-docs-outline open>
+    <summary>{messages.outline}</summary>
+    <nav aria-label={messages.outline} data-section-nav>
+      <ul>
+        {sections.map(({ slug, text, depth }) => (
+          <li class:list={{ "article-outline-subsection": depth === 3 }}>
+            <a href={`#${slug}`}>{text}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </details>
+)}
+
+<script>
+  import "./section-nav";
+</script>

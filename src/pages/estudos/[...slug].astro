@@ -1,6 +1,7 @@
 ---
 import { getCollection, render, type CollectionEntry } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import ArticleOutline from "../../features/documentacao/ArticleOutline.astro";
 import ProjectNavigation from "../../features/aprender/ProjectNavigation.astro";
 import "../../features/codigo/codigo.css";
 import { formatDate, sitePath } from "../../site";
@@ -22,7 +23,7 @@ interface Props {
 }
 
 const { entry } = Astro.props;
-const { Content } = await render(entry);
+const { Content, headings } = await render(entry);
 const tested = formatDate(entry.data.lastTested);
 ---
 
@@ -60,6 +61,7 @@ const tested = formatDate(entry.data.lastTested);
       </dl>
     </header>
 
+    <ArticleOutline headings={headings} />
     <article class="study-article prose">
       <Content />
     </article>

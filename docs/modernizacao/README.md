@@ -5,9 +5,11 @@ de HUD 2.0 e Product Experience Modernization desta conversa, confrontadas
 com a implementação real em 12 de novembro de 2026.
 
 **Etapa atual: implementação incremental.** H1 foi concluído como engenharia
-documental. H2 tem código funcional local e validação técnica aprovada,
-conforme [H2-HUD.md](H2-HUD.md). As alterações locais anteriores de página
-inicial e documentação permanecem preservadas. Avaliação visual é separada.
+documental. H2, A e B têm implementação funcional local, conforme seus
+registros. As alterações anteriores permanecem preservadas. Validação técnica
+e avaliação visual são estados separados. B foi aprovado pelo mantenedor em
+13 de novembro de 2026, com autorização de commit local; H2/A permanecem
+pendentes de avaliação e polimento próprios.
 
 ## Como ler
 
@@ -21,6 +23,7 @@ inicial e documentação permanecem preservadas. Avaliação visual é separada.
 | [H1-NAVEGACAO.md](H1-NAVEGACAO.md)                 | Qual foi o contrato documental de entrada da HUD?                          |
 | [H2-HUD.md](H2-HUD.md)                             | Como a HUD foi implementada e validada localmente?                         |
 | [A-PRODUTO.md](A-PRODUTO.md)                       | Qual foi a entrega do hero com captura real e sua evidência?               |
+| [B-DOCUMENTACAO.md](B-DOCUMENTACAO.md)             | Quais lacunas de documentação foram implementadas e como foram verificadas? |
 
 Os registros [da fundação](../LOCAL-PREVIEW-2026-11-12.md) e
 [da fase C local](../LOCAL-PHASE-C-2026-11-12.md) são históricos da execução.
@@ -34,7 +37,7 @@ as suas alterações visualmente aprovadas.
 | Design system e movimento | Implementados; reutilizar tokens, temas e redução de movimento                                                                             |
 | HUD 2.0                   | H2 implementada localmente; gate técnico aprovado, aprovação visual pendente                                                               |
 | Página inicial            | Galeria antecipada e beta primeiro, em avaliação local; hero com captura real em A, validação técnica aprovada e aprovação visual pendente |
-| Documentação              | Manual, índices e percursos existentes; índice móvel aprimorado localmente                                                                 |
+| Documentação              | B implementado, validado e aprovado pelo mantenedor; índice contextual, cópia localizada e seção atual com texto ampliado; manual e percursos preservados |
 | Busca global              | Não existe; o filtro do manual procura títulos e não equivale a busca global                                                               |
 | Download                  | Links para a release configurada e guia de instalação; sem página própria                                                                  |
 | Comunidade e rodapé       | Integração pública do GitHub funcional e rodapé localizado; refinamento a avaliar                                                          |
@@ -52,7 +55,7 @@ da próxima alteração dependente. Não se muda todo o site de uma vez.
 | H1    | Modelo da HUD — definido                      | Contratos H-01–H-04                        | [Catálogo, composição, contratos e casos de teste](H1-NAVEGACAO.md); entrega documental |
 | H2    | HUD funcional — entregue localmente           | H1 e seu gate de entrada                   | Composição compartilhada desktop/mobile, grupos e aparência; testes e prévia local      |
 | A     | Apresentação do produto — entregue localmente | HUD utilizável e conteúdo verificado       | Hero com captura real validado; galeria e percursos preservados                         |
-| B     | Documentação                                  | Inventário e alterações locais preservadas | Hierarquia, consulta e percursos revisados; manual íntegro                              |
+| B     | Documentação — entregue localmente             | Inventário e alterações locais preservadas | Índice dos headings reais, cópia localizada, marcação corrigida e manual íntegro        |
 | C0    | Prova técnica de busca                        | H2, B e CSP atual                          | Decisão sobre indexador, tamanho medido, base, idioma e compatibilidade de segurança    |
 | C1    | Busca global                                  | C0 aprovado tecnicamente                   | Índice real, interface funcional, teclado, estados e testes estáticos                   |
 | D     | Download e instalação                         | Release oficial conferida                  | Versão/plataforma/requisitos corretos e caminho de primeira execução                    |
@@ -107,12 +110,19 @@ H2 e A tiveram fechamento técnico local, conforme [H2-HUD.md](H2-HUD.md) e
 [A-PRODUTO.md](A-PRODUTO.md). A rodada foi encerrada a pedido do mantenedor,
 sem iniciar B. Aprovação visual permanece pendente para ambos.
 
-A próxima unidade da sequência é B. C0, C1, D, E, F0, F1 e G continuam
-pendentes; busca e idioma só entram na HUD quando tiverem funcionamento real.
+B foi implementado nesta continuação, conforme [B-DOCUMENTACAO.md](B-DOCUMENTACAO.md),
+preservando H2/A e os percursos anteriores. O registro do pacote distingue
+as verificações efetivas da aprovação visual concedida pelo mantenedor em
+13 de novembro de 2026.
+
+A próxima unidade da sequência é C0. C1, D, E, F0, F1 e G continuam pendentes;
+busca e idioma só entram na HUD quando tiverem funcionamento real.
 
 ## Retomada após o checkpoint
 
-O [prompt da próxima sessão](PROXIMA-SESSAO.md) consolida o estado de entrada,
-o pacote B e os limites de continuidade. O mantenedor autorizou um commit
+O [prompt da próxima sessão](PROXIMA-SESSAO.md) consolida a entrega B,
+a próxima unidade C0 e os limites de continuidade. O mantenedor autorizou um commit
 local do estado consolidado; aprovação visual, push e publicação continuam
-separados. O próximo pacote não foi iniciado para preparar esse checkpoint.
+separados. B foi executado depois desse checkpoint, em 13 de novembro de 2026,
+e seu commit local foi autorizado pelo mantenedor após a aprovação da entrega.
+O prompt de retomada aponta para C0; push e publicação não foram autorizados.

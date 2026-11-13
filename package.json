@@ -25,7 +25,7 @@
     "check:manual": "node scripts/check-manual.mjs",
     "check:examples": "node scripts/check-examples.mjs",
     "check:browser": "node scripts/check-browser.mjs && node scripts/check-collaboration-browser.mjs",
-    "check:experience": "node scripts/check-navigation-browser.mjs && node scripts/check-hud-browser.mjs && node scripts/check-collaboration-browser.mjs && node scripts/check-motion-browser.mjs && node scripts/check-flow-browser.mjs && node scripts/check-ui-browser.mjs && node scripts/check-content-browser.mjs && node scripts/check-product-browser.mjs"
+    "check:experience": "node scripts/check-navigation-browser.mjs && node scripts/check-hud-browser.mjs && node scripts/check-collaboration-browser.mjs && node scripts/check-motion-browser.mjs && node scripts/check-flow-browser.mjs && node scripts/check-ui-browser.mjs && node scripts/check-content-browser.mjs && node scripts/check-product-browser.mjs && node scripts/check-docs-browser.mjs"
   },
   "devDependencies": {
     "@astrojs/check": "0.9.10",

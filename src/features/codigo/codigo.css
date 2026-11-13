@@ -41,6 +41,11 @@
   box-shadow: none;
 }
 
+/* A moldura corta o overflow: manter o foco dentro da região rolável. */
+.code-block pre:focus-visible {
+  outline-offset: -3px;
+}
+
 .code-block-bar {
   display: flex;
   min-height: 2.5rem;

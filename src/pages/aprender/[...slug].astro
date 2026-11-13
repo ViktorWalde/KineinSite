@@ -3,6 +3,7 @@ import { render } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import GuideNav from "../../features/aprender/GuideNav.astro";
 import ImageViewer from "../../features/imagens/ImageViewer.astro";
+import ArticleOutline from "../../features/documentacao/ArticleOutline.astro";
 import ProjectNavigation from "../../features/aprender/ProjectNavigation.astro";
 import { projectPathFor } from "../../features/aprender/project-paths";
 import {
@@ -30,7 +31,7 @@ interface Props {
 }
 
 const { guide, guides } = Astro.props;
-const { Content } = await render(guide);
+const { Content, headings } = await render(guide);
 const section = sectionOf(guide);
 const siblings = guides.filter(
   (item) =>
@@ -110,6 +111,7 @@ const outdated = guide.data.ideVersion !== publicVersion;
         </section>
       )}
 
+      <ArticleOutline headings={headings} />
       <article class="guide-article prose">
         <Content />
       </article>

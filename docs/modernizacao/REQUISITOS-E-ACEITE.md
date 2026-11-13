@@ -72,14 +72,21 @@ aprovação visual continua pendente. Evidências em [A-PRODUTO.md](A-PRODUTO.md
 
 | ID   | Requisito e estado                                                | Evidência/critério de conclusão                                                                                                              |
 | ---- | ----------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| B-01 | Hierarquia, índice móvel e seção atual — **existente localmente** | Índices sem scroll lateral, teclado, âncoras e foco; conteúdo visível e navegável sem JS                                                     |
-| B-02 | Percursos, breadcrumbs e índice contextual — **parcial**          | Sequências editoriais explícitas, headings reais, links anteriores/próximos somente quando fizerem sentido; nenhum título oculto pelo sticky |
-| B-03 | Código legível e cópia confirmada — **existente, i18n parcial**   | Linguagem, texto original, scroll local quando necessário, foco, sucesso/falha reais; avaliar realce sem comprometer temas                   |
-| B-04 | Manual oficial rastreável — **existente**                         | Tag/commit/hash preservados; transformações de apresentação não editam a fonte; não criar arquivos independentes sem estratégia              |
+| B-01 | Hierarquia, índice móvel e seção atual — **preservado e corrigido em B** | Índices de documentação/manual preservados; marcador considera o scroll padding da HUD com texto ampliado; teclado, foco e fallback sem JS conferidos |
+| B-02 | Percursos, breadcrumbs e índice contextual — **implementado em B** | Índice gerado dos 100 headings reais de 13 artigos; breadcrumbs e percursos preservados; âncoras livres da HUD, sem lista editorial paralela |
+| B-03 | Código legível e cópia confirmada — **implementado em B** | Catálogo tipado pt-BR/en-US; Clipboard real, estados pendente/sucesso/falha, texto íntegro, rolagem por teclado e foco visível; realce adicional não necessário |
+| B-04 | Manual oficial rastreável — **preservado e revalidado em B** | Tag v0.3.5, commit e hash íntegros; nenhuma mudança da fonte, versão, apresentação ou índice oficial |
 
 Não adicionar outro filtro ao manual ou outro índice mantido à mão. Uma
 eventual divisão em páginas é uma decisão própria, sustentada por benefício
 de consulta e manutenção, não um requisito automático.
+
+Implementação, evidências e limites em [B-DOCUMENTACAO.md](B-DOCUMENTACAO.md).
+`check-docs-browser.mjs`, integrado a `check:experience`, confronta o índice
+com os headings renderizados e cobre 72 cenários por base, cópia e fallback.
+O pacote mantém o gate do build e todas as suítes anteriores. B recebeu
+aprovação visual e autorização de commit local do mantenedor em 13 de novembro
+de 2026. A avaliação e o polimento de H2/A permanecem separados.
 
 ## C — Busca global
 

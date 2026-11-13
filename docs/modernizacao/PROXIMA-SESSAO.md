@@ -1,8 +1,10 @@
 # Prompt para a próxima sessão
 
-O checkpoint consolida o estado local já validado. O commit desta rodada não
-representa aprovação visual, autorização de push ou publicação do site.
-Use o texto abaixo para retomar a execução.
+O checkpoint `cb0a6a6` foi a entrada do pacote B, implementado localmente em
+13 de novembro de 2026 e aprovado pelo mantenedor, com autorização de commit
+local. O estado atual e as evidências estão em B-DOCUMENTACAO.md. Push e
+publicação continuam exigindo pedido explícito.
+Use o texto abaixo para retomar a execução depois de B.
 
 ```text
 Continue o trabalho em /home/hugh/WebstormProjects/KineinSite.
@@ -15,6 +17,7 @@ Leia primeiro:
 - docs/modernizacao/H1-NAVEGACAO.md
 - docs/modernizacao/H2-HUD.md
 - docs/modernizacao/A-PRODUTO.md
+- docs/modernizacao/B-DOCUMENTACAO.md
 - docs/modernizacao/REQUISITOS-E-ACEITE.md
 - docs/modernizacao/VALIDACAO.md
 - docs/modernizacao/RELATORIO-ENGENHARIA.md
@@ -37,24 +40,30 @@ Estado de entrada:
   O checkpoint e os testes não constituem aprovação visual.
 - Os índices móveis de documentação/manual, o helper de outline e as melhorias
   anteriores da página inicial já existem. Não os implemente novamente.
-- B não foi iniciado como pacote; C0/C1, D, E, F0/F1 e G continuam pendentes.
+- B implementa índice contextual nos 13 artigos, gerado dos headings reais,
+  cópia localizada e foco no código rolável. O marcador compartilhado considera
+  o scroll padding da HUD com texto ampliado; índices, breadcrumbs e percursos
+  anteriores foram preservados. Conferir o gate e os limites no registro de B.
+- B foi aprovado visualmente pelo mantenedor em 13 de novembro de 2026,
+  junto da autorização de seu commit local. Não refazer as entregas
+  implementadas; eventual polimento deve partir da prévia concreta.
+- C0/C1, D, E, F0/F1 e G continuam pendentes.
 - Busca global e páginas inglesas ainda não existem. O filtro do manual e o
   catálogo inglês de UI não equivalem a essas funcionalidades.
 
-Comece pelo pacote B — Documentação. Confronte os requisitos B-01–B-04 com
-os componentes reais e implemente as lacunas demonstradas, especialmente o
-índice contextual dos artigos e a cobertura de i18n da cópia de código.
-Preserve os breadcrumbs, percursos editoriais, anteriores/próximos e índices
-já funcionais. Gere âncoras de headings reais; reutilize os helpers existentes.
-Mantenha o manual oficial íntegro e rastreável por tag/commit/hash.
-Não acrescente outro índice ou filtro mantido à mão, nem refatore por estética
-sem um benefício concreto. Registre pendências de polimento fora do pacote.
+Comece por C0 — Prova técnica de busca. Confronte os requisitos C-01–C-03 e
+o contrato de busca com o HTML real. Pagefind é candidato, não solução adotada.
+Registre pacote/versão e justificativa, corpus e exclusões, consultas reais,
+URLs/âncoras, bytes do índice/runtime, base, idioma, carregamento e CSP.
+Não crie uma fonte editorial paralela nem relaxe a política de segurança.
+Preserve os índices, breadcrumbs, percursos e a cópia implementados em B,
+bem como o manual oficial íntegro e rastreável por tag/commit/hash.
+Registre pendências de polimento fora do pacote.
 
-Trabalhe um pacote por vez. Feche B tecnicamente e entregue prévia local.
-Depois avance na ordem e nas dependências do plano. C0 deve produzir prova
-com o HTML real, consultas, tamanho, base, idioma e CSP antes da adoção de
-um indexador ou da implementação de C1. Não exponha controles de busca,
-atalhos ou idioma antes de funcionarem de verdade.
+Trabalhe um pacote por vez. Feche C0 com decisão apoiada em resultados reais
+antes de adotar um indexador ou implementar C1. Não exponha controles de
+busca, atalhos ou idioma antes de funcionarem de verdade. Depois siga a ordem
+e as dependências do plano, com prévia local concreta a cada entrega.
 
 Reutilize os sistemas existentes de tema, movimento, roteamento, i18n e testes.
 Não instale dependências sem necessidade demonstrada. Não altere conteúdo
@@ -69,9 +78,11 @@ Os registros anteriores têm três hints do boot de tema e oito avisos
 informativos de arquitetura: confirme o estado atual e separe regressões.
 Não repita ou atribua testes antigos a uma árvore diferente sem evidência.
 
-As evidências locais anteriores estão em test-results/h2-2026-11-12/ e
-test-results/a-2026-11-12/, ignoradas pelo Git. Elas podem não existir em um
-clone novo. A localização temporária do Chrome também precisa ser conferida.
+As evidências locais estão em test-results/h2-2026-11-12/,
+test-results/a-2026-11-12/ e test-results/b-2026-11-13/, ignoradas pelo Git.
+Elas podem não existir em um clone novo. B tem manifesto e capturas próprios
+nas bases /KineinSite/ e /; não atribua a outra árvore os resultados antigos.
+A localização temporária do Chrome também precisa ser conferida.
 Reutilize scripts/lib/browser.mjs; não instale outra suíte sem demonstrar
 uma lacuna. Reutilize a prévia em http://127.0.0.1:4321/KineinSite/ se estiver
 ativa, ou prepare uma nova prévia local do build correspondente.
@@ -81,9 +92,11 @@ rotineiras pelos contratos existentes; só peça esclarecimento se faltar
 uma decisão indispensável. Mantenha índice, requisitos e relatório fiéis à
 implementação e às verificações efetivas.
 
-Não faça commit, push, deploy ou publicação nesta próxima rodada sem novo
-pedido explícito. O commit de checkpoint já autorizado não estende essa
-permissão a novos envios ou publicações.
+Não faça commit, push, deploy ou publicação sem novo pedido explícito.
+O commit de checkpoint já autorizado não estende essa permissão a novos
+commits, envios ou publicações. O commit local de B foi autorizado
+especificamente pelo mantenedor após sua aprovação; não estender essa
+autorização aos próximos pacotes.
 
 Ao encerrar, informe o que foi implementado, arquivos, decisões, comandos e
 resultados, prévia local, limitações, pendências e próxima unidade. Diferencie

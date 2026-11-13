@@ -6,9 +6,9 @@ for (const panel of document.querySelectorAll<HTMLDetailsElement>(
   enhanceOutline(panel, matchMedia("(width <= 54rem)"));
 }
 
-// Marca no índice lateral (DocsSidebar) a seção em leitura: a última cujo topo
-// já passou de 30% da altura da janela. Sem JavaScript, o índice continua
-// sendo uma lista de âncoras comum.
+// Marca a última seção que alcançou a linha de leitura. O scroll padding
+// acompanha a HUD: com texto ampliado ela pode ultrapassar 30% da janela.
+// Sem JavaScript, o índice continua sendo uma lista de âncoras comum.
 const links = Array.from(
   document.querySelectorAll<HTMLAnchorElement>(
     '.docs-sidebar a[href^="#"], [data-section-nav] a[href^="#"]',
@@ -21,7 +21,10 @@ let scheduled = false;
 
 function update(): void {
   scheduled = false;
-  const line = window.innerHeight * 0.3;
+  const padding = Number.parseFloat(
+    getComputedStyle(document.documentElement).scrollPaddingTop,
+  );
+  const line = Math.max(window.innerHeight * 0.3, (padding || 0) + 1);
   const atEnd =
     window.innerHeight + window.scrollY >=
     document.documentElement.scrollHeight - 2;

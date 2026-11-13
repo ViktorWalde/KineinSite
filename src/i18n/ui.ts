@@ -7,6 +7,16 @@ const ptBR = {
   mobileNavigation: "Navegação móvel",
   explore: "Explorar o site",
   download: "Baixar",
+  article: { outline: "Neste artigo" },
+  code: {
+    copy: "Copiar",
+    copied: "Copiado",
+    failed: "Não copiou",
+    success: "Código copiado.",
+    failure: "Não foi possível copiar; selecione o texto do bloco.",
+    output: "Saída",
+    block: "Bloco de código",
+  },
   hud: {
     groups: {
       product: "Produto",
@@ -78,6 +88,16 @@ const enUS: typeof ptBR = {
   mobileNavigation: "Mobile navigation",
   explore: "Explore the site",
   download: "Download",
+  article: { outline: "On this page" },
+  code: {
+    copy: "Copy",
+    copied: "Copied",
+    failed: "Copy failed",
+    success: "Code copied.",
+    failure: "Could not copy; select the text in the code block.",
+    output: "Output",
+    block: "Code block",
+  },
   hud: {
     groups: {
       product: "Product",

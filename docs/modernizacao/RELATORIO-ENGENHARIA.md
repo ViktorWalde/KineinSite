@@ -4,8 +4,10 @@
 
 Especificações consolidadas em um plano incremental, confrontadas com a árvore
 local. O fechamento inicial foi documental. As seções 12–14 registram a continuidade:
-H1 documental, H2 funcional e A implementados/validados localmente. B e demais
-pacotes continuam pendentes; aprovação visual de H2/A pertence ao mantenedor.
+H1 documental, H2 funcional e A implementados/validados localmente. A seção 16
+registra B implementado e validado em 13 de novembro de 2026. C0 e demais
+pacotes continuam pendentes. A seção 17 registra a aprovação de B e a
+autorização de seu commit local; a avaliação e o polimento de H2/A permanecem separados.
 
 ## 2. Problemas identificados
 
@@ -195,3 +197,70 @@ A, fingerprint `2bf3075e6f0644e7b3b6dcb3eb0f5ef5a2aec9899811c9331d0532e25e432d56
 Por não haver mudança de código desde as verificações aprovadas, esta operação
 confere preservação, diff, formatação e links dos registros sem repetir as
 suítes de navegador. A nova alteração é apenas o handoff documental.
+
+## 16. Execução B — Documentação
+
+B foi implementado a partir de `cb0a6a6`, branch `main`, árvore limpa,
+preservando H2/A e o trabalho consolidado no checkpoint. O fechamento técnico
+está em [B-DOCUMENTACAO.md](B-DOCUMENTACAO.md); a aprovação visual continua
+pendente. C0 não foi iniciado nesta rodada.
+
+O índice contextual dos oito guias e cinco estudos deriva dos headings reais
+do Astro, sem lista editorial paralela. Reutiliza outline, foco e marcador
+existentes, em fluxo, com fallback nativo. Breadcrumbs, índices de capítulos,
+percursos e anteriores/próximos foram preservados. O marcador compartilhado
+passou a considerar o scroll padding real: a matriz reproduziu a seção sem
+estado atual em 1920px/texto 200%, embora a âncora estivesse visível.
+
+A cópia usa mensagens tipadas em português/inglês, incluindo sucesso, falha,
+anúncios e rótulos. Aguarda o Clipboard, limpa a confirmação anterior ao
+repetir e mantém o texto original. Os blocos são alcançáveis pelo teclado e
+o foco fica dentro da moldura que corta overflow. Não houve nova dependência,
+realçador, página traduzida, busca ou seletor inoperante.
+
+`npm run build:pages`, `check:browser` e `check:experience` passaram na árvore
+final, com 25 páginas, três hints do boot de tema e oito avisos informativos
+de arquitetura preexistentes. Todas as suítes anteriores foram mantidas; a
+experiência incorpora `check-docs-browser.mjs`. O gate integrado foi repetido
+após uma execução anterior encerrar com 143 apesar de emitir os resultados;
+a rodada final retornou zero.
+
+A suíte B passou em `/KineinSite/` e no build isolado `/`: 13 artigos/100
+links de headings, 72 cenários por base (seis larguras, três temas, dois
+tamanhos de fonte), âncoras/estado atual, teclado/foco, Clipboard real,
+pendência/falha e inglês por fixture, além de guias/estudos sem JS em duas
+larguras. Documentação e manual receberam a prova adicional do marcador com
+texto 200%. O HTML do build isolado também passou; não se atribui a ele uma
+segunda execução dos checks estáticos completos do build Pages.
+
+Manual, conteúdo técnico, lockfile e CSP preservados. Não se repetiu
+`check:examples`, pois os exemplos não mudaram. O manifesto de 237 arquivos
+tem 227 preservados da entrada, sete alterados e três novos, sem exclusões;
+fingerprint `1b91fd5b5691999427baf033d61fb4f4beb3f63bac07b8f7802a71cd24a47969`.
+Arquivos, decisões, tamanhos absolutos, comandos e limites constam no registro
+do pacote. Capturas e logs estão em `test-results/b-2026-11-13/`, ignorados.
+
+Índice, requisitos, arquitetura, validação e prompt de retomada foram
+sincronizados. Prévia local: `http://127.0.0.1:4321/KineinSite/`, com o índice
+em `/aprender/ide/instalar/` e `/estudos/cpp/primeiros-passos/` sob essa base.
+Leitor de tela, toque físico, zoom real e Core Web Vitals não foram medidos
+nesta rodada; as capturas são candidatas, sem referência visual aprovada.
+
+Próxima unidade: C0, prova técnica antes de adotar busca. Polimento visual de
+H2/A/B permanece separado. Não houve commit, push, deploy ou publicação.
+
+## 17. Aprovação e commit local de B
+
+Após a apresentação da prévia e dos resultados, o mantenedor aprovou a
+entrega B e solicitou seu commit local em 13 de novembro de 2026. Índice,
+requisitos, registro de B e prompt de retomada refletem esse aceite, sem
+estendê-lo à avaliação e ao polimento de H2/A ou à publicação.
+
+Os 237 arquivos de execução/verificação coincidem com o manifesto final de B,
+fingerprint `1b91fd5b5691999427baf033d61fb4f4beb3f63bac07b8f7802a71cd24a47969`.
+Apenas os registros de aprovação mudaram desde os testes; não se repetiram
+as suítes de navegador para essa atualização documental. Foram conferidos
+manifesto, diff, formatação do registro de B e links documentais.
+
+O commit registra a entrega local. C0 continua como próxima unidade, ainda
+não iniciada; não houve push, deploy ou publicação.
