@@ -7,11 +7,22 @@ Este documento descreve **o site**, não o cronograma de recursos da Kinein Vect
 O índice de execução é [modernizacao/README.md](modernizacao/README.md).
 Ele reúne baseline, requisitos rastreáveis, decisões, dependências e critérios
 de teste para HUD, início, documentação, busca, downloads, comunidade e i18n.
-H1 foi documental; H2, A, B e C1 estão implementados, com prova de busca em C0.
-A próxima unidade é D, download e instalação, após o gate de C1.
+H1 foi documental; H2, A, B, C1 e D estão implementados, com prova de busca em C0.
+A próxima unidade é E, comunidade e rodapé, após o gate de D.
 O backlog editorial abaixo continua como referência, sem substituir essa sequência.
 
 ## Entregue
+
+### Download e polimento da busca — 13 de novembro de 2026
+
+D conecta pacote completo, requisitos, integridade, instalação, nota e os
+percursos existentes, com release/arquivos oficiais conferidos. Não criou
+nova rota. O mantenedor também solicitou polimento visual do painel de busca,
+realizado em CSS com o funcionamento de C1 preservado. Resultados e limites
+em [D-DOWNLOAD.md](modernizacao/D-DOWNLOAD.md). O candidato foi aprovado com autorização explícita de publicação. Antes do
+envio, o mantenedor pediu centralizar/reformular o download em Instalar a IDE,
+com os CTAs do beta levando ao painel do guia. Os registros de D distinguem
+essa revisão do candidato inicial e da confirmação operacional no ar.
 
 ### Busca global — 13 de novembro de 2026
 

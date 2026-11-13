@@ -12,7 +12,7 @@ import { references } from "../../data/references";
 import {
   discordUrl,
   publicVersion,
-  releaseUrl,
+  downloadPath,
   repositoryUrl,
   sitePath,
 } from "../../site";
@@ -88,18 +88,13 @@ const firstGuide = ideGuides[0];
           )}
           <a
             class="docs-card card card-interactive"
-            href={releaseUrl}
-            target="_blank"
-            rel="noopener noreferrer"
+            href={sitePath(downloadPath)}
           >
             <span class="label">
-              ORIGEM OFICIAL <span aria-hidden="true">↗</span>
+              DOWNLOAD E INSTALAÇÃO <span aria-hidden="true">→</span>
             </span>
             <h3>Baixar o beta {publicVersion}</h3>
-            <p>
-              Encontre o AppImage, as notas e o arquivo de verificação do
-              pacote.
-            </p>
+            <p>Baixe o pacote, confira o arquivo e siga a instalação da IDE.</p>
           </a>
           <a
             class="docs-card card card-interactive"

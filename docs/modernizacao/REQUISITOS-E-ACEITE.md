@@ -25,7 +25,7 @@ N-01 a N-04 já têm mecanismos de verificação e devem ser preservados. N-05
 | H-01 | Quatro grupos: Produto, Documentação, Comunidade, Atualizações — **implementado localmente em H2; validação técnica aprovada**  | Catálogo único de destinos reais, acesso preservado e rota exata/grupo ativo distintos                                                                    |
 | H-02 | Menus e foco consistentes — **implementado localmente em H2; validação técnica aprovada**                                       | Acionar, Escape interno/externo, clique fora, seleção, Tab/Shift+Tab, resize e HTML sem JS testados; apenas peers conflitantes fechados                   |
 | H-03 | Barra compacta e responsiva — **implementado localmente em H2; validação técnica aprovada**                                     | Matriz de seis larguras, zoom/texto, controles de 40–44px ou mais, sem scroll lateral; altura comparada à baseline sem encolher texto para forçar medidas |
-| H-04 | Download prioritário, aparência preservada e controles honestos — **implementado localmente em H2; validação técnica aprovada** | URL oficial mantida, tema persistido, nenhum campo de busca/atalho ou idioma sem funcionamento real                                                       |
+| H-04 | Download prioritário, aparência preservada e controles honestos — **implementado localmente em H2; validação técnica aprovada** | Arquivos oficiais preservados; download leva a Instalar a IDE por pedido posterior; tema persistido e controles funcionais                                |
 | H-05 | Superfície e movimento consistentes — **implementado localmente em H2; validação técnica aprovada**                             | Contraste, alternativa opaca, empilhamento, âncoras, menu aberto/ativo e redução de movimento conferidos; nenhuma promessa de FPS                         |
 
 64px de altura e raios da referência são pontos de partida, não justificativa
@@ -94,8 +94,8 @@ prova de repetição pendente estão registradas em C0, preservando o aceite vis
 
 | ID   | Requisito e estado                                                                            | Evidência/critério de conclusão                                                                                                   |
 | ---- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| C-01 | Índice do conteúdo efetivamente gerado — **implementado em C1; validação técnica registrada** | 24 páginas/197 headings do HTML real, 404 excluída, sem navegação duplicada; idioma, tipo, versão e origem identificados          |
-| C-02 | UI funcional na HUD — **implementada em C1; avaliação visual separada**                       | Foco inicial, pesquisa imediata, resultados, vazio, erro, teclado/toque, Escape e retorno de foco; consultas não saem do site     |
+| C-01 | Índice do conteúdo efetivamente gerado — **implementado em C1; validação técnica registrada** | 24 páginas/198 headings do HTML real após D, 404 excluída, sem navegação duplicada; idioma, tipo, versão e origem identificados   |
+| C-02 | UI funcional na HUD — **implementada em C1; polimento aprovado em D**                         | Foco inicial, pesquisa imediata, resultados, vazio, erro, teclado/toque, Escape e retorno de foco; consultas não saem do site     |
 | C-03 | Base, CSP, carregamento e idioma — **implementado em C1; duas bases e CSP preservadas**       | Duas bases, bytes e rede medidos, CSP intacta, idioma/filtros/falhas conferidos; sem worker, C1 deve apresentar indisponibilidade |
 
 Pagefind 1.6.0 passou na prova real de C0 usando o worker de mesma origem,
@@ -110,11 +110,21 @@ respeitar campos editáveis, composição de texto e atalhos do navegador.
 
 ## D — Download e instalação
 
-| ID   | Requisito e estado                                                                          | Evidência/critério de conclusão                                                                      |
-| ---- | ------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
-| D-01 | Release, plataforma e arquitetura verificadas — **configuradas, nova conferência pendente** | Consultar release publicada e assets; não inferir versão de commits; manter manual e notas coerentes |
-| D-02 | Requisitos, integridade e início conectado — **existente, revisão a avaliar**               | Guia/release/notas/primeiro projeto ligados; hashes somente da fonte oficial para o mesmo arquivo    |
-| D-03 | Página dedicada — **opcional, ainda não justificada**                                       | Demonstrar benefício sobre o fluxo existente antes de criar rota; não copiar o guia de instalação    |
+| ID   | Requisito e estado                                                                   | Evidência/critério de conclusão                                                                      |
+| ---- | ------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------- |
+| D-01 | Release, plataforma e arquitetura verificadas — **conferidas na fonte oficial em D** | Consultar release publicada e assets; não inferir versão de commits; manter manual e notas coerentes |
+| D-02 | Requisitos, integridade e início conectado — **conectados no painel existente em D** | Guia/release/notas/primeiro projeto ligados; hashes somente da fonte oficial para o mesmo arquivo    |
+| D-03 | Página dedicada — **dispensada em D; fluxo existente suficiente**                    | Demonstrar benefício sobre o fluxo existente antes de criar rota; não copiar o guia de instalação    |
+
+[D-DOWNLOAD.md](D-DOWNLOAD.md) registra API oficial, ZIP/manifesto e AppImage
+conferidos, snapshot ligado à versão pública e painel na área de primeira
+experiência. ZIP e AppImage têm links distintos; o `.sha256` é do AppImage.
+Instalação, nota e três percursos anteriores permanecem conectados. Não se
+criou outra rota nem se duplicou o guia. O mantenedor aprovou o candidato e o polimento CSS de C1 e autorizou a
+publicação. Antes do envio pediu levar/reformular o painel no início do guia
+Instalar a IDE, acessível diretamente por Documentação e pelos CTAs de download.
+Os destinos foram atualizados de forma intencional e revalidados; a nova
+composição foi aprovada explicitamente pelo mantenedor após a prévia.
 
 Sem botões decorativos de Windows/macOS, checksums inventados ou alegação de
 compatibilidade universal. Não alterar uma release da IDE como parte do site.

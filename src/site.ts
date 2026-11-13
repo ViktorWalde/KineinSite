@@ -1,4 +1,4 @@
-import { pathWithBase } from "./i18n/routing.ts";
+import { pathWithBase, publishedRoutes } from "./i18n/routing.ts";
 export { formatDate } from "./i18n/utils.ts";
 
 export const repositoryUrl = "https://github.com/ViktorWalde/KineinVectis";
@@ -11,6 +11,8 @@ export type SiteSection =
 // nota de atualização").
 export const publicVersion = "0.3.5";
 export const publicTag = "v0.3.5";
+export const installPath = publishedRoutes.install["pt-BR"];
+export const downloadPath = `${installPath}#baixar-beta` as const;
 
 export function releaseUrlFor(tag: string): string {
   return `${repositoryUrl}/releases/tag/${tag}`;

@@ -40,6 +40,24 @@ export async function openBrowser({
       const route = decodeURIComponent(
         new URL(request.url, "http://localhost").pathname,
       );
+      // Ao ampliar uma imagem sem JS, Chrome cria um documento próprio e
+      // pede o ícone da raiz da origem, fora da base do projeto. Essa origem
+      // da fixture não tem ícone; responder sem conteúdo evita um 404 alheio
+      // ao HTML testado. Ícones declarados por páginas continuam validados.
+      const referrer =
+        route === "/favicon.ico" && request.headers.referer
+          ? new URL(request.headers.referer)
+          : undefined;
+      if (
+        route === "/favicon.ico" &&
+        referrer?.host === request.headers.host &&
+        referrer.pathname.startsWith(`${basePath}_astro/`) &&
+        /\.(?:webp|png|jpe?g|svg)$/.test(referrer.pathname)
+      ) {
+        response.writeHead(204);
+        response.end();
+        return;
+      }
       if (!route.startsWith(basePath)) throw new Error("Base inválida");
       const file = path.resolve(directory, route.slice(basePath.length));
       if (file !== directory && !file.startsWith(`${directory}${path.sep}`))

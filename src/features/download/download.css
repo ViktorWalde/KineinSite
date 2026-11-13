@@ -1,0 +1,123 @@
+.download-panel {
+  display: grid;
+  min-width: 0;
+  gap: var(--space-m);
+  padding: var(--space-l);
+  border: 1px solid var(--border-control);
+  border-radius: var(--radius-lg);
+  margin-block: var(--space-l) var(--space-xl);
+  background: var(--surface-control);
+}
+
+.download-panel h2,
+.download-panel p {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.download-panel h2 {
+  font-size: var(--text-xl);
+}
+
+.download-intro,
+.download-package-info {
+  display: grid;
+  min-width: 0;
+  gap: var(--space-xs);
+}
+
+.download-alternative p {
+  margin-block: var(--space-xs);
+}
+
+.download-panel p:not(.label) {
+  max-width: 72ch;
+  color: var(--muted);
+  font-size: var(--text-sm);
+}
+
+.download-panel strong {
+  color: var(--text);
+}
+
+.download-requirements,
+.download-package,
+.download-asset {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-xs) var(--space-m);
+}
+
+.download-package {
+  padding-block: var(--space-m);
+  border-block: 1px solid var(--border);
+}
+
+.download-package-info {
+  flex: 1 1 18rem;
+}
+
+.download-file {
+  overflow-wrap: anywhere;
+}
+
+.download-actions {
+  display: grid;
+  max-width: 100%;
+  justify-items: start;
+  gap: var(--space-xs);
+}
+
+.download-actions .button {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  text-align: center;
+}
+
+.download-verify,
+.download-links a,
+.download-asset a {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  color: var(--accent);
+  overflow-wrap: anywhere;
+}
+
+.download-alternative {
+  min-width: 0;
+  padding-block: var(--space-xs);
+}
+
+.download-alternative summary {
+  min-height: 2.75rem;
+  align-content: center;
+  cursor: pointer;
+  font-weight: 650;
+}
+
+.download-asset {
+  padding-block: var(--space-s);
+  border-block-end: 1px solid var(--border);
+}
+
+.download-asset > div {
+  min-width: 0;
+  flex: 1 1 18rem;
+}
+
+.download-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-xs) var(--space-m);
+  padding-block-start: var(--space-s);
+  border-block-start: 1px solid var(--border);
+}
+
+@media (width <= 35rem) {
+  .download-panel {
+    padding: var(--space-s);
+  }
+}

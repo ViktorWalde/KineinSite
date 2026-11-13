@@ -1,7 +1,7 @@
 ---
 import { getImage } from "astro:assets";
 import icon from "../../assets/icon-amber.png";
-import { publicVersion, releaseUrl, type SiteSection } from "../site";
+import { publicVersion, type SiteSection } from "../site";
 import { defaultLocale, type Locale } from "../i18n/config";
 import { resolveRoute } from "../i18n/routing";
 import { uiFor } from "../i18n/ui";
@@ -55,12 +55,9 @@ const optimizedIcon = await getImage({ src: icon, width: 84, format: "webp" });
       <ThemeControls locale={locale} />
       <a
         class="button button-primary button-small header-download"
-        href={releaseUrl}
-        target="_blank"
-        rel="noopener noreferrer"
+        href={`${resolveRoute("install", locale, import.meta.env.BASE_URL).href}#baixar-beta`}
       >
-        {messages.download} {publicVersion} <span aria-hidden="true">↗</span>
-        <span class="visually-hidden"> — {messages.hud.newTab}</span>
+        {messages.download} {publicVersion} <span aria-hidden="true">→</span>
       </a>
     </div>
     <details class="mobile-navigation">

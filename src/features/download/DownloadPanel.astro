@@ -1,0 +1,127 @@
+---
+import { downloadRelease as release } from "../../data/download";
+import { getPublishedGuides } from "../aprender/guides";
+import { getUpdates } from "../atualizacoes/updates";
+import { localeFromPath } from "../../i18n/routing";
+import {
+  installPath,
+  publicTag,
+  publicVersion,
+  releaseUrl,
+  repositoryUrl,
+  sitePath,
+} from "../../site";
+import "./download.css";
+
+interface Props {
+  verificationHref: `#${string}`;
+}
+const { verificationHref } = Astro.props;
+const guide = (await getPublishedGuides()).find(
+  (entry) => entry.id === "ide/instalar",
+);
+const note = (await getUpdates()).find((entry) => entry.data.tag === publicTag);
+if (
+  release.tag !== publicTag ||
+  release.version !== publicVersion ||
+  guide?.data.ideVersion !== publicVersion ||
+  sitePath(`/aprender/${guide.id}/`) !== sitePath(installPath) ||
+  note?.data.version !== publicVersion
+) {
+  throw new Error("Download: confira snapshot, guia e nota da versão pública.");
+}
+const locale = localeFromPath(Astro.url.pathname, import.meta.env.BASE_URL);
+const size = (bytes: number) =>
+  `${new Intl.NumberFormat(locale, { maximumFractionDigits: 1 }).format(bytes / 1024 ** 2)} MiB`;
+const asset = (name: string) =>
+  `${repositoryUrl}/releases/download/${publicTag}/${name}`;
+---
+
+<section
+  id="baixar-beta"
+  class="download-panel"
+  aria-labelledby="download-title"
+>
+  <div class="download-intro">
+    <p class="label">DOWNLOAD · BETA {publicVersion}</p>
+    <h2 id="download-title">Baixe a Kinein Vectis</h2>
+    <p class="download-requirements">
+      <strong>{release.platform}</strong>
+      <span>glibc {release.minimumGlibc}+ · Wayland ou X11</span>
+    </p>
+  </div>
+  <div class="download-package">
+    <div class="download-package-info">
+      <p>
+        <strong>Pacote completo</strong>
+      </p>
+      <p class="download-file">
+        {release.archive.name} · {size(release.archive.bytes)}
+      </p>
+      <p>
+        Inclui AppImage, verificação SHA-256, instalador do atalho e tutorial.
+      </p>
+    </div>
+    <div class="download-actions">
+      <a
+        class="button button-primary"
+        href={asset(release.archive.name)}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Baixar {release.archive.name} <span aria-hidden="true">↗</span>
+      </a>
+      <a class="download-verify" href={verificationHref}>
+        Conferir o download <span aria-hidden="true">↓</span>
+      </a>
+    </div>
+  </div>
+  <p class="download-note">
+    Depois de extrair o pacote, confira o AppImage antes de executar. O passo a
+    passo continua neste guia; os compiladores e as ferramentas de cada
+    linguagem são preparados nos guias de projeto.
+  </p>
+  <details class="download-alternative">
+    <summary>AppImage avulso e arquivo de verificação</summary>
+    <p>
+      Para baixar apenas a IDE, obtenha os dois arquivos da mesma versão. O
+      instalador do atalho e o tutorial estão no pacote completo.
+    </p>
+    <div class="download-asset">
+      <div>
+        <strong>AppImage avulso</strong>
+        <p class="download-file">
+          {release.appImage.name} · {size(release.appImage.bytes)}
+        </p>
+      </div>
+      <a
+        href={asset(release.appImage.name)}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Baixar AppImage <span aria-hidden="true">↗</span>
+      </a>
+    </div>
+    <div class="download-asset">
+      <div>
+        <strong>SHA-256 do AppImage</strong>
+        <p class="download-file">{release.checksum.name}</p>
+      </div>
+      <a
+        href={asset(release.checksum.name)}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Baixar verificação <span aria-hidden="true">↗</span>
+      </a>
+    </div>
+  </details>
+  <div class="download-links">
+    <a href={sitePath(`/atualizacoes/${note.id}/`)}>
+      Notas do beta {publicVersion}
+    </a>
+    <a href={releaseUrl} target="_blank" rel="noopener noreferrer">
+      Release oficial <span aria-hidden="true">↗</span>
+    </a>
+  </div>
+</section>

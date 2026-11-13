@@ -4,6 +4,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import GuideNav from "../../features/aprender/GuideNav.astro";
 import ImageViewer from "../../features/imagens/ImageViewer.astro";
 import ArticleOutline from "../../features/documentacao/ArticleOutline.astro";
+import DownloadPanel from "../../features/download/DownloadPanel.astro";
 import ProjectNavigation from "../../features/aprender/ProjectNavigation.astro";
 import { projectPathFor } from "../../features/aprender/project-paths";
 import {
@@ -47,6 +48,13 @@ const projectIndex =
 // O guia foi reproduzido numa versão; se a pública mudou e ele não foi
 // refeito, a página avisa em vez de fingir que continua igual.
 const outdated = guide.data.ideVersion !== publicVersion;
+const isInstall = guide.id === "ide/instalar";
+const verification = headings.find(
+  (heading) => heading.text === "Confira se o arquivo chegou íntegro",
+);
+if (isInstall && !verification) {
+  throw new Error("Instalação: preserve a seção de verificação do download.");
+}
 ---
 
 <BaseLayout
@@ -92,6 +100,10 @@ const outdated = guide.data.ideVersion !== publicVersion;
           </div>
         </dl>
       </header>
+
+      {isInstall && verification && (
+        <DownloadPanel verificationHref={`#${verification.slug}`} />
+      )}
 
       {outdated && (
         <p class="guide-outdated" role="note">

@@ -89,7 +89,10 @@ try {
   );
   await evaluate("document.querySelector('.hero-capture-open').focus()");
   await key("Enter");
-  await waitFor("location.pathname.endsWith('.webp')");
+  await waitFor(
+    "location.pathname.endsWith('.webp') && document.readyState==='complete' && document.querySelector('img')?.naturalWidth>0",
+  );
+  await evaluate("document.querySelector('img').decode()");
   await send("Emulation.setScriptExecutionDisabled", { value: false });
   assert.deepEqual(browser.errors, []);
   await writeFile(

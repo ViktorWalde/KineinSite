@@ -16,7 +16,7 @@ import "../features/inicio/background.css";
 import "../features/inicio/secoes.css";
 import "../features/inicio/desenvolvimento.css";
 import "../features/inicio/hero-product.css";
-import { discordUrl, publicVersion, releaseUrl, sitePath } from "../site";
+import { discordUrl, publicVersion, downloadPath, sitePath } from "../site";
 
 // A arte é decorativa; a captura real tem a prioridade de rede do hero.
 // As dimensões vêm do resultado, nunca
@@ -65,13 +65,8 @@ const wallpaper = await getImage({
           construção.
         </p>
         <div class="hero-actions">
-          <a
-            class="button button-primary"
-            href={releaseUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Experimentar a Vectis <span aria-hidden="true">↗</span>
+          <a class="button button-primary" href={sitePath(downloadPath)}>
+            Experimentar a Vectis <span aria-hidden="true">→</span>
           </a>
           <a class="button button-quiet" href="#interface">
             Conhecer a interface do beta
@@ -160,14 +155,9 @@ const wallpaper = await getImage({
             </p>
           </div>
           <div class="closing-actions">
-            <a
-              class="button button-primary"
-              href={releaseUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <a class="button button-primary" href={sitePath(downloadPath)}>
               Experimentar o beta {publicVersion}{" "}
-              <span aria-hidden="true">↗</span>
+              <span aria-hidden="true">→</span>
             </a>
             <a
               class="inline-link"

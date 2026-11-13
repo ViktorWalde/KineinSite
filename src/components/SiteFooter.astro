@@ -2,7 +2,6 @@
 import {
   discordUrl,
   publicVersion,
-  releaseUrl,
   repositoryUrl,
   siteRepositoryUrl,
 } from "../site";
@@ -25,8 +24,7 @@ const groups = [
       { label: messages.updates, href: route("updates") },
       {
         label: `${messages.download} ${publicVersion}`,
-        href: releaseUrl,
-        external: true,
+        href: `${route("install")}#baixar-beta`,
       },
       { label: messages.ideCode, href: repositoryUrl, external: true },
     ],

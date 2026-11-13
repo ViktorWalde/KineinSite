@@ -1,90 +1,90 @@
 # Prompt para a próxima sessão
 
-Entrada original: `cb0a6a6` (H2/A). B foi aprovado e registrado em `dcf9287`;
-C0 foi comprovado e registrado em `ef1cba8`. C1 integra a busca real conforme
-C1-BUSCA.md. O mantenedor autorizou explicitamente publicar a versão atual
-após concluir C1, em 13 de novembro de 2026. O commit efetivamente servido
-é identificado pelo `site-version.json` público e conferido pelo publicador.
-Essa autorização não se estende a publicações dos próximos escopos.
+H2/A entraram em `cb0a6a6`; B foi aprovado e registrado em `dcf9287`; C0 está
+em `ef1cba8`; C1 foi implementado e publicado em `50c5641`. O manifesto público
+confirmou `50c5641c59dbc306866ab817f630844a55c67fe8` durante D. Depois do gate local, o mantenedor aprovou D/polimento e autorizou a publicação.
+Antes do envio pediu mover/reformular o download em Instalar a IDE e aprovou
+explicitamente a nova composição. D-DOWNLOAD.md distingue os candidatos e
+suas evidências. O commit efetivamente servido deve ser conferido no manifesto
+público, sem presumir que ainda seja 50c5641.
 
 ```text
-Continue o trabalho em /home/hugh/WebstormProjects/KineinSite.
+Continue em /home/hugh/WebstormProjects/KineinSite.
 
-Leia primeiro:
-- AGENTS.md
+Leia AGENTS.md e os registros vigentes:
 - docs/modernizacao/README.md
-- docs/modernizacao/BASELINE.md
-- docs/modernizacao/ARQUITETURA.md
-- docs/modernizacao/H1-NAVEGACAO.md
-- docs/modernizacao/H2-HUD.md
-- docs/modernizacao/A-PRODUTO.md
-- docs/modernizacao/B-DOCUMENTACAO.md
-- docs/modernizacao/C0-BUSCA.md
-- docs/modernizacao/C1-BUSCA.md
-- docs/modernizacao/REQUISITOS-E-ACEITE.md
-- docs/modernizacao/VALIDACAO.md
-- docs/modernizacao/RELATORIO-ENGENHARIA.md
+- BASELINE.md, ARQUITETURA.md, H1-NAVEGACAO.md, H2-HUD.md, A-PRODUTO.md
+- B-DOCUMENTACAO.md, C0-BUSCA.md, C1-BUSCA.md e D-DOWNLOAD.md
+- REQUISITOS-E-ACEITE.md, VALIDACAO.md e RELATORIO-ENGENHARIA.md
+(todos em docs/modernizacao/).
 
-Confirme HEAD, branch e árvore real, preservando quaisquer alterações locais
-posteriores. Confira o manifesto público antes de atribuir uma versão ao site.
-Não descarte arquivos, refaça entregas ou substitua implementação por outro
-plano geral. Trabalhe um pacote por vez.
+Confira HEAD, branch e árvore real. Use 50c5641 como referência de entrada de D; identifique o commit atual e
+preserve quaisquer alterações locais posteriores. Não use
+reset/checkout para limpar a árvore, refaça entregas ou substitua execução
+por outra rodada geral de planejamento. Confira o manifesto público antes
+de atribuir ao site o estado da prévia local.
 
-Estado de entrada:
-- H1 foi documental. H2 implementa o catálogo de 16 links, composições nativas,
-  aparência/download únicos, foco/teclado/resize e fallback sem JS.
-- A implementa hero com captura real, origem e Astro Assets; galeria, vídeos
-  e percursos anteriores preservados. H2/A têm validação técnica; avaliação
-  e polimento visual pelo mantenedor continuam separados.
-- B implementa índice contextual em 13 artigos, cópia localizada, foco no
-  código e marcador compatível com texto ampliado. Foi aprovado pelo
-  mantenedor; não refazer índices, breadcrumbs, percursos ou o manual.
-- A correção de Clipboard lento de C0 usa aria-disabled e guarda de repetição.
-  Preservar foco, confirmação/falha e o teste de cópia pendente.
-- C0 comprovou Pagefind 1.6.0 com worker de mesma origem nas bases
-  /KineinSite/ e /. Sem worker, WASM falha sob a CSP atual. Não relaxar a
-  política com permissões de eval ou blob para habilitar um fallback.
-- C1 adota a versão comprovada na dependência/lockfile, layouts e build.
-  Astro HTML -> índice nativo -> validações; browser não participa do build.
-  São 24 páginas públicas; manual tem versão/origem/revisão, prévia 0.4
-  indica desenvolvimento, 404/navegação/controles ficam fora do corpus.
-- A busca real fica na HUD, com carregamento na primeira consulta, estados,
-  retry, erro explícito sem worker, navegação por links e renderização segura.
-  Preservar normalização de base, proteção contra respostas antigas,
-  fechamento/reabertura rápida, foco e convivência com os painéis existentes.
-- check:experience inclui a nova busca. check:browser e B agora identificam
-  especificamente o anúncio da cópia, sem confundi-lo com o status da busca.
-  Não reduzir cobertura. Prova C0 continua opt-in e isolada.
-- Não existem páginas inglesas ou seletor de idioma; catálogo de UI não
-  equivale a conteúdo bilíngue. Safari, toque físico, leitor de tela e zoom
-  real continuam limites de verificação, conforme C1.
+Estado preservado:
+- H1 foi documental; H2 implementa catálogo único de 16 links, composições,
+  aparência/download, foco/teclado/resize e fallback sem JS.
+- A tem hero com captura real, origem e Astro Assets; vídeos/galeria/percurso
+  preservados. H2/A mantêm avaliação e polimento visual separados do gate.
+- B tem índice contextual em 13 artigos, cópia localizada, foco e seção atual
+  com texto ampliado. Mantém a aprovação visual concedida pelo mantenedor.
+  Clipboard lento usa aria-disabled com guarda de repetição; preservar o teste.
+- C0 comprovou Pagefind 1.6.0 com worker de mesma origem, nas duas bases.
+  C1 adota a versão no lockfile e no build nativo após HTML, antes dos checks.
+  Não reintroduzir Chrome/DOMParser no build nem permitir eval/blob para WASM.
+- Busca funcional: carregamento sob demanda, estados/retry, erro sem worker,
+  resultados seguros, links/âncoras reais, normalização da base, foco e
+  proteção contra respostas antigas e fechamento/reabertura rápida.
+- D confere release v0.3.5 e assets reais: Linux x86_64, glibc 2.36+, Wayland/X11.
+  src/data/download.ts é snapshot de arquivos/tamanhos/digests. A versão pública
+  continua em site.ts; o painel recusa snapshot/guia/nota incompatíveis.
+  check:download-release confere a API opt-in, sem rede obrigatória no build.
+- O painel foi reformulado para o início de Instalar a IDE, acessível por
+  Documentação e pelos CTAs do beta. A home tem acesso ao guia, sem duplicar
+  o painel. Conferir o download salta para o heading real da verificação. Há ZIP
+  completo, requisitos, instalação/notas e AppImage avulso com seu checksum.
+  Não há rota nova, guia duplicado, plataformas fictícias ou JS adicional.
+  Os CTAs do beta na HUD, hero, galeria, documentação e rodapé agora apontam
+  à âncora do painel no guia, por pedido explícito. Links oficiais dos assets
+  e da release ficam no painel; notas históricas mantêm seus próprios downloads.
+- Durante D o mantenedor pediu polimento da busca. O CSS agora separa ajuda e
+  campo, compacta resultados, limita visualmente trechos a três linhas,
+  destaca foco e estados e mantém alvos. Motor/controlador/renderer intactos.
+- O gate reproduziu em C1 um favicon implícito de documento de imagem sem JS.
+  A fixture HTTP responde 204 somente a esse pedido com referer de imagem
+  da própria origem/base. Ícones de páginas e assets ausentes continuam 404.
+  A também aguarda a decodificação da imagem nativa; não enfraquecer o teste.
+- check:experience conserva todas as suítes e acrescenta check:download.
+  C1 mantém sua suíte de índice real, concorrência, falhas e foco.
+  Não há páginas inglesas ou seletor de idioma; catálogo de UI não é tradução.
 
-Próxima unidade: D — Download e instalação. Confronte D-01–D-03 com os links,
-dados de release, guia e notas já existentes. Confira release, assets,
-plataforma, arquitetura e requisitos nas fontes oficiais antes de modificar
-textos ou versões. Não inferir publicação da IDE a partir de commits. Página
-dedicada é opcional e exige benefício demonstrado sobre o fluxo atual; não
-copiar o guia. Entregue lacunas reais e uma prévia concreta, preservando C1.
-Não modificar releases nem código da IDE. E, F0/F1 e G continuam pendentes.
+Próxima unidade: E — Comunidade e rodapé. Confronte E-01–E-03 com os fluxos
+públicos reais antes de alterar. Preserve paginação, filtros, cache, timestamp,
+stale, vazio, erro, rate limit e saída para GitHub. Identifique lacunas de
+compreensão da contribuição e navegação complementar. Não criar categorias,
+licenças, tarefas no GitHub ou chamadas extras à API sem necessidade demonstrada.
+Não reformar integrações funcionais ou enviar mensagens à comunidade.
 
-Reutilize tema, movimento, roteamento, i18n e harness existentes. Preserve
-manual oficial por SHA-256 e as verificações do projeto. Execute checks
-pertinentes e registre resultados reais, sem atribuir a uma nova árvore os
-resultados anteriores. O gate de C1 mantém três hints do boot de tema e oito
-avisos informativos de arquitetura; não aumentar limites ou tolerâncias.
-Mantenha README do plano, requisitos, validação, relatório e retomada coerentes.
+Trabalhe um pacote por vez e apresente prévia concreta. Reutilize tema,
+movimento, roteamento, i18n, browser harness e verificações. Preserve conteúdo,
+manual oficial por SHA-256, CSP e versões. Não alterar releases/código da IDE
+ou datas/ambientes dos guias sem a reprodução correspondente. F0/F1 e G ficam
+pendentes; idioma depende de conteúdo real e revisado.
 
-Evidências locais: test-results/h2-2026-11-12/, a-2026-11-12/, b-2026-11-13/,
-c0-2026-11-13/ e c1-2026-11-13/, ignoradas pelo Git. Podem não existir num
-clone novo. Reutilize scripts/lib/browser.mjs e confira a disponibilidade
-real de Chrome, Firefox/geckodriver e compiladores temporários.
-A prévia Pages é http://127.0.0.1:4321/KineinSite/ quando ativa. O relatório
-C0 em http://127.0.0.1:4322/ é histórico, não a interface de busca do produto.
+Evidências ignoradas de D: test-results/d-2026-11-13/, com manifesto de entrada,
+fonte oficial, logs, 72 cenários por base, imagens e resultados de busca.
+previous-evidence/ e gate-evidence/ separam árvores; não atribuir um resultado
+histórico a código posterior. Evidências podem faltar em outro clone. Consulte
+D-DOWNLOAD.md para comandos, fingerprints e limites reais. A prévia quando
+ativa é http://127.0.0.1:4321/KineinSite/aprender/ide/instalar/#baixar-beta; busca via HUD ou Ctrl/Cmd+K.
+Conferir Chrome/Firefox/geckodriver disponíveis; não instalar outra suíte.
 
-Continue autonomamente no trabalho local autorizado. "Pode prosseguir" não
-autoriza novas publicações. A autorização explícita de envio de C1 pertence
-somente àquela entrega; commit, push e deploy posteriores exigem novo pedido.
-Não confundir validação técnica, avaliação visual e autorização operacional.
-Ao encerrar informe implementação, decisões, verificações, prévia, limites
-reais e próxima unidade, sem aprovação visual presumida.
+D, o polimento da busca e a reformulação do painel foram aprovados
+explicitamente, com autorização de publicação desta entrega. Prossiga nas ações locais autorizadas. "Pode prosseguir" não
+renova autorização de commit, push ou publicação; a autorização mais recente é específica de D/polimento/reformulação. Só publique uma nova entrega mediante novo pedido.
+Ao encerrar informe implementação, evidências, prévia, limites e próxima unidade,
+mantendo índice, requisitos, validação e relatório sincronizados.
 ```

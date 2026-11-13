@@ -8,8 +8,8 @@ H1 documental, H2 funcional e A implementados/validados localmente. A seção 16
 registra B implementado e validado em 13 de novembro de 2026. A seção 17 registra a aprovação de B e a
 autorização de seu commit local; a avaliação e o polimento de H2/A permanecem separados.
 C0 foi executado depois desse commit, conforme a seção 18; sua decisão técnica
-foi preservada na adoção de C1, descrita na seção 20. D e os pacotes seguintes
-continuam pendentes.
+foi preservada na adoção de C1, descrita na seção 20. D e o polimento solicitado para a busca têm execução local na seção 22;
+E e os pacotes seguintes continuam pendentes.
 
 ## 2. Problemas identificados
 
@@ -400,3 +400,102 @@ inclusive worker/WASM/fragmentos, com o build local. A evidência operacional
 Próxima unidade: D, download e instalação, com conferência das fontes oficiais.
 E, F0/F1 e G continuam pendentes. Polimento visual de H2/A permanece separado;
 B preserva sua aprovação anterior.
+
+## 22. Execução D e polimento visual solicitado para C1
+
+Entrada: `50c5641`, `main`, árvore limpa. O manifesto público confirmou esse
+commit na entrada. D confere a release oficial `v0.3.5`, ainda beta para
+Linux x86_64, glibc 2.36+ e Wayland/X11. O ZIP real coincide com o digest da
+API; o AppImage extraído passou na verificação do manifesto externo/interno
+e respondeu `kinein-vectis 0.3.5` em execução isolada. Instalador, datas e
+ambiente dos guias não foram modificados nem reaplicados no perfil pessoal.
+
+O painel nativo em `#baixar-beta`, na primeira experiência, apresenta pacote
+completo/tamanho, requisitos, instalação/notas e alternativa avulsa com o
+checksum correto. Snapshot em `src/data/download.ts`, com guarda de versão,
+guia e nota no build. O check opt-in compara API/arquivos/digests/requisitos;
+a rede não é requisito do build. Não há rota nova, guia duplicado, plataforma
+sem artefato ou JS adicional. CTAs da HUD/hero/galeria/documentação/rodapé,
+três percursos, conteúdo e manual foram preservados.
+
+Durante D o mantenedor acrescentou o polimento visual da pesquisa. O CSS
+separa a ajuda do campo, estabiliza a largura com scrollbar, compacta cartões
+e títulos, limita visualmente trechos a três linhas, organiza links de seção,
+destaca o foco e dá superfície aos estados. Retry e links mantêm alvos de
+44 px. Motor, controlador, renderer, worker, CSP e a suíte de C1 permanecem.
+Antes/depois têm 14 capturas reais por rodada; são candidatas inspecionadas,
+sem aprovação visual presumida. Detalhes em [D-DOWNLOAD.md](D-DOWNLOAD.md).
+
+O gate corrigiu overflow interno de D a 320 px com fonte 200%. Depois,
+reproduziu no build original de C1 um 404 de favicon implícito ao abrir
+imagem sem JS: a origem da fixture não tem esse recurso fora da base.
+O servidor de teste responde 204 somente ao pedido com referer de imagem
+da própria origem/base. Ícones de páginas e assets ausentes continuam 404;
+os coletores continuam estritos. O teste de A também aguarda/decodifica a
+imagem nativa. As fronteiras HTTP foram conferidas antes da reexecução das
+suítes compartilhadas; nenhuma galeria ou captura do produto foi alterada.
+
+Build Pages/check, HTML root, índice, API oficial, download nas duas bases,
+busca root e Firefox passaram. A execução integrada final terminou com código zero em `check:browser` e
+`check:experience`, após a correção da fixture. São 72 cenários de download por base, além
+dos 36 de busca, corpus/URLs reais, estados/falhas/retry, foco, teclado,
+concorrência e ausência de JS. Preservados três hints de tema e oito avisos
+informativos de arquitetura. Não houve nova dependência ou exceção.
+
+O índice agora contém 24 páginas/198 headings, com um heading novo de D;
+continua excluindo 404 e controles. Artefato Pagefind: 35 arquivos/377.175
+bytes. HTML: 1.250.284 bytes/25 arquivos; CSS em `_astro/`: 75.312 bytes/6;
+JS em `_astro/`: 33.891 bytes/20, sem acréscimo frente a C1. Tamanhos em disco,
+sem atribuir ganho de Core Web Vitals. Fonte, limites, hashes e evidências
+estão no registro D. Conteúdo técnico e exemplos existentes não mudaram;
+`check:examples` não foi repetido nesta entrega local.
+
+Manifesto final: 259 arquivos, 249 preservados, cinco alterados e cinco novos,
+sem exclusões. Fingerprint e algoritmo no registro D. Os resultados novos
+foram arquivados em `d-2026-11-13/gate-evidence/`; os diretórios históricos
+foram restaurados da cópia anterior. Logs intermediários com encerramento
+143 e o 404 reproduzido foram preservados, separados do gate final aprovado.
+
+O fechamento técnico inicial permaneceu local, sem novo commit, push ou deploy.
+A autorização daquela fase foi usada para C1; a seção 23 registra o pedido posterior. Próxima unidade:
+E — Comunidade e rodapé; F0/F1 e G continuam pendentes. Safari, leitor de
+tela físico, toque físico e zoom real continuam limites conhecidos.
+
+## 23. Reformulação de Instalar a IDE e publicação autorizada
+
+Após aprovar D/polimento, o mantenedor pediu explicitamente colocá-los no ar.
+Antes do envio solicitou centralizar o download em Documentação → Instalar a
+IDE e reformular o painel para esse contexto. Após a prévia, confirmou:
+“reformulação aprovada”. A nova entrega tem aprovação visual e autorização
+operacional explícitas, específicas deste escopo; não se estendem a E.
+
+O painel foi removido da primeira experiência da home e colocado no início
+do guia verificado. Composição compacta de instalação, requisitos, ZIP
+principal, AppImage/checksum em linhas próprias e links de nota/release.
+Conferir o download usa o slug real da seção de integridade retornado pelo
+Markdown. Não se copiou o guia nem se alterou seu conteúdo/data de reprodução.
+
+`install` registra o destino já existente no roteamento. CTAs do beta na
+HUD, hero, galeria, encerramento, rodapé e Documentação apontam ao painel no
+guia, com indicador interno. O catálogo de 16 links e a função de Beta
+disponível foram preservados. Links diretos oficiais e notas históricas
+continuam identificados por sua origem/versão. C1/polimento, B, manual e CSP
+foram preservados. Este é um pedido funcional de acesso, não avanço geral de E.
+
+Build Pages e seu gate estático, HTML/índice root, `check:browser`,
+`check:experience`, download nas duas bases e busca/Firefox passaram. São
+72 cenários de download por base, incluindo menus com teclado/sem JS e âncora
+real, e 36 de busca por base com corpus, estados, foco e concorrência.
+Exemplos e exercícios C, C++, Rust, Python e telemetria foram reconferidos,
+assim como a API da release. Permanecem três hints de tema e oito avisos
+informativos de arquitetura. Nenhuma dependência ou tolerância foi adicionada.
+
+Evidência separada em `test-results/d-install-2026-11-13/`. Manifesto final:
+259 arquivos, 247 preservados e 12 alterados frente ao candidato inicial D.
+Frente a C1: 241 preservados, 13 alterados, cinco novos, sem exclusões. Hash,
+bytes e limites no registro D; o índice continua com 24 páginas/198 headings.
+Os logs de publicação e o manifesto público registram a confirmação do envio,
+separada deste gate técnico. Fluxo: commit/push de main e publicador existente,
+sem modificar a release ou o repositório da IDE.
+
+Próxima unidade: E — Comunidade e rodapé, mediante continuidade local.

@@ -130,3 +130,14 @@ do navegador e métricas de campo não foram verificados. Ampliação de fonte,
 
 Próxima unidade: D, download e instalação, conferindo as fontes oficiais antes
 de alterar versão, assets ou requisitos. E, F0/F1 e G continuam pendentes.
+
+## Continuação visual solicitada durante D
+
+O mantenedor pediu melhorias visuais no painel de pesquisa durante o pacote
+D. O registro e as evidências dessa árvore posterior estão em
+[D-DOWNLOAD.md](D-DOWNLOAD.md#polimento-visual-de-c1-solicitado-nesta-continuação).
+O ajuste é CSS: espaçamento, densidade, estados e foco; preserva motor,
+controlador, renderer, índice e testes de C1. Os bytes, manifestos e resultados
+acima continuam sendo o registro histórico de C1 em `50c5641`, sem atribuir
+a ele a validação de uma árvore posterior. O mantenedor aprovou esse polimento ao autorizar a publicação de D.
+A reformulação posterior do download não reescreve a busca.

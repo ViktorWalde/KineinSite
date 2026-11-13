@@ -32,6 +32,7 @@
   width: min(48rem, calc(100% - 2rem));
   max-height: 90dvh;
   overflow-y: auto;
+  scrollbar-gutter: stable;
   padding: 0;
   border: 1px solid var(--border-control);
   border-radius: var(--radius-lg);
@@ -113,42 +114,84 @@
   font-size: var(--text-sm);
 }
 
+#search-hint {
+  margin-block: var(--space-s) var(--space-m);
+}
+
+.search-status {
+  margin: 0;
+}
+
+.search-dialog:not([data-state="results"]) .search-status {
+  padding: var(--space-m);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface-control);
+  color: var(--text);
+}
+
+.search-retry {
+  min-height: 2.75rem;
+  margin-block-start: var(--space-s);
+}
+
 .search-results {
   display: grid;
-  gap: var(--space-s);
+  gap: var(--space-xs);
   padding: 0;
   margin: var(--space-m) 0 0;
   list-style: none;
 }
 
 .search-result {
-  padding: var(--space-m);
+  min-width: 0;
+  padding: var(--space-s) var(--space-m);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
+}
+
+.search-result:focus-within {
+  border-color: var(--accent);
+  background: var(--surface-control);
 }
 
 .search-result p {
   margin-block: 0 var(--space-xs);
 }
 
+.search-excerpt {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
 .search-result-title {
   display: block;
+  min-height: 2.75rem;
   padding-block: var(--space-xs);
   color: var(--text);
-  font-size: var(--text-lg);
+  font-size: var(--text-base);
   font-weight: 650;
   text-decoration-color: var(--accent);
 }
 
 .search-sections {
-  display: grid;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
   margin-block-start: var(--space-s);
 }
 
 .search-sections a {
-  display: flex;
+  display: inline-flex;
   min-height: 2.75rem;
+  max-width: 100%;
   align-items: center;
+  padding: var(--space-xs);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface-control);
   color: var(--accent);
   font-size: var(--text-sm);
 }
@@ -187,6 +230,10 @@
   .search-close {
     min-width: 44px;
     min-height: 44px;
+  }
+
+  .search-result {
+    padding-inline: var(--space-s);
   }
 
   .search-trigger-label {

@@ -303,3 +303,71 @@ Antes de publicar, executar o fluxo do repositório com compiladores disponívei
 os arquivos de `pagefind/` com o build, além do HTML e assets existentes.
 Autorização de publicação é específica; o pedido explícito desta sessão cobre
 a entrega C1. Resultados e limites em [C1-BUSCA.md](C1-BUSCA.md).
+
+## Reprodução de D e polimento visual da busca
+
+D usa o guia existente Instalar a IDE, por pedido antes da publicação;
+não criou página. O candidato inicial na home foi preservado como histórico. O snapshot
+em `src/data/download.ts` precisa coincidir com a release oficial, versão/tag
+pública, guia de instalação verificado e nota. O check de rede é opt-in e
+registra o retorno da API em `test-results/download-release/report.json`.
+Não o adicionar ao build determinístico. Confira também os arquivos reais:
+o ZIP e o AppImage são artefatos distintos; o `.sha256` publicado verifica
+o AppImage, não o ZIP. Não publicar um hash como oficial sem fonte equivalente.
+
+```bash
+npm run check:download-release
+npm run build:pages
+CHROME_BIN=/caminho/do/chrome npm run check:browser
+CHROME_BIN=/caminho/do/chrome npm run check:experience
+CHROME_BIN=/caminho/do/chrome npm run check:search:firefox
+ASTRO_TELEMETRY_DISABLED=1 ./node_modules/.bin/astro build --outDir test-results/d-install-2026-11-13/root-dist
+KINEIN_TEST_DIST=test-results/d-install-2026-11-13/root-dist npm run build:search
+KINEIN_TEST_DIST=test-results/d-install-2026-11-13/root-dist npm run check:search-index
+./node_modules/.bin/html-validate 'test-results/d-install-2026-11-13/root-dist/**/*.html' --max-warnings 0
+KINEIN_TEST_BASE=/ KINEIN_TEST_DIST=test-results/d-install-2026-11-13/root-dist CHROME_BIN=/caminho/do/chrome npm run check:download
+KINEIN_TEST_BASE=/ KINEIN_TEST_DIST=test-results/d-install-2026-11-13/root-dist CHROME_BIN=/caminho/do/chrome npm run check:search
+```
+
+`check:download` está no final de `check:experience`. Confere os 72 cenários
+por base (seis larguras, três temas, texto 100/200%, alternativa aberta/fechada),
+links oficiais e requisitos, mínimos de toque, Space/foco no details, Enter
+para Documentação → Instalar a IDE, verificação por heading real, nota e
+primeiro projeto. Confere painel único no guia, ausente da home, três percursos
+preservados e CTAs de download apontando à âncora do painel. Há navegação pelos
+menus nativos em mobile/desktop sem JS. Os destinos anteriores foram alterados
+intencionalmente após pedido explícito; não remover o teste para acomodar isso.
+
+O polimento pedido para a busca é CSS. Preservar a suíte integral de C1,
+com índice e worker reais, bases, vazio/erro/retry, concorrência e foco.
+Conferir estados e capturas candidatas, três linhas de excerpt, separação
+entre ajuda/campo, foco do resultado e alvo do retry; não alterar o motor
+ou relaxar a CSP para melhorar a apresentação.
+
+Ao abrir a imagem avulsa sem JS, Chrome gera seu próprio documento e pede
+um favicon da raiz da origem. A fixture responde 204 somente ao ícone implícito
+cujo referer é imagem da própria origem/base. Ícones declarados em HTML e
+assets ausentes continuam com erro; os coletores não filtram essas falhas.
+O teste de A aguarda e decodifica a imagem nativa. O caso foi reproduzido no
+build C1 anterior a D e as fronteiras HTTP foram verificadas, antes da nova
+execução das suítes compartilhadas.
+
+Scripts antigos gravam em caminhos fixos de evidência. Preserve esses caminhos
+antes de reproduzir outra árvore; arquive os resultados novos sob a revisão
+correspondente e restaure os históricos sem descartá-los. Nesta execução,
+a cópia anterior está em `d-2026-11-13/previous-evidence/` e a nova em
+`d-2026-11-13/gate-evidence/`. `pages/` e `root/` dentro de D contêm o painel;
+as imagens `search-before-polish/` e `search-after-polish/` são candidatas,
+sem aprovação visual automática.
+
+Os guias e exemplos não mudaram. `--version` do AppImage foi executado com
+extração/configuração/cache temporários; o instalador não foi executado no
+perfil do mantenedor. A data/ambiente da reprodução completa anterior foi
+preservada. Resultados e limites em [D-DOWNLOAD.md](D-DOWNLOAD.md).
+
+A reformulação tem evidências próprias em `test-results/d-install-2026-11-13/`,
+com manifesto `1a2eb37e…`, capturas e novos relatórios. A aprovação do mantenedor
+foi explícita tanto para D/polimento quanto para essa composição. Publicação
+usa o script existente, com os exemplos e checks obrigatórios e comparação
+dos assets da busca. Confirmar também o HTML de instalação, os links oficiais,
+a âncora de verificação e consultas reais na versão efetivamente servida.

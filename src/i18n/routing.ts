@@ -9,6 +9,7 @@ type RouteTranslations = Partial<Record<Locale, `/${string}`>> & {
 export const publishedRoutes = {
   home: { "pt-BR": "/" },
   guide: { "pt-BR": "/aprender/" },
+  install: { "pt-BR": "/aprender/ide/instalar/" },
   manual: { "pt-BR": "/manual/" },
   docs: { "pt-BR": "/documentacao/" },
   updates: { "pt-BR": "/atualizacoes/" },

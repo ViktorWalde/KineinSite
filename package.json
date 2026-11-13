@@ -28,9 +28,11 @@
     "check:examples": "node scripts/check-examples.mjs",
     "check:search-proof": "node scripts/probe-search.mjs && node scripts/probe-search-browser.mjs",
     "check:browser": "node scripts/check-browser.mjs && node scripts/check-collaboration-browser.mjs",
-    "check:experience": "node scripts/check-navigation-browser.mjs && node scripts/check-hud-browser.mjs && node scripts/check-collaboration-browser.mjs && node scripts/check-motion-browser.mjs && node scripts/check-flow-browser.mjs && node scripts/check-ui-browser.mjs && node scripts/check-content-browser.mjs && node scripts/check-product-browser.mjs && node scripts/check-docs-browser.mjs && npm run check:search",
+    "check:experience": "node scripts/check-navigation-browser.mjs && node scripts/check-hud-browser.mjs && node scripts/check-collaboration-browser.mjs && node scripts/check-motion-browser.mjs && node scripts/check-flow-browser.mjs && node scripts/check-ui-browser.mjs && node scripts/check-content-browser.mjs && node scripts/check-product-browser.mjs && node scripts/check-docs-browser.mjs && npm run check:search && npm run check:download",
     "check:search": "node scripts/check-search-browser.mjs",
-    "check:search:firefox": "node scripts/check-search-firefox.mjs"
+    "check:search:firefox": "node scripts/check-search-firefox.mjs",
+    "check:download-release": "node scripts/check-download-release.mjs",
+    "check:download": "node scripts/check-download-browser.mjs"
   },
   "devDependencies": {
     "@astrojs/check": "0.9.10",

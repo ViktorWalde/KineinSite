@@ -199,6 +199,23 @@ download for justificada, ela deve conectar release, requisitos, verificação,
 notas e primeiro projeto. Checksums só são chamados de oficiais quando
 publicados na fonte oficial para o mesmo arquivo.
 
+D usa `src/data/download.ts` como snapshot de assets conferidos da tag,
+sem substituir `publicVersion`/`publicTag`. `DownloadPanel.astro` recusa
+incompatibilidade entre snapshot, versão pública, guia verificado e nota.
+Links de assets são oficiais; tamanhos vêm do snapshot. O cheque opt-in
+`check:download-release` compara esses dados com a API, sem rede obrigatória
+no build. Recolhimento, download e percursos funcionam com HTML nativo.
+Não há página nova: o painel foi inicialmente preparado na primeira experiência
+e, por pedido antes da publicação, reformulado para o guia existente Instalar
+a IDE. `install` registra esse destino no roteamento; CTAs atuais usam a âncora
+do painel e o próprio painel usa o heading real da conferência. A mudança de
+destino da HUD/hero/rodapé é intencional, conforme o registro D.
+
+O polimento de C1 solicitado durante D usa CSS, preservando o motor e o
+controlador. Excerpts mantêm o texto no DOM, com até três linhas visíveis;
+links e áreas de foco permanecem alcançáveis. Não há animação nova, mudança
+de política ou seletor sem conteúdo real.
+
 ## Limites transversais
 
 ### Riscos da implementação seguinte
