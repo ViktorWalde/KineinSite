@@ -1,0 +1,1 @@
+var e={home:{"pt-BR":`/`},guide:{"pt-BR":`/aprender/`},install:{"pt-BR":`/aprender/ide/instalar/`},manual:{"pt-BR":`/manual/`},docs:{"pt-BR":`/documentacao/`},updates:{"pt-BR":`/atualizacoes/`},collaborate:{"pt-BR":`/colabore/`},rules:{"pt-BR":`/colabore/regras/`},site:{"pt-BR":`/documentacao/site/`}};function t(e,t=`/`){return`${t.replace(/\/$/,``)}${e}`}export{e as n,t};
